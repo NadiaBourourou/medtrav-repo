@@ -60,7 +60,7 @@ public class MedicalRecords implements Serializable {
 		this.patient = patient;
 	}
 	
-	
+	@OneToMany(mappedBy="medicalRecords")
 	public List<Surgery> getSurgeries() {
 		return surgeries;
 	}

@@ -4,6 +4,7 @@ import entities.User;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -18,6 +19,9 @@ public class Doctor extends User implements Serializable {
 	
 	private String specialty;
 	private String description;
+	
+	private List<Surgery> surgeries;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Doctor() {
@@ -36,6 +40,14 @@ public class Doctor extends User implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	@OneToMany(mappedBy="doctor")
+	public List<Surgery> getSurgeries() {
+		return surgeries;
+	}
+	public void setSurgeries(List<Surgery> surgeries) {
+		this.surgeries = surgeries;
 	}
    
 }

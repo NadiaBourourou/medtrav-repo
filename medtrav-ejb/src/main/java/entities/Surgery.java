@@ -16,6 +16,9 @@ public class Surgery implements Serializable {
 	private String name;
 	private SurgeryId surgeryId;
 	
+	private Doctor doctor;
+	private MedicalRecords medicalRecords;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Surgery() {
@@ -35,6 +38,26 @@ public class Surgery implements Serializable {
 	}
 	public void setSurgeryId(SurgeryId surgeryId) {
 		this.surgeryId = surgeryId;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "doctorId", referencedColumnName = "id", updatable = false, insertable = false)
+	public Doctor getDoctor() {
+		return doctor;
+	}
+	
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "medicalRecordsId", referencedColumnName = "id", updatable = false, insertable = false)
+	public MedicalRecords getMedicalRecords() {
+		return medicalRecords;
+	}
+	
+	public void setMedicalRecords(MedicalRecords medicalRecords) {
+		this.medicalRecords = medicalRecords;
 	}
    
 }
