@@ -8,7 +8,7 @@ import java.lang.String;
 import javax.persistence.*;
 
 /**
- * Entity implementation class for Entity: Facilities
+ * Entity implementation class for Entity: Facility
  *
  */
 @Entity
