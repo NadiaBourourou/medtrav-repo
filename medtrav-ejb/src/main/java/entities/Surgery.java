@@ -6,12 +6,14 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * Entity implementation class for Entity: Surgery
  *
  */
 @Entity
+@Table(name="t_surgery")
 public class Surgery implements Serializable {
 
 	private String name;
