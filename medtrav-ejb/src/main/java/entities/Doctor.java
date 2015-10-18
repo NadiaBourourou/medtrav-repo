@@ -13,7 +13,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="T_DOCTOR")
+
 public class Doctor extends User implements Serializable {
 
 	
