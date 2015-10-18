@@ -13,7 +13,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="t_surgery")
+@Table(name = "t_surgery")
 public class Surgery implements Serializable {
 
 	private String name;
@@ -45,7 +45,7 @@ public class Surgery implements Serializable {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "userId", referencedColumnName = "userId", updatable = false, insertable = false)
+	@JoinColumn(name = "doctorId", referencedColumnName = "userId", updatable = false, insertable = false)
 	public Doctor getDoctor() {
 		return doctor;
 	}
