@@ -13,15 +13,6 @@ import javax.persistence.*;
 @Table(name="T_BOOKING")
 public class Booking implements Serializable {
 
-	public StateBooking getState() {
-		return state;
-	}
-
-
-	public void setState(StateBooking state) {
-		this.state = state;
-	}
-
 	private Integer bookingId;
 	private Date arrival;
 	private Date departure;
@@ -104,6 +95,13 @@ public class Booking implements Serializable {
 		this.flight = flight;
 	}
 	
-	
+	public StateBooking getState() {
+		return state;
+	}
+
+
+	public void setState(StateBooking state) {
+		this.state = state;
+	}
    
 }

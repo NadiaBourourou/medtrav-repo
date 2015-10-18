@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class MedicalRecords implements Serializable {
 
 	
-	private Integer MedicalRecordsId;
+	private Integer medicalRecordsId;
 	private Blob analysis;
 	private String patientFile;
 	private static final long serialVersionUID = 1L;
@@ -30,11 +30,11 @@ public class MedicalRecords implements Serializable {
 	}   
 	@Id    
 	public Integer getMedicalRecordsId() {
-		return this.MedicalRecordsId;
+		return this.medicalRecordsId;
 	}
 
-	public void setMedicalRecordsId(Integer MedicalRecordsId) {
-		this.MedicalRecordsId = MedicalRecordsId;
+	public void setMedicalRecordsId(Integer medicalRecordsId) {
+		this.medicalRecordsId = medicalRecordsId;
 	}   
 
 	public Blob getAnalysis() {
