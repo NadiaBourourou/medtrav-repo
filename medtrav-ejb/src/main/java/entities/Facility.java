@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.lang.Double;
 import java.lang.Integer;
 import java.lang.String;
+
 import javax.persistence.*;
 
 /**
@@ -11,11 +12,11 @@ import javax.persistence.*;
  *
  */
 @Entity
-
-public class Facilities implements Serializable {
+@Table(name="T_FACILITY")
+public class Facility implements Serializable {
 
 	
-	private Integer facilitiesId;
+	private Integer facilityId;
 	private String name;
 	private String description;
 	private String address;
@@ -25,16 +26,16 @@ public class Facilities implements Serializable {
 	private RoomType room;
 	private static final long serialVersionUID = 1L;
 
-	public Facilities() {
+	public Facility() {
 		super();
 	}   
 	@Id    
-	public Integer getFacilitiesId() {
-		return this.facilitiesId;
+	public Integer getFacilityId() {
+		return this.facilityId;
 	}
 
-	public void setFacilitiesId(Integer facilitiesId) {
-		this.facilitiesId = facilitiesId;
+	public void setFacilityId(Integer facilityId) {
+		this.facilityId = facilityId;
 	}   
 	public String getName() {
 		return this.name;

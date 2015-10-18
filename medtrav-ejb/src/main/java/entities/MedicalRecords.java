@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.lang.Integer;
 import java.lang.String;
 import java.sql.Blob;
+
 import javax.persistence.*;
 
 /**
@@ -11,7 +12,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-
+@Table(name="T_MEDICALRECORDS")
 public class MedicalRecords implements Serializable {
 
 	

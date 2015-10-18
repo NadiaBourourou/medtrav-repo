@@ -3,6 +3,7 @@ package entities;
 import java.io.Serializable;
 import java.lang.Integer;
 import java.lang.String;
+
 import javax.persistence.*;
 
 /**
@@ -10,7 +11,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-
+@Table(name="T_USER")
 public class User implements Serializable {
 
 	

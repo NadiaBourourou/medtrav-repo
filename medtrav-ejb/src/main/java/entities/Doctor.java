@@ -1,8 +1,10 @@
 package entities;
 
 import entities.User;
+
 import java.io.Serializable;
 import java.lang.String;
+
 import javax.persistence.*;
 
 /**
@@ -10,7 +12,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-
+@Table(name="T_DOCTOR")
 public class Doctor extends User implements Serializable {
 
 	

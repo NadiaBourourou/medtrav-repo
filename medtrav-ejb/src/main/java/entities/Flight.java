@@ -5,6 +5,7 @@ import java.lang.Double;
 import java.lang.Integer;
 import java.lang.String;
 import java.util.Date;
+
 import javax.persistence.*;
 
 /**
@@ -12,7 +13,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-
+@Table(name="T_FLIGHT")
 public class Flight implements Serializable {
 
 	

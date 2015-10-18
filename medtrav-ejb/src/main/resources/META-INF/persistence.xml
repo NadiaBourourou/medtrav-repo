@@ -6,10 +6,10 @@
 	<class>entities.Patient</class>
 	<class>entities.Doctor</class>
 	<class>entities.Booking</class>
-	<class>entities.Facilities</class>
 	<class>entities.Flight</class>
 	<class>entities.MedicalRecords</class>
 	<class>entities.Testimony</class>
+	<class>entities.Facility</class>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="create" />
 			<property name="hibernate.show_sql" value="true"/>
