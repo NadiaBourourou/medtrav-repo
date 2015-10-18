@@ -17,6 +17,10 @@ public class User implements Serializable {
 	private Integer userId;
 	private String lastName;
 	private String firstName;
+	private Integer cin;
+	private String login;
+	private String password;
+	private String mail;
 	private static final long serialVersionUID = 1L;
 
 	public User() {
@@ -43,6 +47,34 @@ public class User implements Serializable {
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
+	}   
+	public Integer getCin() {
+		return this.cin;
+	}
+
+	public void setCin(Integer cin) {
+		this.cin = cin;
+	}   
+	public String getLogin() {
+		return this.login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}   
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}   
+	public String getMail() {
+		return this.mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
    
 }
