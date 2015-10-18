@@ -6,12 +6,14 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * Entity implementation class for Entity: Surgery
  *
  */
 @Entity
+@Table(name = "t_surgery")
 public class Surgery implements Serializable {
 
 	private String name;
@@ -44,7 +46,7 @@ public class Surgery implements Serializable {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "userId", referencedColumnName = "userId", updatable = false, insertable = false)
+	@JoinColumn(name = "doctorId", referencedColumnName = "userId", updatable = false, insertable = false)
 	public Doctor getDoctor() {
 		return doctor;
 	}
