@@ -54,7 +54,7 @@ public class Surgery implements Serializable {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "medicalRecordsId", referencedColumnName = "medicalRecordsId", updatable = false, insertable = false)
+	@JoinColumn(name = "medicalRecordsId", referencedColumnName = "id", updatable = false, insertable = false)
 	public MedicalRecords getMedicalRecords() {
 		return medicalRecords;
 	}

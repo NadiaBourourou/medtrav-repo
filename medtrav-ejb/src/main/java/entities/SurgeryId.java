@@ -7,10 +7,6 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class SurgeryId implements Serializable{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private Integer medicalRecordsId;
 	private Integer doctorId;
 	
@@ -73,7 +69,5 @@ public class SurgeryId implements Serializable{
 	public void setDoctorId(Integer doctorId) {
 		this.doctorId = doctorId;
 	}
-	
-	
-	
+
 }
