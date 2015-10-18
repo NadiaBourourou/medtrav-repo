@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.lang.Double;
 import java.lang.Integer;
 import java.lang.String;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -24,6 +25,9 @@ public class Facility implements Serializable {
 	private Integer numNights;
 	private Double price;
 	private RoomType room;
+	
+	private List<Booking> bookings;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Facility() {
@@ -85,6 +89,14 @@ public class Facility implements Serializable {
 
 	public void setRoom(RoomType room) {
 		this.room = room;
+	}
+	
+	@OneToMany(mappedBy="facility")
+	public List<Booking> getBookings() {
+		return bookings;
+	}
+	public void setBookings(List<Booking> bookings) {
+		this.bookings = bookings;
 	}
    
 }

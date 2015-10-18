@@ -5,6 +5,7 @@ import java.lang.Double;
 import java.lang.Integer;
 import java.lang.String;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -23,6 +24,9 @@ public class Flight implements Serializable {
 	private String departureLocation;
 	private String arrivalLocation;
 	private Double price;
+	
+	private List<Booking> bookings;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Flight() {
@@ -70,6 +74,15 @@ public class Flight implements Serializable {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+	
+	@OneToMany(mappedBy="flight")
+	public List<Booking> getBookings() {
+		return bookings;
+	}
+	
+	public void setBookings(List<Booking> bookings) {
+		this.bookings = bookings;
 	}
    
 }

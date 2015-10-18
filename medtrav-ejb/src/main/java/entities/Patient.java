@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.lang.Integer;
 import java.lang.String;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -21,6 +22,11 @@ public class Patient extends User implements Serializable {
 	private Date dateOfBirth;
 	private String country;
 	private Integer numPassport;
+	
+	private List<Booking> bookings;
+	private List<Testimony> testimonies;
+	private MedicalRecords medicalRecords;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Patient() {
@@ -46,6 +52,31 @@ public class Patient extends User implements Serializable {
 
 	public void setNumPassport(Integer numPassport) {
 		this.numPassport = numPassport;
+	}
+	
+	@OneToMany(mappedBy="patient")
+	public List<Booking> getBookings() {
+		return bookings;
+	}
+	
+	public void setBookings(List<Booking> bookings) {
+		this.bookings = bookings;
+	}
+	
+	@OneToMany(mappedBy="patient")
+	public List<Testimony> getTestimonies() {
+		return testimonies;
+	}
+	public void setTestimonies(List<Testimony> testimonies) {
+		this.testimonies = testimonies;
+	}
+	
+	@OneToOne(mappedBy="patient")
+	public MedicalRecords getMedicalRecords() {
+		return medicalRecords;
+	}
+	public void setMedicalRecords(MedicalRecords medicalRecords) {
+		this.medicalRecords = medicalRecords;
 	}
    
 }

@@ -21,6 +21,7 @@ public class User implements Serializable {
 	private Integer cin;
 	private String login;
 	private String password;
+	private RoleType role;
 	private String mail;
 	private static final long serialVersionUID = 1L;
 
@@ -70,6 +71,14 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}   
+	
+	
+	public RoleType getRole() {
+		return role;
+	}
+	public void setRole(RoleType role) {
+		this.role = role;
+	}
 	public String getMail() {
 		return this.mail;
 	}

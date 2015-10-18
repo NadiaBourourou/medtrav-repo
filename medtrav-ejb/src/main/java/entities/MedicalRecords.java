@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.lang.Integer;
 import java.lang.String;
 import java.sql.Blob;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -17,10 +18,12 @@ public class MedicalRecords implements Serializable {
 
 	
 	private Integer MedicalRecordsId;
-	private String surgery;
 	private Blob analysis;
 	private String patientFile;
 	private static final long serialVersionUID = 1L;
+	
+	private Patient patient;
+	private List<Surgery> surgeries;
 
 	public MedicalRecords() {
 		super();
@@ -33,13 +36,7 @@ public class MedicalRecords implements Serializable {
 	public void setMedicalRecordsId(Integer MedicalRecordsId) {
 		this.MedicalRecordsId = MedicalRecordsId;
 	}   
-	public String getSurgery() {
-		return this.surgery;
-	}
 
-	public void setSurgery(String surgery) {
-		this.surgery = surgery;
-	}   
 	public Blob getAnalysis() {
 		return this.analysis;
 	}
@@ -53,6 +50,22 @@ public class MedicalRecords implements Serializable {
 
 	public void setPatientFile(String patientFile) {
 		this.patientFile = patientFile;
+	}
+	
+	@OneToOne
+	public Patient getPatient() {
+		return patient;
+	}
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
+	
+	
+	public List<Surgery> getSurgeries() {
+		return surgeries;
+	}
+	public void setSurgeries(List<Surgery> surgeries) {
+		this.surgeries = surgeries;
 	}
    
 }
