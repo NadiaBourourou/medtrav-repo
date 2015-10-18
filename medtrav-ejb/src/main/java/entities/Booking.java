@@ -16,7 +16,7 @@ public class Booking implements Serializable {
 	private Integer bookingId;
 	private Date arrival;
 	private Date departure;
-	//private StateBooking state;
+	private StateBooking state;
 	
 	private static final long serialVersionUID = 1L;
 
