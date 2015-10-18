@@ -11,6 +11,8 @@
 	<class>entities.Testimony</class>
 	<class>entities.Facility</class>
 	<class>entities.Surgery</class>
+	<class>entities.SurgeryId</class>
+	
 	
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="create" />
