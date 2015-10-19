@@ -8,16 +8,16 @@ public class TestAddDoctor {
 
 	public static void main(String[] args) {
 		Doctor doc = new Doctor();
-		doc.setUserId(1);
-		doc.setCin(14);
+		doc.setUserId(2);
+		doc.setCin(140);
 	
-		doc.setFirstName("Flen");
-		doc.setLastName("Weld Falten");
+		doc.setFirstName("Nadia");
+		doc.setLastName("Boo");
 		doc.setLogin("fwl");
 		doc.setPassword("pwd");
 		doc.setMail("flen@gmail.tn");
-		doc.setSpecialty("Chirurgie");
-		doc.setDescription("ceci est ma description");		
+		doc.setSpecialty("neuro");
+		doc.setDescription("description");		
 		
 		UserServicesDelegate.doaAddDocor(doc);
 		

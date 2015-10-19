@@ -24,8 +24,8 @@ public class UserServicesDelegate {
 		return getProxy().updateDoctor(doctor);
 	}
 
-	public static boolean doRemoveDoctor(Doctor doctor) {
-		return getProxy().removeDoctor(doctor);
+	public static boolean doRemoveDoctor(Integer doctorId) {
+		return getProxy().removeDoctor(doctorId);
 	}
 
 	public static Doctor doFindDoctorById(Integer id) {

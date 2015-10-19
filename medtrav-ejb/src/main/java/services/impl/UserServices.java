@@ -47,10 +47,11 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 		return b;	}
 
 	@Override
-	public boolean removeDoctor(Doctor doctor) {
+	public boolean removeDoctor(Integer doctorId) {
 		Boolean b = false;
 		try {
-			entityManager.remove(doctor);
+			Doctor foundDoctor = entityManager.find(Doctor.class, doctorId);
+			entityManager.remove(foundDoctor);
 			b = true;
 		} catch (Exception e) {
 			System.err.println("ouups ...");
