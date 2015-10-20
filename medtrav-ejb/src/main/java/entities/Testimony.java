@@ -3,6 +3,8 @@ package entities;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -16,7 +18,9 @@ import javax.persistence.Table;
 public class Testimony implements Serializable {
 	
 	private Integer testimonyId;
+	private String title;
 	private String description;
+
 
 	private Patient patient;
 
@@ -27,6 +31,7 @@ public class Testimony implements Serializable {
 	}
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Integer getTestimonyId() {
 		return this.testimonyId;
 	}
@@ -35,6 +40,15 @@ public class Testimony implements Serializable {
 		this.testimonyId = testimonyId;
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	
 	public String getDescription() {
 		return this.description;
 	}
@@ -42,6 +56,8 @@ public class Testimony implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	
 
 	@ManyToOne
 	public Patient getPatient() {
@@ -51,5 +67,6 @@ public class Testimony implements Serializable {
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
+
 
 }
