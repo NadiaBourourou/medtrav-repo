@@ -22,7 +22,6 @@ public class Booking implements Serializable {
 	private Date arrival;
 	private Date departure;
 	private StateBooking state;
-
 	private Facility facility;
 	private Patient patient;
 	private Flight flight;
