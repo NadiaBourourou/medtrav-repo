@@ -2,7 +2,6 @@ package tests;
 
 import delegates.UserServicesDelegate;
 import entities.Doctor;
-import entities.RoleType;
 
 public class TestAddDoctor {
 

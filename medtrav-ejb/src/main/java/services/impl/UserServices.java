@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import services.interfaces.UserServicesLocal;
 import services.interfaces.UserServicesRemote;
 import entities.Doctor;
+import entities.Patient;
 
 /**
  * Session Bean implementation class UserServices
@@ -23,6 +24,7 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 	public UserServices() {
 	}
 
+	// Doctor Services
 	@Override
 	public boolean addDocor(Doctor doctor) {
 		Boolean b = false;
@@ -44,7 +46,8 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 		} catch (Exception e) {
 			System.err.println("ouups ...");
 		}
-		return b;	}
+		return b;
+	}
 
 	@Override
 	public boolean removeDoctor(Integer doctorId) {
@@ -56,13 +59,13 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 		} catch (Exception e) {
 			System.err.println("ouups ...");
 		}
-		return b;	}
+		return b;
+	}
 
 	@Override
 	public Doctor findDoctorById(Integer id) {
 		return entityManager.find(Doctor.class, id);
-	
-	
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -73,5 +76,48 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 		query.setParameter("param", specialty);
 		return query.getResultList();
 	}
+
+	@Override
+	public boolean addPatient(Patient patient) {
+		Boolean b = false;
+		try {
+			entityManager.persist(patient);
+			b = true;
+		} catch (Exception e) {
+			System.err.println("ouups ...");
+		}
+		return b;
+	}
+
+	@Override
+	public boolean updatePatient(Patient patient) {
+		Boolean b = false;
+		try {
+			entityManager.merge(patient);
+			b = true;
+		} catch (Exception e) {
+			System.err.println("ouups ...");
+		}
+		return b;
+	}
+
+	@Override
+	public boolean removePatient(Integer patientId) {
+		Boolean b = false;
+		try {
+			Patient foundPatient = entityManager.find(Patient.class, patientId);
+			entityManager.remove(foundPatient);
+			b = true;
+		} catch (Exception e) {
+			System.err.println("ouups ...");
+		}
+		return b;
+	}
+
+	@Override
+	public Patient findPatientById(Integer id) {
+		return entityManager.find(Patient.class, id);
+	}
+
 
 }
