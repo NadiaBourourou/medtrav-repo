@@ -117,6 +117,7 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 	@Override
 	public Patient findPatientById(Integer id) {
 		return entityManager.find(Patient.class, id);
+		
 	}
 
 
