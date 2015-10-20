@@ -18,7 +18,6 @@ public class Surgery implements Serializable {
 
 	private String name;
 	private SurgeryId surgeryId;
-
 	private Doctor doctor;
 	private MedicalRecords medicalRecords;
 

@@ -28,7 +28,7 @@ public class User implements Serializable {
 	public User() {
 		super();
 	}   
-	@Id    
+	@Id
 	public Integer getUserId() {
 		return this.userId;
 	}

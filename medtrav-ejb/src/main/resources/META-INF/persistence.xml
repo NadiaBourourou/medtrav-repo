@@ -12,6 +12,7 @@
 	<class>entities.Facility</class>
 	<class>entities.Surgery</class>
 	<class>entities.SurgeryId</class>
+	<class>entities.Administrator</class>
 
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
