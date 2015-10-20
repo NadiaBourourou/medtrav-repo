@@ -33,7 +33,8 @@ public class Facility implements Serializable {
 	public Facility() {
 		super();
 	}   
-	@Id    
+	@Id 
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getFacilityId() {
 		return this.facilityId;
 	}
