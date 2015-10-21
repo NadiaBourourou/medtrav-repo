@@ -33,6 +33,7 @@ public class Flight implements Serializable {
 		super();
 	}   
 	@Id    
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getFlightId() {
 		return this.flightId;
 	}
