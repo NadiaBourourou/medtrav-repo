@@ -114,7 +114,4 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 		return b;
 	}
 
-
-
-
 }
