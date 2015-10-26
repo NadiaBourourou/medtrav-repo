@@ -5,6 +5,7 @@ import java.util.List;
 import locator.ServiceLocator;
 import services.interfaces.UserServicesRemote;
 import entities.Doctor;
+import entities.Patient;
 
 public class UserServicesDelegate {
 
@@ -34,6 +35,26 @@ public class UserServicesDelegate {
 
 	public static List<Doctor> doFindDoctorsBySpecialty(String specialty) {
 		return getProxy().findDoctorsBySpecialty(specialty);
+	}
+
+	// _____________________________________________
+	// ____________PATIENT _________________________
+	// _____________________________________________
+
+	public static boolean doAddPatient(Patient patient) {
+		return getProxy().addPatient(patient);
+	}
+
+	public static boolean doUpdatePatient(Patient patient) {
+		return getProxy().updatePatient(patient);
+	}
+
+	public static boolean doRemovePatient(Integer patientId) {
+		return getProxy().removePatient(patientId);
+	}
+
+	public static Patient doFindPatientByPassportNumber(Integer nbPassport) {
+		return getProxy().findPatientByPassportNumber(nbPassport);
 	}
 
 }

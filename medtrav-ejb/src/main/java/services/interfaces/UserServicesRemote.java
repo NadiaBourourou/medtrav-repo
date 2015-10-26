@@ -21,6 +21,8 @@ public interface UserServicesRemote {
 	boolean addPatient(Patient patient);
 	boolean updatePatient(Patient patient);
 	boolean removePatient(Integer patientId);
+	Patient findPatientByPassportNumber (Integer nbPassport);
+	
 
 	
 	

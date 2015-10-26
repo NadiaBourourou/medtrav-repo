@@ -77,6 +77,14 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 		return query.getResultList();
 	}
 
+	
+	
+	// ______________________________________________________________________________________________
+	//_______________________________________PATIENT ________________________________________________
+	// ______________________________________________________________________________________________ 
+	
+	
+	
 	@Override
 	public boolean addPatient(Patient patient) {
 		Boolean b = false;
@@ -112,6 +120,14 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 			System.err.println("ouups ...");
 		}
 		return b;
+	}
+
+	@Override
+	public Patient findPatientByPassportNumber(Integer nbPassport) {
+		String jpql = "select p from Patient p where p.numPassport=:param";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", nbPassport);
+		return (Patient) query.getSingleResult();
 	}
 
 }

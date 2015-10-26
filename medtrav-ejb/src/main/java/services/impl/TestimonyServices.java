@@ -73,6 +73,7 @@ public class TestimonyServices implements TestimonyServicesRemote, TestimonyServ
 	
 
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Testimony> findAllTestimoniesByPatientId(Integer patientId) {
 		String jpql="select t from Testimony t where t.patient.id =: param";
