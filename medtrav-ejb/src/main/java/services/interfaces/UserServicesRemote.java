@@ -23,6 +23,7 @@ public interface UserServicesRemote {
 	boolean updatePatient(Patient patient);
 	boolean removePatient(Integer patientId);
 	Patient findPatientByPassportNumber (Integer nbPassport);
+	List<Patient> findAlltreatedPatiends();
 	
 	User userIdentification(String login, String password);
 	

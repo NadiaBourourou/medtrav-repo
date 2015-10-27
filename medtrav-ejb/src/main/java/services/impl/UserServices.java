@@ -147,4 +147,14 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Patient> findAlltreatedPatiends() {
+		String jpql = "select p from Patient p where p.state=:'TREATED'";
+		Query query = entityManager.createQuery(jpql);
+		return query.getResultList();
+	}
+
+
+
 }

@@ -124,6 +124,7 @@ public class HelloMedtrav {
 		frmWelcomeToMedtrav.getContentPane().add(logo);
 		
 		JLabel Copyright = new JLabel("This project is brought to you by GTech\u00A9 2015 Sigma.  All rights reserved");
+		Copyright.setForeground(Color.DARK_GRAY);
 		Copyright.setBounds(28, 384, 532, 14);
 		frmWelcomeToMedtrav.getContentPane().add(Copyright);
 	}

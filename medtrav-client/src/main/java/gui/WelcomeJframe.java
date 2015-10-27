@@ -39,7 +39,7 @@ public class WelcomeJframe extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		lblWelcome.setBounds(80, 68, 262, 14);
+		lblWelcome.setBounds(289, 0, 145, 14);
 		contentPane.add(lblWelcome);
 
 	}
