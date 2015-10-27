@@ -6,6 +6,7 @@ import javax.ejb.Remote;
 
 import entities.Doctor;
 import entities.Patient;
+import entities.User;
 
 @Remote
 public interface UserServicesRemote {
@@ -23,7 +24,7 @@ public interface UserServicesRemote {
 	boolean removePatient(Integer patientId);
 	Patient findPatientByPassportNumber (Integer nbPassport);
 	
-
+	User userIdentification(String login, String password);
 	
 	
 	

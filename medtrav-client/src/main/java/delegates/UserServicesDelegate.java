@@ -6,6 +6,7 @@ import locator.ServiceLocator;
 import services.interfaces.UserServicesRemote;
 import entities.Doctor;
 import entities.Patient;
+import entities.User;
 
 public class UserServicesDelegate {
 
@@ -55,6 +56,10 @@ public class UserServicesDelegate {
 
 	public static Patient doFindPatientByPassportNumber(Integer nbPassport) {
 		return getProxy().findPatientByPassportNumber(nbPassport);
+	}
+
+	public static User doUserIdentification(String login, String password) {
+		return getProxy().userIdentification(login, password);
 	}
 
 }
