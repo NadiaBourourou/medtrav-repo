@@ -5,7 +5,10 @@ import java.sql.Blob;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -19,8 +22,8 @@ import javax.persistence.Table;
 public class MedicalRecords implements Serializable {
 
 	private Integer medicalRecordsId;
-	private Blob analysis;
-	private String patientFile;
+	private  byte[] analysis;
+	private byte[] patientFile;
 	private static final long serialVersionUID = 1L;
 
 	private Patient patient;
@@ -31,6 +34,7 @@ public class MedicalRecords implements Serializable {
 	}
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getMedicalRecordsId() {
 		return this.medicalRecordsId;
 	}
@@ -39,19 +43,20 @@ public class MedicalRecords implements Serializable {
 		this.medicalRecordsId = MedicalRecordsId;
 	}
 
-	public Blob getAnalysis() {
+	@Lob
+	public byte[] getAnalysis() {
 		return this.analysis;
 	}
 
-	public void setAnalysis(Blob analysis) {
+	public void setAnalysis( byte[] analysis) {
 		this.analysis = analysis;
 	}
 
-	public String getPatientFile() {
+	public byte[] getPatientFile() {
 		return this.patientFile;
 	}
 
-	public void setPatientFile(String patientFile) {
+	public void setPatientFile(byte[] patientFile) {
 		this.patientFile = patientFile;
 	}
 
