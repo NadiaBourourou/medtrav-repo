@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
@@ -25,13 +26,21 @@ import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class AddClinic extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField name;
 	private JTextField address;
+	private JTextField phonenumber;
 	private JTextField professionalism;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -69,19 +78,10 @@ public class AddClinic extends JFrame {
 		address = new JTextField();
 		address.setColumns(10);
 		
-		JLabel lblNewLabel_2 = new JLabel("Description");
+		JLabel lblNewLabel_3 = new JLabel("Phone Number");
 		
-		JTextPane description = new JTextPane();
-		
-		JLabel lblNewLabel_3 = new JLabel("Professionalism");
-		
-		professionalism = new JTextField();
-		professionalism.setColumns(10);
-		
-		JLabel lblNewLabel_4 = new JLabel("State");
-		
-		JComboBox state = new JComboBox();
-		state.setModel(new DefaultComboBoxModel(StateType.values()));
+		phonenumber = new JTextField();
+		phonenumber.setColumns(10);
 		
 		JButton btnAddClinic = new JButton("Add Clinic");
 		btnAddClinic.addActionListener(new ActionListener() {
@@ -89,32 +89,88 @@ public class AddClinic extends JFrame {
 				Clinic clinic= new Clinic ();
 				clinic.setName(name.getText());
 				clinic.setAddress(address.getText());
+				clinic.setPhoneNumber(new Integer (phonenumber.getText()));
 				clinic.setProfessionalism(professionalism.getText());
+				File fichier = new File(textField.getText());
+				FileInputStream fis = null;
+				try {
+					fis = new FileInputStream(fichier);
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				FileReader fr = null;
+				try {
+					fr = new FileReader(fichier);
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				ArrayList<Byte> list = new ArrayList<Byte>();
+				int s;
+				try {
+					while ((s = fr.read()) != -1) {
+						list.add((byte) s);
+					}
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				byte[] b = new byte[list.size()];
+				for (int i = 0; i < b.length; i++) {
+					b[i] = list.get(i);
+				}
+
+				clinic.setImage(b);
+			
 				ClinicServicesDelegate.doAddClinic(clinic);
 			}
 		});
+		
+		JLabel lblNewLabel_2 = new JLabel("Professionalism");
+		
+		professionalism = new JTextField();
+		professionalism.setColumns(10);
+		
+		JButton picture = new JButton("Upload Picture");
+		picture.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser chooser = new JFileChooser();
+				chooser.showOpenDialog(null);
+				File f = chooser.getSelectedFile();
+				String filename = f.getAbsolutePath();
+				textField.setText(filename);
+			}
+		});
+		
+		textField = new JTextField();
+		textField.setColumns(10);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(38)
+					.addGap(25)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblNewLabel)
 						.addComponent(lblNewLabel_1)
-						.addComponent(lblNewLabel_2)
 						.addComponent(lblNewLabel_3)
-						.addComponent(lblNewLabel_4))
-					.addGap(50)
+						.addComponent(lblNewLabel_2)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(37)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(picture)
+							.addPreferredGap(ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+							.addComponent(btnAddClinic)
+							.addGap(45))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(state, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
-							.addComponent(btnAddClinic))
-						.addComponent(professionalism, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(address, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(name, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(description, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(professionalism, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(phonenumber, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(address, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(name, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addContainerGap(180, Short.MAX_VALUE))))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -127,22 +183,21 @@ public class AddClinic extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNewLabel_1)
 						.addComponent(address, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(29)
+					.addGap(32)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(phonenumber, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_3))
+					.addPreferredGap(ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNewLabel_2)
-						.addComponent(description, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(27)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_3)
 						.addComponent(professionalism, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+					.addGap(16)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_4)
-						.addComponent(state, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnAddClinic))
+						.addComponent(btnAddClinic)
+						.addComponent(picture)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
-
 }

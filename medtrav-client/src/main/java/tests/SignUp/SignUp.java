@@ -31,13 +31,14 @@ import entities.StateType;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.function.ToIntFunction;
+import datechooser.beans.DateChooserDialog;
+import datechooser.beans.DateChooserCombo;
 
 public class SignUp extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField FirstName;
 	private JTextField LastName;
-	private JTextField date;
 	private JTextField Cin;
 	private JTextField passport;
 	private JTextField country;
@@ -99,9 +100,6 @@ public class SignUp extends JFrame {
 		LastName = new JTextField();
 		LastName.setColumns(10);
 		
-		date = new JTextField();
-		date.setColumns(10);
-		
 		Cin = new JTextField();
 		Cin.setColumns(10);
 		
@@ -131,7 +129,7 @@ public class SignUp extends JFrame {
 			    p.setCin(i);
 				p.setLogin(login.getText());
 				p.setPassword(new String(passwordField.getPassword()));
-				
+			//	p.setDateOfBirth(DateChooserCombo);
 				p.setMail(mail.getText());
 				p.setCountry(country.getText());
 				Integer ger = new Integer(passport.getText());
@@ -143,6 +141,8 @@ public class SignUp extends JFrame {
 				
 			}
 		});
+		
+		DateChooserCombo dateChooserCombo = new DateChooserCombo();
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -159,19 +159,23 @@ public class SignUp extends JFrame {
 						.addComponent(lblPassportNumber)
 						.addComponent(lblPassword))
 					.addGap(41)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(country)
-						.addComponent(passwordField)
-						.addComponent(FirstName)
-						.addComponent(login)
-						.addComponent(mail)
-						.addComponent(passport)
-						.addComponent(Cin)
-						.addComponent(date)
-						.addComponent(LastName))
-					.addPreferredGap(ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
-					.addComponent(btnSubmit)
-					.addGap(20))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(country)
+								.addComponent(passwordField)
+								.addComponent(FirstName)
+								.addComponent(login)
+								.addComponent(mail)
+								.addComponent(passport)
+								.addComponent(Cin)
+								.addComponent(LastName))
+							.addPreferredGap(ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+							.addComponent(btnSubmit)
+							.addGap(20))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(dateChooserCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -185,10 +189,10 @@ public class SignUp extends JFrame {
 						.addComponent(lblLastName)
 						.addComponent(LastName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblDateOfBirth)
-						.addComponent(date, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(8)
+						.addComponent(dateChooserCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(Cin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblCin))
