@@ -107,6 +107,7 @@ public class HelloMedtrav {
 						WelcomeJframe welcomeJframe = new WelcomeJframe();
 						welcomeJframe.Welcome(username);
 						welcomeJframe.setVisible(true);
+						frmWelcomeToMedtrav.setVisible(false);
 
 					}
 				} catch (Exception e1) {
