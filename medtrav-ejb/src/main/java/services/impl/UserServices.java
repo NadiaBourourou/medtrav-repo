@@ -11,6 +11,7 @@ import services.interfaces.UserServicesLocal;
 import services.interfaces.UserServicesRemote;
 import entities.Doctor;
 import entities.Patient;
+import entities.User;
 
 /**
  * Session Bean implementation class UserServices
@@ -77,6 +78,11 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 		return query.getResultList();
 	}
 
+	// ______________________________________________________________________________________________
+	// _______________________________________PATIENT
+	// ________________________________________________
+	// ______________________________________________________________________________________________
+
 	@Override
 	public boolean addPatient(Patient patient) {
 		Boolean b = false;
@@ -113,5 +119,42 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 		}
 		return b;
 	}
+
+	@Override
+	public Patient findPatientByPassportNumber(Integer nbPassport) {
+		String jpql = "select p from Patient p where p.numPassport=:param";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", nbPassport);
+		return (Patient) query.getSingleResult();
+	}
+	
+
+
+	@Override
+	public User userIdentification(String login, String password) {
+		User user = null;
+		Query query = entityManager
+				.createQuery("select u from User u where u.login=:l and u.password=:p ");
+		query.setParameter("l", login).setParameter("p", password);
+
+		try {
+			user = (User) query.getSingleResult();
+		} catch (Exception e) {
+			user = null;
+		}
+
+		return user;
+
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Patient> findAlltreatedPatiends() {
+		String jpql = "select p from Patient p where p.state=:'TREATED'";
+		Query query = entityManager.createQuery(jpql);
+		return query.getResultList();
+	}
+
+
 
 }

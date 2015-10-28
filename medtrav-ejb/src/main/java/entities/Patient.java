@@ -18,6 +18,7 @@ public class Patient extends User implements Serializable {
 	private Date dateOfBirth;
 	private String country;
 	private Integer numPassport;
+	private PatientState state;
 
 	private List<Booking> bookings;
 	private List<Testimony> testimonies;
@@ -78,6 +79,14 @@ public class Patient extends User implements Serializable {
 
 	public void setMedicalRecords(MedicalRecords medicalRecords) {
 		this.medicalRecords = medicalRecords;
+	}
+
+	public PatientState getState() {
+		return state;
+	}
+
+	public void setState(PatientState state) {
+		this.state = state;
 	}
 
 }
