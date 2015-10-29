@@ -28,6 +28,7 @@ public class HotelServicesDelegate {
 	public static boolean doDeleteHotelById(Integer HotelId) {
 		return getProxy().deleteHotelById(HotelId);
 	}
+
 	public static boolean doDeleteHotelById(Hotel hotel) {
 		return getProxy().deleteHotel(hotel);
 	}
@@ -40,6 +41,4 @@ public class HotelServicesDelegate {
 		return getProxy().findAllHotels();
 	}
 
-	
 }
-

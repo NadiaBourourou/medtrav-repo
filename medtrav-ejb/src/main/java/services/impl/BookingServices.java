@@ -53,8 +53,16 @@ public class BookingServices implements BookingServicesRemote,
 
 	@Override
 	public Boolean deleteBooking(Booking booking) {
+		Boolean b= false;
+		try {
 		entitymanager.remove(findBookingById(booking.getBookingId()));
-		return null;
+		b=true;
+		} 
+		catch (Exception e) {
+			System.err.println("Error");
+		}
+		
+		return b;
 	}
 
 	@SuppressWarnings("unchecked")

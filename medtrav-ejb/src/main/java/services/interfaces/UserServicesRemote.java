@@ -24,6 +24,7 @@ public interface UserServicesRemote {
 	boolean removePatient(Integer patientId);
 	Patient findPatientByPassportNumber (Integer nbPassport);
 	List<Patient> findAlltreatedPatiends();
+	List<Patient> listAllPatients() ;
 	
 	User userIdentification(String login, String password);
 	

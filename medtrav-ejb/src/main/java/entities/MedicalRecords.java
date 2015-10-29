@@ -52,6 +52,7 @@ public class MedicalRecords implements Serializable {
 		this.analysis = analysis;
 	}
 
+	@Lob
 	public byte[] getPatientFile() {
 		return this.patientFile;
 	}
