@@ -65,5 +65,11 @@ public class UserServicesDelegate {
 	public static List <Patient> doListAllPatient() {
 		return getProxy().listAllPatients();
 	}
+	
+	public static Patient dofindPatientByFirstAndLastName(String firstName, String lastName) {
+		return getProxy().findPatientByFirstAndLastName(firstName, lastName);
+	}
+	
+	
 
 }
