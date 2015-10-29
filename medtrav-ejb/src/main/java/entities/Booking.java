@@ -22,7 +22,8 @@ public class Booking implements Serializable {
 	private Date arrival;
 	private Date departure;
 	private StateBooking state;
-	private Facility facility;
+	private Hotel hotel;
+	private Clinic clinic;
 	private Patient patient;
 	private Flight flight;
 
@@ -64,15 +65,23 @@ public class Booking implements Serializable {
 		this.departure = departure;
 	}
 
+
 	@ManyToOne
-	public Facility getFacility() {
-		return facility;
+	public Hotel getHotel() {
+		return hotel;
 	}
 
-	public void setFacility(Facility facility) {
-		this.facility = facility;
+	public void setHotel(Hotel hotel) {
+		this.hotel = hotel;
+	}
+	@ManyToOne
+	public Clinic getClinic() {
+		return clinic;
 	}
 
+	public void setClinic(Clinic clinic) {
+		this.clinic = clinic;
+	}
 	@ManyToOne
 	public Patient getPatient() {
 		return patient;

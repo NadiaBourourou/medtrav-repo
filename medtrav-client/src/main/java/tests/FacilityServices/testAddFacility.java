@@ -1,19 +1,20 @@
 package tests.FacilityServices;
 
-import delegates.FacilityServicesDelegate;
+import delegates.HotelServicesDelegate;
 import entities.Facility;
+import entities.Hotel;
 import entities.RoomType;
 import entities.StateType;
 
 public class testAddFacility {
 
 	public static void main(String[] args) {
-		Facility facility = new Facility();
+		Hotel facility = new Hotel();
 		facility.setName("marsa");
 		facility.setDescription("good");
 		facility.setAddress("marsa");
 		facility.setNumNights(3);
-		facility.setPrice(2D);
+		
 		StateType state = null;
 		facility.setState(state.ENABLED);
 		RoomType state2 = null;
@@ -32,8 +33,5 @@ public class testAddFacility {
 		facility2.setRoom(state2.SUITE);
 
 
-		FacilityServicesDelegate.doAddFacility(facility);
-
-		FacilityServicesDelegate.doAddFacility(facility2);
 	}
 }

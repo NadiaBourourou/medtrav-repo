@@ -1,9 +1,9 @@
 package tests.FacilityServices;
 
-import delegates.FacilityServicesDelegate;
+import delegates.HotelServicesDelegate;
 public class testDeleteFacility {
 
 	public static void main(String[] args) {
-		FacilityServicesDelegate.doDeleteFacilityById(1);
+		HotelServicesDelegate.doDeleteHotelById(1);
 	}
 }

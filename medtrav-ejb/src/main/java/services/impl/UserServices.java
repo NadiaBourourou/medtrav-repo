@@ -127,8 +127,6 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 		query.setParameter("param", nbPassport);
 		return (Patient) query.getSingleResult();
 	}
-	
-
 
 	@Override
 	public User userIdentification(String login, String password) {
@@ -155,6 +153,21 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 		return query.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Patient> listAllPatients() {
+		String jpql = "select u from User u ";
+		Query query = entityManager.createQuery(jpql);
+		return query.getResultList();
+	}
 
+	public Patient findPatientByFirstAndLastName(String firstName,
+			String lastName) {
+		String jpql = "select u from User u where u.firstName=:param1 and u.lastName=:param2";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param1", firstName);
+		query.setParameter("param2", lastName);
+		return (Patient) query.getSingleResult();
+	}
 
 }

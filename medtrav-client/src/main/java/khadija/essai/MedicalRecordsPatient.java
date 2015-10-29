@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -19,10 +18,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
 import delegates.MedicalRecordsDelegate;
-import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class MedicalRecordsPatient extends JFrame {
 
@@ -58,7 +57,8 @@ public class MedicalRecordsPatient extends JFrame {
 		setContentPane(contentPane);
 
 		JButton btnAdd = new JButton("");
-		btnAdd.setIcon(new ImageIcon(MedicalRecordsPatient.class.getResource("/images/upload.jpg")));
+		btnAdd.setIcon(new ImageIcon(MedicalRecordsPatient.class
+				.getResource("/images/upload.jpg")));
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JFileChooser chooser = new JFileChooser();
@@ -77,14 +77,6 @@ public class MedicalRecordsPatient extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				entities.MedicalRecords medicalRecords = new entities.MedicalRecords();
 				File fichier = new File(textField.getText());
-				FileInputStream fis = null;
-				try {
-					fis = new FileInputStream(fichier);
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-
 				FileReader fr = null;
 				try {
 					fr = new FileReader(fichier);
@@ -112,40 +104,74 @@ public class MedicalRecordsPatient extends JFrame {
 
 			}
 		});
-		
+
 		lblAnalysis = new JLabel("Analysis");
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(lblAnalysis)
-							.addGap(35)
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(83)
-							.addComponent(btnAdd_1)))
-					.addContainerGap(170, Short.MAX_VALUE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(136, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblAnalysis))
-					.addPreferredGap(ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-					.addComponent(btnAdd_1)
-					.addGap(27))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(119, Short.MAX_VALUE)
-					.addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
-					.addGap(66))
-		);
+		gl_contentPane
+				.setHorizontalGroup(gl_contentPane
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								gl_contentPane
+										.createSequentialGroup()
+										.addGroup(
+												gl_contentPane
+														.createParallelGroup(
+																Alignment.LEADING)
+														.addGroup(
+																gl_contentPane
+																		.createSequentialGroup()
+																		.addContainerGap()
+																		.addComponent(
+																				lblAnalysis)
+																		.addGap(35)
+																		.addComponent(
+																				textField,
+																				GroupLayout.PREFERRED_SIZE,
+																				GroupLayout.DEFAULT_SIZE,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addGap(18)
+																		.addComponent(
+																				btnAdd,
+																				GroupLayout.PREFERRED_SIZE,
+																				66,
+																				GroupLayout.PREFERRED_SIZE))
+														.addGroup(
+																gl_contentPane
+																		.createSequentialGroup()
+																		.addGap(83)
+																		.addComponent(
+																				btnAdd_1)))
+										.addContainerGap(170, Short.MAX_VALUE)));
+		gl_contentPane
+				.setVerticalGroup(gl_contentPane
+						.createParallelGroup(Alignment.TRAILING)
+						.addGroup(
+								gl_contentPane
+										.createSequentialGroup()
+										.addContainerGap(136, Short.MAX_VALUE)
+										.addGroup(
+												gl_contentPane
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																textField,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																lblAnalysis))
+										.addPreferredGap(
+												ComponentPlacement.RELATED, 46,
+												Short.MAX_VALUE)
+										.addComponent(btnAdd_1).addGap(27))
+						.addGroup(
+								gl_contentPane
+										.createSequentialGroup()
+										.addContainerGap(119, Short.MAX_VALUE)
+										.addComponent(btnAdd,
+												GroupLayout.PREFERRED_SIZE, 67,
+												GroupLayout.PREFERRED_SIZE)
+										.addGap(66)));
 		contentPane.setLayout(gl_contentPane);
 	}
 }

@@ -61,5 +61,15 @@ public class UserServicesDelegate {
 	public static User doUserIdentification(String login, String password) {
 		return getProxy().userIdentification(login, password);
 	}
+	
+	public static List <Patient> doListAllPatient() {
+		return getProxy().listAllPatients();
+	}
+	
+	public static Patient dofindPatientByFirstAndLastName(String firstName, String lastName) {
+		return getProxy().findPatientByFirstAndLastName(firstName, lastName);
+	}
+	
+	
 
 }

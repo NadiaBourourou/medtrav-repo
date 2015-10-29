@@ -1,101 +1,133 @@
 package entities;
 
+
+
 import java.io.Serializable;
-import java.lang.Double;
 import java.lang.Integer;
-import java.lang.String;
 import java.util.List;
 
 import javax.persistence.*;
 
 /**
- * Entity implementation class for Entity: Facility
+ * Entity implementation class for Entity: Hotel
  *
  */
 @Entity
-@Table(name="T_FACILITY")
-public class Facility implements Serializable {
+@Table(name="T_HOTEL")
+public class Hotel implements Serializable {
 
-	
-	private Integer facilityId;
+	private Integer hotelId;
 	private String name;
 	private String description;
 	private String address;
 	private StateType state;
 	private Integer numNights;
-	private Double price;
+	private Double priceSingle;
+	private Double priceSuite;
 	private RoomType room;
-	
+	private Integer stars;
+	private  byte[] image;
 	private List<Booking> bookings;
+	
 	
 	private static final long serialVersionUID = 1L;
 
-	public Facility() {
+	public Hotel() {
 		super();
 	}   
-	@Id 
+	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	public Integer getFacilityId() {
-		return this.facilityId;
+	public Integer getHotelId() {
+		return hotelId;
 	}
 
-	public void setFacilityId(Integer facilityId) {
-		this.facilityId = facilityId;
-	}   
+	public void setHotelId(Integer hotelId) {
+		this.hotelId = hotelId;
+	}
+
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
-	}   
+	}
+
 	public String getDescription() {
-		return this.description;
+		return description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
-	}   
+	}
+
 	public String getAddress() {
-		return this.address;
+		return address;
 	}
 
 	public void setAddress(String address) {
 		this.address = address;
-	}   
+	}
+
 	public StateType getState() {
-		return this.state;
+		return state;
 	}
 
 	public void setState(StateType state) {
 		this.state = state;
-	}   
+	}
+
 	public Integer getNumNights() {
-		return this.numNights;
+		return numNights;
 	}
 
 	public void setNumNights(Integer numNights) {
 		this.numNights = numNights;
-	}   
-	public Double getPrice() {
-		return this.price;
 	}
 
-	public void setPrice(Double price) {
-		this.price = price;
-	}   
+	public Double getPriceSingle() {
+		return priceSingle;
+	}
+
+	public void setPriceSingle(Double priceSingle) {
+		this.priceSingle = priceSingle;
+	}
+
+	public Double getPriceSuite() {
+		return priceSuite;
+	}
+	public void setPriceSuite(Double priceSuite) {
+		this.priceSuite = priceSuite;
+	}
 	public RoomType getRoom() {
-		return this.room;
+		return room;
 	}
 
 	public void setRoom(RoomType room) {
 		this.room = room;
 	}
+
+
+	public Integer getStars() {
+		return this.stars;
+	}
+
+	public void setStars(Integer stars) {
+		this.stars = stars;
+	}
 	
-	@OneToMany(mappedBy="facility")
+	@Lob
+	public byte[] getImage() {
+		return image;
+	}
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+	@OneToMany(mappedBy="hotel")
 	public List<Booking> getBookings() {
 		return bookings;
 	}
+
 	public void setBookings(List<Booking> bookings) {
 		this.bookings = bookings;
 	}
