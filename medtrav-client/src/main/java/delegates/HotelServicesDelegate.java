@@ -3,13 +3,13 @@ package delegates;
 import java.util.List;
 
 import locator.ServiceLocator;
-import services.interfaces.FacilityServicesRemote;
+
 import services.interfaces.HotelServicesRemote;
-import entities.Facility;
+
 import entities.Hotel;
 
 public class HotelServicesDelegate {
-	private FacilityServicesRemote remote;
+	private HotelServicesRemote remote;
 	private static final String jndiName = "/medtrav-ejb/HotelServices!services.interfaces.HotelServicesRemote";
 
 	private static HotelServicesRemote getProxy() {
