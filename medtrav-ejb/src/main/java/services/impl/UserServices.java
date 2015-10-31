@@ -9,6 +9,7 @@ import javax.persistence.Query;
 
 import services.interfaces.UserServicesLocal;
 import services.interfaces.UserServicesRemote;
+import entities.Administrator;
 import entities.Doctor;
 import entities.Patient;
 import entities.User;
@@ -168,6 +169,21 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 		query.setParameter("param1", firstName);
 		query.setParameter("param2", lastName);
 		return (Patient) query.getSingleResult();
+	}
+
+	
+	
+	//we will only need this one for PopulateDb
+	@Override
+	public boolean addAdmin(Administrator admin) {
+		Boolean b = false;
+		try {
+			entityManager.persist(admin);
+			b = true;
+		} catch (Exception e) {
+			System.err.println("ouups ...");
+		}
+		return b;
 	}
 
 }

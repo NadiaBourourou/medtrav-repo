@@ -5,6 +5,7 @@ import java.util.List;
 
 import delegates.TreatmentServicesDelegate;
 import delegates.UserServicesDelegate;
+import entities.Administrator;
 import entities.Doctor;
 import entities.Patient;
 import entities.Procedure;
@@ -56,10 +57,23 @@ public class PopulateDb {
 	    doctor1.setLastName("Hunter");
 	    doctor1.setCin(1940634);
 	    doctor1.setDescription("Specialiste des maladies cardio-vasculaires");
-	    doctor1.setLogin("frmWelcomeToMedtrav");
+	    doctor1.setLogin("Max.Hunter");
 	    doctor1.setPassword("pwdMax");
 	    doctor1.setMail("MaxHunter@gmail.com"); 
 	    doctor1.setSpecialty("CardioVasculaire");
+	    
+	    
+	    
+	    
+	    Administrator admin=new Administrator();
+	    admin.setFirstName("Sayed");
+	    admin.setLastName("El Moudir");
+	    admin.setLogin("Administrator");
+	    admin.setPassword("pwdAdmin");
+	    admin.setMail("admin@admin.net");
+	    admin.setCin(10203060);
+	    
+	    UserServicesDelegate.doAddAdmin(admin);
 	  
 	    
 	   Procedure procedure1=new Procedure();

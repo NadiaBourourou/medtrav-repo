@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import entities.Administrator;
 import entities.Doctor;
 import entities.Patient;
 import entities.User;
@@ -27,6 +28,10 @@ public interface UserServicesRemote {
 	List<Patient> listAllPatients() ;
 	Patient findPatientByFirstAndLastName(String firstName,
 			String lastName) ;
+	
+	
+	boolean addAdmin(Administrator admin);
+	
 	
 	User userIdentification(String login, String password);
 	

@@ -19,8 +19,13 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
 import delegates.UserServicesDelegate;
+import entities.Administrator;
+import entities.Doctor;
+import entities.Patient;
 import entities.User;
+
 import java.awt.Color;
+
 import javax.swing.JMenuBar;
 
 public class HelloMedtrav {
@@ -101,14 +106,59 @@ public class HelloMedtrav {
 							username, password);
 					if (flen == null) {
 						JOptionPane.showMessageDialog(null,
-								"Invalid crendentials");
+								"Invalid crendentials ! ");
 
 					} else {
-						WelcomeJframe welcomeJframe = new WelcomeJframe();
+						if (flen instanceof Administrator)
+							EventQueue.invokeLater(new Runnable() {
+								public void run() {
+									try {
+										AdminUI frame = new AdminUI();
+										frame.setVisible(true);
+										frmWelcomeToMedtrav.setVisible(false);
+									} catch (Exception e) {
+							e.printStackTrace();
+									}
+								}
+						});
+						else if (flen instanceof Patient)
+							EventQueue.invokeLater(new Runnable() {
+								public void run() {
+									try {
+										WelcomeJframe frame = new WelcomeJframe();
+										frame.setVisible(true);
+										frmWelcomeToMedtrav.setVisible(false);
+									} catch (Exception e) {
+							e.printStackTrace();
+									}
+								}
+						});
+						
+						else if (flen instanceof Doctor)
+							EventQueue.invokeLater(new Runnable() {
+								public void run() {
+									try {
+										WelcomeJframe frame = new WelcomeJframe();
+										frame.setVisible(true);
+										frmWelcomeToMedtrav.setVisible(false);
+									} catch (Exception e) {
+							e.printStackTrace();
+									}
+								}
+						});
+						
+						
+						
+						
+						
+						
+						
+						
+					/*	WelcomeJframe welcomeJframe = new WelcomeJframe();
 						welcomeJframe.Welcome(username);
 						welcomeJframe.setVisible(true);
 						frmWelcomeToMedtrav.setVisible(false);
-
+*/
 					}
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1);

@@ -2,7 +2,8 @@ package gui;
 
 import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -12,19 +13,13 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.Box.Filler;
 import javax.swing.border.EmptyBorder;
 
-import delegates.TreatmentServicesDelegate;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import com.toedter.calendar.JDateChooser;
-import java.awt.FlowLayout;
-import javax.swing.SpringLayout;
-import com.toedter.calendar.JDayChooser;
-import com.toedter.calendar.JMonthChooser;
-import com.toedter.calendar.JCalendar;
 import net.miginfocom.swing.MigLayout;
+
+import com.toedter.calendar.JDateChooser;
+
+import delegates.TreatmentServicesDelegate;
 
 public class WelcomeJframe extends JFrame {
 
@@ -40,7 +35,7 @@ public class WelcomeJframe extends JFrame {
 				try {
 					WelcomeJframe frame = new WelcomeJframe();
 					frame.setVisible(true);
-				
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -52,33 +47,33 @@ public class WelcomeJframe extends JFrame {
 	public void fillProcedureCombo() {
 		try {
 			TreatmentServicesDelegate.doFindAllProcedures();
-		int taille=TreatmentServicesDelegate.doFindAllProcedures().size();
-	for (int i =0; i<taille;i++)
-		{
-			String name=TreatmentServicesDelegate.doFindAllProcedures().get(i).getName();
-		cbProcedure.addItem(name);
-		}
-		
+			int taille = TreatmentServicesDelegate.doFindAllProcedures().size();
+			for (int i = 0; i < taille; i++) {
+				String name = TreatmentServicesDelegate.doFindAllProcedures()
+						.get(i).getName();
+				cbProcedure.addItem(name);
+			}
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e);
 		}
 
 	}
-	
+
 	public void fillTreatmentCombo() {
 		try {
-			Integer index=cbProcedure.getSelectedIndex()+1;
+			Integer index = cbProcedure.getSelectedIndex() + 1;
 			JOptionPane.showMessageDialog(null, index);
 			System.out.println(index);
-		TreatmentServicesDelegate.doFindAllTreatmentsByProcedureId(index);
-		int taille=TreatmentServicesDelegate.doFindAllTreatmentsByProcedureId(index).size();
-	for (int i =0; i<taille;i++)
-		{
-			String name=TreatmentServicesDelegate.doFindAllTreatmentsByProcedureId(index).get(i).getName();
-	cbTreatment.addItem(name);
-		}
-		
+			TreatmentServicesDelegate.doFindAllTreatmentsByProcedureId(index);
+			int taille = TreatmentServicesDelegate
+					.doFindAllTreatmentsByProcedureId(index).size();
+			for (int i = 0; i < taille; i++) {
+				String name = TreatmentServicesDelegate
+						.doFindAllTreatmentsByProcedureId(index).get(i)
+						.getName();
+				cbTreatment.addItem(name);
+			}
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e);
@@ -87,7 +82,7 @@ public class WelcomeJframe extends JFrame {
 	}
 
 	public void Welcome(String username) {
-		// this.lblWelcome.setText("Helloooo " + username + "! ");
+	 this.lblWelcome.setText("Helloooo " + username + "! ");
 	}
 
 	public WelcomeJframe() {
@@ -101,9 +96,6 @@ public class WelcomeJframe extends JFrame {
 		mntmLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				
-				
-				
 			}
 		});
 		menuBar.add(mntmLogOut);
@@ -111,66 +103,76 @@ public class WelcomeJframe extends JFrame {
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[112px][1px][1px][198px][1px][1px][1px][1px][][][][][][][][][][][]", "[57px][20px][20px][20px][20px][][][][][][][]"));
+		contentPane.setLayout(null);
 
 		JLabel lblLogo = new JLabel("");
+		lblLogo.setBounds(34, 12, 69, 57);
 		lblLogo.setIcon(new ImageIcon(WelcomeJframe.class
 				.getResource("/images/smallLogo.png")));
-		contentPane.add(lblLogo, "cell 0 0,alignx center,aligny top");
+		contentPane.add(lblLogo);
 
 		JLabel label = new JLabel("");
-		contentPane.add(label, "cell 1 0,alignx left,aligny center");
+		label.setBounds(128, 41, 0, 0);
+		contentPane.add(label);
 
 		JLabel label_1 = new JLabel("");
-		contentPane.add(label_1, "cell 2 0,alignx left,aligny center");
+		label_1.setBounds(133, 41, 0, 0);
+		contentPane.add(label_1);
 
 		JLabel lblProcedure = new JLabel("Select a procedure");
-		contentPane.add(lblProcedure, "cell 0 1,growx,aligny center");
-		
+		lblProcedure.setBounds(12, 76, 112, 14);
+		contentPane.add(lblProcedure);
+
 		fillProcedureCombo();
+		cbProcedure.setBounds(138, 73, 198, 20);
 		cbProcedure.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				fillTreatmentCombo();
 			}
 		});
-		
 
+		contentPane.add(cbProcedure);
 
-		contentPane.add(cbProcedure, "cell 3 1,growx,aligny top");
-		contentPane.add(lblWelcome, "cell 3 0,alignx center,aligny center");
-
-		
-	
 		JLabel lblTreatment = new JLabel("Select a treatment");
-		contentPane.add(lblTreatment, "cell 0 2,growx,aligny center");
+		lblTreatment.setBounds(12, 100, 112, 14);
+		contentPane.add(lblTreatment);
+		cbTreatment.setBounds(138, 97, 198, 20);
 		cbTreatment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			lblDescriptionLabel.setText(TreatmentServicesDelegate.doGetTreatmentDescription(1).toString());
-			lblDescriptionLabel.setText("desc1");
-		
+				lblDescriptionLabel.setText(TreatmentServicesDelegate
+						.doGetTreatmentDescription(1).toString());
+				lblDescriptionLabel.setText("desc1");
+
 			}
 		});
 
-
-		contentPane.add(cbTreatment, "cell 3 2,growx,aligny top");
+		contentPane.add(cbTreatment);
 
 		JLabel label_2 = new JLabel("");
-		contentPane.add(label_2, "cell 4 0,alignx left,aligny center");
+		label_2.setBounds(340, 41, 0, 0);
+		contentPane.add(label_2);
 
 		JLabel label_3 = new JLabel("");
-		contentPane.add(label_3, "cell 5 0,alignx left,aligny center");
+		label_3.setBounds(345, 41, 0, 0);
+		contentPane.add(label_3);
 
 		JLabel label_4 = new JLabel("");
-		contentPane.add(label_4, "cell 7 0,alignx left,aligny center");
-		
+		label_4.setBounds(355, 41, 0, 0);
+		contentPane.add(label_4);
+
 		JLabel lblDescriptionLabel = new JLabel("");
-		contentPane.add(lblDescriptionLabel, "flowx,cell 9 2 9 3");
-		
+		lblDescriptionLabel.setBounds(389, 131, 0, 0);
+		contentPane.add(lblDescriptionLabel);
+
 		JDateChooser dateChooser = new JDateChooser();
-		contentPane.add(dateChooser, "cell 3 3,growx,aligny top");
-		
+		dateChooser.setBounds(138, 121, 198, 20);
+		contentPane.add(dateChooser);
+
 		JDateChooser dateChooser_1 = new JDateChooser();
-		contentPane.add(dateChooser_1, "cell 3 4,growx,aligny top");
+		dateChooser_1.setBounds(138, 145, 198, 20);
+		contentPane.add(dateChooser_1);
+		lblWelcome.setBounds(584, 12, 120, 14);
+		contentPane.add(lblWelcome);
 
 	}
 }
