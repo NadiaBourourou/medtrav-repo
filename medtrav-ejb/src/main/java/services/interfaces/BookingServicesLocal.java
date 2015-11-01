@@ -18,4 +18,5 @@ public interface BookingServicesLocal {
 
 	Booking findBookingById(Integer idBooking);
 
+	List<Booking> findAllBookingsByFlightId(Integer id);
 }

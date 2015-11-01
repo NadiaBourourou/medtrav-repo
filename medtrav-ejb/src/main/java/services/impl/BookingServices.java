@@ -78,5 +78,14 @@ public class BookingServices implements BookingServicesRemote,
 	public Booking findBookingById(Integer idBooking) {
 		return entitymanager.find(Booking.class, idBooking);
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Booking> findAllBookingsByFlightId(Integer id) {
+		String jpql = "select b from Booking b where b.flight.id=:param";
+		Query query = entitymanager.createQuery(jpql);
+		query.setParameter("param", id);
+		return query.getResultList();
+	}
 
 }

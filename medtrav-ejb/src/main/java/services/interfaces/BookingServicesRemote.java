@@ -18,5 +18,7 @@ public interface BookingServicesRemote {
 	List<Booking> findAllBookingsByPatient(Integer patientId);
 
 	Booking findBookingById(Integer idBooking);
+	
+	List<Booking> findAllBookingsByFlightId(Integer id);
 
 }
