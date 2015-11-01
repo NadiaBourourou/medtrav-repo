@@ -24,6 +24,7 @@ public class Flight implements Serializable {
 	private String departureLocation;
 	private String arrivalLocation;
 	private Double price;
+	private String airline;
 	
 	private List<Booking> bookings;
 	
@@ -91,6 +92,12 @@ public class Flight implements Serializable {
 			b.setFlight(this);
 		}
 		
+	}
+	public String getAirline() {
+		return airline;
+	}
+	public void setAirline(String airline) {
+		this.airline = airline;
 	}
    
 }

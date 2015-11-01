@@ -33,4 +33,34 @@ public class FlightServicesDelegate {
 	public static List<Flight> doFindAllFlighstByPatient(Integer patientId) {
 		return getProxy().findAllFlightsByPatientId(patientId);
 	}
+	
+	public static List<Flight> doFindFlightsByAirline(String airline){
+		return getProxy().findFlightsByAirline(airline);
+	}
+	
+	public static Boolean doAssignFlightToBooking(Integer idBooking,Integer idFlight){
+		return getProxy().assignFlightToBooking(idBooking, idFlight);
+	}
+	
+	public static Boolean doAssignFlightToBookingSlaveSide(Integer idBooking,Integer idFlight){
+		return getProxy().assignFlightToBookingSlaveSide(idBooking, idFlight);
+	}
+	
+	public static Boolean doAssignDoctorToSurgery(Integer idSurgery,Integer idDoctor){
+		return getProxy().assignDoctorToSurgery(idSurgery, idDoctor);
+		
+	}
+	
+	public static Boolean doAssignDoctorToSurgerySlaveSide(Integer idSurgery,Integer idDoctor){
+		return getProxy().assignDoctorToSurgerySlaveSide(idSurgery, idDoctor);
+	}
+	
+	public static Boolean doAssignMedicalRecordToSurgery(Integer idSurgery,Integer idMedicalRecord){
+		return getProxy().assignMedicalRecordToSurgery(idSurgery, idMedicalRecord);
+	}
+	public static Boolean doAssignMedicalRecordToSurgerySlaveSide(Integer idSurgery,Integer idMedicalRecord){
+		return getProxy().assignMedicalRecordToSurgerySlaveSide(idSurgery, idMedicalRecord);
+	}
+	
+	
 }

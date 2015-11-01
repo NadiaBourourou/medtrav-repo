@@ -97,16 +97,13 @@ public class FlightServices implements FlightServicesRemote,
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Flight findFlightByDate(Integer idFlight) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Flight findFlightByAirline(Integer idFlight) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Flight> findFlightsByAirline(String airline) {
+			String jpql = "select f from Flight f where f.airline=:airline";
+			Query query = entityManager.createQuery(jpql);
+			query.setParameter("param", airline);
+			return query.getResultList();
 	}
 
 	@Override
