@@ -256,4 +256,20 @@ public class FlightServices implements FlightServicesRemote,
 		return b;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<String> findAllDepartures() {
+		String jpql = "select f.departure from FlightMatching f";
+		Query query = entityManager.createQuery(jpql);
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<String> findAllArrivals() {
+		String jpql = "select f.arrival from FlightMatching f";
+		Query query = entityManager.createQuery(jpql);
+		return query.getResultList();
+	}
+
 }

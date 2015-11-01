@@ -62,5 +62,13 @@ public class FlightServicesDelegate {
 		return getProxy().assignMedicalRecordToSurgerySlaveSide(idSurgery, idMedicalRecord);
 	}
 	
+	public static List<String> doFindAllDepartures() {
+		return getProxy().findAllDepartures();
+	}
+	
+	public static List<String> doFindAllArrivals() {
+		return getProxy().findAllArrivals();
+		
+	}
 	
 }

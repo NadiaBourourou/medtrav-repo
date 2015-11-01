@@ -30,4 +30,6 @@ public interface FlightServicesRemote {
 	Boolean assignMedicalRecordToSurgery(Integer idSurgery,Integer idMedicalRecord);
 	Boolean assignMedicalRecordToSurgerySlaveSide(Integer idSurgery,Integer idMedicalRecord);
 
+	List<String> findAllDepartures();
+	List <String > findAllArrivals();
 }
