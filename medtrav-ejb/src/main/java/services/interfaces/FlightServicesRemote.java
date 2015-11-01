@@ -18,4 +18,20 @@ public interface FlightServicesRemote {
 	List<Flight> findAllFlightsByPatientId(Integer patientId);
 
 	Flight findFlightById(Integer idFlight);
+	
+	///////////////////////////////////////////////NOT YET///////////////////////////////////////////////
+	
+	Flight findFlightByDate(Integer idFlight);
+	Flight findFlightByAirline(Integer idFlight);
+	
+	Boolean assignFlightToBooking(Integer idBooking,Integer idFlight);
+	Boolean assignFlightToBookingSlaveSide(Integer idBooking,Integer idFlight);
+	
+	Boolean assignDoctorToSurgery(Integer idSurgery,Integer idDoctor);
+	Boolean assignDoctorToSurgerySlaveSide(Integer idSurgery,Integer idDoctor);
+			
+	Boolean assignMedicalRecordToSurgery(Integer idSurgery,Integer idMedicalRecord);
+	Boolean assignMedicalRecordToSurgerySlaveSide(Integer idSurgery,Integer idMedicalRecord);
+
+	///////////////////////////////////////////////NOT YET///////////////////////////////////////////////
 }
