@@ -6,7 +6,6 @@ import com.thehowtotutorial.splashscreen.JSplash;
 
 public class SplashScreen {
 
-
 	public static void main(String[] args) throws InterruptedException {
 		JSplash splash = new JSplash(
 				SplashScreen.class.getResource("/images/medtrav.JPG"), true,
@@ -20,7 +19,7 @@ public class SplashScreen {
 		Thread.sleep(1000);
 		splash.setProgress(80, "Starting app");
 		Thread.sleep(1000);
-		
+
 		splash.splashOff();
 	}
 }

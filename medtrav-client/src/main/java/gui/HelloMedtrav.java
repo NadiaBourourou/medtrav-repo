@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,16 +25,11 @@ import entities.Doctor;
 import entities.Patient;
 import entities.User;
 
-import java.awt.Color;
-
-import javax.swing.JMenuBar;
-
 public class HelloMedtrav {
 
 	private JFrame frmWelcomeToMedtrav;
 	private JTextField tfLogin;
 	private JPasswordField tfPassword;
-
 
 	/**
 	 * Launch the application.
@@ -51,16 +47,10 @@ public class HelloMedtrav {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
 	public HelloMedtrav() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		frmWelcomeToMedtrav = new JFrame();
 		frmWelcomeToMedtrav.getContentPane().setBackground(Color.WHITE);
@@ -117,10 +107,10 @@ public class HelloMedtrav {
 										frame.setVisible(true);
 										frmWelcomeToMedtrav.setVisible(false);
 									} catch (Exception e) {
-							e.printStackTrace();
+										e.printStackTrace();
 									}
 								}
-						});
+							});
 						else if (flen instanceof Patient)
 							EventQueue.invokeLater(new Runnable() {
 								public void run() {
@@ -129,11 +119,11 @@ public class HelloMedtrav {
 										frame.setVisible(true);
 										frmWelcomeToMedtrav.setVisible(false);
 									} catch (Exception e) {
-							e.printStackTrace();
+										e.printStackTrace();
 									}
 								}
-						});
-						
+							});
+
 						else if (flen instanceof Doctor)
 							EventQueue.invokeLater(new Runnable() {
 								public void run() {
@@ -142,23 +132,17 @@ public class HelloMedtrav {
 										frame.setVisible(true);
 										frmWelcomeToMedtrav.setVisible(false);
 									} catch (Exception e) {
-							e.printStackTrace();
+										e.printStackTrace();
 									}
 								}
-						});
-						
-						
-						
-						
-						
-						
-						
-						
-					/*	WelcomeJframe welcomeJframe = new WelcomeJframe();
-						welcomeJframe.Welcome(username);
-						welcomeJframe.setVisible(true);
-						frmWelcomeToMedtrav.setVisible(false);
-*/
+							});
+
+						/*
+						 * WelcomeJframe welcomeJframe = new WelcomeJframe();
+						 * welcomeJframe.Welcome(username);
+						 * welcomeJframe.setVisible(true);
+						 * frmWelcomeToMedtrav.setVisible(false);
+						 */
 					}
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1);
@@ -168,13 +152,15 @@ public class HelloMedtrav {
 		});
 		btnLogin.setBounds(562, 232, 98, 23);
 		frmWelcomeToMedtrav.getContentPane().add(btnLogin);
-		
+
 		JLabel logo = new JLabel("");
-		logo.setIcon(new ImageIcon(HelloMedtrav.class.getResource("/images/medtrav.JPG")));
+		logo.setIcon(new ImageIcon(HelloMedtrav.class
+				.getResource("/images/medtrav.JPG")));
 		logo.setBounds(75, 11, 350, 360);
 		frmWelcomeToMedtrav.getContentPane().add(logo);
-		
-		JLabel Copyright = new JLabel("This project is brought to you by GTech\u00A9 2015 Sigma.  All rights reserved");
+
+		JLabel Copyright = new JLabel(
+				"This project is brought to you by GTech\u00A9 2015 Sigma.  All rights reserved");
 		Copyright.setForeground(Color.DARK_GRAY);
 		Copyright.setBounds(28, 384, 532, 14);
 		frmWelcomeToMedtrav.getContentPane().add(Copyright);

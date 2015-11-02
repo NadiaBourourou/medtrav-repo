@@ -171,9 +171,7 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 		return (Patient) query.getSingleResult();
 	}
 
-	
-	
-	//we will only need this one for PopulateDb
+	// we will only need this one for PopulateDb
 	@Override
 	public boolean addAdmin(Administrator admin) {
 		Boolean b = false;
