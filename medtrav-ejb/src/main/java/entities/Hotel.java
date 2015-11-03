@@ -7,6 +7,8 @@ import java.lang.Integer;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.swing.ImageIcon;
+
 
 /**
  * Entity implementation class for Entity: Hotel
@@ -26,12 +28,15 @@ public class Hotel implements Serializable {
 	private Double priceSuite;
 	private RoomType room;
 	private Integer stars;
-	private  byte[] image;
+	private  byte[] pic;
 	private List<Booking> bookings;
 	
 	
 	private static final long serialVersionUID = 1L;
-
+	
+	
+	
+	
 	public Hotel() {
 		super();
 	}   
@@ -117,12 +122,15 @@ public class Hotel implements Serializable {
 	}
 	
 	@Lob
-	public byte[] getImage() {
-		return image;
+	public byte[] getPic() {
+		return pic;
 	}
-	public void setImage(byte[] image) {
-		this.image = image;
+	public void setPic(byte[] pic) {
+		this.pic = pic;
 	}
+
+	
+	
 	@OneToMany(mappedBy="hotel")
 	public List<Booking> getBookings() {
 		return bookings;
@@ -131,5 +139,6 @@ public class Hotel implements Serializable {
 	public void setBookings(List<Booking> bookings) {
 		this.bookings = bookings;
 	}
+	
    
 }
