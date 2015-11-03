@@ -50,5 +50,11 @@ public class Doctor extends User implements Serializable {
 	public void setSurgeries(List<Surgery> surgeries) {
 		this.surgeries = surgeries;
 	}
+	public void linkSurgeriesToThisDoctor(List<Surgery> surgeries) {
+		this.surgeries = surgeries;
+		for (Surgery s : surgeries) {
+			s.setDoctor(this);
+		}
+	}
    
 }

@@ -33,5 +33,4 @@ public class BookingServicesDelegate {
 	public static List<Booking> doFindAllBookingsByPatient(Integer patientId) {
 		return getProxy().findAllBookingsByPatient(patientId);
 	}
-
 }

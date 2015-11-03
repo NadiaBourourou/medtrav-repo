@@ -26,7 +26,7 @@ public class ClinicServicesDelegate {
 	public static boolean doDeleteClinicById(Integer ClinicId) {
 		return getProxy().deleteClinicById(ClinicId);
 	}
-	public static boolean doDeleteClinicById(Clinic Clinic) {
+	public static boolean doDeleteClinic(Clinic Clinic) {
 		return getProxy().deleteClinic(Clinic);
 	}
 

@@ -24,6 +24,7 @@ public class Flight implements Serializable {
 	private String departureLocation;
 	private String arrivalLocation;
 	private Double price;
+	private String airline;
 	
 	private List<Booking> bookings;
 	
@@ -32,6 +33,9 @@ public class Flight implements Serializable {
 	public Flight() {
 		super();
 	}   
+	
+	
+	
 	@Id    
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getFlightId() {
@@ -84,6 +88,22 @@ public class Flight implements Serializable {
 	
 	public void setBookings(List<Booking> bookings) {
 		this.bookings = bookings;
+	}
+
+	
+	public String getAirline() {
+		return airline;
+	}
+	
+	public void setAirline(String airline) {
+		this.airline = airline;
+	}
+	
+	public void linkBookingsToThisFlight(List<Booking> bookings) {
+		this.bookings = bookings;
+		for (Booking b : bookings) {
+			b.setFlight(this);
+		}
 	}
    
 }

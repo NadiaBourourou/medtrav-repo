@@ -79,4 +79,11 @@ public class MedicalRecords implements Serializable {
 		this.surgeries = surgeries;
 	}
 
+	public void linkSurgeriesToThisMedicalRecords(List<Surgery> surgeries) {
+		this.surgeries = surgeries;
+		for (Surgery s : surgeries) {
+			s.setMedicalRecords(this);
+		}		
+	}
+
 }
