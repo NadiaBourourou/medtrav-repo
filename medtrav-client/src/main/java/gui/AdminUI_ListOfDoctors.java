@@ -124,6 +124,7 @@ public class AdminUI_ListOfDoctors extends JFrame {
 		initDataBindings();
 		
 		
+		
 	}
 	
 	
