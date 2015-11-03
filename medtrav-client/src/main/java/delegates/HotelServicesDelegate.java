@@ -29,7 +29,7 @@ public class HotelServicesDelegate {
 		return getProxy().deleteHotelById(HotelId);
 	}
 
-	public static boolean doDeleteHotelById(Hotel hotel) {
+	public static boolean doDeleteHotel(Hotel hotel) {
 		return getProxy().deleteHotel(hotel);
 	}
 
