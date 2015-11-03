@@ -2,6 +2,7 @@ package khadija.essai;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,38 +11,33 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
-import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
-import net.proteanit.sql.DbUtils;
-import delegates.UserServicesDelegate;
-import entities.Patient;
+import entities.User;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import org.jdesktop.beansbinding.BeanProperty;
 
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.io.File;
+
 public class MedicalRecordsDoctor extends JFrame {
-	List<Patient> patients;
-	Patient patient;
+	
+	List<User> patients;
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JButton btnSearch;
+	private JTextField id;
+	private JTextField prenom;
+	private JTextField nom;
+	private JTextField file;
 	private JTable table;
-	private JTextField textField_2;
 
 	/**
 	 * Launch the application.
@@ -63,134 +59,130 @@ public class MedicalRecordsDoctor extends JFrame {
 	 * Create the frame.
 	 */
 	public MedicalRecordsDoctor() {
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-
-		JLabel lblPatientFile = new JLabel("Patient File");
-
-		textField = new JTextField();
-		textField.setColumns(10);
-
-		JButton button = new JButton("");
-		button.setIcon(new ImageIcon(MedicalRecordsDoctor.class
-				.getResource("/images/upload.jpg")));
-
-		JLabel lblSurgery = new JLabel("Patient First Name");
-
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-
-		btnSearch = new JButton("Search");
-		btnSearch.addActionListener(new ActionListener() {
+		JLabel lblPatientId = new JLabel("Patient Id");
+		
+		id = new JTextField();
+		id.setColumns(10);
+		
+		JLabel lblPatientsFirstName = new JLabel("Patient's First name");
+		
+		prenom = new JTextField();
+		prenom.setColumns(10);
+		
+		JLabel lblPatientsLastName = new JLabel("Patient's Last name");
+		
+		nom = new JTextField();
+		nom.setColumns(10);
+		
+		JLabel lblPatientFile = new JLabel("Patient File");
+		
+		file = new JTextField();
+		file.setColumns(10);
+		
+		JButton btnUpload = new JButton("Upload");
+		btnUpload.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				patient = UserServicesDelegate.dofindPatientByFirstAndLastName(textField_1.getText(), textField_2.getText());
-				
-				
-				
+				JFileChooser chooser = new JFileChooser();
+				chooser.showOpenDialog(null);
+				File f = chooser.getSelectedFile();
+				String filename = f.getAbsolutePath();
+				file.setText(filename);
 			}
 		});
-
-		JScrollPane scrollPane = new JScrollPane();
-		patients = UserServicesDelegate.doListAllPatient();
-		scrollPane.setViewportView(table);
 		
-		JLabel lblPatientLastName = new JLabel("Patient Last Name");
-		
-	
+		JPanel panel = new JPanel();
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(10)
-									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addComponent(lblSurgery, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(19)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(btnSearch)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblPatientFile)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+							.addGap(44)
+							.addComponent(lblPatientFile)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(file, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(10)
+							.addComponent(btnUpload))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addContainerGap()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(10)
-									.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE))
-								.addComponent(lblPatientLastName, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE))))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 202, GroupLayout.PREFERRED_SIZE)
-						.addComponent(button, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
-					.addGap(27))
+								.addComponent(lblPatientId)
+								.addComponent(id, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblPatientsFirstName)
+								.addComponent(prenom, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblPatientsLastName)
+								.addComponent(nom, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 301, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(23)
-							.addComponent(lblSurgery)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(lblPatientLastName)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-					.addComponent(btnSearch)
-					.addGap(23)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblPatientFile)
-								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addGap(35))
-						.addComponent(button, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)))
+					.addGap(26)
+					.addComponent(lblPatientId)
+					.addGap(11)
+					.addComponent(id, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(11)
+					.addComponent(lblPatientsFirstName)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(prenom, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblPatientsLastName)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(nom, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(74, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(file, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblPatientFile)
+						.addComponent(btnUpload))
+					.addGap(33))
 		);
-
+		
+		JScrollPane scrollPane = new JScrollPane();
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 284, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(12, Short.MAX_VALUE))
+		);
+		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		panel.setLayout(gl_panel);
 		contentPane.setLayout(gl_contentPane);
 		initDataBindings();
-
-
 	}
-
 	protected void initDataBindings() {
-		JTableBinding<Patient, List<Patient>, JTable> jTableBinding = SwingBindings
-				.createJTableBinding(UpdateStrategy.READ, patients, table);
+		JTableBinding<User, List<User>, JTable> jTableBinding = SwingBindings.createJTableBinding(UpdateStrategy.READ_WRITE, patients, table);
 		//
-		BeanProperty<Patient, Integer> patientBeanProperty = BeanProperty
-				.create("userId");
-		jTableBinding.addColumnBinding(patientBeanProperty).setColumnName(
-				"Id User");
+		BeanProperty<User, Integer> userBeanProperty = BeanProperty.create("userId");
+		jTableBinding.addColumnBinding(userBeanProperty).setColumnName("Patient Id");
 		//
-		BeanProperty<Patient, String> patientBeanProperty_1 = BeanProperty
-				.create("firstName");
-		jTableBinding.addColumnBinding(patientBeanProperty_1).setColumnName(
-				"First Name");
+		BeanProperty<User, String> userBeanProperty_1 = BeanProperty.create("firstName");
+		jTableBinding.addColumnBinding(userBeanProperty_1).setColumnName("Patient First name");
 		//
-		BeanProperty<Patient, String> patientBeanProperty_2 = BeanProperty
-				.create("lastName");
-		jTableBinding.addColumnBinding(patientBeanProperty_2).setColumnName(
-				"Last Name");
+		BeanProperty<User, String> userBeanProperty_2 = BeanProperty.create("lastName");
+		jTableBinding.addColumnBinding(userBeanProperty_2).setColumnName("Patient Last Name");
 		//
 		jTableBinding.bind();
 	}
