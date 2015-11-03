@@ -1,10 +1,16 @@
 package entities;
 
 import java.io.Serializable;
-import java.lang.Integer;
-import java.lang.String;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * Entity implementation class for Entity: Treatment
@@ -25,7 +31,8 @@ public class Treatment implements Serializable {
 	public Treatment() {
 		super();
 	}   
-	@Id    
+	@Id   
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getId() {
 		return this.id;
 	}
@@ -47,8 +54,8 @@ public class Treatment implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "procedureId", referencedColumnName = "id", updatable = false, insertable = false)
+	@ManyToOne(cascade=CascadeType.MERGE)
+	
 	public Procedure getProcedure() {
 		return procedure;
 	}

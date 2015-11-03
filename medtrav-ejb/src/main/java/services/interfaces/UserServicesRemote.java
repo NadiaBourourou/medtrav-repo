@@ -17,7 +17,7 @@ public interface UserServicesRemote {
 	boolean removeDoctor(Integer doctorId);
 	Doctor findDoctorById(Integer id);
 	List <Doctor> findDoctorsBySpecialty(String specialty);
-	
+	List <Doctor> findAllDoctors();
 	
 	
 	boolean addPatient(Patient patient);

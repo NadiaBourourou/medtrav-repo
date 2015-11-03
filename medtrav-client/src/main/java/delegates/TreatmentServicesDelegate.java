@@ -43,4 +43,8 @@ public class TreatmentServicesDelegate {
 		return getProxy().getTreatmentDescription(treatmentId);
 	}
 
+	public static void doAddTreatmentAndAssignItToProcedure(Treatment treatment, Integer idProcedure) {
+		getProxy().addTreatmentAndAssignItToProcedure(treatment, idProcedure);
+	}
+
 }

@@ -1,36 +1,30 @@
 package khadija.essai;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
 import javax.swing.ImageIcon;
-import javax.swing.JTable;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.EmptyBorder;
 
-import net.proteanit.sql.DbUtils;
-import delegates.UserServicesDelegate;
-import entities.Patient;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-import org.jdesktop.swingbinding.JTableBinding;
-import org.jdesktop.swingbinding.SwingBindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import org.jdesktop.beansbinding.BeanProperty;
+import org.jdesktop.swingbinding.JTableBinding;
+import org.jdesktop.swingbinding.SwingBindings;
+
+import delegates.UserServicesDelegate;
+import entities.Patient;
 
 public class MedicalRecordsDoctor extends JFrame {
 	List<Patient> patients;
@@ -91,8 +85,6 @@ public class MedicalRecordsDoctor extends JFrame {
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				patient = UserServicesDelegate.dofindPatientByFirstAndLastName(textField_1.getText(), textField_2.getText());
-				
-				
 				
 			}
 		});

@@ -71,21 +71,14 @@ public class TreatmentServices implements TreatmentServicesRemote {
 		return query.getResultList();
 	}
 
-	// @Override
-	// public Boolean assignTreatmentToProcedure(Treatment treatment, Integer
-	// procedureId) {
-	// Boolean b = false;
-	// try {
-	// Procedure procedure = entityManager.find(Procedure.class, procedureId);
-	// List<Treatment> treatments = findAllTreatmentsByProcedureId(procedureId);
-	// treatments.add(treatment);
-	// procedure.linkTreatmentsToThisProcedure(treatments);l
-	// entityManager.merge(procedure);
-	// b = true;
-	// } catch (Exception e) {
-	// }
-	// return b;
-	// }
+	public void addTreatementAndAssignProcedure(Integer idProcedure,
+			Treatment traitement) {
+
+		Procedure procedure = entityManager.find(Procedure.class, idProcedure);
+		traitement.setProcedure(procedure);
+		entityManager.merge(traitement);
+
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -98,6 +91,14 @@ public class TreatmentServices implements TreatmentServicesRemote {
 	public String getTreatmentDescription(Integer treatmentId) {
 		Treatment treatment = entityManager.find(Treatment.class, treatmentId);
 		return treatment.getDescription();
+	}
+
+	@Override
+	public void addTreatmentAndAssignItToProcedure(Treatment treatment, Integer idProcedure) {
+
+		Procedure procedure = entityManager.find(Procedure.class, idProcedure);
+		treatment.setProcedure(procedure);
+		entityManager.merge(treatment);
 	}
 
 }

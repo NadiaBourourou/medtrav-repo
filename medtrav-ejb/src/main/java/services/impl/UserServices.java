@@ -12,6 +12,7 @@ import services.interfaces.UserServicesRemote;
 import entities.Administrator;
 import entities.Doctor;
 import entities.Patient;
+import entities.RoleType;
 import entities.User;
 
 /**
@@ -76,6 +77,14 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 		String jpql = "select d from Doctor d where d.specialty=:param";
 		Query query = entityManager.createQuery(jpql);
 		query.setParameter("param", specialty);
+		return query.getResultList();
+	}
+	
+	@Override
+	public List<Doctor> findAllDoctors() {
+		String jpql = "select u from User u where u.role=:param";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", RoleType.DOCTOR);
 		return query.getResultList();
 	}
 
@@ -183,5 +192,7 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 		}
 		return b;
 	}
+
+
 
 }

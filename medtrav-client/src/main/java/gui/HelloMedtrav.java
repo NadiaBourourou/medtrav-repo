@@ -25,7 +25,7 @@ import entities.Doctor;
 import entities.Patient;
 import entities.User;
 
-public class HelloMedtrav {
+public class HelloMedtrav extends JFrame {
 
 	private JFrame frmWelcomeToMedtrav;
 	private JTextField tfLogin;
@@ -48,10 +48,7 @@ public class HelloMedtrav {
 	}
 
 	public HelloMedtrav() {
-		initialize();
-	}
-
-	private void initialize() {
+	
 		frmWelcomeToMedtrav = new JFrame();
 		frmWelcomeToMedtrav.getContentPane().setBackground(Color.WHITE);
 		frmWelcomeToMedtrav.setTitle("Welcome to MedTrav");
@@ -99,11 +96,13 @@ public class HelloMedtrav {
 								"Invalid crendentials ! ");
 
 					} else {
+						// JOptionPane.showMessageDialog(null,
+						// flen.getLastName());
 						if (flen instanceof Administrator)
 							EventQueue.invokeLater(new Runnable() {
 								public void run() {
 									try {
-										AdminUI frame = new AdminUI();
+										AdminUI frame = new AdminUI(flen);
 										frame.setVisible(true);
 										frmWelcomeToMedtrav.setVisible(false);
 									} catch (Exception e) {
@@ -115,7 +114,8 @@ public class HelloMedtrav {
 							EventQueue.invokeLater(new Runnable() {
 								public void run() {
 									try {
-										WelcomeJframe frame = new WelcomeJframe();
+										WelcomeJframe frame = new WelcomeJframe(
+												flen);
 										frame.setVisible(true);
 										frmWelcomeToMedtrav.setVisible(false);
 									} catch (Exception e) {
@@ -137,12 +137,6 @@ public class HelloMedtrav {
 								}
 							});
 
-						/*
-						 * WelcomeJframe welcomeJframe = new WelcomeJframe();
-						 * welcomeJframe.Welcome(username);
-						 * welcomeJframe.setVisible(true);
-						 * frmWelcomeToMedtrav.setVisible(false);
-						 */
 					}
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1);

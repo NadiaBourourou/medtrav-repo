@@ -39,6 +39,10 @@ public class UserServicesDelegate {
 		return getProxy().findDoctorsBySpecialty(specialty);
 	}
 
+	public static List<Doctor> doFindAllDoctors() {
+		return getProxy().findAllDoctors();
+	}
+
 	// _____________________________________________
 	// ____________PATIENT _________________________
 	// _____________________________________________
@@ -59,7 +63,6 @@ public class UserServicesDelegate {
 		return getProxy().findPatientByPassportNumber(nbPassport);
 	}
 
-
 	public static List<Patient> doListAllPatient() {
 		return getProxy().listAllPatients();
 	}
@@ -77,12 +80,10 @@ public class UserServicesDelegate {
 		return getProxy().addAdmin(admin);
 	}
 
-	
 	// _____________________________________________
 	// ____________COMMON _________________________
 	// _____________________________________________
 
-	
 	public static User doUserIdentification(String login, String password) {
 		return getProxy().userIdentification(login, password);
 	}
