@@ -18,7 +18,7 @@ public class User implements Serializable {
 	private Integer userId;
 	private String lastName;
 	private String firstName;
-	private Integer cin;
+	private String cin;
 	private String login;
 	private String password;
 	private RoleType role;
@@ -51,11 +51,11 @@ public class User implements Serializable {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}   
-	public Integer getCin() {
+	public String getCin() {
 		return this.cin;
 	}
 
-	public void setCin(Integer cin) {
+	public void setCin(String cin) {
 		this.cin = cin;
 	}   
 	public String getLogin() {

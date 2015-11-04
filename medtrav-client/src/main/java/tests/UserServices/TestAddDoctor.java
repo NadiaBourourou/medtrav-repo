@@ -8,7 +8,7 @@ public class TestAddDoctor {
 	public static void main(String[] args) {
 		Doctor doc = new Doctor();
 		doc.setUserId(2);
-		doc.setCin(140);
+		doc.setCin("140");
 	
 		doc.setFirstName("Nadia");
 		doc.setLastName("Boo");
