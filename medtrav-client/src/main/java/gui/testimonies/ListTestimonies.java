@@ -42,6 +42,8 @@ import javax.swing.JTextPane;
 
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.Bindings;
+import org.jdesktop.beansbinding.ObjectProperty;
+import java.util.Date;
 
 public class ListTestimonies extends JFrame {
 
@@ -52,7 +54,6 @@ public class ListTestimonies extends JFrame {
 	private JTextField testimonyId;
 	private JTextField title;
 	private JTextPane description;
-	private JTextField patientId;
 	
 
 	
@@ -121,6 +122,7 @@ public class ListTestimonies extends JFrame {
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				testimonySelected = testimonies.get(table.getSelectedRow());	
 				TestimonyServicesDelegate.doUpdateTestimony(testimonySelected);
 				testimonies=TestimonyServicesDelegate.doFindAllTestimonies();
 				initDataBindings();
@@ -143,14 +145,15 @@ public class ListTestimonies extends JFrame {
 		btnNewButton.setBounds(414, 295, 89, 23);
 		contentPane.add(btnNewButton);
 		
-		JButton btnMenu = new JButton("Menu");
+		JButton btnMenu = new JButton("Back to menu");
 		btnMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TestimonyInterface testInt= new TestimonyInterface();
 				testInt.setVisible(true);
+				ListTestimonies.this.setVisible(false);
 			}
 		});
-		btnMenu.setBounds(581, 400, 89, 23);
+		btnMenu.setBounds(560, 400, 130, 23);
 		contentPane.add(btnMenu);
 		
 		JLabel lblModification = new JLabel("Modification");
@@ -184,16 +187,6 @@ public class ListTestimonies extends JFrame {
 		description = new JTextPane();
 		description.setBounds(179, 344, 197, 63);
 		contentPane.add(description);
-		
-		JLabel lblIdPatient = new JLabel("Id patient");
-		lblIdPatient.setBounds(99, 422, 63, 14);
-		contentPane.add(lblIdPatient);
-		
-		patientId = new JTextField();
-		patientId.setEnabled(false);
-		patientId.setBounds(179, 418, 135, 23);
-		contentPane.add(patientId);
-		patientId.setColumns(10);
 		initDataBindings();
 	}
 	protected void initDataBindings() {
@@ -205,11 +198,14 @@ public class ListTestimonies extends JFrame {
 		BeanProperty<Testimony, String> testimonyBeanProperty_1 = BeanProperty.create("title");
 		jTableBinding.addColumnBinding(testimonyBeanProperty_1).setColumnName("Title");
 		//
-		BeanProperty<Testimony, String> testimonyBeanProperty_3 = BeanProperty.create("description");
-		jTableBinding.addColumnBinding(testimonyBeanProperty_3).setColumnName("Description");
+		BeanProperty<Testimony, String> testimonyBeanProperty_2 = BeanProperty.create("description");
+		jTableBinding.addColumnBinding(testimonyBeanProperty_2).setColumnName("Description");
 		//
-		BeanProperty<Testimony, Integer> testimonyBeanProperty_2 = BeanProperty.create("patient.userId");
-		jTableBinding.addColumnBinding(testimonyBeanProperty_2).setColumnName("Id patient");
+		BeanProperty<Testimony, Integer> testimonyBeanProperty_3 = BeanProperty.create("patient.userId");
+		jTableBinding.addColumnBinding(testimonyBeanProperty_3).setColumnName("Id patient");
+		//
+		BeanProperty<Testimony, Date> testimonyBeanProperty_7 = BeanProperty.create("date");
+		jTableBinding.addColumnBinding(testimonyBeanProperty_7).setColumnName("Date");
 		//
 		jTableBinding.bind();
 		//
@@ -239,14 +235,5 @@ public class ListTestimonies extends JFrame {
 		BeanProperty<JTextPane, String> jTextPaneBeanProperty = BeanProperty.create("text");
 		AutoBinding<Testimony, String, JTextPane, String> autoBinding_5 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, testimonySelected, testimonyBeanProperty_6, description, jTextPaneBeanProperty);
 		autoBinding_5.bind();
-		//
-		BeanProperty<Testimony, Integer> testimonyBeanProperty_7 = BeanProperty.create("patient.userId");
-		BeanProperty<JTextField, String> jTextFieldBeanProperty_3 = BeanProperty.create("text");
-		AutoBinding<Testimony, Integer, JTextField, String> autoBinding_8 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, testimonySelected, testimonyBeanProperty_7, patientId, jTextFieldBeanProperty_3);
-		autoBinding_8.bind();
-		//
-		BeanProperty<JTable, Integer> jTableBeanProperty_3 = BeanProperty.create("selectedElement.patient.userId");
-		AutoBinding<JTable, Integer, Testimony, Integer> autoBinding_6 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, table, jTableBeanProperty_3, testimonySelected, testimonyBeanProperty_7);
-		autoBinding_6.bind();
 	}
 }

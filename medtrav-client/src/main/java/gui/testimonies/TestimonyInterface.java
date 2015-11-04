@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionListener;
@@ -51,6 +52,8 @@ public class TestimonyInterface extends JFrame {
 				
 				AddTestimony addTestimony= new AddTestimony();
 				addTestimony.setVisible(true);
+				TestimonyInterface.this.setVisible(false);
+				
 			}
 		});
 		btnNewButton.setBounds(256, 160, 137, 23);
@@ -61,6 +64,7 @@ public class TestimonyInterface extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				ListTestimonies listTestimonies = new ListTestimonies();
 				listTestimonies.setVisible(true);
+				TestimonyInterface.this.setVisible(false);
 			}
 		});
 		btnNewButton_1.setBounds(256, 229, 137, 23);

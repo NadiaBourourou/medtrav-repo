@@ -22,6 +22,7 @@ import entities.Testimony;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.Date;
 
 public class AddTestimony extends JFrame {
 
@@ -86,11 +87,13 @@ public class AddTestimony extends JFrame {
 				Testimony testimony= new Testimony();
 				Patient patient=TestimonyServicesDelegate.doFindPatientById(2);
 				System.out.println("nomPatient= "+patient.getFirstName());
-				testimony.setPatient(patient);					
+				testimony.setPatient(patient);		
 				testimony.setTitle(titletf.getText());
 				testimony.setDescription(descriptx.getText().toString());
+				testimony.setDate(new Date());
 				TestimonyServicesDelegate.doAddTestimony(testimony);
 				JOptionPane.showMessageDialog(null, "Successfully added..");
+				AddTestimony.this.setVisible(false);
 				
 			} catch (Exception e1) {
 				JOptionPane.showMessageDialog(null,"Error");
@@ -110,6 +113,7 @@ public class AddTestimony extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				TestimonyInterface testInt= new TestimonyInterface();
 				testInt.setVisible(true);
+				AddTestimony.this.setVisible(false);
 				
 			}
 		});
