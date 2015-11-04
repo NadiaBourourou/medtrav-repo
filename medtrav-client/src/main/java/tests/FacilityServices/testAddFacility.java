@@ -18,6 +18,7 @@ public class testAddFacility {
 		RoomType state2 = null;
 		facility.setRoom(state2.SINGLE);
 
+		
 		Facility facility2 = new Facility();
 		facility2.setName("Cli");
 		facility2.setDescription("nice");
