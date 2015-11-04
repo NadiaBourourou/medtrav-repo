@@ -4,6 +4,7 @@ import java.util.List;
 
 import locator.ServiceLocator;
 import services.interfaces.TestimonyServicesRemote;
+import entities.Patient;
 import entities.Testimony;
 
 public class TestimonyServicesDelegate {
@@ -35,5 +36,12 @@ public class TestimonyServicesDelegate {
 		return getProxy().findAllTestimoniesByPatientId(patientId);
 	}
 
+	public static Patient doFindPatientById(Integer idTestimony) {
+		return getProxy().findPatientById(idTestimony);
+	}
+	
+	public static List<Testimony> doFindAllTestimonies() {
+		return getProxy().findAllTestimonies();
+	}
 	
 }
