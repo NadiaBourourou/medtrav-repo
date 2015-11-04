@@ -267,7 +267,7 @@ public class ListHotels extends JFrame {
 			    name.setText(hotel.getName());
 			    address.setText(hotel.getAddress());
 				description.setText(hotel.getDescription());
-				ImageIcon icon=new ImageIcon(getClass().getResource("/images/medtrav.jpg"));
+				ImageIcon icon=new ImageIcon(getClass().getResource("medtrav.JPG"));
 				picture.setIcon((Icon) icon);
 			}
 		});
@@ -288,6 +288,13 @@ public class ListHotels extends JFrame {
 		);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ImageIcon icon=new ImageIcon(getClass().getResource("medTrav.JPG"));
+				picture.setIcon((Icon) icon);	
+			}
+		});
 
 		
 		hotels = HotelServicesDelegate.doFindAllHotels();
