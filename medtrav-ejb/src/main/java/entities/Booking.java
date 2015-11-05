@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -22,10 +23,12 @@ public class Booking implements Serializable {
 	private Date arrival;
 	private Date departure;
 	private StateBooking state;
+	
 	private Hotel hotel;
 	private Clinic clinic;
 	private Patient patient;
 	private Flight flight;
+	private HotelBooking hotelBooking;
 
 	private static final long serialVersionUID = 1L;
 
@@ -106,6 +109,15 @@ public class Booking implements Serializable {
 
 	public void setState(StateBooking state) {
 		this.state = state;
+	}
+
+	@OneToOne
+	public HotelBooking getHotelBooking() {
+		return hotelBooking;
+	}
+
+	public void setHotelBooking(HotelBooking hotelBooking) {
+		this.hotelBooking = hotelBooking;
 	}
 
 }

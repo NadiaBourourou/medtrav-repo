@@ -14,10 +14,12 @@ public interface HotelServicesRemote {
 	Boolean deleteHotelById(Integer id);
 
 	Hotel findHotelById(Integer id);
+	Hotel findHotelByName(String name);
 
 	Boolean updateHotel(Hotel hotel);
 
 	Boolean deleteHotel(Hotel hotel);
 
 	List<Hotel> findAllHotels();
+	
 }
