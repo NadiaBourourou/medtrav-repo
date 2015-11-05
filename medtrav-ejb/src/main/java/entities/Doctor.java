@@ -21,7 +21,7 @@ public class Doctor extends User implements Serializable {
 	private String description;
 	
 	private List<Surgery> surgeries;
-	
+	private List<Patient> patients;
 	private static final long serialVersionUID = 1L;
 
 	public Doctor() {
@@ -55,6 +55,13 @@ public class Doctor extends User implements Serializable {
 		for (Surgery s : surgeries) {
 			s.setDoctor(this);
 		}
+	}
+	@ManyToMany
+	public List<Patient> getPatients() {
+		return patients;
+	}
+	public void setPatients(List<Patient> patients) {
+		this.patients = patients;
 	}
    
 }

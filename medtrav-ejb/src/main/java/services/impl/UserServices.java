@@ -74,12 +74,13 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Doctor> findDoctorsBySpecialty(String specialty) {
-		String jpql = "select d from Doctor d where d.specialty=:param";
+		// String jpql = "select d from Doctor d where d.specialty=:param";
+		String jpql = "select d from Doctor d where d.specialty  LIKE :param";
 		Query query = entityManager.createQuery(jpql);
-		query.setParameter("param", specialty);
+		query.setParameter("param", "%" + specialty + "%");
 		return query.getResultList();
 	}
-	
+
 	@Override
 	public List<Doctor> findAllDoctors() {
 		String jpql = "select u from User u where u.role=:param";
@@ -192,7 +193,5 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 		}
 		return b;
 	}
-
-
 
 }

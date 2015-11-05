@@ -89,6 +89,7 @@ public class WelcomeJframe extends JFrame {
 		setJMenuBar(menuBar);
 
 		JMenuItem mntmLogOut = new JMenuItem("Log Out");
+		mntmLogOut.setIcon(new ImageIcon(WelcomeJframe.class.getResource("/images/logout-icon.png")));
 		mntmLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -168,8 +169,13 @@ public class WelcomeJframe extends JFrame {
 		dateChooser_1.setBounds(138, 145, 207, 20);
 		contentPane.add(dateChooser_1);
 
-		lblLoggedAs.setBounds(151, 12, 534, 29);
+		lblLoggedAs.setBounds(298, 12, 387, 29);
 		contentPane.add(lblLoggedAs);
+		
+		JLabel lblUser = new JLabel("");
+		lblUser.setIcon(new ImageIcon(WelcomeJframe.class.getResource("/images/user_patient_icon.png")));
+		lblUser.setBounds(642, 34, 62, 57);
+		contentPane.add(lblUser);
 
 	}
 
@@ -179,9 +185,6 @@ public class WelcomeJframe extends JFrame {
 
 		lblLoggedAs.setText("You are logged in as: \n" + user.getLastName()
 				+ " " + user.getFirstName());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 730, 447);
-
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
@@ -267,6 +270,7 @@ public class WelcomeJframe extends JFrame {
 
 		lblLoggedAs.setBounds(151, 12, 534, 29);
 		contentPane.add(lblLoggedAs);
+
 
 	}
 }

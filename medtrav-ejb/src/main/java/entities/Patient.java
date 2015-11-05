@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -23,6 +25,8 @@ public class Patient extends User implements Serializable {
 	private List<Booking> bookings;
 	private List<Testimony> testimonies;
 	private MedicalRecords medicalRecords;
+	
+	private List<Doctor> doctors;
 
 	private static final long serialVersionUID = 1L;
 
@@ -87,6 +91,15 @@ public class Patient extends User implements Serializable {
 
 	public void setState(PatientState state) {
 		this.state = state;
+	}
+
+	@ManyToMany(mappedBy="patients")
+	public List<Doctor> getDoctors() {
+		return doctors;
+	}
+
+	public void setDoctors(List<Doctor> doctors) {
+		this.doctors = doctors;
 	}
 
 }

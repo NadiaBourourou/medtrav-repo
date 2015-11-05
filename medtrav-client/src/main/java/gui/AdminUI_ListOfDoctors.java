@@ -29,6 +29,14 @@ import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import org.jdesktop.beansbinding.BeanProperty;
+import javax.swing.border.TitledBorder;
+import javax.swing.UIManager;
+import javax.swing.JButton;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class AdminUI_ListOfDoctors extends JFrame {
 	private User user;
@@ -37,6 +45,7 @@ public class AdminUI_ListOfDoctors extends JFrame {
 	private List<Doctor> doctors;
 	private Doctor selectedDoctor= new Doctor();
 	private JTable table;
+	private JTextField tfSearch;
 
 	/**
 	 * Launch the application.
@@ -54,9 +63,6 @@ public class AdminUI_ListOfDoctors extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public AdminUI_ListOfDoctors() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 730, 447);
@@ -82,41 +88,90 @@ public class AdminUI_ListOfDoctors extends JFrame {
 		setContentPane(contentPane);
 		
 		JPanel panel = new JPanel();
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(26)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 663, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(25, Short.MAX_VALUE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(121, Short.MAX_VALUE)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE)
-					.addGap(72))
-		);
+		panel.setBounds(26, 121, 663, 192);
+		panel.setBorder(new TitledBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Doctors - Partners of MedTrav", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Doctors  - Partners of MedTrav", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		
+		JButton btnBackToMenu = new JButton("Back to menu");
+		btnBackToMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+			}
+		});
+		btnBackToMenu.setIcon(new ImageIcon(AdminUI_ListOfDoctors.class.getResource("/images/Arrow-back.png")));
+		btnBackToMenu.setBounds(10, 331, 160, 43);
+		
+		JButton btnAddNewDoctor = new JButton("Add new doctor");
+		btnAddNewDoctor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+			}
+		});
+		btnAddNewDoctor.setBackground(Color.WHITE);
+		btnAddNewDoctor.setIcon(new ImageIcon(AdminUI_ListOfDoctors.class.getResource("/images/Plus.png")));
+		btnAddNewDoctor.setBounds(513, 331, 176, 43);
+		
+		tfSearch = new JTextField();
+		tfSearch.setBounds(26, 90, 144, 20);
+		tfSearch.setColumns(10);
+		
+		JButton button = new JButton("");
+		button.setBounds(188, 66, 54, 44);
+		button.setBackground(Color.WHITE);
+		button.setIcon(new ImageIcon(AdminUI_ListOfDoctors.class.getResource("/images/Search.png")));
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			doctors=UserServicesDelegate.doFindDoctorsBySpecialty(tfSearch.getText());
+			initDataBindings();
+			}
+		});
+		
+		JLabel lblSearch = new JLabel("Search by specialty : ");
+		lblSearch.setBounds(26, 70, 132, 14);
+		lblSearch.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		
+		JLabel lblLogo = new JLabel("");
+		lblLogo.setIcon(new ImageIcon(AdminUI_ListOfDoctors.class.getResource("/images/smallLogo.png")));
+		lblLogo.setBounds(10, 0, 69, 73);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(10)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 643, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap()
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
+					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(11)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 170, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap()
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(12, Short.MAX_VALUE))
 		);
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		panel.setLayout(gl_panel);
-		contentPane.setLayout(gl_contentPane);
+		contentPane.setLayout(null);
+		contentPane.add(lblLogo);
+		contentPane.add(panel);
+		contentPane.add(btnBackToMenu);
+		contentPane.add(btnAddNewDoctor);
+		contentPane.add(tfSearch);
+		contentPane.add(lblSearch);
+		contentPane.add(button);
+		
+		JLabel lblLoggedAs = new JLabel("");
+		lblLoggedAs.setBounds(536, 11, 168, 44);
+		contentPane.add(lblLoggedAs);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(AdminUI_ListOfDoctors.class.getResource("/images/User_administrator-icon.png")));
+		label.setBounds(650, 45, 54, 53);
+		contentPane.add(label);
 		
 		
 		
