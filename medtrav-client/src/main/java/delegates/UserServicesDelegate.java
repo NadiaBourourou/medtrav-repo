@@ -4,6 +4,7 @@ import java.util.List;
 
 import locator.ServiceLocator;
 import services.interfaces.UserServicesRemote;
+import entities.Administrator;
 import entities.Doctor;
 import entities.Patient;
 import entities.User;
@@ -38,6 +39,10 @@ public class UserServicesDelegate {
 		return getProxy().findDoctorsBySpecialty(specialty);
 	}
 
+	public static List<Doctor> doFindAllDoctors() {
+		return getProxy().findAllDoctors();
+	}
+
 	// _____________________________________________
 	// ____________PATIENT _________________________
 	// _____________________________________________
@@ -58,18 +63,28 @@ public class UserServicesDelegate {
 		return getProxy().findPatientByPassportNumber(nbPassport);
 	}
 
+	public static List<Patient> doListAllPatient() {
+		return getProxy().listAllPatients();
+	}
+
+	public static Patient dofindPatientByFirstAndLastName(String firstName,
+			String lastName) {
+		return getProxy().findPatientByFirstAndLastName(firstName, lastName);
+	}
+
+	// _____________________________________________
+	// ____________Admin _________________________
+	// _____________________________________________
+
+	public static boolean doAddAdmin(Administrator admin) {
+		return getProxy().addAdmin(admin);
+	}
+
+	// _____________________________________________
+	// ____________COMMON _________________________
+	// _____________________________________________
+
 	public static User doUserIdentification(String login, String password) {
 		return getProxy().userIdentification(login, password);
 	}
-	
-	public static List <Patient> doListAllPatient() {
-		return getProxy().listAllPatients();
-	}
-	
-	public static Patient dofindPatientByFirstAndLastName(String firstName, String lastName) {
-		return getProxy().findPatientByFirstAndLastName(firstName, lastName);
-	}
-	
-	
-
 }

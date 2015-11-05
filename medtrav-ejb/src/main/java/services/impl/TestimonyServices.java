@@ -7,7 +7,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import entities.Patient;
 import entities.Testimony;
+import entities.User;
 import services.interfaces.TestimonyServicesLocal;
 import services.interfaces.TestimonyServicesRemote;
 
@@ -84,9 +86,52 @@ public class TestimonyServices implements TestimonyServicesRemote, TestimonyServ
 	}
 
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Testimony> findAllTestimonies() {
+		String jpql="select t from Testimony t ";
+		Query query=entitymanager.createQuery(jpql);
+		return query.getResultList();
+	
+	}
+
 	@Override
 	public Testimony findTestimonyById(Integer idTestimony) {
 		// TODO Auto-generated method stub
 		return entitymanager.find(Testimony.class, idTestimony);
 	}
+
+	@Override
+	public Boolean assignTestimonyToPatient(Integer idTestimony,
+			Integer idPatient) {
+		Boolean b = false;
+		try {
+			Patient patientFound = (Patient)entitymanager.find(User.class, idPatient);
+			
+			// ou bien
+			//Employee employeeFound = entityManager.find(Employee.class,idEmployee);
+			//
+			Testimony testimonyFound = entitymanager.find(Testimony.class,
+					idTestimony);
+
+			testimonyFound.setPatient(patientFound);
+
+			entitymanager.merge(testimonyFound);
+			b = true;
+
+		} catch (Exception e) {
+			System.err.println("ouups ...");
+		}
+
+		return b;
+	}
+
+	@Override
+	public Patient findPatientById(Integer idPatient) {
+		// TODO Auto-generated method stub
+		return entitymanager.find(Patient.class, idPatient);
+	}
+
+	
+	
 }

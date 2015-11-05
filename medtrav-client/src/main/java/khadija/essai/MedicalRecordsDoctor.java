@@ -36,7 +36,6 @@ import org.jdesktop.swingbinding.SwingBindings;
 
 import delegates.MedicalRecordsDelegate;
 import delegates.UserServicesDelegate;
-import entities.MedicalRecords;
 import entities.Patient;
 import entities.User;
 
@@ -106,6 +105,7 @@ public class MedicalRecordsDoctor extends JFrame {
 		JButton btnUpload = new JButton("Upload");
 		btnUpload.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				JFileChooser chooser = new JFileChooser();
 				chooser.showOpenDialog(null);
 				File f = chooser.getSelectedFile();
@@ -157,37 +157,36 @@ public class MedicalRecordsDoctor extends JFrame {
 			private FileOutputStream output;
 
 			public void actionPerformed(ActionEvent e) {
-			 byte[] analysis = MedicalRecordsDelegate.doDownloadAnalysis(Integer
-						.parseInt(id.getText()));
-			b = null; 
-			try {
-				
-				File file = new File("heyhh.txt");
-	            output = new FileOutputStream(file);
-	           
-	            b.setBytes(analysis.length, analysis);
-	           
-	            long a = 0;
-				b.setBinaryStream(a);
-				b.getBytes(1, (int) b.length());
-				 InputStream is = b.getBinaryStream();
-				 
-	              byte[] buffer = new byte[1024];
-	                while (is.read(buffer) > 0) {
-	                    output.write(buffer);
-	                }
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (FileNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-				
-				
+				byte[] analysis = MedicalRecordsDelegate
+						.doDownloadAnalysis(Integer.parseInt(id.getText()));
+				b = null;
+				try {
+
+					File file = new File("heyhh.txt");
+					output = new FileOutputStream(file);
+
+					b.setBytes(analysis.length, analysis);
+
+					long a = 0;
+					b.setBinaryStream(a);
+					b.getBytes(1, (int) b.length());
+					InputStream is = b.getBinaryStream();
+
+					byte[] buffer = new byte[1024];
+					while (is.read(buffer) > 0) {
+						output.write(buffer);
+					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
 			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
