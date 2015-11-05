@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.sql.Blob;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -44,6 +46,7 @@ public class MedicalRecords implements Serializable {
 	}
 
 	@Lob
+	@Basic(fetch=FetchType.LAZY)
 	public byte[] getAnalysis() {
 		return this.analysis;
 	}
@@ -53,6 +56,7 @@ public class MedicalRecords implements Serializable {
 	}
 
 	@Lob
+	@Basic(fetch=FetchType.LAZY)
 	public byte[] getPatientFile() {
 		return this.patientFile;
 	}

@@ -22,6 +22,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
 import delegates.MedicalRecordsDelegate;
+import entities.Patient;
 
 public class MedicalRecordsPatient extends JFrame {
 
@@ -98,7 +99,9 @@ public class MedicalRecordsPatient extends JFrame {
 				for (int i = 0; i < b.length; i++) {
 					b[i] = list.get(i);
 				}
-
+				Patient p = new Patient ();
+				p.setUserId(1);
+				medicalRecords.setPatient(p);
 				medicalRecords.setAnalysis(b);
 				MedicalRecordsDelegate.doAddMedicalRecords(medicalRecords);
 

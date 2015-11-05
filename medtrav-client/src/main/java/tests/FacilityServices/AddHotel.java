@@ -104,7 +104,7 @@ public class AddHotel extends JFrame {
 						.toString()));
 				hotel.setState(StateType.valueOf(comboBox_1.getSelectedItem()
 						.toString()));
-				File fichier = new File(textField.getText());
+			/*	File fichier = new File(textField.getText());
 				FileInputStream fis = null;
 				try {
 					fis = new FileInputStream(fichier);
@@ -136,7 +136,7 @@ public class AddHotel extends JFrame {
 				}
 
 				hotel.setPic(b);
-
+*/
 				HotelServicesDelegate.doAddHotel(hotel);
 			}
 		});

@@ -7,7 +7,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import entities.Doctor;
 import entities.Hotel;
+import entities.RoleType;
+import entities.StateType;
 import services.interfaces.HotelServicesLocal;
 import services.interfaces.HotelServicesRemote;
 
@@ -92,5 +95,22 @@ public class HotelServices implements HotelServicesRemote, HotelServicesLocal {
 	 Query query= entityManager.createQuery(jpql);
 	 return query.getResultList();
 	}
+
+	@Override
+	public Hotel findHotelByName(String name) {
+		 String jpql = "select h from Hotel h where h.name=:param";
+		 Query query= entityManager.createQuery(jpql);
+		 query.setParameter("param", name);
+		 return (Hotel) query.getSingleResult();
+	}
+
+	@Override
+	public List<Hotel> findAllHotelsEnabled() {
+		String jpql = "select u from Hotel u where u.state=:param";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", StateType.ENABLED);
+		return query.getResultList();
+	}
+	
 
 }

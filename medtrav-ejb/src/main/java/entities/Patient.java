@@ -27,6 +27,8 @@ public class Patient extends User implements Serializable {
 	private MedicalRecords medicalRecords;
 	
 	private List<Doctor> doctors;
+	private HotelBooking hotelBooking;
+	private ClinicBooking clinicBooking;
 
 	private static final long serialVersionUID = 1L;
 
@@ -101,5 +103,23 @@ public class Patient extends User implements Serializable {
 	public void setDoctors(List<Doctor> doctors) {
 		this.doctors = doctors;
 	}
+	@OneToOne(mappedBy="patient")
+	public HotelBooking getHotelBooking() {
+		return hotelBooking;
+	}
+
+	public void setHotelBooking(HotelBooking hotelBooking) {
+		this.hotelBooking = hotelBooking;
+	}
+
+	@OneToOne(mappedBy="patient")
+	public ClinicBooking getClinicBooking() {
+		return clinicBooking;
+	}
+
+	public void setClinicBooking(ClinicBooking clinicBooking) {
+		this.clinicBooking = clinicBooking;
+	}
+	
 
 }

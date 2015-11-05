@@ -1,13 +1,21 @@
 package mailing;
 
+import javax.activation.FileDataSource;
+
+import delegates.FeaturesDomainDelegate;
+
+
+
 public class SendMail {
 
 	public static void main(String[] args) {
-		String message = Message.sms;
+		
+		
+		String message = FeaturesDomainDelegate.doWelcomingMail();
 
 		String[] to = { "Nadia.Bourourou@esprit.tn", "Nadiabourourou@gmail.com" };
 
-		if (EmailSender.sendEmail("medtrav.gtech@gmail.com", "pidevgtech",
+		if (FeaturesDomainDelegate.doSendEmail("medtrav.gtech@gmail.com", "pidevgtech",
 				message, to))
 			System.out.println("email sent successfully");
 		else
