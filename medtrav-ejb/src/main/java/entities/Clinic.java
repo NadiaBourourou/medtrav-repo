@@ -21,9 +21,14 @@ public class Clinic implements Serializable {
 	private String address;
 	private String professionalism;
 	private Integer phoneNumber;
+	private String email;
+	private Double priceSimple;
+	private Double priceSingle;
+	private List<ClinicBooking> clinicBookings;
+	
 
 	private  byte[] image;
-	private List<Booking> bookings;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Clinic() {
@@ -73,12 +78,37 @@ public class Clinic implements Serializable {
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
+	
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
+	
+	public Double getPriceSimple() {
+		return priceSimple;
+	}
+	public void setPriceSimple(Double priceSimple) {
+		this.priceSimple = priceSimple;
+	}
+	public Double getPriceSingle() {
+		return priceSingle;
+	}
+	public void setPriceSingle(Double priceSingle) {
+		this.priceSingle = priceSingle;
+	}
+
 	@OneToMany(mappedBy="clinic")
-	public List<Booking> getBookings() {
-		return bookings;
+	public List<ClinicBooking> getClinicBookings() {
+		return clinicBookings;
 	}
-	public void setBookings(List<Booking> bookings) {
-		this.bookings = bookings;
+	public void setClinicBookings(List<ClinicBooking> clinicBookings) {
+		this.clinicBookings = clinicBookings;
 	}
+	
    
 }

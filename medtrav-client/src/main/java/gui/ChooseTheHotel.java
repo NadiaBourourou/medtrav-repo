@@ -120,7 +120,7 @@ HotelBooking hb= new HotelBooking();
 		JLabel lblNumberOfNights = new JLabel("Number of nights");
 		
 		Hotel arrival = new Hotel();
-		Iterator w =  HotelServicesDelegate.doFindAllHotels().iterator();
+		Iterator w =  HotelServicesDelegate.doFindAllHotelsEnabled().iterator();
 
 		comboBox.removeAllItems();
 		while (w.hasNext()) {
