@@ -19,7 +19,10 @@ public class HotelBooking implements Serializable {
 	private Hotel hotel;
 	
 	private static final long serialVersionUID = 1L;
-
+	
+	private Patient patient;
+	private Booking booking;
+	
 	public HotelBooking() {
 		super();
 	}
@@ -66,6 +69,25 @@ public class HotelBooking implements Serializable {
 		this.hotel = hotel;
 	}
 
+	@OneToOne
+	public Patient getPatient() {
+		return patient;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
+
+	@OneToOne(mappedBy="hotelBooking")
+	public Booking getBooking() {
+		return booking;
+	}
+
+	public void setBooking(Booking booking) {
+		this.booking = booking;
+	}
+
+	
 
 
 

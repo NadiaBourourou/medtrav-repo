@@ -47,6 +47,8 @@ public class HotelBookingServices implements HotelBookingServicesRemote, HotelBo
 		}
 		return b;
 	}
+	
+	
 
 	
 
