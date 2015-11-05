@@ -24,5 +24,8 @@ public class HotelBookingServicesDelegate {
 	}
 	
 
+	public static Hotel doFindHotelByPatientId(Integer idPatient){
+		return getProxy().findHotelByPatientId(idPatient);
+	}
 	
 }

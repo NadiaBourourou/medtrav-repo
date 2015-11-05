@@ -1,28 +1,31 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  * Entity implementation class for Entity: HotelBooking
  *
  */
 @Entity
-
 public class HotelBooking implements Serializable {
 
 	private Integer hotelBookingId;
 	private Double numNights;
 	private Double price;
 	private Hotel hotel;
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private Patient patient;
 	private Booking booking;
-	
+
 	public HotelBooking() {
 		super();
 	}
@@ -35,7 +38,7 @@ public class HotelBooking implements Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getHotelBookingId() {
 		return hotelBookingId;
 	}
@@ -78,7 +81,7 @@ public class HotelBooking implements Serializable {
 		this.patient = patient;
 	}
 
-	@OneToOne(mappedBy="hotelBooking")
+	@OneToOne(mappedBy = "hotelBooking")
 	public Booking getBooking() {
 		return booking;
 	}
@@ -87,9 +90,4 @@ public class HotelBooking implements Serializable {
 		this.booking = booking;
 	}
 
-	
-
-
-
-   
 }

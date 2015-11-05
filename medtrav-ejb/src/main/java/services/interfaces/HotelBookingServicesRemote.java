@@ -12,4 +12,5 @@ public interface HotelBookingServicesRemote {
 
 	Double calculPrix(Double prix, Double numNights);
 	Boolean addHotelBooking (HotelBooking hb);
+	Hotel findHotelByPatientId(Integer idPatient);
 }
