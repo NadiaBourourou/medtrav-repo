@@ -175,7 +175,7 @@ public class Booking extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				hotel = HotelBookingServicesDelegate.doFindHotelByPatientId(1);
+				hotel = HotelBookingServicesDelegate.doFindHotelByPatientId(2);
 				int hotelId = hotel.getHotelId();
 				System.out.println(hotelId);
 				thotel.setText(hotel.getName());
