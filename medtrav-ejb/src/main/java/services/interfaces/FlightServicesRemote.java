@@ -32,4 +32,6 @@ public interface FlightServicesRemote {
 
 	List<String> findAllDepartures();
 	List <String > findAllArrivals();
+	
+	Flight findFlightByPatientId(Integer idPatient) ;
 }

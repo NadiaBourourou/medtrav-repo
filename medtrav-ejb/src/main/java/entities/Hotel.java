@@ -119,14 +119,7 @@ public class Hotel implements Serializable {
 	// this.pic = pic;
 	// }
 
-	@OneToMany(mappedBy = "hotel")
-	public List<Booking> getBookings() {
-		return bookings;
-	}
 
-	public void setBookings(List<Booking> bookings) {
-		this.bookings = bookings;
-	}
 
 	@OneToMany(mappedBy = "hotel")
 	public List<HotelBooking> getHotelBookings() {

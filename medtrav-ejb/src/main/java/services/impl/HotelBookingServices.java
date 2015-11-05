@@ -1,5 +1,6 @@
 package services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -50,10 +51,10 @@ public class HotelBookingServices implements HotelBookingServicesRemote, HotelBo
 	
 	@Override
 	public Hotel findHotelByPatientId(Integer idPatient) {
-		 String jpql = "select h from Hotel h join h.hotelBookings hbs where hbs.patient.userId=:";
+		 String jpql = "select h from Hotel h join h.hotelBookings hbs where hbs.patient.userId=:param";
 		 Query query= entityManager.createQuery(jpql);
 		 query.setParameter("param", idPatient);
-		 return  (Hotel) query.getResultList();
+		 return  (Hotel) query.getSingleResult();
 		
 	}
 	

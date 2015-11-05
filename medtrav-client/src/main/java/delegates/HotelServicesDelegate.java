@@ -42,5 +42,9 @@ public class HotelServicesDelegate {
 		
 		return getProxy().findHotelByName(name);
 	}
+	
+	public static List<Hotel> doFindAllHotelsEnabled () {
+		return getProxy().findAllHotelsEnabled();
+	}
 
 }

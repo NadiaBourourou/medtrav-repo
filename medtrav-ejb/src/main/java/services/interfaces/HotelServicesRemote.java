@@ -21,5 +21,7 @@ public interface HotelServicesRemote {
 	Boolean deleteHotel(Hotel hotel);
 
 	List<Hotel> findAllHotels();
+
+	List<Hotel> findAllHotelsEnabled();
 	
 }
