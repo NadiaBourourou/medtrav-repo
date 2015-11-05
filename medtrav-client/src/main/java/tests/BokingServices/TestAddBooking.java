@@ -14,6 +14,7 @@ public class TestAddBooking {
 		booking1.setDeparture(new Date());
 		StateBooking state = null;
 		booking1.setState(state.CONFIRMED);
+	
 
 		BookingServicesDelegate.doAddBooking(booking1);
 

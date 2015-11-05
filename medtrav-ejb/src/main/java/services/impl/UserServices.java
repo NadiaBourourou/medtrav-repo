@@ -11,6 +11,7 @@ import services.interfaces.UserServicesLocal;
 import services.interfaces.UserServicesRemote;
 import entities.Doctor;
 import entities.Patient;
+import entities.RoleType;
 import entities.User;
 
 /**
@@ -156,8 +157,9 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Patient> listAllPatients() {
-		String jpql = "select u from User u ";
+		String jpql = "select u from User u.role=:param ";
 		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", RoleType.PATIENT);
 		return query.getResultList();
 	}
 
