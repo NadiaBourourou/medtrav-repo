@@ -24,7 +24,7 @@ import entities.HotelBooking;
 
 public class Booking extends JFrame {
 
-	Hotel hotel;
+	Hotel hotel= new Hotel();
 	Booking booking;
 	HotelBooking hotelBooking;
 	private JPanel contentPane;
@@ -178,6 +178,7 @@ public class Booking extends JFrame {
 				hotel = HotelBookingServicesDelegate.doFindHotelByPatientId(2);
 				int hotelId = hotel.getHotelId();
 				System.out.println(hotelId);
+			
 				thotel.setText(hotel.getName());
 
 			}
