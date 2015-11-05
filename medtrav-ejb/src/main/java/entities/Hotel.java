@@ -27,7 +27,7 @@ public class Hotel implements Serializable {
 	private Double priceSuite;
 	private RoomType room;
 	private Integer stars;
-	// private byte[] pic;
+
 	private List<Booking> bookings;
 	private List<HotelBooking> hotelBookings;
 
@@ -111,13 +111,6 @@ public class Hotel implements Serializable {
 		this.stars = stars;
 	}
 
-	// @Lob
-	// public byte[] getPic() {
-	// return pic;
-	// }
-	// public void setPic(byte[] pic) {
-	// this.pic = pic;
-	// }
 
 	@OneToMany(mappedBy = "hotel")
 	public List<Booking> getBookings() {
