@@ -166,7 +166,7 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Patient> listAllPatients() {
-		String jpql = "select u from User u.role=:param ";
+		String jpql = "select u from User where u.role=:param ";
 		Query query = entityManager.createQuery(jpql);
 		query.setParameter("param", RoleType.PATIENT);
 		return query.getResultList();
