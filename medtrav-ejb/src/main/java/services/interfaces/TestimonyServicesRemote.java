@@ -8,6 +8,7 @@ import javax.persistence.Query;
 import entities.Booking;
 import entities.Patient;
 import entities.Testimony;
+import entities.User;
 
 @Remote
 public interface TestimonyServicesRemote {
@@ -29,5 +30,7 @@ public interface TestimonyServicesRemote {
 	Patient findPatientById(Integer idPatient);
 
 	List<Testimony> findAllTestimonies();
+
+	User findUserById(Integer idUser);
 	
 }

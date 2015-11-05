@@ -6,6 +6,7 @@ import locator.ServiceLocator;
 import services.interfaces.TestimonyServicesRemote;
 import entities.Patient;
 import entities.Testimony;
+import entities.User;
 
 public class TestimonyServicesDelegate {
 
@@ -38,6 +39,10 @@ public class TestimonyServicesDelegate {
 
 	public static Patient doFindPatientById(Integer idTestimony) {
 		return getProxy().findPatientById(idTestimony);
+	}
+	
+	public static User doFindUsertById(Integer idTestimony) {
+		return getProxy().findUserById(idTestimony);
 	}
 	
 	public static List<Testimony> doFindAllTestimonies() {
