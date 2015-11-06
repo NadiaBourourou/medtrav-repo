@@ -12,7 +12,7 @@
 	<class>entities.Surgery</class>
 	<class>entities.SurgeryId</class>
 	<class>entities.Administrator</class>
-
+	<class>entities.Question</class>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
 			<property name="hibernate.show_sql" value="false"/>

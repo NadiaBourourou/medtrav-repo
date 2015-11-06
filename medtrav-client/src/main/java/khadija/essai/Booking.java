@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,7 +19,9 @@ import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.ObjectProperty;
 
+import delegates.FlightServicesDelegate;
 import delegates.HotelBookingServicesDelegate;
+import entities.Flight;
 import entities.Hotel;
 import entities.HotelBooking;
 
@@ -27,6 +30,7 @@ public class Booking extends JFrame {
 	Hotel hotel= new Hotel();
 	Booking booking;
 	HotelBooking hotelBooking;
+	Flight flight = new Flight();
 	private JPanel contentPane;
 	private JTextField thotel;
 	private JTextField tclinic;
@@ -174,11 +178,13 @@ public class Booking extends JFrame {
 		JButton button = new JButton("");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				hotel = HotelBookingServicesDelegate.doFindHotelByPatientId(2);
+				
+				hotel = HotelBookingServicesDelegate.doFindHotelByPatientId(1);
 				int hotelId = hotel.getHotelId();
-				System.out.println(hotelId);
 			
+				flight = FlightServicesDelegate.doFindFlightByPatientId(1);
+				Date arrive= (Date) flight.getArrivalDate();
+				
 				thotel.setText(hotel.getName());
 
 			}

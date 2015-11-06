@@ -70,5 +70,9 @@ public class FlightServicesDelegate {
 		return getProxy().findAllArrivals();
 		
 	}
+	public static Flight doFindFlightByPatientId(Integer idPatient){
+		return getProxy().findFlightByPatientId(idPatient);
+		
+	}
 	
 }

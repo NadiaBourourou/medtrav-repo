@@ -22,8 +22,6 @@ public class Testimony implements Serializable {
 	private String title;
 	private String description;
 	private Date date;
-	private String test;
-
 
 	private Patient patient;
 
@@ -79,13 +77,6 @@ public class Testimony implements Serializable {
 		this.date = date;
 	}
 
-	public String getTest() {
-		return test;
-	}
-
-	public void setTest(String test) {
-		this.test = test;
-	}
 
 
 }

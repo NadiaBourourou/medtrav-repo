@@ -133,5 +133,11 @@ public class TestimonyServices implements TestimonyServicesRemote, TestimonyServ
 	}
 
 	
+	@Override
+	public User findUserById(Integer idUser) {
+		// TODO Auto-generated method stub
+		return entitymanager.find(User.class, idUser);
+	}
+	
 	
 }

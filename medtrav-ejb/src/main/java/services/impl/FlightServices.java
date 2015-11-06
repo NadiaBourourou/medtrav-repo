@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import entities.Booking;
 import entities.Doctor;
 import entities.Flight;
+import entities.Hotel;
 import entities.MedicalRecords;
 import entities.Surgery;
 import services.interfaces.BookingServicesLocal;
@@ -271,5 +272,17 @@ public class FlightServices implements FlightServicesRemote,
 		Query query = entityManager.createQuery(jpql);
 		return query.getResultList();
 	}
+	
+	@Override
+	public Flight findFlightByPatientId(Integer idPatient) {
+		 String jpql = "select f from Flight f patient.userId=:param";
+		 Query query= entityManager.createQuery(jpql);
+		 query.setParameter("param", idPatient);
+		 return  (Flight) query.getSingleResult();
+		
+	}
+	
+	
+	
 
 }
