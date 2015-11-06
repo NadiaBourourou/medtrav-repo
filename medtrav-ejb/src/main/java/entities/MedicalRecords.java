@@ -1,8 +1,6 @@
 package entities;
 
 import java.io.Serializable;
-import java.sql.Blob;
-import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
@@ -11,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -24,19 +21,18 @@ import javax.persistence.Table;
 public class MedicalRecords implements Serializable {
 
 	private Integer medicalRecordsId;
-	private  byte[] analysis;
+	private byte[] analysis;
 	private byte[] patientFile;
 	private static final long serialVersionUID = 1L;
 
 	private Patient patient;
-	private List<Surgery> surgeries;
 
 	public MedicalRecords() {
 		super();
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getMedicalRecordsId() {
 		return this.medicalRecordsId;
 	}
@@ -46,17 +42,17 @@ public class MedicalRecords implements Serializable {
 	}
 
 	@Lob
-	@Basic(fetch=FetchType.LAZY)
+	@Basic(fetch = FetchType.LAZY)
 	public byte[] getAnalysis() {
 		return this.analysis;
 	}
 
-	public void setAnalysis( byte[] analysis) {
+	public void setAnalysis(byte[] analysis) {
 		this.analysis = analysis;
 	}
 
 	@Lob
-	@Basic(fetch=FetchType.LAZY)
+	@Basic(fetch = FetchType.LAZY)
 	public byte[] getPatientFile() {
 		return this.patientFile;
 	}
@@ -72,22 +68,6 @@ public class MedicalRecords implements Serializable {
 
 	public void setPatient(Patient patient) {
 		this.patient = patient;
-	}
-
-	@OneToMany(mappedBy = "medicalRecords")
-	public List<Surgery> getSurgeries() {
-		return surgeries;
-	}
-
-	public void setSurgeries(List<Surgery> surgeries) {
-		this.surgeries = surgeries;
-	}
-
-	public void linkSurgeriesToThisMedicalRecords(List<Surgery> surgeries) {
-		this.surgeries = surgeries;
-		for (Surgery s : surgeries) {
-			s.setMedicalRecords(this);
-		}		
 	}
 
 }
