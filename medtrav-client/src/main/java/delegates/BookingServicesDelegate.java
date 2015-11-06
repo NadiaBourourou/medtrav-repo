@@ -5,6 +5,8 @@ import java.util.List;
 import locator.ServiceLocator;
 import services.interfaces.BookingServicesRemote;
 import entities.Booking;
+import entities.Clinic;
+import entities.Hotel;
 
 public class BookingServicesDelegate {
 	public static final String jndiName = "/medtrav-ejb/BookingServices!services.interfaces.BookingServicesRemote";
@@ -32,5 +34,13 @@ public class BookingServicesDelegate {
 
 	public static List<Booking> doFindAllBookingsByPatient(Integer patientId) {
 		return getProxy().findAllBookingsByPatient(patientId);
+	}
+
+	public static Hotel doFindHotelByPatientId(Integer idPatient) {
+		return getProxy().findHotelByPatientId(idPatient);
+	}
+
+	public static Clinic doFindClinicByPatientId(Integer idPatient) {
+		return getProxy().findClinicByPatientId(idPatient);
 	}
 }

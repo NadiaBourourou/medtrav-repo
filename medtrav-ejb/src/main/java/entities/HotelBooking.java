@@ -1,15 +1,13 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 
 /**
  * Entity implementation class for Entity: HotelBooking
@@ -27,26 +25,23 @@ public class HotelBooking implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Patient patient;
-	private Booking booking;
+	private List<Booking> bookings;
 
 	public HotelBooking() {
 		super();
 	}
 
-
-	
-	public HotelBooking(Integer numNights, Double price, RoomType roomType, Hotel hotel, Patient patient) {
+	public HotelBooking(Integer numNights, Double price, RoomType roomType,
+			Hotel hotel, Patient patient) {
 		super();
-		this.hotelBookingId = new HotelBookingID (hotel.getHotelId(),
+		this.hotelBookingId = new HotelBookingID(hotel.getHotelId(),
 				patient.getUserId());
 		this.numNights = numNights;
 		this.price = price;
-		this.roomType=roomType;
+		this.roomType = roomType;
 		this.hotel = hotel;
 		this.patient = patient;
 	}
-
-
 
 	@EmbeddedId
 	public HotelBookingID getHotelBookingId() {
@@ -72,24 +67,17 @@ public class HotelBooking implements Serializable {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-	
-
 
 	public RoomType getRoomType() {
 		return roomType;
 	}
 
-
-
 	public void setRoomType(RoomType roomType) {
 		this.roomType = roomType;
 	}
 
-
-
 	@ManyToOne
 	@JoinColumn(name = "hotelId", referencedColumnName = "hotelId", insertable = false, updatable = false)
-
 	public Hotel getHotel() {
 		return hotel;
 	}
@@ -108,15 +96,13 @@ public class HotelBooking implements Serializable {
 		this.patient = patient;
 	}
 
-	
-
-	@OneToOne(mappedBy = "hotelBooking")
-	public Booking getBooking() {
-		return booking;
+	@OneToMany(mappedBy = "hotelBooking")
+	public List<Booking> getBooking() {
+		return bookings;
 	}
 
-	public void setBooking(Booking booking) {
-		this.booking = booking;
+	public void setBooking(List<Booking> bookings) {
+		this.bookings = bookings;
 	}
 
 }

@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,18 +18,30 @@ import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.ObjectProperty;
 
-import delegates.FlightServicesDelegate;
-import delegates.HotelBookingServicesDelegate;
+import delegates.BookingServicesDelegate;
+import entities.Booking;
+import entities.Clinic;
+import entities.ClinicBooking;
+import entities.ClinicBookingID;
 import entities.Flight;
 import entities.Hotel;
 import entities.HotelBooking;
+import entities.HotelBookingID;
+import entities.Patient;
+import entities.StateBooking;
+import entities.SurgeryPatient;
 
-public class Booking extends JFrame {
+public class Book extends JFrame {
 
-	Hotel hotel= new Hotel();
-	Booking booking;
-	HotelBooking hotelBooking;
-	Flight flight = new Flight();
+	private Hotel hotel = new Hotel();
+	private Booking booking = new Booking();
+	private Flight flight = new Flight();
+	private Clinic clinic = new Clinic();
+	private HotelBooking hotelBooking = new HotelBooking();
+	private HotelBookingID hotelBookingID = new HotelBookingID();
+	private ClinicBooking clinicBooking = new ClinicBooking();
+	private ClinicBookingID clinicBookingID = new ClinicBookingID();
+
 	private JPanel contentPane;
 	private JTextField thotel;
 	private JTextField tclinic;
@@ -46,7 +57,7 @@ public class Booking extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Booking frame = new Booking();
+					Book frame = new Book();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,7 +69,7 @@ public class Booking extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Booking() {
+	public Book() {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 641, 366);
@@ -73,7 +84,7 @@ public class Booking extends JFrame {
 
 		JLabel label = new JLabel("");
 		label.setBounds(15, 17, 70, 70);
-		label.setIcon(new ImageIcon(Booking.class
+		label.setIcon(new ImageIcon(Book.class
 				.getResource("/images/hotel-service_318-29285.jpg")));
 
 		JLabel lblHotel = new JLabel("Hotel ");
@@ -82,7 +93,7 @@ public class Booking extends JFrame {
 		JLabel label_1 = new JLabel("");
 		label_1.setBounds(15, 143, 70, 70);
 		label_1.setIcon(new ImageIcon(
-				Booking.class
+				Book.class
 						.getResource("/images/hospital_medicine_health_healthcare_medical-512.png")));
 
 		JLabel lblClinic = new JLabel("Clinic");
@@ -94,7 +105,7 @@ public class Booking extends JFrame {
 
 		JLabel label_2 = new JLabel("");
 		label_2.setBounds(238, 17, 70, 70);
-		label_2.setIcon(new ImageIcon(Booking.class
+		label_2.setIcon(new ImageIcon(Book.class
 				.getResource("/images/operating-room-theatre-256.png")));
 
 		JLabel lblSurgery = new JLabel("Surgery");
@@ -106,7 +117,7 @@ public class Booking extends JFrame {
 
 		JLabel label_3 = new JLabel("");
 		label_3.setBounds(238, 127, 65, 76);
-		label_3.setIcon(new ImageIcon(Booking.class
+		label_3.setIcon(new ImageIcon(Book.class
 				.getResource("/images/Flight_icon.png")));
 
 		JLabel lblFlight = new JLabel("Flight");
@@ -128,7 +139,7 @@ public class Booking extends JFrame {
 
 		JLabel label_4 = new JLabel("");
 		label_4.setBounds(507, 17, 70, 70);
-		label_4.setIcon(new ImageIcon(Booking.class
+		label_4.setIcon(new ImageIcon(Book.class
 				.getResource("/images/doctorb.png")));
 
 		JLabel lblDoctor = new JLabel("Doctor");
@@ -170,7 +181,38 @@ public class Booking extends JFrame {
 		contentPane.add(btnChangeFlight);
 
 		JButton btnBook = new JButton("");
-		btnBook.setIcon(new ImageIcon(Booking.class
+		btnBook.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				StateBooking state = null;
+				booking.setState(state.CONFIRMED);
+				SurgeryPatient sp = new SurgeryPatient();
+				Patient p = new Patient();
+				p.setUserId(1);
+
+				hotel = BookingServicesDelegate.doFindHotelByPatientId(1);
+				int hotelId = hotel.getHotelId();
+				hotelBookingID.sethotelId(hotelId);
+				hotelBookingID.setpatientId(1);
+				hotelBooking.setHotelBookingId(hotelBookingID);
+				// Clinic
+				clinic = BookingServicesDelegate.doFindClinicByPatientId(1);
+				int clinicId = clinic.getClinicId();
+				clinicBookingID.setClinicId(clinicId);
+				clinicBookingID.setPatientId(1);
+				clinicBooking.setClinicBookingId(clinicBookingID);
+
+				booking.setHotelBooking(hotelBooking);
+				booking.setClinicBooking(clinicBooking);
+
+				BookingServicesDelegate.doAddBooking(booking);
+
+				System.out.println(hotelId);
+				System.out.println(clinicId);
+
+			}
+		});
+		btnBook.setIcon(new ImageIcon(Book.class
 				.getResource("/images/book-now-icon.png")));
 		btnBook.setBounds(507, 207, 86, 85);
 		contentPane.add(btnBook);
@@ -178,18 +220,25 @@ public class Booking extends JFrame {
 		JButton button = new JButton("");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				hotel = HotelBookingServicesDelegate.doFindHotelByPatientId(1);
+
+				// Hotel
+				hotel = BookingServicesDelegate.doFindHotelByPatientId(1);
 				int hotelId = hotel.getHotelId();
-			
-				flight = FlightServicesDelegate.doFindFlightByPatientId(1);
-				Date arrive= (Date) flight.getArrivalDate();
-				
 				thotel.setText(hotel.getName());
+
+				// Clinic
+				clinic = BookingServicesDelegate.doFindClinicByPatientId(1);
+				int clinicId = clinic.getClinicId();
+				tclinic.setText(clinic.getName());
+
+				/*
+				 * flight = FlightServicesDelegate.doFindFlightByPatientId(1);
+				 * Date arrive = (Date) flight.getArrivalDate();
+				 */
 
 			}
 		});
-		button.setIcon(new ImageIcon(Booking.class
+		button.setIcon(new ImageIcon(Book.class
 				.getResource("/images/d\u00E9tails.jpg")));
 		button.setBounds(184, 279, 124, 23);
 		contentPane.add(button);
