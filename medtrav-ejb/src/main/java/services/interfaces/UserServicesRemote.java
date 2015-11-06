@@ -5,8 +5,10 @@ import java.util.List;
 import javax.ejb.Remote;
 
 import entities.Administrator;
+import entities.Clinic;
 import entities.Doctor;
 import entities.Patient;
+import entities.Surgery;
 import entities.User;
 
 @Remote
@@ -44,5 +46,9 @@ public interface UserServicesRemote {
 	User userIdentification(String login, String password);
 
 	public List<User> findAllUsers();
+
+	Boolean bookSurgery(Surgery surgery, String commentaire,Integer idPatient);
+
+	void chooseDoctor(Doctor selectedDoctor, Integer idPatient);
 
 }

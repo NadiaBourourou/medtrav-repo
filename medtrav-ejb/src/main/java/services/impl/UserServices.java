@@ -11,8 +11,13 @@ import services.interfaces.UserServicesLocal;
 import services.interfaces.UserServicesRemote;
 import entities.Administrator;
 import entities.Doctor;
+import entities.DoctorPatient;
+import entities.DoctorPatientID;
 import entities.Patient;
 import entities.RoleType;
+import entities.Surgery;
+import entities.SurgeryPatient;
+import entities.SurgeryPatientID;
 import entities.User;
 
 /**
@@ -208,6 +213,36 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 	public Patient findPatientById(Integer id) {
 
 		return entityManager.find(Patient.class, id);
+	}
+
+	@Override
+	public Boolean bookSurgery(Surgery surgery, String commentaire,
+			Integer idPatient) {
+		Boolean b = false;
+		try {
+			SurgeryPatientID surgeryPatientID = new SurgeryPatientID();
+			surgeryPatientID.setIdPatient(idPatient);
+			surgeryPatientID.setIdSurgery(surgery.getSurgeryId());
+			SurgeryPatient surgeryBooking = new SurgeryPatient(
+					surgeryPatientID, commentaire);
+			entityManager.merge(surgeryBooking);
+			b = true;
+		} catch (Exception e) {
+		}
+		return b;
+	}
+
+	@Override
+	public void chooseDoctor(Doctor selectedDoctor, Integer idPatient) {
+	
+			DoctorPatientID docPatId = new DoctorPatientID();
+			docPatId.setPatientId(idPatient);
+			docPatId.setDoctorId(selectedDoctor.getUserId());
+			
+			DoctorPatient docPat = new DoctorPatient();
+			docPat.setId(docPatId);
+			entityManager.merge(docPat);
+
 	}
 
 }

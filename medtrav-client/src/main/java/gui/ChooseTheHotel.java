@@ -21,7 +21,7 @@ import javax.swing.JComboBox;
 
 import delegates.HotelBookingServicesDelegate;
 import delegates.HotelServicesDelegate;
-import delegates.TreatmentServicesDelegate;
+import delegates.SurgeryServicesDelegate;
 import delegates.UserServicesDelegate;
 import entities.Hotel;
 import entities.HotelBooking;
