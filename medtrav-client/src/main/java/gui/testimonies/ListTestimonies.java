@@ -16,10 +16,14 @@ import java.util.List;
 import javax.swing.JTable;
 
 import delegates.TestimonyServicesDelegate;
+import entities.Administrator;
+import entities.Doctor;
 import entities.Testimony;
+import entities.User;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
 import org.jdesktop.swingbinding.JTableBinding;
@@ -43,7 +47,10 @@ import javax.swing.JTextPane;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.ObjectProperty;
+
 import java.util.Date;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ListTestimonies extends JFrame {
 
@@ -54,6 +61,7 @@ public class ListTestimonies extends JFrame {
 	private JTextField testimonyId;
 	private JTextField title;
 	private JTextPane description;
+	private Integer UserId=3;
 	
 
 	
@@ -67,6 +75,7 @@ public class ListTestimonies extends JFrame {
 				try {
 					ListTestimonies frame = new ListTestimonies();
 					frame.setVisible(true);
+				
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -81,7 +90,7 @@ public class ListTestimonies extends JFrame {
 		testimonies=TestimonyServicesDelegate.doFindAllTestimonies();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 730, 491);
+		setBounds(100, 100, 730, 509);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -94,10 +103,29 @@ public class ListTestimonies extends JFrame {
 		contentPane.add(lblListTestimonies);
 		
 		JPanel panel = new JPanel();
+		panel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
 		panel.setBounds(89, 60, 473, 148);
 		contentPane.add(panel);
 		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(74, 244, 452, 215);
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
+		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {	
+			
+			
+			
+						}
+			
+			
+		});
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -115,35 +143,22 @@ public class ListTestimonies extends JFrame {
 		);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				int idTableau=(int) table.getValueAt(table.getSelectedRow(), 3);
+				System.out.println("id user selectionné = "+idTableau);
+				if(idTableau==UserId)
+				{panel_1.setVisible(true);}
+				else{panel_1.setVisible(false);}	
+			}
+		});
 		scrollPane.setViewportView(table);
 		panel.setLayout(gl_panel);
 		
-		JButton btnUpdate = new JButton("Update");
-		btnUpdate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				testimonySelected = testimonies.get(table.getSelectedRow());	
-				TestimonyServicesDelegate.doUpdateTestimony(testimonySelected);
-				testimonies=TestimonyServicesDelegate.doFindAllTestimonies();
-				initDataBindings();
-			}
-		});
-		btnUpdate.setBounds(414, 261, 89, 23);
-		contentPane.add(btnUpdate);
 		
-		JButton btnNewButton = new JButton("Delete");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TestimonyServicesDelegate.doDeleteTestimony(testimonySelected);
-				testimonies=TestimonyServicesDelegate.doFindAllTestimonies();
-				initDataBindings();
-				testimonyId.setText("");
-				description.setText("");
-				title.setText("");
-			}
-		});
-		btnNewButton.setBounds(414, 295, 89, 23);
-		contentPane.add(btnNewButton);
+		
 		
 		JButton btnMenu = new JButton("Back to menu");
 		btnMenu.addActionListener(new ActionListener() {
@@ -156,37 +171,102 @@ public class ListTestimonies extends JFrame {
 		btnMenu.setBounds(560, 400, 130, 23);
 		contentPane.add(btnMenu);
 		
-		JLabel lblModification = new JLabel("Modification");
-		lblModification.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblModification.setBounds(89, 235, 108, 23);
-		contentPane.add(lblModification);
+
+		JButton btnNewButton = new JButton("Delete");
+		btnNewButton.setBounds(328, 92, 89, 23);
+		panel_1.add(btnNewButton);
+		
+		JButton btnUpdate = new JButton("Update");
+		btnUpdate.setBounds(328, 58, 89, 23);
+		panel_1.add(btnUpdate);
 		
 		JLabel lblId = new JLabel("Id testimony");
-		lblId.setBounds(99, 269, 82, 14);
-		contentPane.add(lblId);
+		lblId.setBounds(10, 66, 82, 14);
+		panel_1.add(lblId);
 		
 		testimonyId = new JTextField();
+		testimonyId.setBounds(90, 62, 135, 23);
+		panel_1.add(testimonyId);
 		testimonyId.setEnabled(false);
-		testimonyId.setBounds(179, 265, 135, 23);
-		contentPane.add(testimonyId);
 		testimonyId.setColumns(10);
 		
 		JLabel lblTitle = new JLabel("Title");
-		lblTitle.setBounds(99, 304, 46, 14);
-		contentPane.add(lblTitle);
+		lblTitle.setBounds(10, 101, 46, 14);
+		panel_1.add(lblTitle);
 		
 		title = new JTextField();
-		title.setBounds(179, 300, 135, 23);
-		contentPane.add(title);
+		title.setBounds(90, 97, 135, 23);
+		panel_1.add(title);
 		title.setColumns(10);
 		
 		JLabel lblDescription = new JLabel("Description");
-		lblDescription.setBounds(99, 345, 70, 14);
-		contentPane.add(lblDescription);
+		lblDescription.setBounds(10, 142, 70, 14);
+		panel_1.add(lblDescription);
 		
 		description = new JTextPane();
-		description.setBounds(179, 344, 197, 63);
-		contentPane.add(description);
+		description.setBounds(90, 141, 197, 63);
+		panel_1.add(description);
+		
+		JLabel lblModification = new JLabel("Modification");
+		lblModification.setBounds(10, 11, 108, 23);
+		panel_1.add(lblModification);
+		lblModification.setFont(new Font("Tahoma", Font.BOLD, 17));
+		
+		JButton btnAddANew = new JButton("Add ");
+		btnAddANew.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				User user=TestimonyServicesDelegate.doFindUsertById(UserId);
+				if(user instanceof Patient) {System.out.println("user is PATIENT");
+				AddTestimony addTestimony= new AddTestimony();
+				addTestimony.setVisible(true);
+				ListTestimonies.this.setVisible(false);
+				}
+				else if (user instanceof Doctor){System.out.println("user is a doctor ");
+				JOptionPane.showMessageDialog(null, "Sorry, you are a doctor, you can't add a testimony.");}
+				else if (user instanceof Administrator){JOptionPane.showMessageDialog(null, "Sorry, you are an administrator, you can't add a testimony.");}
+				else {System.out.println("user normal");}
+				
+				
+				
+			}
+		});
+		btnAddANew.setBounds(570, 168, 130, 23);
+		contentPane.add(btnAddANew);
+		
+		JButton btnSearchTestimonies = new JButton("Search");
+		btnSearchTestimonies.setBounds(570, 135, 130, 23);
+		contentPane.add(btnSearchTestimonies);
+		
+		JButton btnNewButton_1 = new JButton("Display");
+		btnNewButton_1.setBounds(560, 361, 130, 23);
+		contentPane.add(btnNewButton_1);
+		
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// 	btnUpdate.setVisible(false);
+				testimonySelected = testimonies.get(table.getSelectedRow());	
+				TestimonyServicesDelegate.doUpdateTestimony(testimonySelected);
+				testimonies=TestimonyServicesDelegate.doFindAllTestimonies();
+				initDataBindings();
+				
+			}
+		});
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TestimonyServicesDelegate.doDeleteTestimony(testimonySelected);
+				testimonies=TestimonyServicesDelegate.doFindAllTestimonies();
+				initDataBindings();
+				testimonyId.setText("");
+				description.setText("");
+				title.setText("");
+			}
+		});
+		
+		
+	
+		panel_1.setVisible(false);
 		initDataBindings();
 	}
 	protected void initDataBindings() {

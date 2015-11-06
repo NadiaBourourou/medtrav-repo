@@ -23,9 +23,6 @@ public class AdminUI extends JFrame {
 	private JFrame frame;
 	JLabel lblLoggedAs = new JLabel("   ");
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -58,7 +55,7 @@ public class AdminUI extends JFrame {
 		menuBar.add(mntmNewMenuItem_1);
 
 		JMenuItem mntmLogOut = new JMenuItem("Log Out");
-	
+
 		mntmLogOut.setIcon(new ImageIcon(AdminUI.class
 				.getResource("/images/logout-icon.png")));
 		menuBar.add(mntmLogOut);
@@ -78,9 +75,7 @@ public class AdminUI extends JFrame {
 		JButton btnHotels = new JButton("Hotels");
 		btnHotels.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				
+
 			}
 		});
 		btnHotels.setBounds(154, 345, 144, 34);
@@ -121,11 +116,11 @@ public class AdminUI extends JFrame {
 		JButton btnDoctors = new JButton("Doctors");
 		btnDoctors.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				AdminUI_ListOfDoctors frame = new AdminUI_ListOfDoctors();
 				frame.setVisible(true);
-				AdminUI.this.setVisible(false);	
-				
+				AdminUI.this.setVisible(false);
+
 			}
 		});
 		btnDoctors.setBounds(387, 152, 135, 34);
@@ -159,7 +154,7 @@ public class AdminUI extends JFrame {
 		menuBar.add(mntmNewMenuItem_1);
 
 		JMenuItem mntmLogOut = new JMenuItem("Log Out");
-	
+
 		mntmLogOut.setIcon(new ImageIcon(AdminUI.class
 				.getResource("/images/logout-icon.png")));
 		menuBar.add(mntmLogOut);
@@ -179,9 +174,7 @@ public class AdminUI extends JFrame {
 		JButton btnHotels = new JButton("Hotels");
 		btnHotels.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				
+
 			}
 		});
 		btnHotels.setBounds(154, 345, 144, 34);
@@ -222,11 +215,11 @@ public class AdminUI extends JFrame {
 		JButton btnDoctors = new JButton("Doctors");
 		btnDoctors.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				AdminUI_ListOfDoctors frame = new AdminUI_ListOfDoctors();
 				frame.setVisible(true);
-				AdminUI.this.setVisible(false);	
-				
+				AdminUI.this.setVisible(false);
+
 			}
 		});
 		btnDoctors.setBounds(387, 152, 135, 34);

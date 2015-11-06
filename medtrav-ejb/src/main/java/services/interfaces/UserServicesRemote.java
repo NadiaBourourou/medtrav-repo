@@ -13,29 +13,35 @@ import entities.User;
 public interface UserServicesRemote {
 
 	boolean addDocor(Doctor doctor);
+
 	boolean updateDoctor(Doctor doctor);
+
 	boolean removeDoctor(Integer doctorId);
+
 	Doctor findDoctorById(Integer id);
-	List <Doctor> findDoctorsBySpecialty(String specialty);
-	List <Doctor> findAllDoctors();
-	
-	
+
+	List<Doctor> findDoctorsBySpecialty(String specialty);
+
+	List<Doctor> findAllDoctors();
+
 	boolean addPatient(Patient patient);
+
 	boolean updatePatient(Patient patient);
+
 	boolean removePatient(Integer patientId);
-	Patient findPatientByPassportNumber (Integer nbPassport);
+
+	Patient findPatientByPassportNumber(Integer nbPassport);
+
 	List<Patient> findAlltreatedPatiends();
-	List<Patient> listAllPatients() ;
-	Patient findPatientByFirstAndLastName(String firstName,
-			String lastName) ;
-	
-	
+
+	List<Patient> listAllPatients();
+
+	Patient findPatientByFirstAndLastName(String firstName, String lastName);
+
 	boolean addAdmin(Administrator admin);
-	
-	
+
 	User userIdentification(String login, String password);
-	
-	
-	
-	
+
+	public List<User> findAllUsers();
+
 }

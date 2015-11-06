@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -21,7 +22,10 @@ public class Patient extends User implements Serializable {
 	private PatientState state;
 
 	private List<Testimony> testimonies;
+	private List<Question> questions;
 	private MedicalRecords medicalRecords;
+
+	private List<Doctor> doctors;
 	private HotelBooking hotelBooking;
 	private ClinicBooking clinicBooking;
 	private Flight flight;
@@ -83,6 +87,15 @@ public class Patient extends User implements Serializable {
 		this.state = state;
 	}
 
+	@ManyToMany(mappedBy = "patients")
+	public List<Doctor> getDoctors() {
+		return doctors;
+	}
+
+	public void setDoctors(List<Doctor> doctors) {
+		this.doctors = doctors;
+	}
+
 	@OneToOne(mappedBy = "patient")
 	public HotelBooking getHotelBooking() {
 		return hotelBooking;
@@ -90,6 +103,15 @@ public class Patient extends User implements Serializable {
 
 	public void setHotelBooking(HotelBooking hotelBooking) {
 		this.hotelBooking = hotelBooking;
+	}
+
+	@OneToMany(mappedBy = "patient")
+	public List<Question> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
 	}
 
 	@OneToOne(mappedBy = "patient")

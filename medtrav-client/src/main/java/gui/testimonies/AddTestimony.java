@@ -28,7 +28,7 @@ public class AddTestimony extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField titletf;
-
+	private Integer userId=1;
 	/**
 	 * Launch the application.
 	 */
@@ -85,7 +85,7 @@ public class AddTestimony extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			try{	
 				Testimony testimony= new Testimony();
-				Patient patient=TestimonyServicesDelegate.doFindPatientById(2);
+				Patient patient=TestimonyServicesDelegate.doFindPatientById(userId);
 				System.out.println("nomPatient= "+patient.getFirstName());
 				testimony.setPatient(patient);		
 				testimony.setTitle(titletf.getText());
