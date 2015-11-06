@@ -112,7 +112,7 @@ public class ListTestimonies extends JFrame {
 		contentPane.add(panel);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(76, 244, 452, 215);
+		panel_1.setBounds(74, 244, 452, 215);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -241,6 +241,7 @@ public class ListTestimonies extends JFrame {
 		JButton btnNewButton_1 = new JButton("Display");
 		btnNewButton_1.setBounds(560, 361, 130, 23);
 		contentPane.add(btnNewButton_1);
+		
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// 	btnUpdate.setVisible(false);
@@ -251,6 +252,7 @@ public class ListTestimonies extends JFrame {
 				
 			}
 		});
+		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TestimonyServicesDelegate.doDeleteTestimony(testimonySelected);
