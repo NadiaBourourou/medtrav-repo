@@ -34,7 +34,8 @@ public class SurgeryPatient implements Serializable {
 		this.surgeryPatientID = surgeryPatientID;
 		this.commentaire = commentaire;
 	}
-
+  
+	
 	@EmbeddedId
 	public SurgeryPatientID getSurgeryPatientID() {
 		return surgeryPatientID;
