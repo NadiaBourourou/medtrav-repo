@@ -1,12 +1,13 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -23,7 +24,7 @@ public class SurgeryPatient implements Serializable {
 
 	private Patient patient;
 	private Surgery surgery;
-	private Booking bookings;
+	private List<Booking> bookings;
 
 	public SurgeryPatient() {
 		super();
@@ -73,12 +74,12 @@ public class SurgeryPatient implements Serializable {
 		this.surgery = surgery;
 	}
 
-	@OneToOne(mappedBy = "surgeryPatient")
-	public Booking getBookings() {
+	@OneToMany(mappedBy = "surgeryPatient")
+	public List<Booking> getBookings() {
 		return bookings;
 	}
 
-	public void setBookings(Booking bookings) {
+	public void setBookings(List<Booking> bookings) {
 		this.bookings = bookings;
 	}
 

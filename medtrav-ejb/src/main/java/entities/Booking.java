@@ -102,7 +102,7 @@ public class Booking implements Serializable {
 		this.clinicBooking = clinicBooking;
 	}
 
-	@OneToOne
+	@ManyToOne
 	public SurgeryPatient getSurgeryPatient() {
 		return surgeryPatient;
 	}
