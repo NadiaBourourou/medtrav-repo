@@ -1,10 +1,13 @@
 package services.interfaces;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Remote;
 
 import entities.Flight;
+import entities.FlightMatching;
+import entities.Patient;
 
 @Remote
 public interface FlightServicesRemote {
@@ -19,7 +22,7 @@ public interface FlightServicesRemote {
 
 	Flight findFlightById(Integer idFlight);
 		
-	List<Flight> findFlightsByAirline(String airline);
+	List<FlightMatching> findFlightsByAirline(String airline);
 	
 	Boolean assignFlightToBooking(Integer idBooking,Integer idFlight);
 	Boolean assignFlightToBookingSlaveSide(Integer idBooking,Integer idFlight);
@@ -30,8 +33,19 @@ public interface FlightServicesRemote {
 	//Boolean assignMedicalRecordToSurgery(Integer idSurgery,Integer idMedicalRecord);
 	//Boolean assignMedicalRecordToSurgerySlaveSide(Integer idSurgery,Integer idMedicalRecord);
 
-	List<String> findAllDepartures();
-	List <String > findAllArrivals();
+	List<FlightMatching> findAllDepartures();
+	List<FlightMatching> findAllArrivals();
 	
-	Flight findFlightByPatientId(Integer idPatient) ;
+	List <FlightMatching > findMatchingFlight(String departure,String arrival,String departureDate,String arrivalDate);
+
+	List<Flight> findAllFlight();
+	
+	Patient findPatientById(Integer idPatient);
+
+	FlightMatching findFlightMatchingByNumFlight(String numFlight);
+	
+	FlightMatching findFlightMatchingById(Integer idFmatching);
+
+	Boolean updateNbSits(Integer nbSitsMaj,Integer idFlight);
+
 }

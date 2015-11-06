@@ -1,10 +1,13 @@
 package delegates;
 
+import java.util.Date;
 import java.util.List;
 
+import entities.Flight;
+import entities.FlightMatching;
+import entities.Patient;
 import locator.ServiceLocator;
 import services.interfaces.FlightServicesRemote;
-import entities.Flight;
 
 public class FlightServicesDelegate {
 	public static final String jndiName = "/medtrav-ejb/FlightServices!services.interfaces.FlightServicesRemote";
@@ -34,7 +37,7 @@ public class FlightServicesDelegate {
 		return getProxy().findAllFlightsByPatientId(patientId);
 	}
 
-	public static List<Flight> doFindFlightsByAirline(String airline) {
+	public static List<FlightMatching> doFindFlightsByAirline(String airline) {
 		return getProxy().findFlightsByAirline(airline);
 	}
 
@@ -58,29 +61,48 @@ public class FlightServicesDelegate {
 			Integer idDoctor) {
 		return getProxy().assignDoctorToSurgerySlaveSide(idSurgery, idDoctor);
 	}
+/*
+	public static Boolean doAssignMedicalRecordToSurgery(Integer idSurgery,
+			Integer idMedicalRecord) {
+		return getProxy().assignMedicalRecordToSurgery(idSurgery,
+				idMedicalRecord);
+	}
 
-	/*
-	 * public static Boolean doAssignMedicalRecordToSurgery(Integer
-	 * idSurgery,Integer idMedicalRecord){ return
-	 * getProxy().assignMedicalRecordToSurgery(idSurgery, idMedicalRecord); }
-	 * public static Boolean doAssignMedicalRecordToSurgerySlaveSide(Integer
-	 * idSurgery,Integer idMedicalRecord){ return
-	 * getProxy().assignMedicalRecordToSurgerySlaveSide(idSurgery,
-	 * idMedicalRecord); }
-	 */
-
-	public static List<String> doFindAllDepartures() {
+	public static Boolean doAssignMedicalRecordToSurgerySlaveSide(
+			Integer idSurgery, Integer idMedicalRecord) {
+		return getProxy().assignMedicalRecordToSurgerySlaveSide(idSurgery,
+				idMedicalRecord);
+	}
+*/
+	public static List<FlightMatching> doFindAllDepartures() {
 		return getProxy().findAllDepartures();
 	}
 
-	public static List<String> doFindAllArrivals() {
+	public static List<FlightMatching> doFindAllArrivals() {
 		return getProxy().findAllArrivals();
 
 	}
 
-	public static Flight doFindFlightByPatientId(Integer idPatient) {
-		return getProxy().findFlightByPatientId(idPatient);
-
+	public static List<FlightMatching> doFindMatchingFlight(String departure,
+			String arrival, String dateDeparture, String dateArrival) {
+		return getProxy().findMatchingFlight(departure, arrival, dateDeparture,
+				dateArrival);
 	}
 
+	public static List<Flight> doFindAllFlight() {
+		return getProxy().findAllFlight();
+	}
+
+	public static Patient doFindPatientById(Integer idPatient) {
+		return getProxy().findPatientById(idPatient);
+	}
+
+	public static FlightMatching doFindFlightMatchingById(Integer idFmatching)
+	{
+		return getProxy().findFlightMatchingById(idFmatching);
+	}
+	
+	public static Boolean doUpdateNbSits(Integer nbSitsMaj,Integer idFlight){
+		return getProxy().updateNbSits(nbSitsMaj,idFlight);
+	}
 }

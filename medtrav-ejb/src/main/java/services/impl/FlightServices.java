@@ -1,5 +1,6 @@
 package services.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -11,9 +12,11 @@ import javax.persistence.Query;
 import entities.Booking;
 import entities.Doctor;
 import entities.Flight;
-import entities.Hotel;
+import entities.FlightMatching;
 import entities.MedicalRecords;
+import entities.Patient;
 import entities.Surgery;
+import entities.User;
 import services.interfaces.BookingServicesLocal;
 import services.interfaces.FlightServicesLocal;
 import services.interfaces.FlightServicesRemote;
@@ -100,11 +103,19 @@ public class FlightServices implements FlightServicesRemote,
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Flight> findFlightsByAirline(String airline) {
-			String jpql = "select f from Flight f where f.airline=:airline";
-			Query query = entityManager.createQuery(jpql);
-			query.setParameter("param", airline);
-			return query.getResultList();
+	public List<FlightMatching> findFlightsByAirline(String airline) {
+		// String jpql =
+		// "select f from FlightMatching f where UPPER(f.airline) = UPPER(:%param%)";
+		// //recherche insensible à la casse
+		String jpql = "select f from FlightMatching f where f.airline =: param"; // recherche
+																					// insensible
+																					// à
+																					// la
+																					// casse
+
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", airline);
+		return query.getResultList();
 	}
 
 	@Override
@@ -205,8 +216,8 @@ public class FlightServices implements FlightServicesRemote,
 
 		return b;
 	}
-/*
-	@Override
+
+/*	@Override
 	public Boolean assignMedicalRecordToSurgery(Integer idSurgery,
 			Integer idMedicalRecord) {
 		Boolean b = false;
@@ -237,7 +248,8 @@ public class FlightServices implements FlightServicesRemote,
 			Surgery surgeryFound = surgeryServicesLocal
 					.findSurgeryById(idSurgery);
 
-			MedicalRecords medicalRecordsFound = entityManager.find(MedicalRecords.class, idMedicalRecord);
+			MedicalRecords medicalRecordsFound = entityManager.find(
+					MedicalRecords.class, idMedicalRecord);
 
 			List<Surgery> surgeries = surgeryServicesLocal
 					.findAllSurgeriesByMedicalRecordsId(idMedicalRecord);
@@ -255,34 +267,110 @@ public class FlightServices implements FlightServicesRemote,
 		}
 
 		return b;
-	}*/
-
+	}
+*/
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<String> findAllDepartures() {
-		String jpql = "select f.departure from FlightMatching f";
+	public List<FlightMatching> findAllDepartures() {
+		String jpql = "select f from FlightMatching f group by f.departure";
 		Query query = entityManager.createQuery(jpql);
 		return query.getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<String> findAllArrivals() {
-		String jpql = "select f.arrival from FlightMatching f";
+	public List<FlightMatching> findAllArrivals() {
+		String jpql = "select f from FlightMatching f group by f.arrival";
 		Query query = entityManager.createQuery(jpql);
 		return query.getResultList();
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	@Override
-	public Flight findFlightByPatientId(Integer idPatient) {
-		 String jpql = "select f from Flight f patient.userId=:param";
-		 Query query= entityManager.createQuery(jpql);
-		 query.setParameter("param", idPatient);
-		 return  (Flight) query.getSingleResult();
-		
+	public List<FlightMatching> findMatchingFlight(String departure,
+			String arrival, String departureDate, String arrivalDate) {
+
+		// String jpql =
+		// "select f from FlightMatching f where f.departure=:param1 AND f.arrival=:param2 AND f.DateFlightMatchingDep:=param3 AND f.DateFlightMatchingArr:=param4 AND numberOfSits>0";
+		String jpql = "select f from FlightMatching f where f.departure=:param1 AND f.arrival=:param2 AND f.dateFlightMatchingDep=:param3 AND f.dateFlightMatchingArr=:param4";
+
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param1", departure);
+		query.setParameter("param2", arrival);
+		query.setParameter("param3", departureDate);
+		query.setParameter("param4", arrivalDate);
+		return query.getResultList();
 	}
-	
-	
-	
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Flight> findAllFlight() {
+		String jpql = "select f from Flight f";
+		Query query = entityManager.createQuery(jpql);
+		return query.getResultList();
+	}
+
+	// ancienne version avant combo
+	/*
+	 * @SuppressWarnings("unchecked")
+	 * 
+	 * @Override public List<String> findAllDepartures() { String jpql =
+	 * "select f.departure from FlightMatching f order by f.departure"; Query
+	 * query = entityManager.createQuery(jpql); return query.getResultList(); }
+	 */
+
+	@Override
+	public Patient findPatientById(Integer idPatient) {
+		return entityManager.find(Patient.class, idPatient);
+	}
+
+	/*
+	 * @Override public FlightMatching findFlightMatchingByNumFlight(String
+	 * numF) { String jpql =
+	 * "select f from FlightMatching f where f.numFlight =: param";
+	 * 
+	 * Query query = entityManager.createQuery(jpql);
+	 * query.setParameter("param", numF);
+	 * 
+	 * FlightMatching flightMatchingChosen = null; flightMatchingChosen =
+	 * (FlightMatching) query.getSingleResult(); return flightMatchingChosen; }
+	 */
+
+	@Override
+	public FlightMatching findFlightMatchingByNumFlight(String numF) {
+		FlightMatching user = null;
+		Query query = entityManager
+				.createQuery("select f from FlightMatching f where f.numFlight=:param ");
+		query.setParameter("param", numF);
+
+		try {
+			user = (FlightMatching) query.getSingleResult();
+		} catch (Exception e) {
+			user = null;
+		}
+
+		return user;
+	}
+
+	@Override
+	public FlightMatching findFlightMatchingById(Integer idFmatching) {
+		return entityManager.find(FlightMatching.class, idFmatching);
+	}
+
+	@Override
+	public Boolean updateNbSits(Integer nbSitsMaj, Integer idFlight) {
+		Boolean b = false;
+		try {
+		String jpql="update FlightMatching f set f.numberOfSits=:param1 where f.idFlightMatching=:param2";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param1", nbSitsMaj);
+		query.setParameter("param2", idFlight);
+		b=true;
+		} catch (Exception e) {
+			System.err.println("Error updating nbSits");
+		}
+		return b;
+
+	}
 
 }
