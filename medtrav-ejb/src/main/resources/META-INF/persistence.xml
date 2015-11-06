@@ -10,7 +10,6 @@
 	<class>entities.MedicalRecords</class>
 	<class>entities.Testimony</class>
 	<class>entities.Surgery</class>
-	<class>entities.SurgeryId</class>
 	<class>entities.Administrator</class>
 
 		<properties>

@@ -205,7 +205,7 @@ public class FlightServices implements FlightServicesRemote,
 
 		return b;
 	}
-
+/*
 	@Override
 	public Boolean assignMedicalRecordToSurgery(Integer idSurgery,
 			Integer idMedicalRecord) {
@@ -255,7 +255,7 @@ public class FlightServices implements FlightServicesRemote,
 		}
 
 		return b;
-	}
+	}*/
 
 	@SuppressWarnings("unchecked")
 	@Override

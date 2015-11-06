@@ -20,12 +20,12 @@ public class Patient extends User implements Serializable {
 	private Integer numPassport;
 	private PatientState state;
 
-	private List<Booking> bookings;
 	private List<Testimony> testimonies;
 	private MedicalRecords medicalRecords;
 	private HotelBooking hotelBooking;
 	private ClinicBooking clinicBooking;
 	private Flight flight;
+	private List<SurgeryPatient> surgeryPatients;
 
 	private static final long serialVersionUID = 1L;
 
@@ -58,15 +58,6 @@ public class Patient extends User implements Serializable {
 	}
 
 	@OneToMany(mappedBy = "patient")
-	public List<Booking> getBookings() {
-		return bookings;
-	}
-
-	public void setBookings(List<Booking> bookings) {
-		this.bookings = bookings;
-	}
-
-	@OneToMany(mappedBy = "patient")
 	public List<Testimony> getTestimonies() {
 		return testimonies;
 	}
@@ -92,7 +83,7 @@ public class Patient extends User implements Serializable {
 		this.state = state;
 	}
 
-	@OneToOne(mappedBy="patient")
+	@OneToOne(mappedBy = "patient")
 	public HotelBooking getHotelBooking() {
 		return hotelBooking;
 	}
@@ -101,7 +92,7 @@ public class Patient extends User implements Serializable {
 		this.hotelBooking = hotelBooking;
 	}
 
-	@OneToOne(mappedBy="patient")
+	@OneToOne(mappedBy = "patient")
 	public ClinicBooking getClinicBooking() {
 		return clinicBooking;
 	}
@@ -110,7 +101,7 @@ public class Patient extends User implements Serializable {
 		this.clinicBooking = clinicBooking;
 	}
 
-	@OneToOne(mappedBy="patient")
+	@OneToOne(mappedBy = "patient")
 	public Flight getFlight() {
 		return flight;
 	}
@@ -118,6 +109,14 @@ public class Patient extends User implements Serializable {
 	public void setFlight(Flight flight) {
 		this.flight = flight;
 	}
-	
+
+	@OneToMany(mappedBy = "patient")
+	public List<SurgeryPatient> getSurgeryPatients() {
+		return surgeryPatients;
+	}
+
+	public void setSurgeryPatients(List<SurgeryPatient> surgeryPatients) {
+		this.surgeryPatients = surgeryPatients;
+	}
 
 }
