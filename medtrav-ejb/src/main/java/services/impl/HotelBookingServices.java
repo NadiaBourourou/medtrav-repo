@@ -10,6 +10,8 @@ import javax.persistence.Query;
 
 import entities.Hotel;
 import entities.HotelBooking;
+import entities.Patient;
+import entities.RoomType;
 import services.interfaces.HotelBookingServicesLocal;
 import services.interfaces.HotelBookingServicesRemote;
 
@@ -29,7 +31,7 @@ public class HotelBookingServices implements HotelBookingServicesRemote, HotelBo
     }
 
 	@Override
-	public Double calculPrix(Double prix, Double numNights) {
+	public Double calculPrix(Double prix, Integer numNights) {
 	
 			return prix*numNights; 
 		}
@@ -57,7 +59,23 @@ public class HotelBookingServices implements HotelBookingServicesRemote, HotelBo
 		 return  (Hotel) query.getSingleResult();
 		
 	}
-	
+
+	@Override
+	public Boolean bookHotel(Integer numNights, Double price,
+			RoomType roomType, Hotel hotel, Integer idPatient) {
+		Boolean b = false;
+		try {
+			Patient patient= entityManager.find(Patient.class,idPatient);
+			HotelBooking hotelBooking = new HotelBooking(numNights, price,
+				roomType, hotel, patient);
+			entityManager.merge(hotelBooking);
+			b = true;
+		} catch (Exception e) {
+		}
+		return b;
 	}
 
+	}
+	
+	
 

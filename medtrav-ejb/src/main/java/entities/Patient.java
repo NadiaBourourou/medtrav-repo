@@ -26,8 +26,8 @@ public class Patient extends User implements Serializable {
 	private MedicalRecords medicalRecords;
 
 	private List<Doctor> doctors;
-	private HotelBooking hotelBooking;
-	private ClinicBooking clinicBooking;
+	private List<HotelBooking> hotelBookings;
+	private List<ClinicBooking> clinicBookings;
 	private Flight flight;
 	private List<SurgeryPatient> surgeryPatients;
 
@@ -96,38 +96,44 @@ public class Patient extends User implements Serializable {
 		this.doctors = doctors;
 	}
 
-	@OneToOne(mappedBy = "patient")
-	public HotelBooking getHotelBooking() {
-		return hotelBooking;
-	}
-
-	public void setHotelBooking(HotelBooking hotelBooking) {
-		this.hotelBooking = hotelBooking;
-	}
 
 	@OneToMany(mappedBy = "patient")
 	public List<Question> getQuestions() {
 		return questions;
 	}
-
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
 
-	@OneToOne(mappedBy = "patient")
-	public ClinicBooking getClinicBooking() {
-		return clinicBooking;
+	@OneToMany(mappedBy = "patient")
+	
+	public List<HotelBooking> getHotelBookings() {
+		return hotelBookings;
 	}
 
-	public void setClinicBooking(ClinicBooking clinicBooking) {
-		this.clinicBooking = clinicBooking;
+	public void setHotelBookings(List<HotelBooking> hotelBookings) {
+		this.hotelBookings = hotelBookings;
 	}
+
+
+
+	@OneToMany(mappedBy = "patient")
+	public List<ClinicBooking> getClinicBookings() {
+		return clinicBookings;
+	}
+
+	public void setClinicBookings(List<ClinicBooking> clinicBookings) {
+		this.clinicBookings = clinicBookings;
+	}
+
+	
 
 	@OneToOne(mappedBy = "patient")
 	public Flight getFlight() {
 		return flight;
 	}
 
+	
 	public void setFlight(Flight flight) {
 		this.flight = flight;
 	}

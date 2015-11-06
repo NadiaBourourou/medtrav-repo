@@ -71,6 +71,9 @@ public class UserServicesDelegate {
 			String lastName) {
 		return getProxy().findPatientByFirstAndLastName(firstName, lastName);
 	}
+	public static Patient doFindPatientById(Integer id) {
+		return getProxy().findPatientById(id);
+	}
 
 	// _____________________________________________
 	// ____________Admin _________________________

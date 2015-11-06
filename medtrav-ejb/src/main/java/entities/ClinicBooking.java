@@ -18,11 +18,10 @@ import javax.persistence.*;
 public class ClinicBooking implements Serializable {
 
 	
-	private Integer clinicBookingId;
+	private ClinicBookingID clinicBookingId;
 	private RoomClinicType typeRoom;
 	private String date;
 	private String commentaire;
-	private Double price;
 	private static final long serialVersionUID = 1L;
 	private Clinic clinic;
 	private Patient patient;
@@ -33,14 +32,32 @@ public class ClinicBooking implements Serializable {
 	public ClinicBooking() {
 		super();
 	}   
-	@Id    
-	public Integer getClinicBookingId() {
-		return this.clinicBookingId;
+	
+	
+	public ClinicBooking(RoomClinicType typeRoom, String date,
+			String commentaire, Clinic clinic, Patient patient) {
+		super();
+		this.clinicBookingId = new ClinicBookingID (clinic.getClinicId(),
+				patient.getUserId());
+		this.typeRoom = typeRoom;
+		this.date = date;
+		this.commentaire = commentaire;
+		this.clinic = clinic;
+		this.patient = patient;
 	}
 
-	public void setClinicBookingId(Integer clinicBookingId) {
+
+	@EmbeddedId
+	public ClinicBookingID getClinicBookingId() {
+		return clinicBookingId;
+	}
+
+
+	public void setClinicBookingId(ClinicBookingID clinicBookingId) {
 		this.clinicBookingId = clinicBookingId;
-	}   
+	}
+
+
 	public RoomClinicType getTypeRoom() {
 		return this.typeRoom;
 	}
@@ -62,14 +79,12 @@ public class ClinicBooking implements Serializable {
 	public void setCommentaire(String commentaire) {
 		this.commentaire = commentaire;
 	}   
-	public Double getPrice() {
-		return this.price;
-	}
+	
+	
 
-	public void setPrice(Double price) {
-		this.price = price;
-	}
+
 	@ManyToOne
+	@JoinColumn(name = "clinicId", referencedColumnName = "clinicId", insertable = false, updatable = false)
 	public Clinic getClinic() {
 		return clinic;
 	}
@@ -77,7 +92,10 @@ public class ClinicBooking implements Serializable {
 		this.clinic = clinic;
 	}
 	
-	@OneToOne
+
+
+	@ManyToOne
+	@JoinColumn(name = "patientId", referencedColumnName = "userId", insertable = false, updatable = false)
 	public Patient getPatient() {
 		return patient;
 	}
