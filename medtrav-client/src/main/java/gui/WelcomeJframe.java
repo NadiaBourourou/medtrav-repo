@@ -25,6 +25,10 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import org.jdesktop.beansbinding.ObjectProperty;
+import org.jdesktop.beansbinding.AutoBinding;
+import org.jdesktop.beansbinding.Bindings;
+import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 
 public class WelcomeJframe extends JFrame {
 	private User user;
@@ -37,6 +41,7 @@ public class WelcomeJframe extends JFrame {
 	private List<Doctor>doctors;
 	private Doctor selectedDoctor=new Doctor();
 	private JTable table;
+	private JScrollPane scrollPane;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -187,7 +192,7 @@ public class WelcomeJframe extends JFrame {
 		panel.setBounds(134, 149, 295, 172);
 		contentPane.add(panel);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -207,6 +212,7 @@ public class WelcomeJframe extends JFrame {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		panel.setLayout(gl_panel);
+		initDataBindings();
 
 	}
 
@@ -303,5 +309,10 @@ public class WelcomeJframe extends JFrame {
 		contentPane.add(lblLoggedAs);
 
 
+	}
+	protected void initDataBindings() {
+		ObjectProperty<JScrollPane> jScrollPaneObjectProperty = ObjectProperty.create();
+		AutoBinding<List<Doctor>, List<Doctor>, JScrollPane, JScrollPane> autoBinding = Bindings.createAutoBinding(UpdateStrategy.READ, doctors, scrollPane, jScrollPaneObjectProperty);
+		autoBinding.bind();
 	}
 }
