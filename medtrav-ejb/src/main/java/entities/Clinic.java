@@ -26,9 +26,6 @@ public class Clinic implements Serializable {
 	private Double priceSingle;
 	private List<ClinicBooking> clinicBookings;
 	
-
-	private  byte[] image;
-	
 	private static final long serialVersionUID = 1L;
 
 	public Clinic() {
@@ -70,13 +67,6 @@ public class Clinic implements Serializable {
 
 	public void setPhoneNumber(Integer phoneNumber) {
 		this.phoneNumber = phoneNumber;
-	}
-	@Lob
-	public byte[] getImage() {
-		return image;
-	}
-	public void setImage(byte[] image) {
-		this.image = image;
 	}
 	
 	

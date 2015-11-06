@@ -91,38 +91,7 @@ public class AddClinic extends JFrame {
 				clinic.setAddress(address.getText());
 				clinic.setPhoneNumber(new Integer (phonenumber.getText()));
 				clinic.setProfessionalism(professionalism.getText());
-				File fichier = new File(textField.getText());
-				FileInputStream fis = null;
-				try {
-					fis = new FileInputStream(fichier);
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-
-				FileReader fr = null;
-				try {
-					fr = new FileReader(fichier);
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				ArrayList<Byte> list = new ArrayList<Byte>();
-				int s;
-				try {
-					while ((s = fr.read()) != -1) {
-						list.add((byte) s);
-					}
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				byte[] b = new byte[list.size()];
-				for (int i = 0; i < b.length; i++) {
-					b[i] = list.get(i);
-				}
-
-				clinic.setImage(b);
+			
 			
 				ClinicServicesDelegate.doAddClinic(clinic);
 			}

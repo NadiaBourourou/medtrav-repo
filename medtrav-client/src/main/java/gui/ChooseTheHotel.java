@@ -124,10 +124,10 @@ HotelBooking hb= new HotelBooking();
 				 
 		
 		 System.out.println("ok");	
-		
-		 hb.setNumNights(numNights);
+		//
+		// hb.setNumNights(numNights);
 		 
-		 hb.setHotel(h);
+	//	 hb.setHotel(h);
 		//	HotelBookingServicesDelegate.doAddHotelBooking(hb);
 					 
 				}
