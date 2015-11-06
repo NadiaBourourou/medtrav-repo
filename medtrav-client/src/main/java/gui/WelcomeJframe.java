@@ -216,16 +216,18 @@ public class WelcomeJframe extends JFrame {
 
 	}
 
+	
 	public WelcomeJframe(User user) {
-		JOptionPane.showMessageDialog(null,
-				user.getFirstName() + user.getLastName());
+		
+		lblLoggedAs.setText(user.getLogin());
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 730, 447);
 
-		lblLoggedAs.setText("You are logged in as: \n" + user.getLastName()
-				+ " " + user.getFirstName());
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
 		JMenuItem mntmLogOut = new JMenuItem("Log Out");
+		mntmLogOut.setIcon(new ImageIcon(WelcomeJframe.class.getResource("/images/logout-icon.png")));
 		mntmLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -297,19 +299,50 @@ public class WelcomeJframe extends JFrame {
 		lblDescriptionLabel.setBounds(389, 131, 0, 0);
 		contentPane.add(lblDescriptionLabel);
 
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(138, 121, 207, 20);
-		contentPane.add(dateChooser);
-
-		JDateChooser dateChooser_1 = new JDateChooser();
-		dateChooser_1.setBounds(138, 145, 207, 20);
-		contentPane.add(dateChooser_1);
-
-		lblLoggedAs.setBounds(151, 12, 534, 29);
+		lblLoggedAs.setBounds(298, 12, 387, 29);
 		contentPane.add(lblLoggedAs);
-
+		
+		JLabel lblUser = new JLabel("");
+		lblUser.setIcon(new ImageIcon(WelcomeJframe.class.getResource("/images/user_patient_icon.png")));
+		lblUser.setBounds(642, 34, 62, 57);
+		contentPane.add(lblUser);
+		
+		JLabel lblDoctors = new JLabel("Doctors ");
+		lblDoctors.setBounds(12, 149, 91, 14);
+		contentPane.add(lblDoctors);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(134, 149, 295, 172);
+		contentPane.add(panel);
+		
+		scrollPane = new JScrollPane();
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		panel.setLayout(gl_panel);
+		initDataBindings();
 
 	}
+
+	
+	
+	
+	
 	protected void initDataBindings() {
 		ObjectProperty<JScrollPane> jScrollPaneObjectProperty = ObjectProperty.create();
 		AutoBinding<List<Doctor>, List<Doctor>, JScrollPane, JScrollPane> autoBinding = Bindings.createAutoBinding(UpdateStrategy.READ, doctors, scrollPane, jScrollPaneObjectProperty);
