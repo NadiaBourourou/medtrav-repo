@@ -1,14 +1,12 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -20,8 +18,7 @@ import javax.persistence.Table;
 public class Booking implements Serializable {
 
 	private Integer bookingId;
-	private Date arrival;
-	private Date departure;
+
 	private StateBooking state;
 
 	private Flight flight;
@@ -35,12 +32,6 @@ public class Booking implements Serializable {
 		super();
 	}
 
-	public Booking(Date arrival, Date departure) {
-		super();
-		this.arrival = arrival;
-		this.departure = departure;
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getBookingId() {
@@ -49,22 +40,6 @@ public class Booking implements Serializable {
 
 	public void setBookingId(Integer bookingId) {
 		this.bookingId = bookingId;
-	}
-
-	public Date getArrival() {
-		return arrival;
-	}
-
-	public void setArrival(Date arrival) {
-		this.arrival = arrival;
-	}
-
-	public Date getDeparture() {
-		return departure;
-	}
-
-	public void setDeparture(Date departure) {
-		this.departure = departure;
 	}
 
 	@ManyToOne
@@ -84,7 +59,7 @@ public class Booking implements Serializable {
 		this.state = state;
 	}
 
-	@OneToOne
+	@ManyToOne
 	public HotelBooking getHotelBooking() {
 		return hotelBooking;
 	}
@@ -93,7 +68,7 @@ public class Booking implements Serializable {
 		this.hotelBooking = hotelBooking;
 	}
 
-	@OneToOne
+	@ManyToOne
 	public ClinicBooking getClinicBooking() {
 		return clinicBooking;
 	}

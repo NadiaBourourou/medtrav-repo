@@ -5,6 +5,8 @@ import java.util.List;
 import javax.ejb.Remote;
 
 import entities.Booking;
+import entities.Clinic;
+import entities.Hotel;
 
 @Remote
 public interface BookingServicesRemote {
@@ -18,7 +20,11 @@ public interface BookingServicesRemote {
 	List<Booking> findAllBookingsByPatient(Integer patientId);
 
 	Booking findBookingById(Integer idBooking);
-	
+
 	List<Booking> findAllBookingsByFlightId(Integer id);
+
+	Hotel findHotelByPatientId(Integer idPatient);
+
+	Clinic findClinicByPatientId(Integer idPatient);
 
 }
