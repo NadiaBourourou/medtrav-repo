@@ -105,4 +105,17 @@ public class FlightServicesDelegate {
 	public static Boolean doUpdateNbSits(Integer nbSitsMaj,Integer idFlight){
 		return getProxy().updateNbSits(nbSitsMaj,idFlight);
 	}
+	
+	public static List<FlightMatching> doFindMatchingFlightWithThatFromAndTo(String fromMatching, String toMatching){
+		return getProxy().findMatchingFlightWithThatFromAndTo(fromMatching, toMatching);
+	}
+	
+	public static List<FlightMatching> doFindAllFlightMatching(){
+		return getProxy().findAllFlightMatching();
+	}
+	
+	
+	public static List<String> doFindAllDepaturesSansDoublons() {return getProxy().findAllDepaturesSansDoublons();}
+	public static List<String> doFindAllDepaturesOfOurPatients() {return getProxy().findAllDepaturesOfOurPatients();}
+	
 }

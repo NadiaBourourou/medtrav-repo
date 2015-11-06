@@ -36,6 +36,7 @@ import com.toedter.calendar.JCalendar;
 public class AddFlight2 extends JFrame {
 
 	private JPanel contentPane;
+	private Integer userId=1;
 
 	/**
 	 * Launch the application.

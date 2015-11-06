@@ -58,14 +58,20 @@ public class PopulateDb {
     
     FlightMatching flight27 = new FlightMatching("TU441", "Lyon - Lyon-Saint-Exupéry (LYS)", "Djerba - Djerba–Zarzis International Airport (DJE)", "18-11-2015","22-11-2015", "05:35:00",  "09:30:00", "TUNISAIR", 3, 140D);
     entityManager.merge(flight27);
-  /*  
-  FlightMatching flight2 = new FlightMatching("TU847", "Bruxelles - Brussels Airport (BRU)", "Tunis - Tunis-Carthage International Airport (TUN)", "17-11-2015 05:35:00","18-11-2015 05:35:00", "TUNISAIR", 8, 190D);
-    entityManager.merge(flight2);
-    FlightMatching flight3 = new FlightMatching("BJ382", "Bordeaux - Bordeaux–Mérignac Airport (BOD)", "Monastir - Monastir Habib Bourguiba International Airport(MIR)", "18-11-2015 07:30:00","19-11-2015 05:35:00", "NOUVEL AIR TUNISIE", 9, 140D);
-    entityManager.merge(flight3);
-    FlightMatching flight4 = new FlightMatching("8U451", "Tripoli - Tripoli International Airport (TIP)", "Djerba - Djerba–Zarzis International Airport (DJE)", "19-11-2015 08:15:00","20-11-2015 05:35:00", "AFRIQIYAH AIRWAYS", 10, 130D);
-    entityManager.merge(flight4);
     
+    FlightMatching flight28 = new FlightMatching("UG002", "Lyon - Lyon-Saint-Exupéry (LYS)", "Djerba - Djerba–Zarzis International Airport (DJE)", "25-11-2015","01-12-2015", "09:00:00",  "10:45:00", "TUNISAIR EXPRESS", 2, 110D);
+    entityManager.merge(flight28);
+    
+    FlightMatching flight29 = new FlightMatching("BJ778", "Lyon - Lyon-Saint-Exupéry (LYS)", "Djerba - Djerba–Zarzis International Airport (DJE)", "25-11-2015","01-12-2015", "20:05:00",  "21:40:00", "NOUVEL AIR TUNISIE", 4, 120D);
+    entityManager.merge(flight29);
+   
+  FlightMatching flight2 = new FlightMatching("TU847", "Bruxelles - Brussels Airport (BRU)", "Tunis - Tunis-Carthage International Airport (TUN)", "17-11-2015","18-11-2015", "05:35:00", "07:35:00", "TUNISAIR", 8, 190D);
+    entityManager.merge(flight2);
+    FlightMatching flight3 = new FlightMatching("BJ382", "Bordeaux - Bordeaux–Mérignac Airport (BOD)", "Monastir - Monastir Habib Bourguiba International Airport(MIR)", "18-11-2015", "19-11-2015", "07:30:00", "05:35:00", "NOUVEL AIR TUNISIE", 9, 140D);
+    entityManager.merge(flight3);
+    FlightMatching flight4 = new FlightMatching("8U451", "Tripoli - Tripoli International Airport (TIP)", "Djerba - Djerba–Zarzis International Airport (DJE)", "19-11-2015","20-11-2015", "08:15:00", "05:35:00", "AFRIQIYAH AIRWAYS", 10, 130D);
+    entityManager.merge(flight4);
+    /*  
     FlightMatching flight5 = new FlightMatching("UZ151", "Abidjan - Port Bouet Airport (ABJ)", "Sfax - Sfax–Thyna International Airport (SFA)", "20-11-2015 09:20:00", "21-11-2015 05:35:00", "BURAQ AIR", 4, 160D);
     entityManager.merge(flight5);
     FlightMatching flight6 = new FlightMatching("TU847", "Paris - Paris Charles-de-Gaulle (CDG)", "Tunis - Tunis-Carthage International Airport (TUN)", "21-11-2015 10:30:00","22-11-2015 05:35:00", "TRANSAVIA", 15, 190D);

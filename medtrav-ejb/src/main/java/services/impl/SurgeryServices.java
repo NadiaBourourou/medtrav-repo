@@ -7,9 +7,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import entities.Surgery;
 import services.interfaces.SurgeryServicesLocal;
 import services.interfaces.SurgeryServicesRemote;
+import entities.Procedure;
+import entities.Surgery;
 
 /**
  * Session Bean implementation class SurgeryServices
@@ -45,12 +46,80 @@ public class SurgeryServices implements SurgeryServicesRemote,
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Surgery> findAllSurgeriesByMedicalRecordsId(
-			Integer id) {
+	public List<Surgery> findAllSurgeriesByMedicalRecordsId(Integer id) {
 		String jpql = "select s from Surgery s where s.medicalRecords.id=:param";
 		Query query = entityManager.createQuery(jpql);
 		query.setParameter("param", id);
 		return query.getResultList();
+	}
+
+	@Override
+	public Boolean assignProcedureToSurgery(Surgery newTreatment,
+			Integer procedureId) {
+		Boolean b = false;
+		try {
+			Procedure procedure = entityManager.find(Procedure.class,
+					procedureId);
+			newTreatment.setProcedure(procedure);
+			entityManager.merge(newTreatment);
+			b = true;
+		} catch (Exception e) {
+		}
+		return b;
+	}
+
+	@Override
+	public boolean addSurgery(Surgery treatment) {
+		Boolean b = false;
+		try {
+			entityManager.persist(treatment);
+			b = true;
+		} catch (Exception e) {
+			System.err.println("ouups ...");
+		}
+		return b;
+	}
+
+	@Override
+	public void addSurgeryAndAssignItToProcedure(Surgery treatment,
+			Integer idProcedure) {
+
+		Procedure procedure = entityManager.find(Procedure.class, idProcedure);
+		treatment.setProcedure(procedure);
+		entityManager.merge(treatment);
+	}
+
+	@Override
+	public boolean addProcedure(Procedure procedure) {
+		Boolean b = false;
+		try {
+			entityManager.persist(procedure);
+			b = true;
+		} catch (Exception e) {
+			System.err.println("ouups ...");
+		}
+		return b;
+	}
+
+	@Override
+	public List<Procedure> findAllProcedures() {
+		String jpql = "select p from Procedure p";
+		Query query = entityManager.createQuery(jpql);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<Surgery> findAllSurgeriesByProcedureId(Integer procedureId) {
+		String jpql = "select s from Surgery s where s.procedure.id=:param";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", procedureId);
+		return query.getResultList();
+	}
+
+	@Override
+	public String getSurgeryDescription(Integer treatmentId) {
+		Surgery surgery = entityManager.find(Surgery.class, treatmentId);
+		return surgery.getDescription();
 	}
 
 }

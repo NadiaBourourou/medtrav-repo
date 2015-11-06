@@ -89,11 +89,13 @@ public class FlightServices implements FlightServicesRemote,
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Flight> findAllFlightsByPatientId(Integer patientId) {
-		String jpql = "select f from Flight f where f.patient.id =: param";
-		Query query = entityManager.createQuery(jpql);
+		String jpql="select f from Flight f where f.patient.id =:param";
+		Query query=entityManager.createQuery(jpql);
 		query.setParameter("param", patientId);
 		return query.getResultList();
+	
 	}
+
 
 	@Override
 	public Flight findFlightById(Integer idFlight) {
@@ -107,7 +109,7 @@ public class FlightServices implements FlightServicesRemote,
 		// String jpql =
 		// "select f from FlightMatching f where UPPER(f.airline) = UPPER(:%param%)";
 		// //recherche insensible à la casse
-		String jpql = "select f from FlightMatching f where f.airline =: param"; // recherche
+		String jpql = "select f from FlightMatching f where f.airline=:param"; // recherche
 																					// insensible
 																					// à
 																					// la
@@ -217,7 +219,7 @@ public class FlightServices implements FlightServicesRemote,
 		return b;
 	}
 
-/*	@Override
+	/*	@Override
 	public Boolean assignMedicalRecordToSurgery(Integer idSurgery,
 			Integer idMedicalRecord) {
 		Boolean b = false;
@@ -269,6 +271,7 @@ public class FlightServices implements FlightServicesRemote,
 		return b;
 	}
 */
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<FlightMatching> findAllDepartures() {
@@ -373,4 +376,42 @@ public class FlightServices implements FlightServicesRemote,
 
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<FlightMatching> findMatchingFlightWithThatFromAndTo(
+			String fromMatching, String toMatching) {
+		String jpql = "select f from FlightMatching f where f.departure=:param1 AND f.arrival=:param2 ";
+
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param1", fromMatching);
+		query.setParameter("param2", toMatching);
+
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<FlightMatching> findAllFlightMatching() {
+		String jpql="select f from FlightMatching f";
+		Query query=entityManager.createQuery(jpql);
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<String> findAllDepaturesSansDoublons() {
+		String jpql = "select f.departure from FlightMatching f group by f.departure";
+		Query query = entityManager.createQuery(jpql);
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<String> findAllDepaturesOfOurPatients() {
+		String jpql = "select f.departureLocation from Flight f";
+		Query query = entityManager.createQuery(jpql);
+		return query.getResultList();
+	}
+
+	
 }

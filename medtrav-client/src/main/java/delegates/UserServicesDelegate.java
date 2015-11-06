@@ -7,6 +7,7 @@ import services.interfaces.UserServicesRemote;
 import entities.Administrator;
 import entities.Doctor;
 import entities.Patient;
+import entities.Surgery;
 import entities.User;
 
 public class UserServicesDelegate {
@@ -71,6 +72,7 @@ public class UserServicesDelegate {
 			String lastName) {
 		return getProxy().findPatientByFirstAndLastName(firstName, lastName);
 	}
+
 	public static Patient doFindPatientById(Integer id) {
 		return getProxy().findPatientById(id);
 	}
@@ -90,4 +92,12 @@ public class UserServicesDelegate {
 	public static User doUserIdentification(String login, String password) {
 		return getProxy().userIdentification(login, password);
 	}
+
+	public static Boolean doBookSurgery(Surgery surgery, String commentaire,
+			Integer idPatient) {
+		return getProxy().bookSurgery(surgery, commentaire, idPatient);
+	}
+
+	public static void doChooseDoctor(Doctor selectedDoctor, Integer idPatient)
+	{ getProxy().chooseDoctor(selectedDoctor, idPatient);}
 }

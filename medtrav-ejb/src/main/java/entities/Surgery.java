@@ -3,6 +3,7 @@ package entities;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,9 +22,11 @@ public class Surgery implements Serializable {
 
 	private Integer surgeryId;
 	private String name;
+	private String description;
 
 	private Doctor doctor;
 	private List<SurgeryPatient> surgeryPatients;
+	private Procedure procedure;
 
 	private static final long serialVersionUID = 1L;
 
@@ -65,6 +68,23 @@ public class Surgery implements Serializable {
 
 	public void setSurgeryPatients(List<SurgeryPatient> surgeryPatients) {
 		this.surgeryPatients = surgeryPatients;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	@ManyToOne(cascade = CascadeType.MERGE)
+	public Procedure getProcedure() {
+		return procedure;
+	}
+
+	public void setProcedure(Procedure procedure) {
+		this.procedure = procedure;
 	}
 
 }

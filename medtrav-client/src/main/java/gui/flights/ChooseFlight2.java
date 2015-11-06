@@ -69,6 +69,7 @@ public class ChooseFlight2 extends JFrame {
 	private JLabel lblDepartureTime;
 	private JTextField departureTimeFlight;
 	private JTextField hiddenNbSits;
+	private Integer userId=1;
 
 	/**
 	 * Launch the application.
@@ -187,7 +188,7 @@ public class ChooseFlight2 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				Flight flight = new Flight();
-				Patient patient = FlightServicesDelegate.doFindPatientById(2);
+				Patient patient = FlightServicesDelegate.doFindPatientById(userId);
 				System.out.println("nomPatient= " + patient.getFirstName());
 
 				flight.setPatient(patient);
@@ -200,6 +201,7 @@ public class ChooseFlight2 extends JFrame {
 				flight.setTimeFlightMatchingDep(departureTimeFlight.getText());
 				flight.setPrice(Double.parseDouble(priceFlight.getText()));
 				flight.setNbSits(Integer.parseInt(numberSitsFlight.getText()));
+				flight.setNumFlight(flightNumber.getText());
 
 				Integer nbSitsAvailable=(Integer)table.getValueAt(table.getSelectedRow(), 10);
 				Integer nbSitsNeeded = Integer.parseInt(numberSitsFlight.getText());
@@ -371,7 +373,7 @@ public class ChooseFlight2 extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 
 		table = new JTable();
-		scrollPane.setColumnHeaderView(table);
+		scrollPane.setViewportView(table);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(
 				Alignment.LEADING).addGroup(

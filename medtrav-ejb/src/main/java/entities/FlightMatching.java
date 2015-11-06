@@ -43,7 +43,7 @@ public class FlightMatching implements Serializable {
 		this.dateFlightMatchingDep = dateFlightMatchingDep;
 		this.dateFlightMatchingArr = dateFlightMatchingArr;
 		this.timeFlightMatchingDep = timeFlightMatchingDep;
-		this.timeFlightMatchingArr = timeFlightMatchingDep;
+		this.timeFlightMatchingArr = timeFlightMatchingArr;
 		this.airline = airline;
 		this.numberOfSits = numberOfSits;
 		this.price = price;

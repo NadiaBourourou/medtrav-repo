@@ -19,6 +19,7 @@ public class Flight implements Serializable {
 
 	
 	private Integer flightId;
+	private String numFlight;
 	private String departureDate;
 	private String arrivalDate;
 	private String departureLocation;
@@ -109,7 +110,7 @@ public class Flight implements Serializable {
 		}
 	}
 
-	@OneToOne
+	@ManyToOne
 	public Patient getPatient() {
 		return patient;
 	}
@@ -144,6 +145,14 @@ public class Flight implements Serializable {
 
 	public void setTimeFlightMatchingArr(String timeFlightMatchingArr) {
 		this.timeFlightMatchingArr = timeFlightMatchingArr;
+	}
+
+	public String getNumFlight() {
+		return numFlight;
+	}
+
+	public void setNumFlight(String numFlight) {
+		this.numFlight = numFlight;
 	}
    
 }

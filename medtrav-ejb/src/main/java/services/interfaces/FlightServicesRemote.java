@@ -29,10 +29,10 @@ public interface FlightServicesRemote {
 	
 	Boolean assignDoctorToSurgery(Integer idSurgery,Integer idDoctor);
 	Boolean assignDoctorToSurgerySlaveSide(Integer idSurgery,Integer idDoctor);
-			
-	//Boolean assignMedicalRecordToSurgery(Integer idSurgery,Integer idMedicalRecord);
-	//Boolean assignMedicalRecordToSurgerySlaveSide(Integer idSurgery,Integer idMedicalRecord);
-
+/*			
+	Boolean assignMedicalRecordToSurgery(Integer idSurgery,Integer idMedicalRecord);
+	Boolean assignMedicalRecordToSurgerySlaveSide(Integer idSurgery,Integer idMedicalRecord);
+*/
 	List<FlightMatching> findAllDepartures();
 	List<FlightMatching> findAllArrivals();
 	
@@ -47,5 +47,14 @@ public interface FlightServicesRemote {
 	FlightMatching findFlightMatchingById(Integer idFmatching);
 
 	Boolean updateNbSits(Integer nbSitsMaj,Integer idFlight);
+
+	List<FlightMatching> findMatchingFlightWithThatFromAndTo(String fromMatching, String toMatching);
+	
+	List<FlightMatching> findAllFlightMatching();
+	
+	List<String> findAllDepaturesSansDoublons();
+	
+	List<String> findAllDepaturesOfOurPatients();
+
 
 }
