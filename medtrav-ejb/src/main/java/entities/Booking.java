@@ -25,6 +25,7 @@ public class Booking implements Serializable {
 	private HotelBooking hotelBooking;
 	private ClinicBooking clinicBooking;
 	private SurgeryPatient surgeryPatient;
+	private DoctorPatient doctorPatient;
 
 	private static final long serialVersionUID = 1L;
 
@@ -84,6 +85,15 @@ public class Booking implements Serializable {
 
 	public void setSurgeryPatient(SurgeryPatient surgeryPatient) {
 		this.surgeryPatient = surgeryPatient;
+	}
+
+	@ManyToOne
+	public DoctorPatient getDoctorPatient() {
+		return doctorPatient;
+	}
+
+	public void setDoctorPatient(DoctorPatient doctorPatient) {
+		this.doctorPatient = doctorPatient;
 	}
 
 }

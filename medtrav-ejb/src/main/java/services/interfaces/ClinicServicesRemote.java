@@ -21,4 +21,5 @@ public interface ClinicServicesRemote {
 
 	List<Clinic> findAllClinics();
 
+	Clinic findClinicByName(String name);
 }
