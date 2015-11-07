@@ -179,6 +179,7 @@ public class WelcomeJframe extends JFrame {
 
 				Doctor doctor = UserServicesDelegate.doFindDoctorById(3);
 				UserServicesDelegate.doChooseDoctor(doctor, 1);
+
 			}
 		});
 
