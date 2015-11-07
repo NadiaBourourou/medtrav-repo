@@ -74,7 +74,17 @@ public class TestimonyServices implements TestimonyServicesRemote, TestimonyServ
 	}	
 	
 
-
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Testimony> findAllTestimoniesByTitle(String titleParam) {
+		String jpql="select t from Testimony t where t.title =: param";
+		Query query=entitymanager.createQuery(jpql);
+		query.setParameter("param", titleParam);
+		return query.getResultList();
+	
+	}
+	
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Testimony> findAllTestimoniesByPatientId(Integer patientId) {

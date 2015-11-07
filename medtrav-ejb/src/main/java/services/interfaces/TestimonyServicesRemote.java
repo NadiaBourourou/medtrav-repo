@@ -32,5 +32,7 @@ public interface TestimonyServicesRemote {
 	List<Testimony> findAllTestimonies();
 
 	User findUserById(Integer idUser);
+
+	List<Testimony> findAllTestimoniesByTitle(String titleParam);
 	
 }
