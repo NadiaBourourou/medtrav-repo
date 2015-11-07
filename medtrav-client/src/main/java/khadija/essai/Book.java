@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -24,15 +25,14 @@ import entities.Booking;
 import entities.Clinic;
 import entities.ClinicBooking;
 import entities.ClinicBookingID;
+import entities.DoctorPatient;
 import entities.Flight;
 import entities.Hotel;
 import entities.HotelBooking;
 import entities.HotelBookingID;
-import entities.Patient;
 import entities.StateBooking;
 import entities.Surgery;
 import entities.SurgeryPatient;
-import entities.SurgeryPatientID;
 
 public class Book extends JFrame {
 
@@ -41,6 +41,8 @@ public class Book extends JFrame {
 	private Flight flight = new Flight();
 	private Clinic clinic = new Clinic();
 	private Surgery surgery = new Surgery();
+	private SurgeryPatient surgeryPatient = new SurgeryPatient();
+	private DoctorPatient doctorPatient = new DoctorPatient();
 	private HotelBooking hotelBooking = new HotelBooking();
 	private HotelBookingID hotelBookingID = new HotelBookingID();
 	private ClinicBooking clinicBooking = new ClinicBooking();
@@ -52,7 +54,8 @@ public class Book extends JFrame {
 	private JTextField tsurgery;
 	private JTextField textField_3;
 	private JTextField textField_4;
-	private JTextField textField_5;
+	private JTextField tdoctor;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -149,16 +152,16 @@ public class Book extends JFrame {
 		JLabel lblDoctor = new JLabel("Doctor");
 		lblDoctor.setBounds(587, 17, 56, 14);
 
-		textField_5 = new JTextField();
-		textField_5.setBounds(587, 49, 86, 20);
-		textField_5.setColumns(10);
+		tdoctor = new JTextField();
+		tdoctor.setBounds(587, 49, 86, 20);
+		tdoctor.setColumns(10);
 
 		JButton btnChangeHotel = new JButton("Change hotel");
 		btnChangeHotel.setBounds(95, 93, 124, 23);
 		contentPane.setLayout(null);
 		contentPane.add(label_4);
 		contentPane.add(lblDoctor);
-		contentPane.add(textField_5);
+		contentPane.add(tdoctor);
 		contentPane.add(btnChangeHotel);
 		contentPane.add(label);
 		contentPane.add(label_1);
@@ -190,38 +193,30 @@ public class Book extends JFrame {
 
 				StateBooking state = null;
 				booking.setState(state.CONFIRMED);
-				SurgeryPatient sp = new SurgeryPatient();
-				Patient p = new Patient();
-				p.setUserId(1);
 
-				hotel = BookingServicesDelegate.doFindHotelByPatientId(1);
-				int hotelId = hotel.getHotelId();
-				hotelBookingID.sethotelId(hotelId);
-				hotelBookingID.setpatientId(1);
-				hotelBooking.setHotelBookingId(hotelBookingID);
-				// Clinic
-				clinic = BookingServicesDelegate.doFindClinicByPatientId(1);
-				int clinicId = clinic.getClinicId();
-				clinicBookingID.setClinicId(clinicId);
-				clinicBookingID.setPatientId(1);
-				clinicBooking.setClinicBookingId(clinicBookingID);
-				//Surgery
-				surgery = BookingServicesDelegate.doFindSurgeryByPatientId(1);
-				int surgeryId = surgery.getSurgeryId();
-				SurgeryPatientID surgeryPatientID = new SurgeryPatientID();
-				surgeryPatientID.setIdSurgery(surgeryId);
-				surgeryPatientID.setIdPatient(1);
-				SurgeryPatient surgeryPatient = new SurgeryPatient();
-				surgeryPatient.setSurgeryPatientID(surgeryPatientID);
-
+				// hotel
+				hotelBooking = BookingServicesDelegate
+						.doFindHotelBookingByPatientId(1);
 				booking.setHotelBooking(hotelBooking);
+
+				// Clinic
+				clinicBooking = BookingServicesDelegate
+						.doFindClinicBookingByPatientId(1);
 				booking.setClinicBooking(clinicBooking);
+
+				// Surgery
+				surgeryPatient = BookingServicesDelegate
+						.doFindSurgeryPatientByPatientId(1);
 				booking.setSurgeryPatient(surgeryPatient);
 
-				BookingServicesDelegate.doAddBooking(booking);
+				// Doctor
+				doctorPatient = BookingServicesDelegate
+						.doFindDoctorPatientByPatientId(1);
+				booking.setDoctorPatient(doctorPatient);
 
-				System.out.println(hotelId);
-				System.out.println(clinicId);
+				BookingServicesDelegate.doAddBooking(booking);
+				
+
 
 			}
 		});
@@ -235,16 +230,25 @@ public class Book extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				// Hotel
-				hotel = BookingServicesDelegate.doFindHotelByPatientId(1);
-				thotel.setText(hotel.getName());
+				hotelBooking = BookingServicesDelegate
+						.doFindHotelBookingByPatientId(1);
+				thotel.setText(hotelBooking.getHotel().getName());
 
 				// Clinic
-				clinic = BookingServicesDelegate.doFindClinicByPatientId(1);
-				tclinic.setText(clinic.getName());
+				clinicBooking = BookingServicesDelegate
+						.doFindClinicBookingByPatientId(1);
+				tclinic.setText(clinicBooking.getClinic().getName());
 
 				// Surgery
-				surgery = BookingServicesDelegate.doFindSurgeryByPatientId(1);
-				tsurgery.setText(surgery.getName());
+				surgeryPatient = BookingServicesDelegate
+						.doFindSurgeryPatientByPatientId(1);
+				tsurgery.setText(surgeryPatient.getSurgery().getName());
+
+				// Doctor
+				doctorPatient = BookingServicesDelegate
+						.doFindDoctorPatientByPatientId(1);
+				tdoctor.setText(doctorPatient.getDoctor().getLastName() + "  "
+						+ doctorPatient.getDoctor().getFirstName());
 
 				/*
 				 * flight = FlightServicesDelegate.doFindFlightByPatientId(1);
@@ -276,12 +280,22 @@ public class Book extends JFrame {
 		contentPane.add(button_2);
 
 		JLabel lblState = new JLabel("State");
-		lblState.setBounds(443, 143, 56, 14);
+		lblState.setBounds(456, 186, 56, 14);
 		contentPane.add(lblState);
 
 		JComboBox etatCombo = new JComboBox();
-		etatCombo.setBounds(507, 140, 70, 20);
+		etatCombo.setModel(new DefaultComboBoxModel(StateBooking.values()));
+		etatCombo.setBounds(517, 183, 108, 20);
 		contentPane.add(etatCombo);
+		
+		JLabel id = new JLabel("Booking Id");
+		id.setBounds(466, 127, 76, 14);
+		contentPane.add(id);
+		
+		textField = new JTextField();
+		textField.setBounds(529, 127, 86, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
 		initDataBindings();
 	}
 
