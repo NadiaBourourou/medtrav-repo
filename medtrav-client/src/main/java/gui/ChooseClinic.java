@@ -14,7 +14,6 @@ import javax.swing.JComboBox;
 import com.toedter.calendar.JCalendar;
 
 import datechooser.beans.DateChooserCombo;
-import delegates.ClinicBookingServicesDelegate;
 import delegates.ClinicServicesDelegate;
 import delegates.HotelServicesDelegate;
 
@@ -117,8 +116,8 @@ public class ChooseClinic extends JFrame {
 				//hb.setTypeRoom(RoomClinicType.valueOf(comboBoxTRC.getSelectedItem()
 					//	.toString()));
 				Date date = dateChooser.getDate();
-				String strDate = DateFormat.getDateInstance().format(date);
-				hb.setDate(strDate);
+				//String strDate = DateFormat.getDateInstance().format(date);
+			//	hb.setDate(strDate);
 				System.out.println(index);
 				
 				hb.setCommentaire(com);
@@ -127,7 +126,7 @@ public class ChooseClinic extends JFrame {
 						.toString()));
 				System.out.println(index);
 				
-				ClinicBookingServicesDelegate.doBookClinic(r, strDate, com, clinic, 1);
+				ClinicServicesDelegate.doBookClinic(r, date, com, clinic, 1);
 				System.out.println("ok");
 			}
 		});
@@ -148,7 +147,7 @@ public class ChooseClinic extends JFrame {
 					.addGap(39)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)
 							.addContainerGap())
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 							.addGroup(gl_contentPane.createSequentialGroup()
@@ -178,9 +177,9 @@ public class ChooseClinic extends JFrame {
 								.addComponent(comboBoxTRC, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addComponent(lblTypeOfRoom))
 							.addGap(12)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(dateChooser, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblDate, Alignment.TRAILING))
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblDate)
+								.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 							.addGap(24)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 								.addComponent(commentaire, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)

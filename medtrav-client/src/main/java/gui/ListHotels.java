@@ -46,6 +46,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class ListHotels extends JFrame {
 
@@ -62,6 +65,9 @@ public class ListHotels extends JFrame {
 	private JTextField pricesuite;
 	private JComboBox comboBoxstate;
 	private JComboBox comboBoxstars;
+	public ImageIcon getImage(){
+		return new ImageIcon(hotel.getPic());
+	}
 
 	/**
 	 * Launch the application.
@@ -291,7 +297,22 @@ public class ListHotels extends JFrame {
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ImageIcon icon=new ImageIcon(getClass().getResource("medTrav.JPG"));
+				
+
+				hotel = hotels.get(table.getSelectedRow());
+				
+				byte[] image= HotelServicesDelegate.doGetMyImage(hotel.getHotelId());
+				try {
+				File file = new File("somsom.jpg");
+				FileOutputStream output = new FileOutputStream(file);	
+			
+					output.write(image);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			
+				ImageIcon icon=new ImageIcon(image);
 				picture.setIcon((Icon) icon);	
 			}
 		});

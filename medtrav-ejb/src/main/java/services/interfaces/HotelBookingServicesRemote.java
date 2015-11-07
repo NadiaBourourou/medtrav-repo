@@ -1,5 +1,7 @@
 package services.interfaces;
 
+import java.util.List;
+
 import javax.ejb.Remote;
 
 import entities.Hotel;
@@ -16,4 +18,5 @@ public interface HotelBookingServicesRemote {
 	Hotel findHotelByPatientId(Integer idPatient);
 	
 	Boolean bookHotel(Integer numNights, Double price, RoomType roomType, Hotel hotel, Integer idPatient);
+	
 }
