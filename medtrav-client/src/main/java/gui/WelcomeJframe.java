@@ -19,12 +19,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.UIManager;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import org.jdesktop.beansbinding.BeanProperty;
+import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 
@@ -45,6 +47,7 @@ public class WelcomeJframe extends JFrame {
 	private List<Doctor> doctors;
 	private Doctor selectedDoctor = new Doctor();
 	private JTable table;
+	private JLabel lblDoctorDescription;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -119,40 +122,25 @@ public class WelcomeJframe extends JFrame {
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 
 		JLabel lblLogo = new JLabel("");
-		lblLogo.setBounds(34, 12, 69, 57);
 		lblLogo.setIcon(new ImageIcon(WelcomeJframe.class
 				.getResource("/images/smallLogo.png")));
-		contentPane.add(lblLogo);
 
 		JLabel label = new JLabel("");
-		label.setBounds(128, 41, 0, 0);
-		contentPane.add(label);
 
 		JLabel label_1 = new JLabel("");
-		label_1.setBounds(133, 41, 0, 0);
-		contentPane.add(label_1);
 
 		JLabel lblProcedure = new JLabel("Select a procedure");
-		lblProcedure.setBounds(12, 76, 112, 14);
-		contentPane.add(lblProcedure);
 
 		fillProcedureCombo();
-		cbProcedure.setBounds(138, 73, 295, 20);
 		cbProcedure.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				fillTreatmentCombo();
 			}
 		});
 
-		contentPane.add(cbProcedure);
-
 		JLabel lblTreatment = new JLabel("Select a treatment");
-		lblTreatment.setBounds(12, 100, 112, 14);
-		contentPane.add(lblTreatment);
-		cbTreatment.setBounds(138, 97, 295, 20);
 		cbTreatment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -160,197 +148,296 @@ public class WelcomeJframe extends JFrame {
 						.doGetSurgeryDescription(1).toString());
 				lblDescriptionLabel.setText("desc1");
 
+				doctors = UserServicesDelegate
+						.doFindDoctorsBySpecialty(cbTreatment.getSelectedItem()
+								.toString());
+
+				initDataBindings();
+
 			}
 		});
 
-		contentPane.add(cbTreatment);
-
 		JLabel label_2 = new JLabel("");
-		label_2.setBounds(340, 41, 0, 0);
-		contentPane.add(label_2);
 
 		JLabel label_3 = new JLabel("");
-		label_3.setBounds(345, 41, 0, 0);
-		contentPane.add(label_3);
 
 		JLabel label_4 = new JLabel("");
-		label_4.setBounds(355, 41, 0, 0);
-		contentPane.add(label_4);
 
 		JLabel lblDescriptionLabel = new JLabel("");
-		lblDescriptionLabel.setBounds(389, 131, 0, 0);
-		contentPane.add(lblDescriptionLabel);
-
-		lblLoggedAs.setBounds(298, 12, 387, 29);
-		contentPane.add(lblLoggedAs);
 
 		JLabel lblUser = new JLabel("");
 		lblUser.setIcon(new ImageIcon(WelcomeJframe.class
 				.getResource("/images/user_patient_icon.png")));
-		lblUser.setBounds(642, 34, 62, 57);
-		contentPane.add(lblUser);
-
-		JLabel lblDoctors = new JLabel("Doctors ");
-		lblDoctors.setBounds(12, 149, 91, 14);
-		contentPane.add(lblDoctors);
-		
-		
-		
 
 		JButton btnNext = new JButton("Next ");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				
 
 				Surgery surgery = SurgeryServicesDelegate
 						.doFindSurgeryById(cbTreatment.getSelectedIndex());
 				UserServicesDelegate.doBookSurgery(surgery, "Test", 1);
-				
-				
-				Doctor doctor=UserServicesDelegate.doFindDoctorById(3);
-				
-			UserServicesDelegate.doChooseDoctor(doctor, 1);
+
+				Doctor doctor = UserServicesDelegate.doFindDoctorById(3);
+				UserServicesDelegate.doChooseDoctor(doctor, 1);
 			}
 		});
-		btnNext.setBounds(596, 353, 89, 23);
-		contentPane.add(btnNext);
 
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(new TitledBorder(UIManager
-				.getBorder("TitledBorder.border"),
-				"Doctors - Partners of MedTrav", TitledBorder.LEADING,
-				TitledBorder.TOP, null, new Color(0, 0, 0)),
-				"Doctors  - Partners of MedTrav", TitledBorder.LEADING,
-				TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBounds(69, 174, 544, 186);
-		contentPane.add(panel);
+		panel.setBorder(new TitledBorder(null,
+				"Qualified doctors for this surgery", TitledBorder.LEADING,
+				TitledBorder.TOP, null, Color.DARK_GRAY));
+
+		lblDoctorDescription = new JLabel("");
+		lblDoctorDescription.setForeground(Color.BLACK);
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane
+				.setHorizontalGroup(gl_contentPane
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								gl_contentPane
+										.createSequentialGroup()
+										.addGroup(
+												gl_contentPane
+														.createParallelGroup(
+																Alignment.LEADING)
+														.addGroup(
+																gl_contentPane
+																		.createSequentialGroup()
+																		.addGap(7)
+																		.addGroup(
+																				gl_contentPane
+																						.createParallelGroup(
+																								Alignment.LEADING)
+																						.addGroup(
+																								gl_contentPane
+																										.createSequentialGroup()
+																										.addGap(22)
+																										.addComponent(
+																												lblLogo))
+																						.addComponent(
+																								lblProcedure,
+																								GroupLayout.PREFERRED_SIZE,
+																								112,
+																								GroupLayout.PREFERRED_SIZE))
+																		.addGap(4)
+																		.addComponent(
+																				label)
+																		.addGap(5)
+																		.addComponent(
+																				label_1)
+																		.addGap(5)
+																		.addGroup(
+																				gl_contentPane
+																						.createParallelGroup(
+																								Alignment.LEADING)
+																						.addGroup(
+																								gl_contentPane
+																										.createSequentialGroup()
+																										.addGap(160)
+																										.addComponent(
+																												lblLoggedAs,
+																												GroupLayout.PREFERRED_SIZE,
+																												387,
+																												GroupLayout.PREFERRED_SIZE))
+																						.addGroup(
+																								gl_contentPane
+																										.createSequentialGroup()
+																										.addGap(202)
+																										.addComponent(
+																												label_2))
+																						.addComponent(
+																								cbProcedure,
+																								GroupLayout.PREFERRED_SIZE,
+																								295,
+																								GroupLayout.PREFERRED_SIZE)
+																						.addGroup(
+																								gl_contentPane
+																										.createSequentialGroup()
+																										.addGap(207)
+																										.addComponent(
+																												label_3))
+																						.addGroup(
+																								gl_contentPane
+																										.createSequentialGroup()
+																										.addGap(217)
+																										.addComponent(
+																												label_4))
+																						.addGroup(
+																								gl_contentPane
+																										.createSequentialGroup()
+																										.addGap(504)
+																										.addComponent(
+																												lblUser,
+																												GroupLayout.PREFERRED_SIZE,
+																												62,
+																												GroupLayout.PREFERRED_SIZE))))
+														.addGroup(
+																gl_contentPane
+																		.createSequentialGroup()
+																		.addGap(384)
+																		.addComponent(
+																				lblDescriptionLabel))
+														.addGroup(
+																gl_contentPane
+																		.createSequentialGroup()
+																		.addGap(7)
+																		.addComponent(
+																				lblTreatment,
+																				GroupLayout.PREFERRED_SIZE,
+																				112,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addGap(14)
+																		.addComponent(
+																				cbTreatment,
+																				GroupLayout.PREFERRED_SIZE,
+																				295,
+																				GroupLayout.PREFERRED_SIZE))
+														.addGroup(
+																gl_contentPane
+																		.createParallelGroup(
+																				Alignment.LEADING,
+																				false)
+																		.addGroup(
+																				gl_contentPane
+																						.createSequentialGroup()
+																						.addContainerGap()
+																						.addComponent(
+																								panel,
+																								GroupLayout.PREFERRED_SIZE,
+																								418,
+																								GroupLayout.PREFERRED_SIZE)
+																						.addPreferredGap(
+																								ComponentPlacement.UNRELATED)
+																						.addComponent(
+																								lblDoctorDescription,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								Short.MAX_VALUE))
+																		.addGroup(
+																				gl_contentPane
+																						.createSequentialGroup()
+																						.addGap(591)
+																						.addComponent(
+																								btnNext,
+																								GroupLayout.PREFERRED_SIZE,
+																								89,
+																								GroupLayout.PREFERRED_SIZE))))
+										.addGap(5)));
+		gl_contentPane
+				.setVerticalGroup(gl_contentPane
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								gl_contentPane
+										.createSequentialGroup()
+										.addGap(7)
+										.addGroup(
+												gl_contentPane
+														.createParallelGroup(
+																Alignment.LEADING)
+														.addGroup(
+																gl_contentPane
+																		.createSequentialGroup()
+																		.addComponent(
+																				lblLogo)
+																		.addGap(7)
+																		.addComponent(
+																				lblProcedure))
+														.addGroup(
+																gl_contentPane
+																		.createSequentialGroup()
+																		.addGap(29)
+																		.addComponent(
+																				label))
+														.addGroup(
+																gl_contentPane
+																		.createSequentialGroup()
+																		.addGap(29)
+																		.addComponent(
+																				label_1))
+														.addGroup(
+																gl_contentPane
+																		.createSequentialGroup()
+																		.addComponent(
+																				lblLoggedAs,
+																				GroupLayout.PREFERRED_SIZE,
+																				29,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addComponent(
+																				label_2)
+																		.addGap(32)
+																		.addComponent(
+																				cbProcedure,
+																				GroupLayout.PREFERRED_SIZE,
+																				GroupLayout.DEFAULT_SIZE,
+																				GroupLayout.PREFERRED_SIZE))
+														.addGroup(
+																gl_contentPane
+																		.createSequentialGroup()
+																		.addGap(29)
+																		.addComponent(
+																				label_3))
+														.addGroup(
+																gl_contentPane
+																		.createSequentialGroup()
+																		.addGap(29)
+																		.addComponent(
+																				label_4))
+														.addGroup(
+																gl_contentPane
+																		.createSequentialGroup()
+																		.addGap(22)
+																		.addComponent(
+																				lblUser)))
+										.addGroup(
+												gl_contentPane
+														.createParallelGroup(
+																Alignment.LEADING,
+																false)
+														.addGroup(
+																gl_contentPane
+																		.createSequentialGroup()
+																		.addGap(4)
+																		.addGroup(
+																				gl_contentPane
+																						.createParallelGroup(
+																								Alignment.LEADING)
+																						.addGroup(
+																								gl_contentPane
+																										.createSequentialGroup()
+																										.addGap(3)
+																										.addComponent(
+																												lblTreatment))
+																						.addComponent(
+																								cbTreatment,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE))
+																		.addGap(14)
+																		.addComponent(
+																				lblDescriptionLabel)
+																		.addGap(18)
+																		.addComponent(
+																				panel,
+																				GroupLayout.PREFERRED_SIZE,
+																				193,
+																				GroupLayout.PREFERRED_SIZE))
+														.addGroup(
+																gl_contentPane
+																		.createSequentialGroup()
+																		.addGap(116)
+																		.addComponent(
+																				lblDoctorDescription,
+																				GroupLayout.DEFAULT_SIZE,
+																				GroupLayout.DEFAULT_SIZE,
+																				Short.MAX_VALUE)))
+										.addPreferredGap(
+												ComponentPlacement.RELATED)
+										.addComponent(btnNext)));
 
 		JScrollPane scrollPane = new JScrollPane();
-
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 514, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(23, Short.MAX_VALUE))
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE))
-		);
-		panel.setLayout(gl_panel);
-		initDataBindings();
-
-	}
-
-	public WelcomeJframe(User user) {
-
-		lblLoggedAs.setText(user.getLogin());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 730, 447);
-
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
-
-		JMenuItem mntmLogOut = new JMenuItem("Log Out");
-		mntmLogOut.setIcon(new ImageIcon(WelcomeJframe.class
-				.getResource("/images/logout-icon.png")));
-		menuBar.add(mntmLogOut);
-		contentPane = new JPanel();
-		contentPane.setBackground(Color.WHITE);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-
-		JLabel lblLogo = new JLabel("");
-		lblLogo.setBounds(34, 12, 69, 57);
-		lblLogo.setIcon(new ImageIcon(WelcomeJframe.class
-				.getResource("/images/smallLogo.png")));
-		contentPane.add(lblLogo);
-
-		JLabel label = new JLabel("");
-		label.setBounds(128, 41, 0, 0);
-		contentPane.add(label);
-
-		JLabel label_1 = new JLabel("");
-		label_1.setBounds(133, 41, 0, 0);
-		contentPane.add(label_1);
-
-		JLabel lblProcedure = new JLabel("Select a procedure");
-		lblProcedure.setBounds(12, 76, 112, 14);
-		contentPane.add(lblProcedure);
-
-		fillProcedureCombo();
-		cbProcedure.setBounds(138, 73, 295, 20);
-		cbProcedure.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				fillTreatmentCombo();
-			}
-		});
-
-		contentPane.add(cbProcedure);
-
-		JLabel lblTreatment = new JLabel("Select a treatment");
-		lblTreatment.setBounds(12, 100, 112, 14);
-		contentPane.add(lblTreatment);
-		cbTreatment.setBounds(138, 97, 295, 20);
-		cbTreatment.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				lblDescriptionLabel.setText(SurgeryServicesDelegate
-						.doGetSurgeryDescription(1).toString());
-				lblDescriptionLabel.setText("desc1");
-
-			}
-		});
-
-		contentPane.add(cbTreatment);
-
-		JLabel label_2 = new JLabel("");
-		label_2.setBounds(340, 41, 0, 0);
-		contentPane.add(label_2);
-
-		JLabel label_3 = new JLabel("");
-		label_3.setBounds(345, 41, 0, 0);
-		contentPane.add(label_3);
-
-		JLabel label_4 = new JLabel("");
-		label_4.setBounds(355, 41, 0, 0);
-		contentPane.add(label_4);
-
-		JLabel lblDescriptionLabel = new JLabel("");
-		lblDescriptionLabel.setBounds(389, 131, 0, 0);
-		contentPane.add(lblDescriptionLabel);
-
-		lblLoggedAs.setBounds(298, 12, 387, 29);
-		contentPane.add(lblLoggedAs);
-
-		JLabel lblUser = new JLabel("");
-		lblUser.setIcon(new ImageIcon(WelcomeJframe.class
-				.getResource("/images/user_patient_icon.png")));
-		lblUser.setBounds(642, 34, 62, 57);
-		contentPane.add(lblUser);
-
-		JLabel lblDoctors = new JLabel("Doctors ");
-		lblDoctors.setBounds(12, 149, 91, 14);
-		contentPane.add(lblDoctors);
-
-		JPanel panel = new JPanel();
-		panel.setBounds(134, 149, 295, 172);
-		contentPane.add(panel);
-
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane = new JScrollPane();
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(
 				Alignment.LEADING).addGroup(
-				Alignment.TRAILING,
 				gl_panel.createSequentialGroup()
 						.addContainerGap()
 						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE,
@@ -358,20 +445,23 @@ public class WelcomeJframe extends JFrame {
 		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(
 				Alignment.LEADING).addGroup(
 				gl_panel.createSequentialGroup()
-						.addContainerGap()
+						.addGap(13)
 						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE,
-								150, Short.MAX_VALUE).addContainerGap()));
+								169, Short.MAX_VALUE).addContainerGap()));
 
 		table = new JTable();
+
 		scrollPane.setViewportView(table);
 		panel.setLayout(gl_panel);
+		contentPane.setLayout(gl_contentPane);
+
 		initDataBindings();
 
 	}
 
 	protected void initDataBindings() {
 		JTableBinding<Doctor, List<Doctor>, JTable> jTableBinding = SwingBindings
-				.createJTableBinding(UpdateStrategy.READ_WRITE, doctors, table);
+				.createJTableBinding(UpdateStrategy.READ, doctors, table);
 		//
 		BeanProperty<Doctor, String> doctorBeanProperty = BeanProperty
 				.create("firstName");
@@ -389,5 +479,45 @@ public class WelcomeJframe extends JFrame {
 				"Specialty");
 		//
 		jTableBinding.bind();
+		//
+		BeanProperty<JTable, String> jTableBeanProperty = BeanProperty
+				.create("selectedElement.firstName");
+		BeanProperty<Doctor, String> doctorBeanProperty_3 = BeanProperty
+				.create("firstName");
+		AutoBinding<JTable, String, Doctor, String> autoBinding = Bindings
+				.createAutoBinding(UpdateStrategy.READ, table,
+						jTableBeanProperty, selectedDoctor,
+						doctorBeanProperty_3);
+		autoBinding.bind();
+		//
+		BeanProperty<JTable, String> jTableBeanProperty_1 = BeanProperty
+				.create("selectedElement.lastName");
+		BeanProperty<Doctor, String> doctorBeanProperty_4 = BeanProperty
+				.create("lastName");
+		AutoBinding<JTable, String, Doctor, String> autoBinding_1 = Bindings
+				.createAutoBinding(UpdateStrategy.READ, table,
+						jTableBeanProperty_1, selectedDoctor,
+						doctorBeanProperty_4);
+		autoBinding_1.bind();
+		//
+		BeanProperty<JTable, String> jTableBeanProperty_2 = BeanProperty
+				.create("selectedElement.specialty");
+		BeanProperty<Doctor, String> doctorBeanProperty_5 = BeanProperty
+				.create("specialty");
+		AutoBinding<JTable, String, Doctor, String> autoBinding_2 = Bindings
+				.createAutoBinding(UpdateStrategy.READ, table,
+						jTableBeanProperty_2, selectedDoctor,
+						doctorBeanProperty_5);
+		autoBinding_2.bind();
+		//
+		BeanProperty<Doctor, String> doctorBeanProperty_6 = BeanProperty
+				.create("description");
+		BeanProperty<JLabel, String> jLabelBeanProperty = BeanProperty
+				.create("text");
+		AutoBinding<Doctor, String, JLabel, String> autoBinding_3 = Bindings
+				.createAutoBinding(UpdateStrategy.READ, selectedDoctor,
+						doctorBeanProperty_6, lblDoctorDescription,
+						jLabelBeanProperty);
+		autoBinding_3.bind();
 	}
 }

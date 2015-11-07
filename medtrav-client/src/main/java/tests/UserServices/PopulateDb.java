@@ -61,7 +61,7 @@ public class PopulateDb {
 		doctor2.setLogin("Achek");
 		doctor2.setPassword("achek");
 		doctor2.setMail("Mehdiachek@gmail.com");
-		doctor2.setSpecialty("CardioVasculaire");
+		doctor2.setSpecialty("Botox, lifting, body lift");
 		doctor2.setRole(RoleType.DOCTOR);
 
 		Administrator admin = new Administrator();
