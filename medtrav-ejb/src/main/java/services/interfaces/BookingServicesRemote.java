@@ -6,7 +6,10 @@ import javax.ejb.Remote;
 
 import entities.Booking;
 import entities.Clinic;
+import entities.Doctor;
 import entities.Hotel;
+import entities.HotelBooking;
+import entities.Surgery;
 
 @Remote
 public interface BookingServicesRemote {
@@ -26,5 +29,15 @@ public interface BookingServicesRemote {
 	Hotel findHotelByPatientId(Integer idPatient);
 
 	Clinic findClinicByPatientId(Integer idPatient);
+
+	Booking findBookingByPatientId(Integer idPatient);
+
+	Boolean deleteBookingByPatientId(Integer idPatient);
+
+	HotelBooking findHotelBookingByPatientId(Integer idPatient);
+
+	Surgery findSurgeryByPatientId(Integer idPatient);
+
+	Doctor findDoctorByPatientId(Integer idPatient);
 
 }

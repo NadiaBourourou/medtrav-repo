@@ -7,6 +7,7 @@ import services.interfaces.BookingServicesRemote;
 import entities.Booking;
 import entities.Clinic;
 import entities.Hotel;
+import entities.Surgery;
 
 public class BookingServicesDelegate {
 	public static final String jndiName = "/medtrav-ejb/BookingServices!services.interfaces.BookingServicesRemote";
@@ -28,6 +29,14 @@ public class BookingServicesDelegate {
 		return getProxy().findBookingById(idBooking);
 	}
 
+	public static void doDeleteBookingByPatientId(Integer idPatient) {
+		getProxy().deleteBookingByPatientId(idPatient);
+	}
+
+	public static Booking doFindBookingByPatientId(Integer idPatient) {
+		return getProxy().findBookingByPatientId(idPatient);
+	}
+
 	public static void doDeleteBooking(Booking booking) {
 		getProxy().deleteBooking(booking);
 	}
@@ -42,5 +51,9 @@ public class BookingServicesDelegate {
 
 	public static Clinic doFindClinicByPatientId(Integer idPatient) {
 		return getProxy().findClinicByPatientId(idPatient);
+	}
+
+	public static Surgery doFindSurgeryByPatientId(Integer idPatient) {
+		return getProxy().findSurgeryByPatientId(idPatient);
 	}
 }
