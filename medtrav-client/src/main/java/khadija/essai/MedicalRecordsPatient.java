@@ -57,9 +57,7 @@ public class MedicalRecordsPatient extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
-		JButton btnAdd = new JButton("");
-		btnAdd.setIcon(new ImageIcon(MedicalRecordsPatient.class
-				.getResource("/images/upload.jpg")));
+		JButton btnAdd = new JButton("upload");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JFileChooser chooser = new JFileChooser();
@@ -110,71 +108,38 @@ public class MedicalRecordsPatient extends JFrame {
 
 		lblAnalysis = new JLabel("Analysis");
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane
-				.setHorizontalGroup(gl_contentPane
-						.createParallelGroup(Alignment.LEADING)
-						.addGroup(
-								gl_contentPane
-										.createSequentialGroup()
-										.addGroup(
-												gl_contentPane
-														.createParallelGroup(
-																Alignment.LEADING)
-														.addGroup(
-																gl_contentPane
-																		.createSequentialGroup()
-																		.addContainerGap()
-																		.addComponent(
-																				lblAnalysis)
-																		.addGap(35)
-																		.addComponent(
-																				textField,
-																				GroupLayout.PREFERRED_SIZE,
-																				GroupLayout.DEFAULT_SIZE,
-																				GroupLayout.PREFERRED_SIZE)
-																		.addGap(18)
-																		.addComponent(
-																				btnAdd,
-																				GroupLayout.PREFERRED_SIZE,
-																				66,
-																				GroupLayout.PREFERRED_SIZE))
-														.addGroup(
-																gl_contentPane
-																		.createSequentialGroup()
-																		.addGap(83)
-																		.addComponent(
-																				btnAdd_1)))
-										.addContainerGap(170, Short.MAX_VALUE)));
-		gl_contentPane
-				.setVerticalGroup(gl_contentPane
-						.createParallelGroup(Alignment.TRAILING)
-						.addGroup(
-								gl_contentPane
-										.createSequentialGroup()
-										.addContainerGap(136, Short.MAX_VALUE)
-										.addGroup(
-												gl_contentPane
-														.createParallelGroup(
-																Alignment.BASELINE)
-														.addComponent(
-																textField,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																lblAnalysis))
-										.addPreferredGap(
-												ComponentPlacement.RELATED, 46,
-												Short.MAX_VALUE)
-										.addComponent(btnAdd_1).addGap(27))
-						.addGroup(
-								gl_contentPane
-										.createSequentialGroup()
-										.addContainerGap(119, Short.MAX_VALUE)
-										.addComponent(btnAdd,
-												GroupLayout.PREFERRED_SIZE, 67,
-												GroupLayout.PREFERRED_SIZE)
-										.addGap(66)));
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblAnalysis)
+							.addGap(35)
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(btnAdd))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(83)
+							.addComponent(btnAdd_1)))
+					.addContainerGap(171, Short.MAX_VALUE))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+							.addGap(119)
+							.addComponent(btnAdd, GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap(136, Short.MAX_VALUE)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblAnalysis))))
+					.addGap(46)
+					.addComponent(btnAdd_1)
+					.addGap(27))
+		);
 		contentPane.setLayout(gl_contentPane);
 	}
 }

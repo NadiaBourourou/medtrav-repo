@@ -1,5 +1,9 @@
 package services.impl;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -63,8 +67,8 @@ public class MedicalRecordsServices implements MedicalRecordsServicesRemote,
 	public byte [] downloadAnalysis(int id) {
 		String jpql = "select m.analysis from MedicalRecords m where m.patient.userId=:param";
 		 Query query = entityManager.createQuery(jpql);
-		    query.setParameter("param", id);
-		    Object o = query.getSingleResult();
+		    query.setParameter("param", id);    
+		    Object o = query.getSingleResult();	    
 		    byte[] tmpArray = (byte[]) o; 
 		    return tmpArray;	}
 

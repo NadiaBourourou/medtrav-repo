@@ -158,27 +158,15 @@ public class MedicalRecordsDoctor extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				byte[] analysis = MedicalRecordsDelegate
-						.doDownloadAnalysis(Integer.parseInt(id.getText()));
+						.doDownloadAnalysis(1);
 				b = null;
 				try {
 
-					File file = new File("heyhh.txt");
-					output = new FileOutputStream(file);
+					File file = new File("somsom.jpg");
+					output = new FileOutputStream(file);	
+					output.write(analysis);
 
-					b.setBytes(analysis.length, analysis);
-
-					long a = 0;
-					b.setBinaryStream(a);
-					b.getBytes(1, (int) b.length());
-					InputStream is = b.getBinaryStream();
-
-					byte[] buffer = new byte[1024];
-					while (is.read(buffer) > 0) {
-						output.write(buffer);
-					}
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					System.out.println(111);
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
