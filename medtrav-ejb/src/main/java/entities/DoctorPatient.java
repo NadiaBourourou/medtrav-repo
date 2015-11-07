@@ -46,7 +46,7 @@ public class DoctorPatient implements Serializable {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "patientId", referencedColumnName = "userId", insertable = false, updatable = false)
+	@JoinColumn(name = "doctorId", referencedColumnName = "userId", insertable = false, updatable = false)
 	public Doctor getDoctor() {
 		return doctor;
 	}
@@ -56,7 +56,7 @@ public class DoctorPatient implements Serializable {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "doctorId", referencedColumnName = "userId", insertable = false, updatable = false)
+	@JoinColumn(name = "patientId", referencedColumnName = "userId", insertable = false, updatable = false)
 	public Patient getPatient() {
 		return patient;
 	}
