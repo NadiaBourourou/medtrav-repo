@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import entities.Clinic;
+import entities.Hotel;
 import entities.Patient;
 import services.interfaces.ClinicServicesLocal;
 import services.interfaces.ClinicServicesRemote;
@@ -91,4 +92,13 @@ public class ClinicServices implements ClinicServicesRemote, ClinicServicesLocal
 		return query.getResultList();
 	}
 
-}
+	@Override
+	public Clinic findClinicByName(String name) {
+		 String jpql = "select h from Clinic h where h.name=:param";
+		 Query query= entityManager.createQuery(jpql);
+		 query.setParameter("param", name);
+		 return (Clinic) query.getSingleResult();
+	}
+	}
+
+

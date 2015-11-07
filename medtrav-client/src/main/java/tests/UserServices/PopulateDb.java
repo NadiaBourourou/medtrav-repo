@@ -42,7 +42,7 @@ public class PopulateDb {
 		patient2.setNumPassport(121214);
 		patient2.setRole(RoleType.PATIENT);
 
-		Doctor doctor1 = new Doctor();
+	Doctor doctor1 = new Doctor();
 		doctor1.setFirstName("Max");
 		doctor1.setLastName("Hunter");
 		doctor1.setCin("1940634");

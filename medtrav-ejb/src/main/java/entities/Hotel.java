@@ -3,6 +3,7 @@ package entities;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,7 +26,6 @@ public class Hotel implements Serializable {
 	private StateType state;
 	private Double priceSingle;
 	private Double priceSuite;
-	private RoomType room;
 	private Integer stars;
 	private List<ServiceHotel> servicesHotel;
 	// private byte[] pic;
@@ -95,13 +95,6 @@ public class Hotel implements Serializable {
 		this.priceSuite = priceSuite;
 	}
 
-	public RoomType getRoom() {
-		return room;
-	}
-
-	public void setRoom(RoomType room) {
-		this.room = room;
-	}
 
 	public Integer getStars() {
 		return this.stars;
@@ -121,7 +114,7 @@ public class Hotel implements Serializable {
 
 
 
-	@OneToMany(mappedBy = "hotel")
+	@OneToMany(mappedBy = "hotel", cascade = CascadeType.MERGE)
 	public List<HotelBooking> getHotelBookings() {
 		return hotelBookings;
 	}
@@ -130,7 +123,7 @@ public class Hotel implements Serializable {
 		this.hotelBookings = hotelBookings;
 	}
 
-	@OneToMany(mappedBy="hotel")
+	@OneToMany(mappedBy="hotel",cascade = CascadeType.ALL)
 	public List<ServiceHotel> getServicesHotel() {
 		return servicesHotel;
 	}
