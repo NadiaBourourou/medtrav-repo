@@ -18,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 
 import delegates.UserServicesDelegate;
 import entities.Doctor;
+import entities.RoleType;
 import entities.User;
 
 public class AdminUI_AddDoctor extends JFrame {
@@ -135,6 +136,7 @@ public class AdminUI_AddDoctor extends JFrame {
 				newDoc.setMail(tfMail.getText());
 				newDoc.setLogin(tfFirstName.getText() + "."
 						+ tfLastName.getText());
+				newDoc.setRole(RoleType.DOCTOR);
 				newDoc.setPassword("pwd" + tfLastName.getText());
 				newDoc.setSpecialty(tfSpecialty.getText());
 				newDoc.setDescription(tAreaDescription.getText());
@@ -170,10 +172,7 @@ public class AdminUI_AddDoctor extends JFrame {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				AdminUI_ListOfDoctors frameDoc = new AdminUI_ListOfDoctors();
-				frameDoc.setVisible(true);
-				AdminUI_AddDoctor.this.setVisible(false);
-
+		
 			}
 		});
 		btnBack.setBounds(9, 377, 88, 22);

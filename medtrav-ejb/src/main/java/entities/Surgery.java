@@ -1,11 +1,15 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.List;
 
-import javax.persistence.EmbeddedId;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -16,10 +20,13 @@ import javax.persistence.Table;
 @Table(name = "t_surgery")
 public class Surgery implements Serializable {
 
+	private Integer surgeryId;
 	private String name;
-	private SurgeryId surgeryId;
+	private String description;
+
 	private Doctor doctor;
-	private MedicalRecords medicalRecords;
+	private List<SurgeryPatient> surgeryPatients;
+	private Procedure procedure;
 
 	private static final long serialVersionUID = 1L;
 
@@ -35,17 +42,17 @@ public class Surgery implements Serializable {
 		this.name = name;
 	}
 
-	@EmbeddedId
-	public SurgeryId getSurgeryId() {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public Integer getSurgeryId() {
 		return surgeryId;
 	}
 
-	public void setSurgeryId(SurgeryId surgeryId) {
+	public void setSurgeryId(Integer surgeryId) {
 		this.surgeryId = surgeryId;
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "doctorId", referencedColumnName = "userId", updatable = false, insertable = false)
 	public Doctor getDoctor() {
 		return doctor;
 	}
@@ -54,14 +61,30 @@ public class Surgery implements Serializable {
 		this.doctor = doctor;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "medicalRecordsId", referencedColumnName = "medicalRecordsId", updatable = false, insertable = false)
-	public MedicalRecords getMedicalRecords() {
-		return medicalRecords;
+	@OneToMany(mappedBy = "surgery")
+	public List<SurgeryPatient> getSurgeryPatients() {
+		return surgeryPatients;
 	}
 
-	public void setMedicalRecords(MedicalRecords medicalRecords) {
-		this.medicalRecords = medicalRecords;
+	public void setSurgeryPatients(List<SurgeryPatient> surgeryPatients) {
+		this.surgeryPatients = surgeryPatients;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	@ManyToOne(cascade = CascadeType.MERGE)
+	public Procedure getProcedure() {
+		return procedure;
+	}
+
+	public void setProcedure(Procedure procedure) {
+		this.procedure = procedure;
 	}
 
 }

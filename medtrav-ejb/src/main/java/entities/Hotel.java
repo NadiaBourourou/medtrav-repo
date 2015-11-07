@@ -27,8 +27,8 @@ public class Hotel implements Serializable {
 	private Double priceSuite;
 	private RoomType room;
 	private Integer stars;
+	private List<ServiceHotel> servicesHotel;
 	// private byte[] pic;
-	private List<Booking> bookings;
 	private List<HotelBooking> hotelBookings;
 
 	private static final long serialVersionUID = 1L;
@@ -129,5 +129,16 @@ public class Hotel implements Serializable {
 	public void setHotelBookings(List<HotelBooking> hotelBookings) {
 		this.hotelBookings = hotelBookings;
 	}
+
+	@OneToMany(mappedBy="hotel")
+	public List<ServiceHotel> getServicesHotel() {
+		return servicesHotel;
+	}
+
+	public void setServicesHotel(List<ServiceHotel> servicesHotel) {
+		this.servicesHotel = servicesHotel;
+	}
+	
+	
 
 }

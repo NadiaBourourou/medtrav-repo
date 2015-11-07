@@ -5,6 +5,7 @@ import services.interfaces.HotelBookingServicesRemote;
 import services.interfaces.HotelServicesRemote;
 import entities.Hotel;
 import entities.HotelBooking;
+import entities.RoomType;
 
 public class HotelBookingServicesDelegate {
 	private HotelServicesRemote remote;
@@ -15,7 +16,7 @@ public class HotelBookingServicesDelegate {
 				jndiName);
 	}
 
-	public static Double doCalculPrix(Double prix, Double numNights) {
+	public static Double doCalculPrix(Double prix, Integer numNights) {
 		return getProxy().calculPrix(prix, numNights);
 	}
 
@@ -28,4 +29,7 @@ public class HotelBookingServicesDelegate {
 		return getProxy().findHotelByPatientId(idPatient);
 	}
 	
+	public static Boolean doBookHotel(Integer numNights, Double price, RoomType roomType, Hotel hotel, Integer idPatient){
+		return getProxy().bookHotel(numNights,price,roomType,hotel, idPatient);
+	}
 }

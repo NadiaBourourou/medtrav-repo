@@ -21,9 +21,12 @@ import javax.swing.JComboBox;
 
 import delegates.HotelBookingServicesDelegate;
 import delegates.HotelServicesDelegate;
-import delegates.TreatmentServicesDelegate;
+import delegates.SurgeryServicesDelegate;
+import delegates.UserServicesDelegate;
 import entities.Hotel;
 import entities.HotelBooking;
+import entities.Patient;
+import entities.RoomClinicType;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -57,8 +60,6 @@ HotelBooking hb= new HotelBooking();
 	}
 
 	JComboBox comboBox = new JComboBox();
-
-	JCheckBox Singleroom = new JCheckBox("Single Room");
 	/**
 	 * Create the frame.
 	 */
@@ -74,6 +75,10 @@ HotelBooking hb= new HotelBooking();
 		
 		textField = new JTextField();
 		textField.setColumns(10);
+
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setModel(new DefaultComboBoxModel(RoomType.values()));
 		
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
@@ -88,29 +93,43 @@ HotelBooking hb= new HotelBooking();
 				System.out.println(index);
 				h= HotelServicesDelegate.doFindHotelById(index);
 				System.out.println("ok");
-				Double numNights=Double.parseDouble(textField.getText());
+				Integer numNights=Integer.parseInt(textField.getText());
+			//	Patient p= UserServicesDelegate.doFindPatientById(1);
 				
 				 System.out.println("ok");
 				 
-				 if ( Singleroom.isSelected()){
+		//		Patient p= UserServicesDelegate.do
+				RoomType r= (RoomType.valueOf(comboBox_1.getSelectedItem()
+						.toString()));
+				 Integer index2= comboBox_1.getSelectedIndex() + 1;
+				 
+				 if (index2==1) {
+				 
+				 
+			//	 if ( Singleroom.isSelected()){
 					 
 					Double pri= h.getPriceSingle();
-					double o=HotelBookingServicesDelegate.doCalculPrix(pri, numNights);
-					hb.setPrice(o);
+					double u=HotelBookingServicesDelegate.doCalculPrix(pri, numNights);
+					hb.setPrice(u);
+
+					HotelBookingServicesDelegate.doBookHotel(numNights, u, r, h, 1);
+					
 				 }
 				 else {Double pri= h.getPriceSuite();
 					double u=HotelBookingServicesDelegate.doCalculPrix(pri, numNights);
-					hb.setPrice(u); }
+					hb.setPrice(u); 
+
+					HotelBookingServicesDelegate.doBookHotel(numNights, u, r, h, 1);
+					}
 				 
 		
 		 System.out.println("ok");	
-		
-		 hb.setNumNights(numNights);
+		//
+		// hb.setNumNights(numNights);
 		 
-		 hb.setHotel(h);
-			HotelBookingServicesDelegate.doAddHotelBooking(hb);
+	//	 hb.setHotel(h);
+		//	HotelBookingServicesDelegate.doAddHotelBooking(hb);
 					 
-					
 				}
 			
 		});
@@ -127,9 +146,6 @@ HotelBooking hb= new HotelBooking();
 			arrival = ((Hotel) w.next());
 			comboBox.addItem(arrival.getName());
 		}
-		
-		
-		JCheckBox suiteroom = new JCheckBox("Suite Room");
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -140,23 +156,16 @@ HotelBooking hb= new HotelBooking();
 						.addComponent(lblTypeOfRomm)
 						.addComponent(lblHotel))
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(btnSubmit)
+							.addGap(90))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(29)
-							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
-							.addGap(37))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(37)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(Singleroom)
-									.addGap(18)
-									.addComponent(suiteroom)
-									.addGap(64))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-									.addComponent(btnSubmit)
-									.addGap(90))))))
+								.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+								.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
+								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGap(156))))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -168,13 +177,12 @@ HotelBooking hb= new HotelBooking();
 					.addGap(27)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblTypeOfRomm)
-						.addComponent(Singleroom)
-						.addComponent(suiteroom))
+						.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(25)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNumberOfNights))
-					.addPreferredGap(ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+						.addComponent(lblNumberOfNights)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
 					.addComponent(btnSubmit)
 					.addGap(38))
 		);

@@ -27,8 +27,8 @@ public interface FlightServicesLocal {
 	Boolean assignDoctorToSurgery(Integer idSurgery,Integer idDoctor);
 	Boolean assignDoctorToSurgerySlaveSide(Integer idSurgery,Integer idDoctor);
 			
-	Boolean assignMedicalRecordToSurgery(Integer idSurgery,Integer idMedicalRecord);
-	Boolean assignMedicalRecordToSurgerySlaveSide(Integer idSurgery,Integer idMedicalRecord);
+	//Boolean assignMedicalRecordToSurgery(Integer idSurgery,Integer idMedicalRecord);
+	//Boolean assignMedicalRecordToSurgerySlaveSide(Integer idSurgery,Integer idMedicalRecord);
 	
 	List<String> findAllDepartures();
 	List <String > findAllArrivals();

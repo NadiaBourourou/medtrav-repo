@@ -1,14 +1,12 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -20,25 +18,18 @@ import javax.persistence.Table;
 public class Booking implements Serializable {
 
 	private Integer bookingId;
-	private Date arrival;
-	private Date departure;
+
 	private StateBooking state;
-	
-	private Patient patient;
+
 	private Flight flight;
 	private HotelBooking hotelBooking;
 	private ClinicBooking clinicBooking;
+	private SurgeryPatient surgeryPatient;
 
 	private static final long serialVersionUID = 1L;
 
 	public Booking() {
 		super();
-	}
-
-	public Booking(Date arrival, Date departure) {
-		super();
-		this.arrival = arrival;
-		this.departure = departure;
 	}
 
 	@Id
@@ -49,32 +40,6 @@ public class Booking implements Serializable {
 
 	public void setBookingId(Integer bookingId) {
 		this.bookingId = bookingId;
-	}
-
-	public Date getArrival() {
-		return arrival;
-	}
-
-	public void setArrival(Date arrival) {
-		this.arrival = arrival;
-	}
-
-	public Date getDeparture() {
-		return departure;
-	}
-
-	public void setDeparture(Date departure) {
-		this.departure = departure;
-	}
-
-	
-	@ManyToOne
-	public Patient getPatient() {
-		return patient;
-	}
-
-	public void setPatient(Patient patient) {
-		this.patient = patient;
 	}
 
 	@ManyToOne
@@ -94,7 +59,7 @@ public class Booking implements Serializable {
 		this.state = state;
 	}
 
-	@OneToOne
+	@ManyToOne
 	public HotelBooking getHotelBooking() {
 		return hotelBooking;
 	}
@@ -103,13 +68,22 @@ public class Booking implements Serializable {
 		this.hotelBooking = hotelBooking;
 	}
 
-	@OneToOne
+	@ManyToOne
 	public ClinicBooking getClinicBooking() {
 		return clinicBooking;
 	}
 
 	public void setClinicBooking(ClinicBooking clinicBooking) {
 		this.clinicBooking = clinicBooking;
+	}
+
+	@ManyToOne
+	public SurgeryPatient getSurgeryPatient() {
+		return surgeryPatient;
+	}
+
+	public void setSurgeryPatient(SurgeryPatient surgeryPatient) {
+		this.surgeryPatient = surgeryPatient;
 	}
 
 }

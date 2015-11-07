@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -20,13 +21,15 @@ public class Patient extends User implements Serializable {
 	private Integer numPassport;
 	private PatientState state;
 
-	private List<Booking> bookings;
 	private List<Testimony> testimonies;
 	private List<Question> questions;
 	private MedicalRecords medicalRecords;
-	private HotelBooking hotelBooking;
-	private ClinicBooking clinicBooking;
+
+	private List<Doctor> doctors;
+	private List<HotelBooking> hotelBookings;
+	private List<ClinicBooking> clinicBookings;
 	private Flight flight;
+	private List<SurgeryPatient> surgeryPatients;
 
 	private static final long serialVersionUID = 1L;
 
@@ -59,15 +62,6 @@ public class Patient extends User implements Serializable {
 	}
 
 	@OneToMany(mappedBy = "patient")
-	public List<Booking> getBookings() {
-		return bookings;
-	}
-
-	public void setBookings(List<Booking> bookings) {
-		this.bookings = bookings;
-	}
-
-	@OneToMany(mappedBy = "patient")
 	public List<Testimony> getTestimonies() {
 		return testimonies;
 	}
@@ -75,7 +69,6 @@ public class Patient extends User implements Serializable {
 	public void setTestimonies(List<Testimony> testimonies) {
 		this.testimonies = testimonies;
 	}
-	
 
 	@OneToOne(mappedBy = "patient")
 	public MedicalRecords getMedicalRecords() {
@@ -94,41 +87,64 @@ public class Patient extends User implements Serializable {
 		this.state = state;
 	}
 
-	@OneToOne(mappedBy="patient")
-	public HotelBooking getHotelBooking() {
-		return hotelBooking;
+	@ManyToMany(mappedBy = "patients")
+	public List<Doctor> getDoctors() {
+		return doctors;
 	}
 
-	public void setHotelBooking(HotelBooking hotelBooking) {
-		this.hotelBooking = hotelBooking;
+	public void setDoctors(List<Doctor> doctors) {
+		this.doctors = doctors;
 	}
-	
+
+
 	@OneToMany(mappedBy = "patient")
 	public List<Question> getQuestions() {
 		return questions;
 	}
-
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
 
-	@OneToOne(mappedBy="patient")
-	public ClinicBooking getClinicBooking() {
-		return clinicBooking;
+	@OneToMany(mappedBy = "patient")
+	
+	public List<HotelBooking> getHotelBookings() {
+		return hotelBookings;
 	}
 
-	public void setClinicBooking(ClinicBooking clinicBooking) {
-		this.clinicBooking = clinicBooking;
+	public void setHotelBookings(List<HotelBooking> hotelBookings) {
+		this.hotelBookings = hotelBookings;
 	}
 
-	@OneToOne(mappedBy="patient")
+
+
+	@OneToMany(mappedBy = "patient")
+	public List<ClinicBooking> getClinicBookings() {
+		return clinicBookings;
+	}
+
+	public void setClinicBookings(List<ClinicBooking> clinicBookings) {
+		this.clinicBookings = clinicBookings;
+	}
+
+	
+
+	@OneToOne(mappedBy = "patient")
 	public Flight getFlight() {
 		return flight;
 	}
 
+	
 	public void setFlight(Flight flight) {
 		this.flight = flight;
 	}
-	
+
+	@OneToMany(mappedBy = "patient")
+	public List<SurgeryPatient> getSurgeryPatients() {
+		return surgeryPatients;
+	}
+
+	public void setSurgeryPatients(List<SurgeryPatient> surgeryPatients) {
+		this.surgeryPatients = surgeryPatients;
+	}
 
 }

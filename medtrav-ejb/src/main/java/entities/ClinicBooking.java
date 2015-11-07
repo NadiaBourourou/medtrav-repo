@@ -1,97 +1,106 @@
 package entities;
 
-import entities.RoomClinicType;
-
 import java.io.Serializable;
-import java.lang.Double;
-import java.lang.Integer;
-import java.lang.String;
+import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * Entity implementation class for Entity: ClinicBooking
  *
  */
 @Entity
-
 public class ClinicBooking implements Serializable {
 
-	
-	private Integer clinicBookingId;
+	private ClinicBookingID clinicBookingId;
 	private RoomClinicType typeRoom;
 	private String date;
 	private String commentaire;
-	private Double price;
 	private static final long serialVersionUID = 1L;
 	private Clinic clinic;
 	private Patient patient;
-	private Booking booking;
-	
+	private List<Booking> bookings;
 
-	
 	public ClinicBooking() {
 		super();
-	}   
-	@Id    
-	public Integer getClinicBookingId() {
-		return this.clinicBookingId;
 	}
 
-	public void setClinicBookingId(Integer clinicBookingId) {
+	public ClinicBooking(RoomClinicType typeRoom, String date,
+			String commentaire, Clinic clinic, Patient patient) {
+		super();
+		this.clinicBookingId = new ClinicBookingID(clinic.getClinicId(),
+				patient.getUserId());
+		this.typeRoom = typeRoom;
+		this.date = date;
+		this.commentaire = commentaire;
+		this.clinic = clinic;
+		this.patient = patient;
+	}
+
+	@EmbeddedId
+	public ClinicBookingID getClinicBookingId() {
+		return clinicBookingId;
+	}
+
+	public void setClinicBookingId(ClinicBookingID clinicBookingId) {
 		this.clinicBookingId = clinicBookingId;
-	}   
+	}
+
 	public RoomClinicType getTypeRoom() {
 		return this.typeRoom;
 	}
 
 	public void setTypeRoom(RoomClinicType typeRoom) {
 		this.typeRoom = typeRoom;
-	}   
+	}
+
 	public String getDate() {
 		return this.date;
 	}
 
 	public void setDate(String date) {
 		this.date = date;
-	}   
+	}
+
 	public String getCommentaire() {
 		return this.commentaire;
 	}
 
 	public void setCommentaire(String commentaire) {
 		this.commentaire = commentaire;
-	}   
-	public Double getPrice() {
-		return this.price;
 	}
 
-	public void setPrice(Double price) {
-		this.price = price;
-	}
 	@ManyToOne
+	@JoinColumn(name = "clinicId", referencedColumnName = "clinicId", insertable = false, updatable = false)
 	public Clinic getClinic() {
 		return clinic;
 	}
+
 	public void setClinic(Clinic clinic) {
 		this.clinic = clinic;
 	}
-	
-	@OneToOne
+
+	@ManyToOne
+	@JoinColumn(name = "patientId", referencedColumnName = "userId", insertable = false, updatable = false)
 	public Patient getPatient() {
 		return patient;
 	}
+
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
-	@OneToOne(mappedBy = "clinicBooking")
-	public Booking getBooking() {
-		return booking;
+
+	@OneToMany(mappedBy = "clinicBooking")
+	public List<Booking> getBooking() {
+		return bookings;
 	}
-	public void setBooking(Booking booking) {
-		this.booking = booking;
+
+	public void setBooking(List<Booking> bookings) {
+		this.bookings = bookings;
 	}
-	
-	
-   
+
 }

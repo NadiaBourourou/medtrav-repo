@@ -1,6 +1,6 @@
 package tests.UserServices;
 
-import delegates.TreatmentServicesDelegate;
+import delegates.SurgeryServicesDelegate;
 import delegates.UserServicesDelegate;
 import entities.Patient;
 
@@ -13,10 +13,10 @@ public class TestFindPatientByPassportNumber {
 		System.out.println(trouvee.getLastName() + "  "
 				+ trouvee.getFirstName());
 
-	int taille=TreatmentServicesDelegate.doFindAllTreatmentsByProcedureId(1).size();
+	int taille=SurgeryServicesDelegate.doFindAllTreatmentsByProcedureId(1).size();
 for (int i=0;i<taille;i++)
 {
-System.out.println(TreatmentServicesDelegate.doFindAllTreatmentsByProcedureId(1).get(i).toString());	
+System.out.println(SurgeryServicesDelegate.doFindAllTreatmentsByProcedureId(1).get(i).toString());	
 
 }
 

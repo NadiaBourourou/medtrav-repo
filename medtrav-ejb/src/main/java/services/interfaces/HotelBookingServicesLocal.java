@@ -7,5 +7,5 @@ import entities.Hotel;
 @Local
 public interface HotelBookingServicesLocal {
 
-	Double calculPrix(Double prix, Double numNights);
+	Double calculPrix(Double prix, Integer numNights);
 }
