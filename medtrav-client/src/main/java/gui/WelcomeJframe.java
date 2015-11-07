@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.GroupLayout;
@@ -19,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
@@ -48,6 +51,8 @@ public class WelcomeJframe extends JFrame {
 	private Doctor selectedDoctor = new Doctor();
 	private JTable table;
 	private JLabel lblDoctorDescription;
+	private JTextField nom;
+	private JTextField prenom;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -68,6 +73,7 @@ public class WelcomeJframe extends JFrame {
 		try {
 			SurgeryServicesDelegate.doFindAllProcedures();
 			int taille = SurgeryServicesDelegate.doFindAllProcedures().size();
+			cbProcedure.addItem("...");
 			for (int i = 0; i < taille; i++) {
 				String name = SurgeryServicesDelegate.doFindAllProcedures()
 						.get(i).getName();
@@ -82,13 +88,13 @@ public class WelcomeJframe extends JFrame {
 
 	public void fillTreatmentCombo() {
 		try {
-			Integer index = cbProcedure.getSelectedIndex() + 1;
+			Integer index = cbProcedure.getSelectedIndex();
 			JOptionPane.showMessageDialog(null, index);
 			System.out.println(index);
 			SurgeryServicesDelegate.doFindAllTreatmentsByProcedureId(index);
 			int taille = SurgeryServicesDelegate
 					.doFindAllTreatmentsByProcedureId(index).size();
-
+			cbTreatment.addItem("...");
 			for (int i = 0; i < taille; i++) {
 				String name = SurgeryServicesDelegate
 						.doFindAllTreatmentsByProcedureId(index).get(i)
@@ -112,11 +118,6 @@ public class WelcomeJframe extends JFrame {
 		JMenuItem mntmLogOut = new JMenuItem("Log Out");
 		mntmLogOut.setIcon(new ImageIcon(WelcomeJframe.class
 				.getResource("/images/logout-icon.png")));
-		mntmLogOut.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
 		menuBar.add(mntmLogOut);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -176,6 +177,11 @@ public class WelcomeJframe extends JFrame {
 				Surgery surgery = SurgeryServicesDelegate
 						.doFindSurgeryById(cbTreatment.getSelectedIndex());
 				UserServicesDelegate.doBookSurgery(surgery, "Test", 1);
+				
+				System.out.println(surgery.getName());
+
+				
+				//selectedBook = booksList.get(table.convertRowIndexToModel(selectedRow));
 
 				Doctor doctor = UserServicesDelegate.doFindDoctorById(3);
 				UserServicesDelegate.doChooseDoctor(doctor, 1);
@@ -190,6 +196,13 @@ public class WelcomeJframe extends JFrame {
 
 		lblDoctorDescription = new JLabel("");
 		lblDoctorDescription.setForeground(Color.BLACK);
+
+		nom = new JTextField();
+		nom.setColumns(10);
+
+		prenom = new JTextField();
+		prenom.setText("");
+		prenom.setColumns(10);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane
 				.setHorizontalGroup(gl_contentPane
@@ -307,13 +320,39 @@ public class WelcomeJframe extends JFrame {
 																								GroupLayout.PREFERRED_SIZE,
 																								418,
 																								GroupLayout.PREFERRED_SIZE)
-																						.addPreferredGap(
-																								ComponentPlacement.UNRELATED)
-																						.addComponent(
-																								lblDoctorDescription,
-																								GroupLayout.DEFAULT_SIZE,
-																								GroupLayout.DEFAULT_SIZE,
-																								Short.MAX_VALUE))
+																						.addGroup(
+																								gl_contentPane
+																										.createParallelGroup(
+																												Alignment.LEADING)
+																										.addGroup(
+																												gl_contentPane
+																														.createSequentialGroup()
+																														.addPreferredGap(
+																																ComponentPlacement.UNRELATED)
+																														.addComponent(
+																																lblDoctorDescription,
+																																GroupLayout.DEFAULT_SIZE,
+																																GroupLayout.DEFAULT_SIZE,
+																																Short.MAX_VALUE))
+																										.addGroup(
+																												gl_contentPane
+																														.createSequentialGroup()
+																														.addGap(19)
+																														.addComponent(
+																																nom,
+																																GroupLayout.PREFERRED_SIZE,
+																																GroupLayout.DEFAULT_SIZE,
+																																GroupLayout.PREFERRED_SIZE)
+																														.addPreferredGap(
+																																ComponentPlacement.RELATED,
+																																34,
+																																Short.MAX_VALUE)
+																														.addComponent(
+																																prenom,
+																																GroupLayout.PREFERRED_SIZE,
+																																GroupLayout.DEFAULT_SIZE,
+																																GroupLayout.PREFERRED_SIZE)
+																														.addGap(27))))
 																		.addGroup(
 																				gl_contentPane
 																						.createSequentialGroup()
@@ -425,7 +464,22 @@ public class WelcomeJframe extends JFrame {
 														.addGroup(
 																gl_contentPane
 																		.createSequentialGroup()
-																		.addGap(116)
+																		.addGap(67)
+																		.addGroup(
+																				gl_contentPane
+																						.createParallelGroup(
+																								Alignment.BASELINE)
+																						.addComponent(
+																								nom,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE)
+																						.addComponent(
+																								prenom,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE))
+																		.addGap(29)
 																		.addComponent(
 																				lblDoctorDescription,
 																				GroupLayout.DEFAULT_SIZE,
@@ -451,11 +505,9 @@ public class WelcomeJframe extends JFrame {
 								169, Short.MAX_VALUE).addContainerGap()));
 
 		table = new JTable();
-
 		scrollPane.setViewportView(table);
 		panel.setLayout(gl_panel);
 		contentPane.setLayout(gl_contentPane);
-
 		initDataBindings();
 
 	}
@@ -486,7 +538,7 @@ public class WelcomeJframe extends JFrame {
 		BeanProperty<Doctor, String> doctorBeanProperty_3 = BeanProperty
 				.create("firstName");
 		AutoBinding<JTable, String, Doctor, String> autoBinding = Bindings
-				.createAutoBinding(UpdateStrategy.READ, table,
+				.createAutoBinding(UpdateStrategy.READ_WRITE, table,
 						jTableBeanProperty, selectedDoctor,
 						doctorBeanProperty_3);
 		autoBinding.bind();
@@ -496,7 +548,7 @@ public class WelcomeJframe extends JFrame {
 		BeanProperty<Doctor, String> doctorBeanProperty_4 = BeanProperty
 				.create("lastName");
 		AutoBinding<JTable, String, Doctor, String> autoBinding_1 = Bindings
-				.createAutoBinding(UpdateStrategy.READ, table,
+				.createAutoBinding(UpdateStrategy.READ_WRITE, table,
 						jTableBeanProperty_1, selectedDoctor,
 						doctorBeanProperty_4);
 		autoBinding_1.bind();
@@ -506,7 +558,7 @@ public class WelcomeJframe extends JFrame {
 		BeanProperty<Doctor, String> doctorBeanProperty_5 = BeanProperty
 				.create("specialty");
 		AutoBinding<JTable, String, Doctor, String> autoBinding_2 = Bindings
-				.createAutoBinding(UpdateStrategy.READ, table,
+				.createAutoBinding(UpdateStrategy.READ_WRITE, table,
 						jTableBeanProperty_2, selectedDoctor,
 						doctorBeanProperty_5);
 		autoBinding_2.bind();
@@ -516,7 +568,7 @@ public class WelcomeJframe extends JFrame {
 		BeanProperty<JLabel, String> jLabelBeanProperty = BeanProperty
 				.create("text");
 		AutoBinding<Doctor, String, JLabel, String> autoBinding_3 = Bindings
-				.createAutoBinding(UpdateStrategy.READ, selectedDoctor,
+				.createAutoBinding(UpdateStrategy.READ_WRITE, selectedDoctor,
 						doctorBeanProperty_6, lblDoctorDescription,
 						jLabelBeanProperty);
 		autoBinding_3.bind();
