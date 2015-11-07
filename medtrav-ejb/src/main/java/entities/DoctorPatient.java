@@ -1,12 +1,12 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  * Entity implementation class for Entity: DoctorPatient
@@ -19,7 +19,7 @@ public class DoctorPatient implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private List<Booking> bookings;
+	private Booking booking;
 	private Doctor doctor;
 	private Patient patient;
 
@@ -36,16 +36,17 @@ public class DoctorPatient implements Serializable {
 		this.id = id;
 	}
 
-	@OneToMany(mappedBy = "doctorPatient")
-	public List<Booking> getBookings() {
-		return bookings;
+	@OneToOne(mappedBy = "doctorPatient")
+	public Booking getBookings() {
+		return booking;
 	}
 
-	public void setBookings(List<Booking> bookings) {
-		this.bookings = bookings;
+	public void setBookings(Booking booking) {
+		this.booking = booking;
 	}
 
 	@ManyToOne
+	@JoinColumn(name = "patientId", referencedColumnName = "userId", insertable = false, updatable = false)
 	public Doctor getDoctor() {
 		return doctor;
 	}
@@ -55,6 +56,7 @@ public class DoctorPatient implements Serializable {
 	}
 
 	@ManyToOne
+	@JoinColumn(name = "doctorId", referencedColumnName = "userId", insertable = false, updatable = false)
 	public Patient getPatient() {
 		return patient;
 	}
