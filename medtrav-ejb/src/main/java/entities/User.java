@@ -23,6 +23,8 @@ public class User implements Serializable {
 	private String password;
 	private RoleType role;
 	private String mail;
+	private UserSexe sexe;
+	
 	private static final long serialVersionUID = 1L;
 
 	public User() {
@@ -86,6 +88,12 @@ public class User implements Serializable {
 
 	public void setMail(String mail) {
 		this.mail = mail;
+	}
+	public UserSexe getSexe() {
+		return sexe;
+	}
+	public void setSexe(UserSexe sexe) {
+		this.sexe = sexe;
 	}
    
 }

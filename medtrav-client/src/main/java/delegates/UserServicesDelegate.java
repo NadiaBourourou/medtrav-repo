@@ -98,6 +98,7 @@ public class UserServicesDelegate {
 		return getProxy().bookSurgery(surgery, commentaire, idPatient);
 	}
 
-	public static void doChooseDoctor(Doctor selectedDoctor, Integer idPatient)
-	{ getProxy().chooseDoctor(selectedDoctor, idPatient);}
+	public static void doChooseDoctor(Doctor selectedDoctor, Integer idPatient) {
+		getProxy().chooseDoctor(selectedDoctor, idPatient);
+	}
 }

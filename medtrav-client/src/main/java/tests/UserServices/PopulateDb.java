@@ -12,6 +12,7 @@ import entities.User;
 import entities.Procedure;
 import entities.RoleType;
 import entities.Surgery;
+import entities.UserSexe;
 
 public class PopulateDb {
 	private static List<Surgery> Surgerys;
@@ -25,11 +26,12 @@ public class PopulateDb {
 		patient1.setCin("14714750");
 		patient1.setCountry("Spain");
 		patient1.setDateOfBirth(Date.valueOf("1993-12-02"));
-		patient1.setLogin("Flen.Foulen");
+		patient1.setLogin("Flen.Foulena");
 		patient1.setPassword("pwdFlen");
 		patient1.setMail("flenfoulen@gmail.com");
 		patient1.setNumPassport(96359);
 		patient1.setRole(RoleType.PATIENT);
+		patient1.setSexe(UserSexe.Female);
 
 		Patient patient2 = new Patient();
 		patient2.setFirstName("Sam");
@@ -42,7 +44,9 @@ public class PopulateDb {
 		patient2.setMail("SamHeinrich@gmail.com");
 		patient2.setNumPassport(121214);
 		patient2.setRole(RoleType.PATIENT);
-
+		patient2.setSexe(UserSexe.Male);
+		
+		
 	Doctor doctor1 = new Doctor();
 		doctor1.setFirstName("Max");
 		doctor1.setLastName("Hunter");
@@ -53,7 +57,8 @@ public class PopulateDb {
 		doctor1.setMail("MaxHunter@gmail.com");
 		doctor1.setSpecialty("CardioVasculaire");
 		doctor1.setRole(RoleType.DOCTOR);
-
+		doctor1.setSexe(UserSexe.Male);
+		
 		Doctor doctor2 = new Doctor();
 		doctor2.setFirstName("Mehdi");
 		doctor2.setLastName("Achek");
@@ -62,8 +67,9 @@ public class PopulateDb {
 		doctor2.setLogin("Achek");
 		doctor2.setPassword("achek");
 		doctor2.setMail("Mehdiachek@gmail.com");
-		doctor2.setSpecialty("CardioVasculaire");
+		doctor2.setSpecialty("Botox, lifting, body lift");
 		doctor2.setRole(RoleType.DOCTOR);
+		doctor2.setSexe(UserSexe.Male);
 
 		Administrator admin = new Administrator();
 		admin.setFirstName("Sayed");
