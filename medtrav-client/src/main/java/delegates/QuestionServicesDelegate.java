@@ -33,8 +33,14 @@ public class QuestionServicesDelegate {
 		getProxy().deleteQuestion(testimony);
 	}
 
-	public static List<Question> doFindAllQuestionsByPatient(Integer patientId) {
-		return getProxy().findAllQuestionsByPatientId(patientId);
+	public static List<Question> doFindAllQuestionsByPatientName(String name) {
+		return getProxy().findAllQuestionsByPatientLastName(name);
+	}
+	public static List<Question> doFindAllQuestionsByTitle(String title) {
+		return getProxy().findAllQuestionsByTitle(title);
+	}
+	public static List<Question> doFindAllQuestionsWithResponse() {
+		return getProxy().findAllQuestionsWithResponse();
 	}
 
 	public static Patient doFindPatientById(Integer idQuestion) {

@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import entities.Doctor;
 import entities.Patient;
 import entities.Testimony;
 import entities.User;
@@ -76,10 +77,10 @@ public class TestimonyServices implements TestimonyServicesRemote, TestimonyServ
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Testimony> findAllTestimoniesByTitle(String titleParam) {
-		String jpql="select t from Testimony t where t.title =: param";
+	public List<Testimony> findAllTestimoniesByTitle(String title) {
+		String jpql="select t from Testimony t where t.title LIKE :param";
 		Query query=entitymanager.createQuery(jpql);
-		query.setParameter("param", titleParam);
+		query.setParameter("param",  "%" + title + "%");
 		return query.getResultList();
 	
 	}
@@ -87,13 +88,25 @@ public class TestimonyServices implements TestimonyServicesRemote, TestimonyServ
 	
 	@SuppressWarnings("unchecked")
 	@Override
+	public List<Testimony> findAllTestimoniesByPatientLastName(String name) {
+		String jpql="select t from Testimony t where t.patient.lastName LIKE :param";
+		Query query=entitymanager.createQuery(jpql);
+		query.setParameter("param",  "%" + name + "%");
+		return query.getResultList();
+	
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
 	public List<Testimony> findAllTestimoniesByPatientId(Integer patientId) {
-		String jpql="select t from Testimony t where t.patient.id =: param";
+		String jpql="select t from Testimony t where t.patient.id =:param";
 		Query query=entitymanager.createQuery(jpql);
 		query.setParameter("param", patientId);
 		return query.getResultList();
 	
 	}
+
+
 
 
 	@SuppressWarnings("unchecked")

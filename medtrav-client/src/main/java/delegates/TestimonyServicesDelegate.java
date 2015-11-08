@@ -41,6 +41,10 @@ public class TestimonyServicesDelegate {
 		return getProxy().findAllTestimoniesByPatientId(patientId);
 	}
 
+	public static List<Testimony> doFindAllTestimoniesByPatientLastName(String name) {
+		return getProxy().findAllTestimoniesByPatientLastName(name);
+	}
+	
 	public static Patient doFindPatientById(Integer idTestimony) {
 		return getProxy().findPatientById(idTestimony);
 	}
