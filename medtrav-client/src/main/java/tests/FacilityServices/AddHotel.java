@@ -107,7 +107,7 @@ public class AddHotel extends JFrame {
 				hotel.setState(StateType.valueOf(comboBox_1.getSelectedItem()
 						.toString()));
 				File fichier = new File(textField.getText());
-				FileInputStream fis = null;
+			/*	FileInputStream fis = null;
 				try {
 					fis = new FileInputStream(fichier);
 				} catch (FileNotFoundException e1) {
@@ -136,7 +136,8 @@ public class AddHotel extends JFrame {
 				for (int i = 0; i < b.length; i++) {
 					b[i] = list.get(i);
 				}
-				hotel.setPic(b);
+*/
+			//s	hotel.setPic(img);
 
 				HotelServicesDelegate.doAddHotel(hotel);
 			}

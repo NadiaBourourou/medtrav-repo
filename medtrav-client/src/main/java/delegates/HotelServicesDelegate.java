@@ -1,5 +1,7 @@
 package delegates;
 
+import java.io.File;
+import java.sql.Blob;
 import java.util.List;
 
 import locator.ServiceLocator;
@@ -65,7 +67,7 @@ public class HotelServicesDelegate {
 		return getProxy().bookHotel(numNights,price,roomType,hotel, idPatient);
 	}
 	
-	public static byte[] doGetMyImage(Integer id) {
+	public static File doGetMyImage(Integer id) {
 		return getProxy().getMyImage( id);
 	}
 

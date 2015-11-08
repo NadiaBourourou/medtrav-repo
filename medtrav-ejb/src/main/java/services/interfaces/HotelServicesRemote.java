@@ -1,5 +1,7 @@
 package services.interfaces;
 
+import java.io.File;
+import java.sql.Blob;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -33,6 +35,6 @@ public interface HotelServicesRemote {
 	Hotel findHotelByPatientId(Integer idPatient);
 	
 	Boolean bookHotel(Integer numNights, Double price, RoomType roomType, Hotel hotel, Integer idPatient);
-	byte[] getMyImage(Integer id);
+	File getMyImage(Integer id);
 	
 }

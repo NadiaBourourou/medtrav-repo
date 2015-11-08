@@ -1,54 +1,47 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+
+import org.jdesktop.beansbinding.AutoBinding;
+import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
+import org.jdesktop.beansbinding.BeanProperty;
+import org.jdesktop.beansbinding.Bindings;
+import org.jdesktop.swingbinding.JTableBinding;
+import org.jdesktop.swingbinding.SwingBindings;
 
 import delegates.HotelServicesDelegate;
 import entities.Hotel;
-
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-
-import org.jdesktop.swingbinding.JTableBinding;
-import org.jdesktop.swingbinding.SwingBindings;
-import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
-import org.jdesktop.beansbinding.ObjectProperty;
-import org.jdesktop.beansbinding.BeanProperty;
-
 import entities.StateType;
-
-import java.awt.Window.Type;
-
-import javax.swing.border.TitledBorder;
-import javax.swing.Icon;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-
-import org.jdesktop.beansbinding.AutoBinding;
-import org.jdesktop.beansbinding.Bindings;
-
-import javax.swing.DefaultComboBoxModel;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 public class ListHotels extends JFrame {
 
@@ -65,9 +58,7 @@ public class ListHotels extends JFrame {
 	private JTextField pricesuite;
 	private JComboBox comboBoxstate;
 	private JComboBox comboBoxstars;
-	public ImageIcon getImage(){
-		return new ImageIcon(hotel.getPic());
-	}
+
 
 	/**
 	 * Launch the application.
@@ -301,19 +292,39 @@ public class ListHotels extends JFrame {
 
 				hotel = hotels.get(table.getSelectedRow());
 				
-				byte[] image= HotelServicesDelegate.doGetMyImage(hotel.getHotelId());
+				Blob image= HotelServicesDelegate.doGetMyImage(hotel.getHotelId());
 				try {
-				File file = new File("somsom.jpg");
-				FileOutputStream output = new FileOutputStream(file);	
+			//	File file = new File("somsom.jpg");
+			//	FileOutputStream output = new FileOutputStream(file);	
 			
-					output.write(image);
-				} catch (IOException e1) {
+			//		output.write(image);
+					
+
+			        InputStream in = image.getBinaryStream();
+				        ByteArrayOutputStream out = new ByteArrayOutputStream();
+				        OutputStream outputStream = new FileOutputStream ("/Desktop/a.jpg");
+				        int length = (int) image.length();
+				        int bufferSize = 1024;
+				 
+				        byte[] buffer = new byte[bufferSize];
+				 
+				        while ((length = in.read(buffer)) != -1) {
+				            System.out.println("writing " + length + " bytes");
+				            out.write(buffer, 0, length);   
+
+							ImageIcon icon=new ImageIcon(buffer);
+							picture.setIcon((Icon) icon);	
+				        }
+				        out.writeTo(outputStream); 
+				        in.close();
+				        				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}
+				} catch (SQLException e1) {
+											// TODO Auto-generated catch block
+											e1.printStackTrace();
+										}
 			
-				ImageIcon icon=new ImageIcon(image);
-				picture.setIcon((Icon) icon);	
 			}
 		});
 

@@ -1,6 +1,8 @@
 package entities;
 
+import java.io.File;
 import java.io.Serializable;
+import java.sql.Blob;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -31,7 +33,7 @@ public class Hotel implements Serializable {
 	private Double priceSuite;
 	private Integer stars;
 	private List<ServiceHotel> servicesHotel;
-	private byte[] pic;
+	private File pic;
 	private List<HotelBooking> hotelBookings;
 
 	private static final long serialVersionUID = 1L;
@@ -108,11 +110,11 @@ public class Hotel implements Serializable {
 
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
-	public byte[] getPic() {
+	public File getPic() {
 		return pic;
 	}
 
-	public void setPic(byte[] pic) {
+	public void setPic(File pic) {
 		this.pic = pic;
 	}
 

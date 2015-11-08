@@ -1,5 +1,7 @@
 package services.impl;
 
+import java.io.File;
+import java.sql.Blob;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -7,15 +9,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import entities.Doctor;
+import services.interfaces.HotelServicesLocal;
+import services.interfaces.HotelServicesRemote;
 import entities.Hotel;
 import entities.HotelBooking;
 import entities.Patient;
-import entities.RoleType;
 import entities.RoomType;
 import entities.StateType;
-import services.interfaces.HotelServicesLocal;
-import services.interfaces.HotelServicesRemote;
 
 /**
  * Session Bean implementation class HotelServices
@@ -25,36 +25,35 @@ public class HotelServices implements HotelServicesRemote, HotelServicesLocal {
 
 	@PersistenceContext
 	EntityManager entityManager;
-    /**
-     * Default constructor. 
-     */
-    public HotelServices() {
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * Default constructor.
+	 */
+	public HotelServices() {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public Boolean addHotel(Hotel hotel) {
-		Boolean b= false;
+		Boolean b = false;
 		try {
 			entityManager.persist(hotel);
-			b= true;
-		}
-		catch (Exception e) {
-			System.err.println ("erreur");
+			b = true;
+		} catch (Exception e) {
+			System.err.println("erreur");
 		}
 		return b;
 	}
 
 	@Override
 	public Boolean deleteHotelById(Integer id) {
-		Boolean b= false;
+		Boolean b = false;
 		try {
 			entityManager.remove(findHotelById(id));
-			b= true;
-		}
-		catch (Exception e){
+			b = true;
+		} catch (Exception e) {
 			System.err.println("error");
-			
+
 		}
 		return b;
 	}
@@ -66,12 +65,11 @@ public class HotelServices implements HotelServicesRemote, HotelServicesLocal {
 
 	@Override
 	public Boolean updateHotel(Hotel hotel) {
-		Boolean b= false;
+		Boolean b = false;
 		try {
 			entityManager.merge(hotel);
-			b= true;
-		}
-		catch (Exception e){
+			b = true;
+		} catch (Exception e) {
 			System.err.println("error");
 		}
 		return b;
@@ -79,32 +77,30 @@ public class HotelServices implements HotelServicesRemote, HotelServicesLocal {
 
 	@Override
 	public Boolean deleteHotel(Hotel hotel) {
-		Boolean b= false;
+		Boolean b = false;
 		try {
 			entityManager.remove(entityManager.merge(hotel));
-			b= true;
-			
-		}
-		catch (Exception e) {
+			b = true;
+
+		} catch (Exception e) {
 			System.err.println("error");
 		}
 		return b;
 	}
-	
 
 	@Override
 	public List<Hotel> findAllHotels() {
-	 String jpql = "select h from Hotel h";
-	 Query query= entityManager.createQuery(jpql);
-	 return query.getResultList();
+		String jpql = "select h from Hotel h";
+		Query query = entityManager.createQuery(jpql);
+		return query.getResultList();
 	}
 
 	@Override
 	public Hotel findHotelByName(String name) {
-		 String jpql = "select h from Hotel h where h.name=:param";
-		 Query query= entityManager.createQuery(jpql);
-		 query.setParameter("param", name);
-		 return (Hotel) query.getSingleResult();
+		String jpql = "select h from Hotel h where h.name=:param";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", name);
+		return (Hotel) query.getSingleResult();
 	}
 
 	@Override
@@ -114,34 +110,33 @@ public class HotelServices implements HotelServicesRemote, HotelServicesLocal {
 		query.setParameter("param", StateType.ENABLED);
 		return query.getResultList();
 	}
+
 	@Override
 	public Double calculPrix(Double prix, Integer numNights) {
-	
-			return prix*numNights; 
-		}
-	
-	
-	
+
+		return prix * numNights;
+	}
 
 	@Override
 	public Boolean addHotelBooking(HotelBooking hb) {
-		Boolean b= false; 
-		try {  entityManager.merge(hb);
-		
-			b= true;
+		Boolean b = false;
+		try {
+			entityManager.merge(hb);
+
+			b = true;
 		} catch (Exception e) {
 			System.err.println("error");
 		}
 		return b;
 	}
-	
+
 	@Override
 	public Hotel findHotelByPatientId(Integer idPatient) {
-		 String jpql = "select h from Hotel h join h.hotelBookings hbs where hbs.patient.userId=:param";
-		 Query query= entityManager.createQuery(jpql);
-		 query.setParameter("param", idPatient);
-		 return  (Hotel) query.getSingleResult();
-		
+		String jpql = "select h from Hotel h join h.hotelBookings hbs where hbs.patient.userId=:param";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", idPatient);
+		return (Hotel) query.getSingleResult();
+
 	}
 
 	@Override
@@ -149,9 +144,9 @@ public class HotelServices implements HotelServicesRemote, HotelServicesLocal {
 			RoomType roomType, Hotel hotel, Integer idPatient) {
 		Boolean b = false;
 		try {
-			Patient patient= entityManager.find(Patient.class,idPatient);
+			Patient patient = entityManager.find(Patient.class, idPatient);
 			HotelBooking hotelBooking = new HotelBooking(numNights, price,
-				roomType, hotel, patient);
+					roomType, hotel, patient);
 			entityManager.merge(hotelBooking);
 			b = true;
 		} catch (Exception e) {
@@ -160,13 +155,12 @@ public class HotelServices implements HotelServicesRemote, HotelServicesLocal {
 	}
 
 	@Override
-	public byte[] getMyImage(Integer id) {
-			String jpql = "select m.pic from Hotel m where m.hotelId=:param";
-			 Query query = entityManager.createQuery(jpql);
-			    query.setParameter("param", id);    
-			    Object o = query.getSingleResult();	    
-			    byte[] tmpArray = (byte[]) o; 
-			    return tmpArray;	}
+	public File getMyImage(Integer id) {
+		String jpql = "select m.pic from Hotel m where m.hotelId=:param";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", id);
+		Object o = query.getSingleResult();
+		File tmpArray = (File) o;
+		return tmpArray;
 	}
-
-
+}
