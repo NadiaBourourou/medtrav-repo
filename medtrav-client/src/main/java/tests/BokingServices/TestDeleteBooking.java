@@ -8,7 +8,9 @@ public class TestDeleteBooking {
 	public static void main(String[] args) {
 		Booking booking = new Booking();
 		booking = BookingServicesDelegate.doFindBookingByPatientId(1);
+		System.out.println(1);
 		BookingServicesDelegate.doDeleteBookingByPatientId(booking);
+		System.out.println(1);
 	}
 	
 
