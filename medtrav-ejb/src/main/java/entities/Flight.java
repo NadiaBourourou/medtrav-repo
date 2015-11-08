@@ -28,7 +28,7 @@ public class Flight implements Serializable {
 	private Double price;
 	private String airline;
 
-	private List<Booking> bookings;
+	private Booking booking;
 	private Patient patient;
 
 	private static final long serialVersionUID = 1L;
@@ -87,13 +87,13 @@ public class Flight implements Serializable {
 		this.price = price;
 	}
 
-	@OneToMany(mappedBy = "flight")
-	public List<Booking> getBookings() {
-		return bookings;
+	@OneToOne(mappedBy = "flight")
+	public Booking getBookings() {
+		return booking;
 	}
 
-	public void setBookings(List<Booking> bookings) {
-		this.bookings = bookings;
+	public void setBookings(Booking booking) {
+		this.booking = booking;
 	}
 
 	public String getAirline() {
@@ -104,12 +104,12 @@ public class Flight implements Serializable {
 		this.airline = airline;
 	}
 
-	public void linkBookingsToThisFlight(List<Booking> bookings) {
+	/*public void linkBookingsToThisFlight(List<Booking bookings) {
 		this.bookings = bookings;
 		for (Booking b : bookings) {
 			b.setFlight(this);
 		}
-	}
+	}*/
 
 	@OneToOne
 	public Patient getPatient() {

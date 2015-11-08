@@ -1,14 +1,11 @@
 package tests.BokingServices;
 
-import java.util.Date;
-
 import delegates.BookingServicesDelegate;
 import entities.Booking;
+import entities.Hotel;
+import entities.HotelBooking;
 import entities.Patient;
 import entities.StateBooking;
-import entities.Surgery;
-import entities.SurgeryPatient;
-import entities.SurgeryPatientID;
 
 public class TestAddBooking {
 
@@ -17,18 +14,14 @@ public class TestAddBooking {
 
 		StateBooking state = null;
 		booking1.setState(state.CONFIRMED);
-		SurgeryPatient sp = new SurgeryPatient();
+		HotelBooking hotelBooking = new HotelBooking();
 		Patient p = new Patient();
 		p.setUserId(1);
-		Surgery s = new Surgery();
-		s.setSurgeryId(1);
-		sp.setPatient(p);
-		sp.setSurgery(s);
-		SurgeryPatientID ids = new SurgeryPatientID();
-		ids.setIdPatient(p.getUserId());
-		ids.setIdSurgery(s.getSurgeryId());
-		sp.setSurgeryPatientID(ids);
-		booking1.setSurgeryPatient(sp);
+		hotelBooking.setPatient(p);
+		Hotel hotel = new Hotel();
+		hotel.setHotelId(1);
+		hotelBooking.setHotel(hotel);
+		booking1.setHotelBooking(hotelBooking);
 
 		BookingServicesDelegate.doAddBooking(booking1);
 

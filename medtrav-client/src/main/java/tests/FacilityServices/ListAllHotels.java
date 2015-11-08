@@ -159,8 +159,7 @@ JLabel lblIdHotel = new JLabel("Id Hotel");
 				stars.setSelectedIndex(hotel.getStars() - 1);
 			    address.setText(hotel.getAddress());
 				description.setText(hotel.getDescription());
-				ImageIcon icon=new ImageIcon(hotel.getPic());
-				label.setIcon(icon);
+			
 				
 				
 				

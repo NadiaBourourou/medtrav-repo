@@ -9,12 +9,12 @@ public class TestUpdateTestimony {
 	
 	public static void main(String[] args) {
 		
-		//Testimony testimonyFound=TestimonyServicesDelegate.doFindTestimonyById(1);
-		Testimony testimony1 = new Testimony();
-		testimony1.setTitle("Third travel");
-		testimony1.setDescription("My third testimony");
+		Testimony testimonyFound=TestimonyServicesDelegate.doFindTestimonyById(5);
+		//Testimony testimony1 = new Testimony();
+		//testimony1.setTitle("Third travel");
+		testimonyFound.setDescription("coucou");
 		
-		TestimonyServicesDelegate.doUpdateTestimony(testimony1);
+		TestimonyServicesDelegate.doUpdateTestimony(testimonyFound);
 	}
 	
 }

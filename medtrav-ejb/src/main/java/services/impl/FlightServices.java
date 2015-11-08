@@ -128,7 +128,7 @@ public class FlightServices implements FlightServicesRemote,
 		return b;
 	}
 
-	@Override
+	/*@Override
 	public Boolean assignFlightToBookingSlaveSide(Integer idBooking,
 			Integer idFlight) {
 		Boolean b = false;
@@ -154,7 +154,7 @@ public class FlightServices implements FlightServicesRemote,
 		}
 
 		return b;
-	}
+	}*/
 
 	@Override
 	public Boolean assignDoctorToSurgery(Integer idSurgery, Integer idDoctor) {

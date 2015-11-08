@@ -76,7 +76,40 @@ public class QuestionServices implements QuestionServicesRemote, QuestionService
 	
 
 
-
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Question> findAllQuestionsByTitle(String title) {
+		String jpql="select t from Question t where t.title LIKE :param";
+		Query query=entitymanager.createQuery(jpql);
+		query.setParameter("param",  "%" + title + "%");
+		return query.getResultList();
+	
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Question> findAllQuestionsByPatientLastName(String name) {
+		String jpql="select t from Question t where t.patient.lastName LIKE :param";
+		Query query=entitymanager.createQuery(jpql);
+		query.setParameter("param",  "%" + name + "%");
+		return query.getResultList();
+	
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Question> findAllQuestionsWithResponse() {
+		//String chaine=null;
+		String jpql="select t from Question t where t.response IS NOT NULL";
+		Query query=entitymanager.createQuery(jpql);
+		//query.setParameter("param",chaine);
+		return query.getResultList();
+	
+	}
+	
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Question> findAllQuestionsByPatientId(Integer patientId) {
