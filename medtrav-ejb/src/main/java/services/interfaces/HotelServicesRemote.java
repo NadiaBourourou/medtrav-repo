@@ -35,6 +35,6 @@ public interface HotelServicesRemote {
 	Hotel findHotelByPatientId(Integer idPatient);
 	
 	Boolean bookHotel(Integer numNights, Double price, RoomType roomType, Hotel hotel, Integer idPatient);
-	File getMyImage(Integer id);
+
 	
 }

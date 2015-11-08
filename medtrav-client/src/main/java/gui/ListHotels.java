@@ -185,225 +185,73 @@ public class ListHotels extends JFrame {
 				pricesuite.setText("");
 			}
 		});
-
-		JLabel picture = new JLabel("");
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-		gl_panel_1
-				.setHorizontalGroup(gl_panel_1
-						.createParallelGroup(Alignment.LEADING)
-						.addGroup(
-								gl_panel_1
-										.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(
-												gl_panel_1
-														.createParallelGroup(
-																Alignment.LEADING)
-														.addComponent(
-																lblPriceForSingle)
-														.addComponent(
-																lblPriceForSuite)
-														.addComponent(lblName)
-														.addComponent(
-																lblDescription)
-														.addComponent(
-																lblAddress)
-														.addComponent(lblState)
-														.addComponent(lblStars))
-										.addPreferredGap(
-												ComponentPlacement.RELATED)
-										.addGroup(
-												gl_panel_1
-														.createParallelGroup(
-																Alignment.LEADING)
-														.addGroup(
-																gl_panel_1
-																		.createParallelGroup(
-																				Alignment.LEADING)
-																		.addComponent(
-																				comboBoxstars,
-																				GroupLayout.PREFERRED_SIZE,
-																				GroupLayout.DEFAULT_SIZE,
-																				GroupLayout.PREFERRED_SIZE)
-																		.addComponent(
-																				pricesingle,
-																				GroupLayout.PREFERRED_SIZE,
-																				GroupLayout.DEFAULT_SIZE,
-																				GroupLayout.PREFERRED_SIZE))
-														.addGroup(
-																gl_panel_1
-																		.createParallelGroup(
-																				Alignment.LEADING)
-																		.addComponent(
-																				pricesuite,
-																				GroupLayout.PREFERRED_SIZE,
-																				GroupLayout.DEFAULT_SIZE,
-																				GroupLayout.PREFERRED_SIZE)
-																		.addComponent(
-																				comboBoxstate,
-																				GroupLayout.PREFERRED_SIZE,
-																				GroupLayout.DEFAULT_SIZE,
-																				GroupLayout.PREFERRED_SIZE)
-																		.addComponent(
-																				address,
-																				GroupLayout.PREFERRED_SIZE,
-																				GroupLayout.DEFAULT_SIZE,
-																				GroupLayout.PREFERRED_SIZE)
-																		.addComponent(
-																				description,
-																				GroupLayout.PREFERRED_SIZE,
-																				GroupLayout.DEFAULT_SIZE,
-																				GroupLayout.PREFERRED_SIZE)
-																		.addComponent(
-																				name,
-																				GroupLayout.PREFERRED_SIZE,
-																				GroupLayout.DEFAULT_SIZE,
-																				GroupLayout.PREFERRED_SIZE)))
-										.addPreferredGap(
-												ComponentPlacement.RELATED, 65,
-												Short.MAX_VALUE)
-										.addGroup(
-												gl_panel_1
-														.createParallelGroup(
-																Alignment.TRAILING)
-														.addGroup(
-																gl_panel_1
-																		.createSequentialGroup()
-																		.addGroup(
-																				gl_panel_1
-																						.createParallelGroup(
-																								Alignment.LEADING,
-																								false)
-																						.addComponent(
-																								delete,
-																								GroupLayout.DEFAULT_SIZE,
-																								GroupLayout.DEFAULT_SIZE,
-																								Short.MAX_VALUE)
-																						.addComponent(
-																								update,
-																								GroupLayout.DEFAULT_SIZE,
-																								GroupLayout.DEFAULT_SIZE,
-																								Short.MAX_VALUE))
-																		.addGap(63))
-														.addGroup(
-																Alignment.LEADING,
-																gl_panel_1
-																		.createSequentialGroup()
-																		.addComponent(
-																				picture,
-																				GroupLayout.PREFERRED_SIZE,
-																				109,
-																				GroupLayout.PREFERRED_SIZE)
-																		.addGap(21)))));
-		gl_panel_1
-				.setVerticalGroup(gl_panel_1
-						.createParallelGroup(Alignment.TRAILING)
-						.addGroup(
-								gl_panel_1
-										.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(
-												gl_panel_1
-														.createParallelGroup(
-																Alignment.BASELINE)
-														.addComponent(lblName)
-														.addComponent(
-																name,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(
-												ComponentPlacement.RELATED)
-										.addGroup(
-												gl_panel_1
-														.createParallelGroup(
-																Alignment.BASELINE)
-														.addComponent(
-																lblDescription)
-														.addComponent(
-																description,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(
-												ComponentPlacement.RELATED)
-										.addGroup(
-												gl_panel_1
-														.createParallelGroup(
-																Alignment.BASELINE)
-														.addComponent(
-																lblAddress)
-														.addComponent(
-																address,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(
-												ComponentPlacement.RELATED)
-										.addGroup(
-												gl_panel_1
-														.createParallelGroup(
-																Alignment.BASELINE)
-														.addComponent(lblState)
-														.addComponent(
-																comboBoxstate,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(
-												ComponentPlacement.RELATED)
-										.addGroup(
-												gl_panel_1
-														.createParallelGroup(
-																Alignment.BASELINE)
-														.addComponent(lblStars)
-														.addComponent(
-																comboBoxstars,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(
-												ComponentPlacement.RELATED)
-										.addGroup(
-												gl_panel_1
-														.createParallelGroup(
-																Alignment.BASELINE)
-														.addComponent(
-																lblPriceForSingle)
-														.addComponent(
-																pricesingle,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(
-												ComponentPlacement.RELATED)
-										.addGroup(
-												gl_panel_1
-														.createParallelGroup(
-																Alignment.BASELINE)
-														.addComponent(
-																lblPriceForSuite)
-														.addComponent(
-																pricesuite,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE))
-										.addContainerGap(
-												GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE))
-						.addGroup(
-								gl_panel_1
-										.createSequentialGroup()
-										.addContainerGap(22, Short.MAX_VALUE)
-										.addComponent(picture,
-												GroupLayout.PREFERRED_SIZE, 89,
-												GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(
-												ComponentPlacement.UNRELATED)
-										.addComponent(update)
-										.addPreferredGap(
-												ComponentPlacement.RELATED)
-										.addComponent(delete).addGap(24)));
+		gl_panel_1.setHorizontalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblPriceForSingle)
+						.addComponent(lblPriceForSuite)
+						.addComponent(lblName)
+						.addComponent(lblDescription)
+						.addComponent(lblAddress)
+						.addComponent(lblState)
+						.addComponent(lblStars))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addComponent(comboBoxstars, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(pricesingle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(pricesuite, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(comboBoxstate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(address, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(description, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(name, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(delete, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(update, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addGap(63))
+		);
+		gl_panel_1.setVerticalGroup(
+			gl_panel_1.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblName)
+						.addComponent(name, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblDescription)
+						.addComponent(description, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblAddress)
+						.addComponent(address, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblState)
+						.addComponent(comboBoxstate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblStars)
+						.addComponent(comboBoxstars, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblPriceForSingle)
+						.addComponent(pricesingle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblPriceForSuite)
+						.addComponent(pricesuite, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addContainerGap(122, Short.MAX_VALUE)
+					.addComponent(update)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(delete)
+					.addGap(24))
+		);
 		panel_1.setLayout(gl_panel_1);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -416,9 +264,6 @@ public class ListHotels extends JFrame {
 				name.setText(hotel.getName());
 				address.setText(hotel.getAddress());
 				description.setText(hotel.getDescription());
-				ImageIcon icon = new ImageIcon(getClass().getResource(
-						"medtrav.JPG"));
-				picture.setIcon((Icon) icon);
 			}
 		});
 		GroupLayout gl_panel = new GroupLayout(panel);
