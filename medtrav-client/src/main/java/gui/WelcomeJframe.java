@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.GroupLayout;
@@ -36,8 +38,6 @@ import delegates.UserServicesDelegate;
 import entities.Doctor;
 import entities.Surgery;
 import entities.User;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class WelcomeJframe extends JFrame {
 
@@ -54,8 +54,7 @@ public class WelcomeJframe extends JFrame {
 	private Doctor selectedDoctor = new Doctor();
 	private JTable table;
 	private JLabel lblDoctorDescription;
-	
-	
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -159,8 +158,6 @@ public class WelcomeJframe extends JFrame {
 			}
 		});
 
-		
-		
 		JLabel label_2 = new JLabel("");
 
 		JLabel label_3 = new JLabel("");
@@ -168,8 +165,6 @@ public class WelcomeJframe extends JFrame {
 		JLabel label_4 = new JLabel("");
 
 		JLabel lblDescriptionLabel = new JLabel("");
-		
-		
 
 		JLabel lblUser = new JLabel("");
 		lblUser.setIcon(new ImageIcon(WelcomeJframe.class
@@ -192,9 +187,9 @@ public class WelcomeJframe extends JFrame {
 							.doFindSurgeryById(cbTreatment.getSelectedIndex());
 					UserServicesDelegate.doBookSurgery(surgery, "Test", 1);
 					System.out.println(surgery.getName());
-					
+
 					selectedDoctor = doctors.get(table.getSelectedRow());
-					
+
 					UserServicesDelegate.doChooseDoctor(selectedDoctor, 1);
 
 				}
@@ -209,7 +204,6 @@ public class WelcomeJframe extends JFrame {
 
 		lblDoctorDescription = new JLabel("");
 		lblDoctorDescription.setForeground(Color.BLACK);
-		
 
 		lblError.setFont(new Font("Tahoma", Font.ITALIC, 14));
 		lblError.setForeground(Color.RED);
