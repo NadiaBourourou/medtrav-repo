@@ -22,7 +22,7 @@ public interface FlightServicesLocal {
 	List<Flight> findFlightsByAirline(String airline);
 	
 	Boolean assignFlightToBooking(Integer idBooking,Integer idFlight);
-	Boolean assignFlightToBookingSlaveSide(Integer idBooking,Integer idFlight);
+	//Boolean assignFlightToBookingSlaveSide(Integer idBooking,Integer idFlight);
 	
 	Boolean assignDoctorToSurgery(Integer idSurgery,Integer idDoctor);
 	Boolean assignDoctorToSurgerySlaveSide(Integer idSurgery,Integer idDoctor);

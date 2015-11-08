@@ -1,13 +1,12 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -36,8 +35,7 @@ public class SurgeryPatient implements Serializable {
 		this.surgeryPatientID = surgeryPatientID;
 		this.commentaire = commentaire;
 	}
-  
-	
+
 	@EmbeddedId
 	public SurgeryPatientID getSurgeryPatientID() {
 		return surgeryPatientID;

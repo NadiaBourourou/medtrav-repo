@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -52,8 +54,8 @@ public class Book extends JFrame {
 	private JTextField thotel;
 	private JTextField tclinic;
 	private JTextField tsurgery;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField arrival;
+	private JTextField departure;
 	private JTextField tdoctor;
 
 	/**
@@ -129,13 +131,13 @@ public class Book extends JFrame {
 		JLabel lblFlight = new JLabel("Flight");
 		lblFlight.setBounds(343, 102, 56, 14);
 
-		textField_3 = new JTextField();
-		textField_3.setBounds(313, 143, 86, 20);
-		textField_3.setColumns(10);
+		arrival = new JTextField();
+		arrival.setBounds(313, 143, 86, 20);
+		arrival.setColumns(10);
 
-		textField_4 = new JTextField();
-		textField_4.setBounds(313, 193, 86, 20);
-		textField_4.setColumns(10);
+		departure = new JTextField();
+		departure.setBounds(313, 193, 86, 20);
+		departure.setColumns(10);
 
 		JLabel lblArrival = new JLabel("Arrival");
 		lblArrival.setBounds(314, 127, 56, 14);
@@ -173,9 +175,9 @@ public class Book extends JFrame {
 		contentPane.add(lblSurgery);
 		contentPane.add(lblFlight);
 		contentPane.add(lblArrival);
-		contentPane.add(textField_3);
+		contentPane.add(arrival);
 		contentPane.add(lblDeparture);
-		contentPane.add(textField_4);
+		contentPane.add(departure);
 		contentPane.add(tsurgery);
 
 		JButton btnChangeClinic = new JButton("Change clinic");
@@ -213,8 +215,11 @@ public class Book extends JFrame {
 						.doFindDoctorPatientByPatientId(1);
 				booking.setDoctorPatient(doctorPatient);
 
+				// Flight
+				flight = BookingServicesDelegate.doFindFlightByPatientId(1);
+				booking.setFlight(flight);
+
 				BookingServicesDelegate.doAddBooking(booking);
-				
 
 			}
 		});
@@ -248,10 +253,21 @@ public class Book extends JFrame {
 				tdoctor.setText(doctorPatient.getDoctor().getLastName() + "  "
 						+ doctorPatient.getDoctor().getFirstName());
 
-				/*
-				 * flight = FlightServicesDelegate.doFindFlightByPatientId(1);
-				 * Date arrive = (Date) flight.getArrivalDate();
-				 */
+				// Flight
+				flight = BookingServicesDelegate.doFindFlightByPatientId(1);
+				Date arrive = (Date) flight.getArrivalDate();
+				Date depart = (Date) flight.getDepartureDate();
+
+				SimpleDateFormat sdfr = new SimpleDateFormat("dd/MMM/yyyy");
+
+				String dateArriveString = null;
+				String dateDepartString = null;
+
+				dateArriveString = sdfr.format(arrive);
+				dateDepartString = sdfr.format(depart);
+
+				arrival.setText(dateArriveString);
+				departure.setText(dateDepartString);
 
 			}
 		});
@@ -269,8 +285,10 @@ public class Book extends JFrame {
 		JButton button_2 = new JButton("");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				
+
+				booking = BookingServicesDelegate.doFindBookingByPatientId(1);
+				BookingServicesDelegate.doDeleteBookingByPatientId(booking);
+
 			}
 		});
 		button_2.setIcon(new ImageIcon(Book.class
