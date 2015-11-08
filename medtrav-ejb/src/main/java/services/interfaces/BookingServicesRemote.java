@@ -35,7 +35,7 @@ public interface BookingServicesRemote {
 
 	Booking findBookingByPatientId(Integer idPatient);
 
-	Boolean deleteBookingByPatientId(Integer idPatient);
+	Boolean deleteBookingByPatientId(Booking booking);
 
 	HotelBooking findHotelBookingByPatientId(Integer idPatient);
 

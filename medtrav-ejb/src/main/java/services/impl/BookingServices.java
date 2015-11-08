@@ -72,13 +72,11 @@ public class BookingServices implements BookingServicesRemote,
 	}
 
 	@Override
-	public Boolean deleteBookingByPatientId(Integer idPatient) {
+	public Boolean deleteBookingByPatientId(Booking booking) {
 		Boolean b = false;
 		try {
-			HotelBooking hotelBooking1 = new HotelBooking();
-			hotelBooking1 = findHotelBookingByPatientId(idPatient);
 
-			entitymanager.remove(hotelBooking1.getBooking());
+			entitymanager.remove(booking);
 			b = true;
 		} catch (Exception e) {
 			System.err.println("Error");
@@ -135,7 +133,10 @@ public class BookingServices implements BookingServicesRemote,
 
 	@Override
 	public Booking findBookingByPatientId(Integer idPatient) {
-		return entitymanager.find(Booking.class, idPatient);
+		String jpql = "select b from Booking b where b.hotelBooking.patient.userId=:param";
+		Query query = entitymanager.createQuery(jpql);
+		query.setParameter("param", idPatient);
+		return (Booking) query.getSingleResult();
 	}
 
 	@SuppressWarnings("unchecked")

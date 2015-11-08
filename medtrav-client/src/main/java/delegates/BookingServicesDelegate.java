@@ -33,8 +33,8 @@ public class BookingServicesDelegate {
 		return getProxy().findBookingById(idBooking);
 	}
 
-	public static void doDeleteBookingByPatientId(Integer idPatient) {
-		getProxy().deleteBookingByPatientId(idPatient);
+	public static void doDeleteBookingByPatientId(Booking booking) {
+		getProxy().deleteBookingByPatientId(booking);
 	}
 
 	public static Booking doFindBookingByPatientId(Integer idPatient) {
