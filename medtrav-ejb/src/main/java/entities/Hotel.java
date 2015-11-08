@@ -33,7 +33,7 @@ public class Hotel implements Serializable {
 	private Double priceSuite;
 	private Integer stars;
 	private List<ServiceHotel> servicesHotel;
-	private File pic;
+	
 	private List<HotelBooking> hotelBookings;
 
 	private static final long serialVersionUID = 1L;
@@ -108,15 +108,6 @@ public class Hotel implements Serializable {
 		this.stars = stars;
 	}
 
-	@Lob
-	@Basic(fetch = FetchType.LAZY)
-	public File getPic() {
-		return pic;
-	}
-
-	public void setPic(File pic) {
-		this.pic = pic;
-	}
 
 	@OneToMany(mappedBy = "hotel", cascade = CascadeType.MERGE)
 	public List<HotelBooking> getHotelBookings() {

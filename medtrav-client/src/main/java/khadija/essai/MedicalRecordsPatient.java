@@ -23,6 +23,7 @@ import javax.swing.border.EmptyBorder;
 
 import delegates.MedicalRecordsDelegate;
 import entities.Patient;
+import java.awt.Color;
 
 public class MedicalRecordsPatient extends JFrame {
 
@@ -54,6 +55,7 @@ public class MedicalRecordsPatient extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
@@ -118,25 +120,21 @@ public class MedicalRecordsPatient extends JFrame {
 							.addComponent(lblAnalysis)
 							.addGap(35)
 							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
+							.addGap(10)
 							.addComponent(btnAdd))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(83)
 							.addComponent(btnAdd_1)))
-					.addContainerGap(171, Short.MAX_VALUE))
+					.addContainerGap(179, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-							.addGap(119)
-							.addComponent(btnAdd, GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap(136, Short.MAX_VALUE)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblAnalysis))))
+					.addContainerGap(135, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblAnalysis)
+						.addComponent(btnAdd, GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
 					.addGap(46)
 					.addComponent(btnAdd_1)
 					.addGap(27))
