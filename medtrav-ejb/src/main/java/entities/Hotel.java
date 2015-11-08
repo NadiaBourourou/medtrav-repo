@@ -3,11 +3,14 @@ package entities;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -28,7 +31,7 @@ public class Hotel implements Serializable {
 	private Double priceSuite;
 	private Integer stars;
 	private List<ServiceHotel> servicesHotel;
-	// private byte[] pic;
+	private byte[] pic;
 	private List<HotelBooking> hotelBookings;
 
 	private static final long serialVersionUID = 1L;
@@ -95,7 +98,6 @@ public class Hotel implements Serializable {
 		this.priceSuite = priceSuite;
 	}
 
-
 	public Integer getStars() {
 		return this.stars;
 	}
@@ -104,15 +106,15 @@ public class Hotel implements Serializable {
 		this.stars = stars;
 	}
 
-	// @Lob
-	// public byte[] getPic() {
-	// return pic;
-	// }
-	// public void setPic(byte[] pic) {
-	// this.pic = pic;
-	// }
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	public byte[] getPic() {
+		return pic;
+	}
 
-
+	public void setPic(byte[] pic) {
+		this.pic = pic;
+	}
 
 	@OneToMany(mappedBy = "hotel", cascade = CascadeType.MERGE)
 	public List<HotelBooking> getHotelBookings() {
@@ -123,7 +125,7 @@ public class Hotel implements Serializable {
 		this.hotelBookings = hotelBookings;
 	}
 
-	@OneToMany(mappedBy="hotel",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
 	public List<ServiceHotel> getServicesHotel() {
 		return servicesHotel;
 	}
@@ -131,7 +133,5 @@ public class Hotel implements Serializable {
 	public void setServicesHotel(List<ServiceHotel> servicesHotel) {
 		this.servicesHotel = servicesHotel;
 	}
-	
-	
 
 }

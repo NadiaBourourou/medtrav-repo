@@ -8,6 +8,7 @@ import delegates.UserServicesDelegate;
 import entities.Administrator;
 import entities.Doctor;
 import entities.Patient;
+import entities.User;
 import entities.Procedure;
 import entities.RoleType;
 import entities.Surgery;
@@ -35,7 +36,7 @@ public class PopulateDb {
 		Patient patient2 = new Patient();
 		patient2.setFirstName("Sam");
 		patient2.setLastName("Heinrich");
-		patient2.setCin("1000634");
+	patient2.setCin("1000634");
 		patient2.setCountry("Germay");
 		patient2.setDateOfBirth(Date.valueOf("1984-6-12"));
 		patient2.setLogin("Sam.Heinrich");

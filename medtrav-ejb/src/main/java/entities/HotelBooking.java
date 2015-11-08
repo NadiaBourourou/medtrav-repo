@@ -1,13 +1,12 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  * Entity implementation class for Entity: HotelBooking
@@ -25,7 +24,7 @@ public class HotelBooking implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Patient patient;
-	private List<Booking> bookings;
+	private Booking booking;
 
 	public HotelBooking() {
 		super();
@@ -96,13 +95,13 @@ public class HotelBooking implements Serializable {
 		this.patient = patient;
 	}
 
-	@OneToMany(mappedBy = "hotelBooking")
-	public List<Booking> getBooking() {
-		return bookings;
+	@OneToOne(mappedBy = "hotelBooking")
+	public Booking getBooking() {
+		return booking;
 	}
 
-	public void setBooking(List<Booking> bookings) {
-		this.bookings = bookings;
+	public void setBooking(Booking booking) {
+		this.booking = booking;
 	}
 
 }

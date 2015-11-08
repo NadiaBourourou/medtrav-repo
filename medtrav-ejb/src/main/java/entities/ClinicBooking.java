@@ -1,6 +1,8 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -17,7 +19,7 @@ public class ClinicBooking implements Serializable {
 
 	private ClinicBookingID clinicBookingId;
 	private RoomClinicType typeRoom;
-	private String date;
+	private Date date;
 	private String commentaire;
 	private static final long serialVersionUID = 1L;
 	private Clinic clinic;
@@ -28,7 +30,7 @@ public class ClinicBooking implements Serializable {
 		super();
 	}
 
-	public ClinicBooking(RoomClinicType typeRoom, String date,
+	public ClinicBooking(RoomClinicType typeRoom, Date date,
 			String commentaire, Clinic clinic, Patient patient) {
 		super();
 		this.clinicBookingId = new ClinicBookingID(clinic.getClinicId(),
@@ -57,11 +59,11 @@ public class ClinicBooking implements Serializable {
 		this.typeRoom = typeRoom;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return this.date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

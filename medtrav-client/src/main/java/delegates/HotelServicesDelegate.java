@@ -5,6 +5,8 @@ import java.util.List;
 import locator.ServiceLocator;
 import services.interfaces.HotelServicesRemote;
 import entities.Hotel;
+import entities.HotelBooking;
+import entities.RoomType;
 
 public class HotelServicesDelegate {
 	private HotelServicesRemote remote;
@@ -45,6 +47,26 @@ public class HotelServicesDelegate {
 	
 	public static List<Hotel> doFindAllHotelsEnabled () {
 		return getProxy().findAllHotelsEnabled();
+	}
+	public static Double doCalculPrix(Double prix, Integer numNights) {
+		return getProxy().calculPrix(prix, numNights);
+	}
+
+	public static boolean doAddHotelBooking (HotelBooking hb){
+		return getProxy().addHotelBooking(hb);
+	}
+	
+
+	public static Hotel doFindHotelByPatientId(Integer idPatient){
+		return getProxy().findHotelByPatientId(idPatient);
+	}
+	
+	public static Boolean doBookHotel(Integer numNights, Double price, RoomType roomType, Hotel hotel, Integer idPatient){
+		return getProxy().bookHotel(numNights,price,roomType,hotel, idPatient);
+	}
+	
+	public static byte[] doGetMyImage(Integer id) {
+		return getProxy().getMyImage( id);
 	}
 
 }

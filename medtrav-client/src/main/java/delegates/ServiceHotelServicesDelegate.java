@@ -37,4 +37,8 @@ public class ServiceHotelServicesDelegate {
 	public static Boolean doDeleteServiceHotel(ServiceHotel serviceHotel){
 		return getProxy().deleteServiceHotel(serviceHotel);
 	}
+	
+	public static List<ServiceHotel> doFindHotelServiceByHotelName(String name){
+		return getProxy().findHotelServiceByHotelName(name);
+	}
 }

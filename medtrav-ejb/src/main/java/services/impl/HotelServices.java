@@ -9,7 +9,10 @@ import javax.persistence.Query;
 
 import entities.Doctor;
 import entities.Hotel;
+import entities.HotelBooking;
+import entities.Patient;
 import entities.RoleType;
+import entities.RoomType;
 import entities.StateType;
 import services.interfaces.HotelServicesLocal;
 import services.interfaces.HotelServicesRemote;
@@ -111,6 +114,59 @@ public class HotelServices implements HotelServicesRemote, HotelServicesLocal {
 		query.setParameter("param", StateType.ENABLED);
 		return query.getResultList();
 	}
+	@Override
+	public Double calculPrix(Double prix, Integer numNights) {
+	
+			return prix*numNights; 
+		}
+	
+	
 	
 
-}
+	@Override
+	public Boolean addHotelBooking(HotelBooking hb) {
+		Boolean b= false; 
+		try {  entityManager.merge(hb);
+		
+			b= true;
+		} catch (Exception e) {
+			System.err.println("error");
+		}
+		return b;
+	}
+	
+	@Override
+	public Hotel findHotelByPatientId(Integer idPatient) {
+		 String jpql = "select h from Hotel h join h.hotelBookings hbs where hbs.patient.userId=:param";
+		 Query query= entityManager.createQuery(jpql);
+		 query.setParameter("param", idPatient);
+		 return  (Hotel) query.getSingleResult();
+		
+	}
+
+	@Override
+	public Boolean bookHotel(Integer numNights, Double price,
+			RoomType roomType, Hotel hotel, Integer idPatient) {
+		Boolean b = false;
+		try {
+			Patient patient= entityManager.find(Patient.class,idPatient);
+			HotelBooking hotelBooking = new HotelBooking(numNights, price,
+				roomType, hotel, patient);
+			entityManager.merge(hotelBooking);
+			b = true;
+		} catch (Exception e) {
+		}
+		return b;
+	}
+
+	@Override
+	public byte[] getMyImage(Integer id) {
+			String jpql = "select m.pic from Hotel m where m.hotelId=:param";
+			 Query query = entityManager.createQuery(jpql);
+			    query.setParameter("param", id);    
+			    Object o = query.getSingleResult();	    
+			    byte[] tmpArray = (byte[]) o; 
+			    return tmpArray;	}
+	}
+
+
