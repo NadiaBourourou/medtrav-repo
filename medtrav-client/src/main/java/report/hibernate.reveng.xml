@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-catalog="medtravdb" match-name="clinicbooking"/>
+  <table-filter match-catalog="medtravdb" match-name="doctorpatient"/>
+  <table-filter match-catalog="medtravdb" match-name="flightmatching"/>
+  <table-filter match-catalog="medtravdb" match-name="hibernate_sequence"/>
+  <table-filter match-catalog="medtravdb" match-name="hotelbooking"/>
+  <table-filter match-catalog="medtravdb" match-name="servicehotel"/>
+  <table-filter match-catalog="medtravdb" match-name="t_booking"/>
+  <table-filter match-catalog="medtravdb" match-name="t_clinic"/>
+  <table-filter match-catalog="medtravdb" match-name="t_facility"/>
+  <table-filter match-catalog="medtravdb" match-name="t_flight"/>
+  <table-filter match-catalog="medtravdb" match-name="t_hotel"/>
+  <table-filter match-catalog="medtravdb" match-name="t_medicalrecords"/>
+  <table-filter match-catalog="medtravdb" match-name="t_procedure"/>
+  <table-filter match-catalog="medtravdb" match-name="t_question"/>
+  <table-filter match-catalog="medtravdb" match-name="t_surgery"/>
+  <table-filter match-catalog="medtravdb" match-name="t_surgerypatient"/>
+  <table-filter match-catalog="medtravdb" match-name="t_testimony"/>
+  <table-filter match-catalog="medtravdb" match-name="t_treatment"/>
+  <table-filter match-catalog="medtravdb" match-name="t_user"/>
+</hibernate-reverse-engineering>

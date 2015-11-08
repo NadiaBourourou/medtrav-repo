@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -25,12 +27,21 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.swing.JRViewer;
+import net.sf.jasperreports.view.JasperViewer;
+
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
+
+import com.mysql.jdbc.Connection;
 
 import delegates.HotelServicesDelegate;
 import entities.Hotel;
@@ -608,5 +619,24 @@ public class ListHotels extends JFrame {
 						jTableBeanProperty_3, comboBoxstars,
 						jComboBoxBeanProperty);
 		autoBinding_13.bind();
+	}
+	private void showreport() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con = (Connection) DriverManager
+					.getConnection(
+							"jdbc:mysql://localhost:3306/medtravdb",
+							"root", "");
+			String sourceName = "src/main/java/report/report1.jrxml";
+			JasperReport report = JasperCompileManager
+					.compileReport(sourceName);
+			JasperPrint filedReport = JasperFillManager.fillReport(report,
+					null, con);
+			JasperViewer.viewReport(filedReport);
+			this.getContentPane().add(new JRViewer(filedReport));
+			this.pack();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+		}
 	}
 }
