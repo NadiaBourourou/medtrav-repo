@@ -5,6 +5,8 @@ import java.util.List;
 import javax.ejb.Local;
 
 import entities.Hotel;
+import entities.HotelBooking;
+import entities.RoomType;
 
 @Local
 public interface HotelServicesLocal {
@@ -20,4 +22,12 @@ public interface HotelServicesLocal {
 	Boolean deleteHotel(Hotel hotel);
 
 	List<Hotel> findAllHotels();
+
+	Double calculPrix(Double prix, Integer numNights);
+
+	Boolean addHotelBooking(HotelBooking hb);
+
+	Hotel findHotelByPatientId(Integer idPatient);
+	
+	Boolean bookHotel(Integer numNights, Double price, RoomType roomType, Hotel hotel, Integer idPatient);
 }

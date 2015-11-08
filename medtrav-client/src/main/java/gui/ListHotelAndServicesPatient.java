@@ -153,7 +153,7 @@ public class ListHotelAndServicesPatient extends JFrame {
 			
 				servicesHotels= ServiceHotelServicesDelegate.doFindAllServicesHotelByHotel(index);
 				
-				initDataBindings();
+				initDataBindingss();
 			}
 		});
 		
@@ -163,9 +163,10 @@ public class ListHotelAndServicesPatient extends JFrame {
 		panel.setLayout(gl_panel);
 		contentPane.setLayout(gl_contentPane);
 		initDataBindings();
+		initDataBindingss();
 	}
 	protected void initDataBindings() {
-		JTableBinding<Hotel, List<Hotel>, JTable> jTableBinding = SwingBindings.createJTableBinding(UpdateStrategy.READ_WRITE, hotels, tableHotel);
+		JTableBinding<Hotel, List<Hotel>, JTable> jTableBinding = SwingBindings.createJTableBinding(UpdateStrategy.READ, hotels, tableHotel);
 		//
 		BeanProperty<Hotel, String> hotelBeanProperty = BeanProperty.create("name");
 		jTableBinding.addColumnBinding(hotelBeanProperty).setColumnName("Name Hotel");
@@ -208,8 +209,10 @@ public class ListHotelAndServicesPatient extends JFrame {
 		BeanProperty<Hotel, String> hotelBeanProperty_9 = BeanProperty.create("address");
 		AutoBinding<JTable, String, Hotel, String> autoBinding_4 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, tableHotel, jTableBeanProperty_4, hotel, hotelBeanProperty_9);
 		autoBinding_4.bind();
+	}
+	protected void initDataBindingss() {
 		//
-		JTableBinding<ServiceHotel, List<ServiceHotel>, JTable> jTableBinding_1 = SwingBindings.createJTableBinding(UpdateStrategy.READ_WRITE, servicesHotels, tableServiceHotel);
+		JTableBinding<ServiceHotel, List<ServiceHotel>, JTable> jTableBinding_1 = SwingBindings.createJTableBinding(UpdateStrategy.READ, servicesHotels, tableServiceHotel);
 		//
 		BeanProperty<ServiceHotel, String> serviceHotelBeanProperty = BeanProperty.create("name");
 		jTableBinding_1.addColumnBinding(serviceHotelBeanProperty).setColumnName("Name Of Service");

@@ -79,10 +79,11 @@ public class MedicalRecordsPatient extends JFrame {
 				FileReader fr = null;
 				try {
 					fr = new FileReader(fichier);
-				} catch (FileNotFoundException e1) {
+				} catch (FileNotFoundException e2) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					e2.printStackTrace();
 				}
+	
 				ArrayList<Byte> list = new ArrayList<Byte>();
 				int s;
 				try {

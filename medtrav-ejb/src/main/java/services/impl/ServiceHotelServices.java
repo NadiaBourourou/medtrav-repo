@@ -94,4 +94,12 @@ EntityManager entityManager;
 		return b;
 	}
 
+	@Override
+	public List<ServiceHotel> findHotelServiceByHotelName(String name) {
+		String jpql = "select b from ServiceHotel b where b.hotel.name=:param";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", name);
+		return query.getResultList();
+	}
+
 }
