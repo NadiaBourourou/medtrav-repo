@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import com.toedter.calendar.JCalendar;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AddFlight {
 
@@ -88,6 +90,10 @@ public class AddFlight {
 		lblReturn.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		JButton btnOk = new JButton("OK");
+		btnOk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(AddFlight.class
