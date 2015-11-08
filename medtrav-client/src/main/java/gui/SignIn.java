@@ -10,14 +10,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import org.hibernate.type.IntegerType;
+
+import delegates.FeaturesDomainDelegate;
 import delegates.UserServicesDelegate;
 import entities.Patient;
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
+import entities.UserSexe;
 
 public class SignIn extends JFrame {
 
@@ -29,6 +32,8 @@ public class SignIn extends JFrame {
 	private JTextField mail;
 	JLabel lblError = new JLabel("");
 	Patient newPatient = new Patient();
+	Choice choice = new Choice();
+	private JTextField passport;
 
 	/**
 	 * Launch the application.
@@ -59,25 +64,25 @@ public class SignIn extends JFrame {
 		setContentPane(contentPane);
 
 		JLabel lblFirstName = new JLabel("First Name");
-		lblFirstName.setBounds(24, 99, 68, 14);
+		lblFirstName.setBounds(24, 99, 141, 14);
 
 		JLabel lblLastName = new JLabel("Last Name");
-		lblLastName.setBounds(24, 127, 74, 14);
+		lblLastName.setBounds(24, 127, 113, 14);
 
 		JLabel lblNewLabel = new JLabel("CIN");
-		lblNewLabel.setBounds(24, 205, 18, 14);
+		lblNewLabel.setBounds(24, 205, 74, 14);
 
 		JLabel lblNewLabel_1 = new JLabel("Country");
-		lblNewLabel_1.setBounds(24, 230, 39, 14);
+		lblNewLabel_1.setBounds(24, 230, 74, 14);
 
 		JLabel lblDateOfBirth = new JLabel("Date of birth");
-		lblDateOfBirth.setBounds(24, 155, 61, 14);
+		lblDateOfBirth.setBounds(24, 155, 113, 14);
 
 		JLabel lblMail = new JLabel("Mail");
-		lblMail.setBounds(24, 255, 18, 14);
+		lblMail.setBounds(24, 288, 113, 14);
 
 		firstName = new JTextField();
-		firstName.setBounds(128, 96, 213, 20);
+		firstName.setBounds(195, 96, 213, 20);
 		firstName.setColumns(10);
 		contentPane.setLayout(null);
 		contentPane.add(lblMail);
@@ -90,22 +95,22 @@ public class SignIn extends JFrame {
 
 		lastName = new JTextField();
 		lastName.setColumns(10);
-		lastName.setBounds(128, 124, 213, 20);
+		lastName.setBounds(195, 124, 213, 20);
 		contentPane.add(lastName);
 
 		cin = new JTextField();
 		cin.setColumns(10);
-		cin.setBounds(128, 202, 213, 20);
+		cin.setBounds(195, 202, 213, 20);
 		contentPane.add(cin);
 
 		country = new JTextField();
 		country.setColumns(10);
-		country.setBounds(128, 227, 213, 20);
+		country.setBounds(195, 227, 213, 20);
 		contentPane.add(country);
 
 		mail = new JTextField();
 		mail.setColumns(10);
-		mail.setBounds(128, 252, 213, 20);
+		mail.setBounds(195, 285, 213, 20);
 		contentPane.add(mail);
 
 		JLabel label = new JLabel("");
@@ -115,7 +120,7 @@ public class SignIn extends JFrame {
 		contentPane.add(label);
 
 		JLabel lblSexe = new JLabel("Sexe");
-		lblSexe.setBounds(24, 180, 46, 14);
+		lblSexe.setBounds(24, 180, 94, 14);
 		contentPane.add(lblSexe);
 
 		JLabel label_1 = new JLabel("");
@@ -137,7 +142,14 @@ public class SignIn extends JFrame {
 
 					newPatient.setFirstName(firstName.getText());
 					newPatient.setLastName(lastName.getText());
-
+					if (choice.getSelectedIndex() == 0) {
+						newPatient.setSexe(UserSexe.Male);
+					} else if (choice.getSelectedIndex() == 1) {
+						newPatient.setSexe(UserSexe.Female);
+					} else if (choice.getSelectedIndex() == 2) {
+						newPatient.setSexe(UserSexe.Other);
+					}
+					newPatient.setNumPassport(Integer.parseInt(passport.getText()));
 					newPatient.setCin(cin.getText());
 					newPatient.setMail(mail.getText());
 					// mail.getText().contains('@');
@@ -147,10 +159,26 @@ public class SignIn extends JFrame {
 					newPatient.setPassword("pwd" + firstName.getText());
 
 					UserServicesDelegate.doAddPatient(newPatient);
+					String message = FeaturesDomainDelegate
+							.doPatientLoginAndPassword(newPatient.getLogin(),
+									newPatient.getPassword());
+
+					String[] to = { newPatient.getMail() };
+
+					if (FeaturesDomainDelegate.doSendEmail(
+							"medtrav.gtech@gmail.com", "pidevgtech", message,
+							to)) {
+						System.out.println("Email sent successfully");
+						JOptionPane
+								.showConfirmDialog(null,
+										"Please check your mail to get your credentials.");
+					} else
+						System.out.println("Some error occured");
+
 				}
 			}
 		});
-		btnRegister.setBounds(252, 314, 89, 23);
+		btnRegister.setBounds(319, 336, 89, 23);
 		contentPane.add(btnRegister);
 
 		JButton btnReset = new JButton("Reset");
@@ -165,7 +193,7 @@ public class SignIn extends JFrame {
 
 			}
 		});
-		btnReset.setBounds(128, 314, 89, 23);
+		btnReset.setBounds(191, 336, 89, 23);
 		contentPane.add(btnReset);
 
 		JButton btnBack = new JButton("Back");
@@ -173,15 +201,22 @@ public class SignIn extends JFrame {
 		contentPane.add(btnBack);
 		lblError.setForeground(Color.RED);
 
-		lblError.setBounds(24, 280, 306, 23);
+		lblError.setBounds(10, 313, 185, 23);
 		contentPane.add(lblError);
 
-		Choice choice = new Choice();
-	
 		choice.add("Male");
 		choice.add("Female");
 		choice.add("3rd gender");
-		choice.setBounds(128, 174, 213, 20);
+		choice.setBounds(195, 176, 213, 20);
 		contentPane.add(choice);
+		
+		JLabel lblPassportNumber = new JLabel("Passport Number");
+		lblPassportNumber.setBounds(24, 263, 113, 14);
+		contentPane.add(lblPassportNumber);
+		
+		passport = new JTextField();
+		passport.setColumns(10);
+		passport.setBounds(195, 258, 213, 20);
+		contentPane.add(passport);
 	}
 }

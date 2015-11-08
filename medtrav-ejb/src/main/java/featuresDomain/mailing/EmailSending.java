@@ -66,4 +66,13 @@ public class EmailSending implements EmailSendingRemote {
 		return "<img src='http://img15.hostingpics.net/pics/187393Capture2.png' width:100% />"
 				+ "";
 	}
+
+	public String patientLoginAndPassword(String login, String pwd) {
+		String newLine = System.getProperty("line.separator");
+		return "Welcome to MedTrav." + newLine + newLine
+				+ "  You can now login with these credentials : " + newLine
+				+ "Login : " + login + newLine + "Password : " + pwd + newLine;
+
+	}
+
 }

@@ -38,7 +38,7 @@ public class AdminUI extends JFrame {
 	}
 
 	public AdminUI(User admin) {
-		lblLoggedAs.setText("You are logged in as : \n" + admin.getLastName());
+		lblLoggedAs.setText(admin.getLastName());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 730, 447);
 
@@ -55,7 +55,14 @@ public class AdminUI extends JFrame {
 		menuBar.add(mntmNewMenuItem_1);
 
 		JMenuItem mntmLogOut = new JMenuItem("Log Out");
-
+		mntmLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setVisible(false);
+				HelloMedtrav back = new HelloMedtrav();
+				back.setVisible(true);
+			}
+		});
 		mntmLogOut.setIcon(new ImageIcon(AdminUI.class
 				.getResource("/images/logout-icon.png")));
 		menuBar.add(mntmLogOut);
@@ -117,7 +124,7 @@ public class AdminUI extends JFrame {
 		btnDoctors.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				AdminUI_ListOfDoctors frame = new AdminUI_ListOfDoctors();
+				AdminUI_ListOfDoctors frame = new AdminUI_ListOfDoctors(admin);
 				frame.setVisible(true);
 				AdminUI.this.setVisible(false);
 
@@ -154,6 +161,14 @@ public class AdminUI extends JFrame {
 		menuBar.add(mntmNewMenuItem_1);
 
 		JMenuItem mntmLogOut = new JMenuItem("Log Out");
+		mntmLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setVisible(false);
+				HelloMedtrav back = new HelloMedtrav();
+				back.setVisible(true);
+			}
+		});
 
 		mntmLogOut.setIcon(new ImageIcon(AdminUI.class
 				.getResource("/images/logout-icon.png")));
