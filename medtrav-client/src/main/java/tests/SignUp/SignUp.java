@@ -111,9 +111,7 @@ public class SignUp extends JFrame {
 				p.setFirstName(FirstName.getText());
 				p.setLastName(LastName.getText());
 
-				Integer cinI = new Integer(Cin.getText());
-				Integer i = cinI.intValue();
-				p.setCin(i);
+				 
 				p.setLogin(login.getText());
 				p.setPassword(new String(passwordField.getPassword()));
 				// p.setDateOfBirth(DateChooserCombo);

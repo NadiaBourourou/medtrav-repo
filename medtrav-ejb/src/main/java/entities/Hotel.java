@@ -1,12 +1,18 @@
 package entities;
 
+import java.io.File;
 import java.io.Serializable;
+import java.sql.Blob;
 import java.util.List;
 
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -25,10 +31,9 @@ public class Hotel implements Serializable {
 	private StateType state;
 	private Double priceSingle;
 	private Double priceSuite;
-	private RoomType room;
 	private Integer stars;
 	private List<ServiceHotel> servicesHotel;
-	// private byte[] pic;
+	private File pic;
 	private List<HotelBooking> hotelBookings;
 
 	private static final long serialVersionUID = 1L;
@@ -95,14 +100,6 @@ public class Hotel implements Serializable {
 		this.priceSuite = priceSuite;
 	}
 
-	public RoomType getRoom() {
-		return room;
-	}
-
-	public void setRoom(RoomType room) {
-		this.room = room;
-	}
-
 	public Integer getStars() {
 		return this.stars;
 	}
@@ -111,17 +108,17 @@ public class Hotel implements Serializable {
 		this.stars = stars;
 	}
 
-	// @Lob
-	// public byte[] getPic() {
-	// return pic;
-	// }
-	// public void setPic(byte[] pic) {
-	// this.pic = pic;
-	// }
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	public File getPic() {
+		return pic;
+	}
 
+	public void setPic(File pic) {
+		this.pic = pic;
+	}
 
-
-	@OneToMany(mappedBy = "hotel")
+	@OneToMany(mappedBy = "hotel", cascade = CascadeType.MERGE)
 	public List<HotelBooking> getHotelBookings() {
 		return hotelBookings;
 	}
@@ -130,7 +127,7 @@ public class Hotel implements Serializable {
 		this.hotelBookings = hotelBookings;
 	}
 
-	@OneToMany(mappedBy="hotel")
+	@OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
 	public List<ServiceHotel> getServicesHotel() {
 		return servicesHotel;
 	}
@@ -138,7 +135,5 @@ public class Hotel implements Serializable {
 	public void setServicesHotel(List<ServiceHotel> servicesHotel) {
 		this.servicesHotel = servicesHotel;
 	}
-	
-	
 
 }

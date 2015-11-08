@@ -11,7 +11,12 @@ import services.interfaces.BookingServicesLocal;
 import services.interfaces.BookingServicesRemote;
 import entities.Booking;
 import entities.Clinic;
+import entities.ClinicBooking;
+import entities.DoctorPatient;
 import entities.Hotel;
+import entities.HotelBooking;
+import entities.Surgery;
+import entities.SurgeryPatient;
 
 /**
  * Session Bean implementation class BookingServices
@@ -66,6 +71,22 @@ public class BookingServices implements BookingServicesRemote,
 		return b;
 	}
 
+	@Override
+	public Boolean deleteBookingByPatientId(Integer idPatient) {
+		Boolean b = false;
+		try {
+			HotelBooking hotelBooking1 = new HotelBooking();
+			hotelBooking1 = findHotelBookingByPatientId(idPatient);
+
+			entitymanager.remove(hotelBooking1.getBooking());
+			b = true;
+		} catch (Exception e) {
+			System.err.println("Error");
+		}
+
+		return b;
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Booking> findAllBookingsByPatient(Integer patientId) {
@@ -76,8 +97,45 @@ public class BookingServices implements BookingServicesRemote,
 	}
 
 	@Override
+	public HotelBooking findHotelBookingByPatientId(Integer idPatient) {
+		String jpql = "select hb from HotelBooking hb where hb.patient.userId=:param";
+		Query query = entitymanager.createQuery(jpql);
+		query.setParameter("param", idPatient);
+		return (HotelBooking) query.getSingleResult();
+	}
+
+	@Override
+	public ClinicBooking findClinicBookingByPatientId(Integer idPatient) {
+		String jpql = "select cb from ClinicBooking cb where cb.patient.userId=:param";
+		Query query = entitymanager.createQuery(jpql);
+		query.setParameter("param", idPatient);
+		return (ClinicBooking) query.getSingleResult();
+	}
+
+	@Override
+	public SurgeryPatient findSurgeryPatientByPatientId(Integer idPatient) {
+		String jpql = "select sp from SurgeryPatient sp where sp.patient.userId=:param";
+		Query query = entitymanager.createQuery(jpql);
+		query.setParameter("param", idPatient);
+		return (SurgeryPatient) query.getSingleResult();
+	}
+
+	@Override
+	public DoctorPatient findDoctorPatientByPatientId(Integer idPatient) {
+		String jpql = "select dp from DoctorPatient dp where dp.patient.userId=:param";
+		Query query = entitymanager.createQuery(jpql);
+		query.setParameter("param", idPatient);
+		return (DoctorPatient) query.getSingleResult();
+	}
+
+	@Override
 	public Booking findBookingById(Integer idBooking) {
 		return entitymanager.find(Booking.class, idBooking);
+	}
+
+	@Override
+	public Booking findBookingByPatientId(Integer idPatient) {
+		return entitymanager.find(Booking.class, idPatient);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -104,6 +162,15 @@ public class BookingServices implements BookingServicesRemote,
 		Query query = entitymanager.createQuery(jpql);
 		query.setParameter("param", idPatient);
 		return (Clinic) query.getSingleResult();
+
+	}
+
+	@Override
+	public Surgery findSurgeryByPatientId(Integer idPatient) {
+		String jpql = "select s from Surgery s join s.surgeryPatients sps where sps.patient.userId=:param";
+		Query query = entitymanager.createQuery(jpql);
+		query.setParameter("param", idPatient);
+		return (Surgery) query.getSingleResult();
 
 	}
 

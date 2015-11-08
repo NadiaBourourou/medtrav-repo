@@ -16,4 +16,5 @@ List<ServiceHotel> findAllServicesHotelByHotel (Integer id);
 List<ServiceHotel> findAllServicesHotel();
 Boolean updateServiceHotel(ServiceHotel serviceHotel);
 Boolean deleteServiceHotel(ServiceHotel serviceHotel);
+List<ServiceHotel> findHotelServiceByHotelName(String name);
 }

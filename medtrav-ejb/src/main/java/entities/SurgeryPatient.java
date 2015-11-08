@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -24,7 +25,7 @@ public class SurgeryPatient implements Serializable {
 
 	private Patient patient;
 	private Surgery surgery;
-	private List<Booking> bookings;
+	private Booking booking;
 
 	public SurgeryPatient() {
 		super();
@@ -74,13 +75,13 @@ public class SurgeryPatient implements Serializable {
 		this.surgery = surgery;
 	}
 
-	@OneToMany(mappedBy = "surgeryPatient")
-	public List<Booking> getBookings() {
-		return bookings;
+	@OneToOne(mappedBy = "surgeryPatient")
+	public Booking getBookings() {
+		return booking;
 	}
 
-	public void setBookings(List<Booking> bookings) {
-		this.bookings = bookings;
+	public void setBookings(Booking booking) {
+		this.booking = booking;
 	}
 
 }

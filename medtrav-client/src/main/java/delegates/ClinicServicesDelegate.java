@@ -1,10 +1,13 @@
 package delegates;
 
 import java.util.List;
+import java.util.Date;
 
 import locator.ServiceLocator;
 import services.interfaces.ClinicServicesRemote;
 import entities.Clinic;
+import entities.ClinicBooking;
+import entities.RoomClinicType;
 
 public class ClinicServicesDelegate {
 	private ClinicServicesRemote remote;
@@ -36,5 +39,18 @@ public class ClinicServicesDelegate {
 
 	public static List<Clinic> doFindAllClinics() {
 		return getProxy().findAllClinics();
+	}
+	
+	public static List<Clinic> doFindClinicByName(String name){
+		return getProxy().findClinicByName(name);
+	}
+
+	public static boolean doAddClinicBookingAndAffectClinic (ClinicBooking hb,Integer id){
+		return getProxy().addClinicBookingAndAffectClinic(hb, id);
+	}
+	
+	public static Boolean doBookClinic(RoomClinicType typeRoom, Date date,
+			String commentaire, Clinic clinic, Integer idPatient) {
+		return getProxy().bookClinic(typeRoom, date, commentaire, clinic, idPatient);
 	}
 }
