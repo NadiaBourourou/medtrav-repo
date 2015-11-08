@@ -27,7 +27,7 @@ import entities.User;
 
 public class HelloMedtrav extends JFrame {
 
-	private JFrame frmWelcomeToMedtrav;
+	//private JFrame frmWelcomeToMedtrav;
 	private JTextField tfLogin;
 	private JPasswordField tfPassword;
 
@@ -38,8 +38,8 @@ public class HelloMedtrav extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HelloMedtrav window = new HelloMedtrav();
-					window.frmWelcomeToMedtrav.setVisible(true);
+					HelloMedtrav frmWelcomeToMedtrav = new HelloMedtrav();
+					frmWelcomeToMedtrav.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -49,17 +49,16 @@ public class HelloMedtrav extends JFrame {
 
 	public HelloMedtrav() {
 	
-		frmWelcomeToMedtrav = new JFrame();
-		frmWelcomeToMedtrav.getContentPane().setBackground(Color.WHITE);
-		frmWelcomeToMedtrav.setTitle("Welcome to MedTrav");
-		frmWelcomeToMedtrav.setBounds(100, 100, 730, 447);
-		frmWelcomeToMedtrav.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmWelcomeToMedtrav.getContentPane().setLayout(null);
+		getContentPane().setBackground(Color.WHITE);
+		setTitle("Welcome to MedTrav");
+		setBounds(100, 100, 730, 447);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(null);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(482, 162, 181, 59);
-		frmWelcomeToMedtrav.getContentPane().add(panel);
+		getContentPane().add(panel);
 		panel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC, FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC, FormFactory.DEFAULT_COLSPEC,
@@ -96,15 +95,14 @@ public class HelloMedtrav extends JFrame {
 								"Invalid crendentials ! ");
 
 					} else {
-						// JOptionPane.showMessageDialog(null,
-						// flen.getLastName());
+						
 						if (flen instanceof Administrator)
 							EventQueue.invokeLater(new Runnable() {
 								public void run() {
 									try {
 										AdminUI frame = new AdminUI(flen);
 										frame.setVisible(true);
-										frmWelcomeToMedtrav.setVisible(false);
+										setVisible(false);
 									} catch (Exception e) {
 										e.printStackTrace();
 									}
@@ -117,7 +115,7 @@ public class HelloMedtrav extends JFrame {
 										WelcomeJframe frame = new WelcomeJframe(
 												flen);
 										frame.setVisible(true);
-										frmWelcomeToMedtrav.setVisible(false);
+										setVisible(false);
 									} catch (Exception e) {
 										e.printStackTrace();
 									}
@@ -127,10 +125,13 @@ public class HelloMedtrav extends JFrame {
 						else if (flen instanceof Doctor)
 							EventQueue.invokeLater(new Runnable() {
 								public void run() {
+									JOptionPane.showMessageDialog(null,
+											flen.getLastName());
 									try {
-										WelcomeJframe frame = new WelcomeJframe();
-										frame.setVisible(true);
-										frmWelcomeToMedtrav.setVisible(false);
+										DoctorUI frame2 = new DoctorUI();
+										//Doctor_updateProfile frame2 = new Doctor_updateProfile(flen);
+										frame2.setVisible(true);
+										setVisible(false);
 									} catch (Exception e) {
 										e.printStackTrace();
 									}
@@ -145,18 +146,18 @@ public class HelloMedtrav extends JFrame {
 			}
 		});
 		btnLogin.setBounds(562, 232, 98, 23);
-		frmWelcomeToMedtrav.getContentPane().add(btnLogin);
+		getContentPane().add(btnLogin);
 
 		JLabel logo = new JLabel("");
 		logo.setIcon(new ImageIcon(HelloMedtrav.class
 				.getResource("/images/medtrav.JPG")));
 		logo.setBounds(75, 11, 350, 360);
-		frmWelcomeToMedtrav.getContentPane().add(logo);
+		getContentPane().add(logo);
 
 		JLabel Copyright = new JLabel(
 				"This project is brought to you by GTech\u00A9 2015 Sigma.  All rights reserved");
 		Copyright.setForeground(Color.DARK_GRAY);
 		Copyright.setBounds(28, 384, 532, 14);
-		frmWelcomeToMedtrav.getContentPane().add(Copyright);
+		getContentPane().add(Copyright);
 	}
 }

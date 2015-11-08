@@ -43,10 +43,10 @@ public class FlightServicesDelegate {
 		return getProxy().assignFlightToBooking(idBooking, idFlight);
 	}
 
-	public static Boolean doAssignFlightToBookingSlaveSide(Integer idBooking,
+	/*public static Boolean doAssignFlightToBookingSlaveSide(Integer idBooking,
 			Integer idFlight) {
 		return getProxy().assignFlightToBookingSlaveSide(idBooking, idFlight);
-	}
+	}*/
 
 	public static Boolean doAssignDoctorToSurgery(Integer idSurgery,
 			Integer idDoctor) {
