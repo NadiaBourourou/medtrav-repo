@@ -55,7 +55,7 @@ public class Book extends JFrame {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField tdoctor;
-	private JTextField textField;
+	private JTextField tid;
 
 	/**
 	 * Launch the application.
@@ -217,7 +217,6 @@ public class Book extends JFrame {
 				BookingServicesDelegate.doAddBooking(booking);
 				
 
-
 			}
 		});
 		btnBook.setIcon(new ImageIcon(Book.class
@@ -271,7 +270,7 @@ public class Book extends JFrame {
 		JButton button_2 = new JButton("");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				
 			}
 		});
 		button_2.setIcon(new ImageIcon(Book.class
@@ -287,15 +286,15 @@ public class Book extends JFrame {
 		etatCombo.setModel(new DefaultComboBoxModel(StateBooking.values()));
 		etatCombo.setBounds(517, 183, 108, 20);
 		contentPane.add(etatCombo);
-		
+
 		JLabel id = new JLabel("Booking Id");
 		id.setBounds(466, 127, 76, 14);
 		contentPane.add(id);
-		
-		textField = new JTextField();
-		textField.setBounds(529, 127, 86, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+
+		tid = new JTextField();
+		tid.setBounds(529, 127, 86, 20);
+		contentPane.add(tid);
+		tid.setColumns(10);
 		initDataBindings();
 	}
 

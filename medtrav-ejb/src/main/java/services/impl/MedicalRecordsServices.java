@@ -58,14 +58,15 @@ public class MedicalRecordsServices implements MedicalRecordsServicesRemote,
 		query.setParameter("param", patientId);
 		return (MedicalRecords) query.getSingleResult();
 	}
-	
+
 	@Override
-	public byte [] downloadAnalysis(int id) {
+	public byte[] downloadAnalysis(int id) {
 		String jpql = "select m.analysis from MedicalRecords m where m.patient.userId=:param";
-		 Query query = entityManager.createQuery(jpql);
-		    query.setParameter("param", id);
-		    Object o = query.getSingleResult();
-		    byte[] tmpArray = (byte[]) o; 
-		    return tmpArray;	}
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", id);
+		Object o = query.getSingleResult();
+		byte[] tmpArray = (byte[]) o;
+		return tmpArray;
+	}
 
 }
