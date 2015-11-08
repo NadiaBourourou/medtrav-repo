@@ -3,6 +3,7 @@ package gui.testimonies;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.SystemColor;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -11,6 +12,10 @@ import javax.swing.JLabel;
 
 import java.awt.Font;
 import java.awt.Color;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 
 import javax.swing.JTable;
@@ -21,6 +26,7 @@ import entities.Doctor;
 import entities.Testimony;
 import entities.User;
 
+import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JOptionPane;
@@ -48,11 +54,19 @@ import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.ObjectProperty;
 
+import com.sun.speech.freetts.Voice;
+import com.sun.speech.freetts.VoiceManager;
+
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+
 import java.util.Date;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
+import javax.swing.JRadioButton;
 
 public class ListTestimonies extends JFrame {
 
@@ -63,7 +77,7 @@ public class ListTestimonies extends JFrame {
 	private JTextField testimonyId;
 	private JTextField title;
 	private JTextPane description;
-	private Integer UserId=3;
+	private Integer UserId=2;
 	private JTextField searchtf;
 	
 
@@ -77,8 +91,11 @@ public class ListTestimonies extends JFrame {
 			public void run() {
 				try {
 					ListTestimonies frame = new ListTestimonies();
+					 frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				
+
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -93,29 +110,50 @@ public class ListTestimonies extends JFrame {
 		testimonies=TestimonyServicesDelegate.doFindAllTestimonies();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 730, 509);
+		setBounds(100, 100, 730, 611);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblListTestimonies = new JLabel("List testimonies");
-		lblListTestimonies.setForeground(new Color(32, 178, 170));
+		lblListTestimonies.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				Voice voice;
+				VoiceManager vm = VoiceManager.getInstance();
+				voice = vm.getVoice("kevin16");
+				voice.allocate();
+				try {
+					voice.speak("testimonies");
+					
+				}
+
+				catch (Exception en) {
+					System.out.println("error");
+				}
+
+			}
+		});
+		
+		lblListTestimonies.setForeground(SystemColor.desktop);
 		lblListTestimonies.setFont(new Font("Tahoma", Font.BOLD, 24));
 		lblListTestimonies.setBounds(240, 11, 216, 45);
 		contentPane.add(lblListTestimonies);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
 		panel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
 		});
-		panel.setBounds(89, 60, 473, 148);
+		panel.setBounds(75, 141, 473, 148);
 		contentPane.add(panel);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(74, 244, 452, 215);
+		panel_1.setBounds(75, 334, 473, 215);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -149,7 +187,7 @@ public class ListTestimonies extends JFrame {
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				panel_1.setVisible(false);
 				int idTableau=(int) table.getValueAt(table.getSelectedRow(), 3);
 				System.out.println("id user selectionné = "+idTableau);
 				if(idTableau==UserId)
@@ -166,12 +204,12 @@ public class ListTestimonies extends JFrame {
 		JButton btnMenu = new JButton("Back to menu");
 		btnMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TestimonyInterface testInt= new TestimonyInterface();
-				testInt.setVisible(true);
-				ListTestimonies.this.setVisible(false);
+//				TestimonyInterface testInt= new TestimonyInterface();
+//				testInt.setVisible(true);
+		//		ListTestimonies.this.setVisible(false);
 			}
 		});
-		btnMenu.setBounds(560, 400, 130, 23);
+		btnMenu.setBounds(570, 335, 130, 23);
 		contentPane.add(btnMenu);
 		
 
@@ -221,13 +259,14 @@ public class ListTestimonies extends JFrame {
 			
 				User user=TestimonyServicesDelegate.doFindUsertById(UserId);
 				if(user instanceof Patient) {System.out.println("user is PATIENT");
-				AddTestimony addTestimony= new AddTestimony();
+				AddTestimony addTestimony= new AddTestimony(UserId);
+				addTestimony.setLocationRelativeTo(null);
 				addTestimony.setVisible(true);
 				ListTestimonies.this.setVisible(false);
 				}
 				else if (user instanceof Doctor){System.out.println("user is a doctor ");
-				JOptionPane.showMessageDialog(null, "Sorry, you are a doctor, you can't add a testimony.");}
-				else if (user instanceof Administrator){JOptionPane.showMessageDialog(null, "Sorry, you are an administrator, you can't add a testimony.");}
+				JOptionPane.showMessageDialog(null, "Sorry, as a doctor, you can't add a testimony.");}
+				else if (user instanceof Administrator){JOptionPane.showMessageDialog(null, "Sorry, as an administrator, you can't add a testimony.");}
 				else {System.out.println("user normal");}
 				
 				
@@ -237,31 +276,58 @@ public class ListTestimonies extends JFrame {
 		btnAddANew.setBounds(570, 168, 130, 23);
 		contentPane.add(btnAddANew);
 		
-		JButton btnSearchTestimonies = new JButton("Search");
-		btnSearchTestimonies.addActionListener(new ActionListener() {
+		JButton btnNewButton_1 = new JButton("Display");
+		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try{testimonySelected = testimonies.get(table.getSelectedRow());
+				
+				DisplayTestimony dispTestimony= new DisplayTestimony(testimonySelected);
+				dispTestimony.setLocationRelativeTo(null);
+				
+				dispTestimony.setVisible(true);
+				ListTestimonies.this.setVisible(false);
+					
+				}
+				catch(Exception p){JOptionPane.showMessageDialog(null,"Please select a testimony.");}
+				
 			}
 		});
-		btnSearchTestimonies.setBounds(443, 11, 130, 23);
-		contentPane.add(btnSearchTestimonies);
-		
-		JButton btnNewButton_1 = new JButton("Display");
-		btnNewButton_1.setBounds(560, 361, 130, 23);
+		btnNewButton_1.setBounds(570, 296, 130, 23);
 		contentPane.add(btnNewButton_1);
+		
+		JRadioButton rbtitle = new JRadioButton("Title");
+		rbtitle.setBackground(Color.WHITE);
+		rbtitle.setBounds(350, 99, 58, 23);
+		contentPane.add(rbtitle);
+		
+		JRadioButton rbdescription = new JRadioButton("Patient's last name");
+		rbdescription.setBackground(Color.WHITE);
+		rbdescription.setBounds(424, 99, 140, 23);
+		contentPane.add(rbdescription);
+		
 		
 		searchtf = new JTextField();
 		searchtf.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				
-				testimonies=TestimonyServicesDelegate.doFindAllTestimoniesByTitle(searchtf.getText());
-			initDataBindings();
+				if(rbtitle.isSelected())
+				{	testimonies=TestimonyServicesDelegate.doFindAllTestimoniesByTitle(searchtf.getText());
+				}
+				else if(rbdescription.isSelected()){ testimonies=TestimonyServicesDelegate.doFindAllTestimoniesByPatientLastName(searchtf.getText());
+				}else{System.out.println("rien de selectionné");}
+				initDataBindings();
 			}
 		});
-		searchtf.setBounds(34, 11, 183, 23);
+		searchtf.setBounds(74, 99, 183, 23);
 		contentPane.add(searchtf);
 		searchtf.setColumns(10);
 		
+		JLabel lblSearchByTitle = new JLabel("Search by:");
+		lblSearchByTitle.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblSearchByTitle.setBounds(283, 103, 58, 14);
+		contentPane.add(lblSearchByTitle);
+		
+
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// 	btnUpdate.setVisible(false);
@@ -287,7 +353,17 @@ public class ListTestimonies extends JFrame {
 		
 	
 		panel_1.setVisible(false);
+		ButtonGroup group = new ButtonGroup();
+		group.add(rbtitle);
+		group.add(rbdescription);
+		rbtitle.setSelected(true);
+		
+	
 		initDataBindings();
+		
+	
+	
+	
 	}
 	protected void initDataBindings() {
 		JTableBinding<Testimony, List<Testimony>, JTable> jTableBinding = SwingBindings.createJTableBinding(UpdateStrategy.READ_WRITE, testimonies, table);

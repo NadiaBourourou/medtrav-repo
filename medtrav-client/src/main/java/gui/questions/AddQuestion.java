@@ -6,7 +6,7 @@ import entities.Patient;
 import entities.Question;
 import entities.Testimony;
 import gui.testimonies.AddTestimony;
-import gui.testimonies.TestimonyInterface;
+import gui.testimonies.ListTestimonies;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -25,13 +25,15 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.Date;
+import java.awt.SystemColor;
+import javax.swing.ImageIcon;
 
 public class AddQuestion extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	private Integer userId=1;
 
+	static Integer userId;
 	/**
 	 * Launch the application.
 	 */
@@ -39,7 +41,8 @@ public class AddQuestion extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AddQuestion frame = new AddQuestion();
+					AddQuestion frame = new AddQuestion(userId);
+					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,30 +54,33 @@ public class AddQuestion extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AddQuestion() {
+	public AddQuestion(Integer userId) {
+		this.userId=userId;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		setBounds(100, 100, 730, 447);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel label = new JLabel("Title :");
-		label.setBounds(293, 125, 46, 14);
+		label.setBounds(217, 109, 46, 14);
 		contentPane.add(label);
 		
 		textField = new JTextField();
 		textField.setColumns(10);
-		textField.setBounds(369, 116, 231, 33);
+		textField.setBounds(294, 105, 231, 23);
 		contentPane.add(textField);
 		
 		JLabel label_1 = new JLabel("Description :");
-		label_1.setBounds(293, 208, 91, 33);
+		label_1.setBounds(217, 192, 91, 33);
 		contentPane.add(label_1);
 		
 		JTextPane textPane = new JTextPane();
-		textPane.setBounds(369, 208, 232, 103);
+		textPane.setBackground(SystemColor.control);
+		textPane.setBounds(293, 192, 232, 103);
 		contentPane.add(textPane);
 		
 		JButton button = new JButton("Confirm");
@@ -83,7 +89,7 @@ public class AddQuestion extends JFrame {
 				try{	
 					Question question= new Question();
 					Patient patient=TestimonyServicesDelegate.doFindPatientById(userId);
-					System.out.println("nomPatient= "+patient.getFirstName());
+					System.out.println("nomPatient= "+patient.getLastName());
 					question.setPatient(patient);		
 					question.setTitle(textField.getText());
 					question.setDescription(textPane.getText().toString());
@@ -96,29 +102,51 @@ public class AddQuestion extends JFrame {
 					JOptionPane.showMessageDialog(null,"Error");
 				}
 					
-					TestimonyInterface testInt= new TestimonyInterface();
-					testInt.setVisible(true);
+				ListQuestions dispTestimony= new ListQuestions();
+				dispTestimony.setLocationRelativeTo(null);
+				dispTestimony.setVisible(true);
+				AddQuestion.this.setVisible(false);
 					
 				
 				
 				
 			}
 		});
-		button.setBounds(335, 377, 89, 23);
+		button.setBounds(238, 343, 89, 23);
 		contentPane.add(button);
 		
-		JButton button_1 = new JButton("Cancel");
-		button_1.addActionListener(new ActionListener() {
+		JButton btnReturn = new JButton("Return");
+		btnReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ListTestimonies dispTestimony= new ListTestimonies();
+				dispTestimony.setLocationRelativeTo(null);
+				dispTestimony.setVisible(true);
+				AddQuestion.this.setVisible(false);
+				
 			}
 		});
-		button_1.setBounds(512, 377, 89, 23);
-		contentPane.add(button_1);
+		btnReturn.setBounds(37, 343, 89, 23);
+		contentPane.add(btnReturn);
 		
-		JLabel lblAddQuestion = new JLabel("Ask a question");
-		lblAddQuestion.setForeground(new Color(32, 178, 170));
-		lblAddQuestion.setFont(new Font("Tahoma", Font.BOLD, 24));
-		lblAddQuestion.setBounds(355, 33, 188, 45);
-		contentPane.add(lblAddQuestion);
+		JLabel lblAskAQuestion = new JLabel("Ask a question");
+		lblAskAQuestion.setForeground(SystemColor.desktop);
+		lblAskAQuestion.setFont(new Font("Tahoma", Font.BOLD, 24));
+		lblAskAQuestion.setBounds(221, 11, 216, 45);
+		contentPane.add(lblAskAQuestion);
+		
+		JLabel label_2 = new JLabel("");
+		label_2.setIcon(new ImageIcon(AddQuestion.class.getResource("/images/quest.png")));
+		label_2.setBounds(37, 100, 142, 180);
+		contentPane.add(label_2);
+		
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textPane.setText("");
+				textField.setText("");
+			}
+		});
+		btnCancel.setBounds(390, 343, 89, 23);
+		contentPane.add(btnCancel);
 	}
 }

@@ -15,6 +15,8 @@ import java.io.*;
 import java.net.URL;
 
 import sun.audio.*;
+import com.sun.speech.freetts.Voice;
+import com.sun.speech.freetts.VoiceManager;
 
 
 
@@ -52,18 +54,19 @@ public class testVoix extends JFrame {
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				InputStream in;
-				try{
-				//marche // in= new FileInputStream(new File("hello.mp3"));
-					URL url = getClass().getResource("hello.mp3");
-					
-					in= new FileInputStream(new File(url.getPath()));
-					AudioStream audios= new AudioStream(in);
-				AudioPlayer.player.start(audios);
+				Voice voice;
+				VoiceManager vm = VoiceManager.getInstance();
+				voice = vm.getVoice("kevin16");
+				voice.allocate();
+				try {
+					voice.speak("testimonies");
+					voice.speak("frequently asked questions");
 				}
-				catch(Exception e2){
-					System.out.println(e2);
+
+				catch (Exception en) {
+					System.out.println("error");
 				}
+
 			}
 		});
 		btnNewButton.setBounds(114, 119, 89, 23);

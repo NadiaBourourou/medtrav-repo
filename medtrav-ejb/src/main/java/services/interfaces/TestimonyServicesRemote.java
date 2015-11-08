@@ -34,5 +34,7 @@ public interface TestimonyServicesRemote {
 	User findUserById(Integer idUser);
 
 	List<Testimony> findAllTestimoniesByTitle(String titleParam);
+
+	List<Testimony> findAllTestimoniesByPatientLastName(String s);
 	
 }
