@@ -279,19 +279,19 @@ public class Book extends JFrame {
 
 				// Flight
 				flight = BookingServicesDelegate.doFindFlightByPatientId(1);
-				Date arrive = (Date) flight.getArrivalDate();
-				Date depart = (Date) flight.getDepartureDate();
+				String arrive =  flight.getArrivalDate();
+				String depart = flight.getDepartureDate();
 
-				SimpleDateFormat sdfr = new SimpleDateFormat("dd/MMM/yyyy");
+				/*SimpleDateFormat sdfr = new SimpleDateFormat("dd/MMM/yyyy");
 
 				String dateArriveString = null;
 				String dateDepartString = null;
 
 				dateArriveString = sdfr.format(arrive);
-				dateDepartString = sdfr.format(depart);
+				dateDepartString = sdfr.format(depart);*/
 
-				arrival.setText(dateArriveString);
-				departure.setText(dateDepartString);
+				arrival.setText(arrive);
+				departure.setText(depart);
 
 			}
 		});

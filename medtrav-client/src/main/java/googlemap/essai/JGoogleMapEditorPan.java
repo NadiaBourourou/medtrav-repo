@@ -17,14 +17,14 @@ public class JGoogleMapEditorPan {
         JFrame test = new JFrame("Google Maps");
  
         try {
-            String latitude = "36.898889";
-            String longitude = "10.1871157";
+            String latitude = "36.8997598";
+            String longitude = "10.1878506";
  
             String imageUrl = "https://maps.googleapis.com/maps/api/staticmap?center="
                     + latitude
                     + ","
                     + longitude
-                    + "&zoom=11&size=612x612&scale=2&maptype=roadmap";
+                    + "&zoom=16&size=612x612&scale=2&maptype=roadmap";
             String destinationFile = "image.jpg";
  
             // read the map image from Google
