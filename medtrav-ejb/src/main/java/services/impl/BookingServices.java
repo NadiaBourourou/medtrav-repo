@@ -13,6 +13,7 @@ import entities.Booking;
 import entities.Clinic;
 import entities.ClinicBooking;
 import entities.DoctorPatient;
+import entities.Flight;
 import entities.Hotel;
 import entities.HotelBooking;
 import entities.Surgery;
@@ -72,15 +73,16 @@ public class BookingServices implements BookingServicesRemote,
 	}
 
 	@Override
-	public Boolean deleteBookingByPatientId(Integer idPatient) {
+	public Boolean deleteBookingByPatientId(Booking booking) {
 		Boolean b = false;
 		try {
-			HotelBooking hotelBooking1 = new HotelBooking();
-			hotelBooking1 = findHotelBookingByPatientId(idPatient);
-
-			entitymanager.remove(hotelBooking1.getBooking());
+			Booking booking1 = new Booking();
+			booking1 = entitymanager
+					.find(Booking.class, booking.getBookingId());
+			entitymanager.remove(booking1);
 			b = true;
 		} catch (Exception e) {
+			
 			System.err.println("Error");
 		}
 
@@ -129,13 +131,24 @@ public class BookingServices implements BookingServicesRemote,
 	}
 
 	@Override
+	public Flight findFlightByPatientId(Integer idPatient) {
+		String jpql = "select f from Flight f where f.patient.userId=:param";
+		Query query = entitymanager.createQuery(jpql);
+		query.setParameter("param", idPatient);
+		return (Flight) query.getSingleResult();
+	}
+
+	@Override
 	public Booking findBookingById(Integer idBooking) {
 		return entitymanager.find(Booking.class, idBooking);
 	}
 
 	@Override
 	public Booking findBookingByPatientId(Integer idPatient) {
-		return entitymanager.find(Booking.class, idPatient);
+		String jpql = "select b from Booking b where b.hotelBooking.patient.userId=:param";
+		Query query = entitymanager.createQuery(jpql);
+		query.setParameter("param", idPatient);
+		return (Booking) query.getSingleResult();
 	}
 
 	@SuppressWarnings("unchecked")

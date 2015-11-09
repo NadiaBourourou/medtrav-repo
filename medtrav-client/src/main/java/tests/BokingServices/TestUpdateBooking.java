@@ -9,10 +9,9 @@ public class TestUpdateBooking {
 	public static void main(String[] args) {
 		Booking booking = new Booking();
 		StateBooking stateBooking = null;
-		booking= BookingServicesDelegate.doFindBookingById(3);
-		booking.setState(stateBooking.CANCELED);
+		booking = BookingServicesDelegate.doFindBookingById(3);
+
 		BookingServicesDelegate.doUpdateBooking(booking);
-		
 
 	}
 }

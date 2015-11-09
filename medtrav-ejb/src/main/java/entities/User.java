@@ -29,7 +29,18 @@ public class User implements Serializable {
 
 	public User() {
 		super();
-	}   
+	}  
+	
+	
+	
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", lastName=" + lastName
+				+ ", firstName=" + firstName + ", role=" + role + "]";
+	}
+
+
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getUserId() {

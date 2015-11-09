@@ -24,4 +24,10 @@ public interface QuestionServicesRemote {
 
 	List<Question> findAllQuestionsByPatientId(Integer patientId);
 
+	List<Question> findAllQuestionsByTitle(String title);
+
+	List<Question> findAllQuestionsByPatientLastName(String name);
+
+	List<Question> findAllQuestionsWithResponse();
+
 }

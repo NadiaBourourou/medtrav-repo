@@ -40,6 +40,7 @@ import org.jdesktop.beansbinding.Bindings;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class ListServiceHotelAdmin extends JFrame {
 
@@ -76,26 +77,23 @@ public class ListServiceHotelAdmin extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 397);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
 		JLabel lblHotel = new JLabel("Hotel");
 		
-		JComboBox comboBox = new JComboBox();
-		
-		Hotel hotel = new Hotel();
+	/*	Hotel hotel = new Hotel();
 		Iterator w =  HotelServicesDelegate.doFindAllHotels().iterator();
-
-	comboBox.removeAllItems();
 		while (w.hasNext()) {
 			hotel = ((Hotel) w.next());
-			comboBox.addItem(hotel.getName());
-		}
+			comboBox.addItem(hotel.getName()); */
 		
 	//	serviceHotels=
 		JPanel panel = new JPanel();
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(Color.WHITE);
 		
 		txtnameHotel = new JTextField();
 		txtnameHotel.setColumns(10);
@@ -113,14 +111,12 @@ public class ListServiceHotelAdmin extends JFrame {
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(lblHotel)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
+							.addGap(32)
 							.addComponent(txtnameHotel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(26)
+							.addGap(27)
 							.addComponent(btSearch))
 						.addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 395, GroupLayout.PREFERRED_SIZE))
@@ -132,7 +128,6 @@ public class ListServiceHotelAdmin extends JFrame {
 					.addGap(30)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblHotel)
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txtnameHotel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btSearch))
 					.addGap(24)
@@ -230,34 +225,11 @@ public class ListServiceHotelAdmin extends JFrame {
 		);
 		
 		table = new JTable();
-		 index = comboBox.getSelectedIndex()+1;
 		serviceHotels= ServiceHotelServicesDelegate.doFindAllServicesHotel();
 		scrollPane.setViewportView(table);
 		panel.setLayout(gl_panel);
 		contentPane.setLayout(gl_contentPane);
 		initDataBindings();
-		
-		comboBox.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				 index = comboBox.getSelectedIndex()+1;
-				System.out.println(index);
-			
-				serviceHotels= ServiceHotelServicesDelegate.doFindAllServicesHotelByHotel(index);
-				
-				initDataBindings();
-				
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				 index = comboBox.getSelectedIndex()+1;
-					System.out.println(index);
-				
-					serviceHotels= ServiceHotelServicesDelegate.doFindAllServicesHotelByHotel(index);
-					
-					initDataBindings();
-			}
-		});
 	}
 	protected void initDataBindings() {
 		JTableBinding<ServiceHotel, List<ServiceHotel>, JTable> jTableBinding = SwingBindings.createJTableBinding(UpdateStrategy.READ_WRITE, serviceHotels, table);

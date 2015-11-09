@@ -23,7 +23,6 @@ import entities.Flight;
 import entities.FlightMatching;
 import entities.Patient;
 import entities.Testimony;
-import gui.testimonies.TestimonyInterface;
 
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;

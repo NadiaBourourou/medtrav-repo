@@ -24,7 +24,7 @@ public interface FlightServicesLocal {
 	List<FlightMatching> findFlightsByAirline(String airline);
 	
 	Boolean assignFlightToBooking(Integer idBooking,Integer idFlight);
-	Boolean assignFlightToBookingSlaveSide(Integer idBooking,Integer idFlight);
+	//Boolean assignFlightToBookingSlaveSide(Integer idBooking,Integer idFlight);
 	
 	Boolean assignDoctorToSurgery(Integer idSurgery,Integer idDoctor);
 	Boolean assignDoctorToSurgerySlaveSide(Integer idSurgery,Integer idDoctor);
@@ -62,4 +62,6 @@ public interface FlightServicesLocal {
 	long mostWorkingAirlines(String airlineGiven);
 	
 	List<String> findAllAirlines();
+	
+	public void generateImageStat();
 }

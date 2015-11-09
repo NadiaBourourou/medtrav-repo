@@ -2,5 +2,5 @@ package entities;
 
 public enum StateBooking {
 
-	CONFIRMED, POSTPONED, CANCELED
+	CONFIRMED, POSTPONED
 }

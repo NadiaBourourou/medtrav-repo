@@ -67,8 +67,5 @@ public class HotelServicesDelegate {
 		return getProxy().bookHotel(numNights,price,roomType,hotel, idPatient);
 	}
 	
-	public static File doGetMyImage(Integer id) {
-		return getProxy().getMyImage( id);
-	}
 
 }

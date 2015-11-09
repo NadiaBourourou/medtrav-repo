@@ -13,7 +13,6 @@ import delegates.TestimonyServicesDelegate;
 import entities.Flight;
 import entities.FlightMatching;
 import entities.Patient;
-import gui.testimonies.TestimonyInterface;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;

@@ -154,13 +154,4 @@ public class HotelServices implements HotelServicesRemote, HotelServicesLocal {
 		return b;
 	}
 
-	@Override
-	public File getMyImage(Integer id) {
-		String jpql = "select m.pic from Hotel m where m.hotelId=:param";
-		Query query = entityManager.createQuery(jpql);
-		query.setParameter("param", id);
-		Object o = query.getSingleResult();
-		File tmpArray = (File) o;
-		return tmpArray;
-	}
 }

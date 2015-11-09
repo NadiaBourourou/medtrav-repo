@@ -19,6 +19,7 @@ public class Patient extends User implements Serializable {
 	private String country;
 	private Integer numPassport;
 	private PatientState state;
+	private Boolean confirmed;
 
 	private List<Testimony> testimonies;
 	private List<Question> questions;
@@ -138,6 +139,14 @@ public class Patient extends User implements Serializable {
 
 	public void setDoctorPatients(List<DoctorPatient> doctorPatients) {
 		this.doctorPatients = doctorPatients;
+	}
+
+	public Boolean getConfirmed() {
+		return confirmed;
+	}
+
+	public void setConfirmed(Boolean confirmed) {
+		this.confirmed = confirmed;
 	}
 
 }

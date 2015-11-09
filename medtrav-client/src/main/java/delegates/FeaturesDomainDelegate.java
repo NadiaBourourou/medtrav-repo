@@ -1,7 +1,7 @@
 package delegates;
 
-import featuresDomain.mailing.EmailSendingRemote;
 import locator.ServiceLocator;
+import featuresDomain.mailing.EmailSendingRemote;
 
 public class FeaturesDomainDelegate {
 	public static final String jndiName = "/medtrav-ejb/EmailSending!featuresDomain.mailing.EmailSendingRemote";
@@ -19,7 +19,11 @@ public class FeaturesDomainDelegate {
 	public static String doWelcomingMail() {
 		return getProxy().welcomingMail();
 	}
-	
-	
+
+	public static String doPatientLoginAndPassword(String login, String pwd)
+
+	{
+		return getProxy().patientLoginAndPassword(login, pwd);
+	}
 
 }

@@ -8,6 +8,7 @@ import entities.Booking;
 import entities.Clinic;
 import entities.ClinicBooking;
 import entities.DoctorPatient;
+import entities.Flight;
 import entities.Hotel;
 import entities.HotelBooking;
 import entities.Surgery;
@@ -33,8 +34,8 @@ public class BookingServicesDelegate {
 		return getProxy().findBookingById(idBooking);
 	}
 
-	public static void doDeleteBookingByPatientId(Integer idPatient) {
-		getProxy().deleteBookingByPatientId(idPatient);
+	public static void doDeleteBookingByPatientId(Booking booking) {
+		getProxy().deleteBookingByPatientId(booking);
 	}
 
 	public static Booking doFindBookingByPatientId(Integer idPatient) {
@@ -76,5 +77,9 @@ public class BookingServicesDelegate {
 
 	public static DoctorPatient doFindDoctorPatientByPatientId(Integer idPatient) {
 		return getProxy().findDoctorPatientByPatientId(idPatient);
+	}
+
+	public static Flight doFindFlightByPatientId(Integer idPatient) {
+		return getProxy().findFlightByPatientId(idPatient);
 	}
 }
