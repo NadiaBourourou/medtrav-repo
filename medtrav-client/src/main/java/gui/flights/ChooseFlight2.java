@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -40,6 +41,10 @@ import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.SystemColor;
+import javax.swing.border.TitledBorder;
 
 public class ChooseFlight2 extends JFrame {
 
@@ -70,6 +75,10 @@ public class ChooseFlight2 extends JFrame {
 	private JTextField departureTimeFlight;
 	private JTextField hiddenNbSits;
 	private Integer userId=1;
+	private JLabel labelLogo;
+	private JButton buttonHome;
+	private JButton btnBack;
+	private JLabel lblAddAFlight;
 
 	/**
 	 * Launch the application.
@@ -108,32 +117,43 @@ public class ChooseFlight2 extends JFrame {
 				this.to, this.dateDepBDD, this.dateArrivalBDD);
 		setTitle("Choose a flight");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 730, 447);
+		setBounds(100, 100, 813, 474);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
 		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Matching flight", TitledBorder.LEADING, TitledBorder.TOP, null, Color.GRAY));
 
 		panel_1 = new JPanel();
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(30)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 656, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(18, Short.MAX_VALUE))
-				.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
-					.addGap(42)
-					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(19, Short.MAX_VALUE))
-		);
+		
+		labelLogo = new JLabel("");
+		labelLogo.setIcon(new ImageIcon(AddFlight2.class.getResource("/images/smallLogo.png")));
+		labelLogo.setBounds(10, 0, 69, 73);
+		
+		buttonHome = new JButton("");
+		buttonHome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ManageFlights home= new ManageFlights();
+				home.setVisible(true);
+				ChooseFlight2.this.setVisible(false);
+
+			}
+		});
+		buttonHome.setIcon(new ImageIcon(ChooseFlight2.class.getResource("/images/blue-home-icon.png")));
+		buttonHome.setBounds(10, 331, 160, 43);
+		
+		btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddFlight2 home= new AddFlight2();
+				home.setVisible(true);
+				ChooseFlight2.this.setVisible(false);
+			}
+		});
+		btnBack.setIcon(new ImageIcon(ChooseFlight2.class.getResource("/images/Arrow-back.png")));
+		btnBack.setBounds(10, 331, 160, 43);
 
 		lblId = new JLabel("Id");
 
@@ -232,18 +252,23 @@ public class ChooseFlight2 extends JFrame {
 			System.out.println("NbSitsMaj = "+nbSitsMaj);
 				
 					JOptionPane.showMessageDialog(null, "Flight successfully added");
+					SeeMyFlights seeMyflights = new SeeMyFlights();
+					seeMyflights.setVisible(true);
+					ChooseFlight2.this.setVisible(false);
 				} else {
 					Integer numFlight=(Integer)table.getValueAt(table.getSelectedRow(), 0);
 					 FlightMatching fm1=FlightServicesDelegate.doFindFlightMatchingById(numFlight);
 					System.out.println("Failed to add a flight!");
 					JOptionPane.showMessageDialog(null, "Sorry, there is not enough sits. We only have "+fm1.getNumberOfSits()+" available sits");
 
+		
 				}
-				ManageFlights testInt = new ManageFlights();
-				testInt.setVisible(true);
+
 
 			}
 		});
+		btnAddThisFlight.setIcon(new ImageIcon(AddFlight2.class.getResource("/images/add.png")));
+
 
 		lblPrice = new JLabel("Price");
 
@@ -267,126 +292,203 @@ public class ChooseFlight2 extends JFrame {
 		hiddenNbSits.setVisible(false);
 		hiddenNbSits.setEnabled(false);
 		hiddenNbSits.setColumns(10);
-		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblFlightNumber)
-						.addComponent(lblId)
-						.addComponent(lblDepartureLocation)
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING, false)
-							.addGroup(Alignment.LEADING, gl_panel_1.createSequentialGroup()
-								.addGap(40)
-								.addComponent(hiddenNbSits, 0, 0, Short.MAX_VALUE))
-							.addComponent(lblArrivalLocation, Alignment.LEADING)))
-					.addGap(14)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addComponent(flightNumber, 157, 157, 157)
-						.addComponent(idFlight, 157, 157, 157)
-						.addComponent(departureLocationFlight, GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-						.addComponent(arrivalLocationFlight, GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-							.addComponent(lblAirline)
-							.addComponent(lblArrivalDate))
-						.addComponent(lblNumberOfSits)
-						.addComponent(lblDepartureDate))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(numberSitsFlight)
-						.addComponent(airlineFlight)
-						.addComponent(departureDateFlight)
-						.addComponent(arrivalDateFlight, GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
-					.addGap(22)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
-							.addGroup(gl_panel_1.createSequentialGroup()
-								.addGap(4)
-								.addComponent(lblPrice)
-								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(priceFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addGroup(gl_panel_1.createSequentialGroup()
-								.addPreferredGap(ComponentPlacement.UNRELATED)
-								.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
-									.addGroup(gl_panel_1.createSequentialGroup()
-										.addComponent(lblDepartureTime)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(departureTimeFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-									.addGroup(gl_panel_1.createSequentialGroup()
-										.addComponent(lblArrivalTime)
-										.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(arrivalTimeFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
-						.addComponent(btnAddThisFlight))
-					.addContainerGap())
-		);
-		gl_panel_1.setVerticalGroup(
-			gl_panel_1.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addContainerGap(16, Short.MAX_VALUE)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblId)
-						.addComponent(lblDepartureTime)
-						.addComponent(departureTimeFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(idFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(departureDateFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblDepartureDate))
-					.addGap(18)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblFlightNumber)
-								.addComponent(flightNumber, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(arrivalDateFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblArrivalDate))
-							.addGap(18)
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblPrice)
-								.addComponent(airlineFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblDepartureLocation)
-								.addComponent(departureLocationFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblAirline)))
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblArrivalTime)
-								.addComponent(arrivalTimeFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addGap(18)
-							.addComponent(priceFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addGap(19)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-								.addComponent(numberSitsFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblArrivalLocation)
-								.addComponent(arrivalLocationFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNumberOfSits))
-							.addGap(26)
-							.addComponent(hiddenNbSits, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED))
-						.addComponent(btnAddThisFlight))
-					.addGap(26))
-		);
-		panel_1.setLayout(gl_panel_1);
 
 		JScrollPane scrollPane = new JScrollPane();
 
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		
+		lblAddAFlight = new JLabel("Add a flight");
+		lblAddAFlight.setForeground(new Color(135, 206, 250));
+		lblAddAFlight.setFont(new Font("Tahoma", Font.BOLD, 23));
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(10)
+					.addComponent(btnBack)
+					.addContainerGap(670, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(4)
+					.addComponent(labelLogo)
+					.addGap(201)
+					.addComponent(lblAddAFlight, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 282, Short.MAX_VALUE)
+					.addComponent(buttonHome, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+					.addGap(18))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(panel_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 721, Short.MAX_VALUE))
+					.addContainerGap(66, Short.MAX_VALUE))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblAddAFlight, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+								.addComponent(labelLogo)))
+						.addComponent(buttonHome))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+		);
+		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+		gl_panel_1.setHorizontalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGap(10)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addComponent(lblId)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(idFlight, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addComponent(lblArrivalLocation)
+							.addGap(32)
+							.addComponent(arrivalLocationFlight, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addComponent(lblFlightNumber)
+							.addGap(38)
+							.addComponent(flightNumber, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addComponent(lblDepartureLocation)
+							.addGap(14)
+							.addComponent(departureLocationFlight, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)))
+					.addPreferredGap(ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addComponent(lblDepartureDate)
+							.addGap(4)
+							.addComponent(departureDateFlight, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(4)
+							.addComponent(lblArrivalDate)
+							.addGap(18)
+							.addComponent(arrivalDateFlight, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(5)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addComponent(lblAirline)
+									.addGap(44)
+									.addComponent(airlineFlight, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addComponent(lblNumberOfSits)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(numberSitsFlight, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)))))
+					.addGap(18)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnAddThisFlight)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addComponent(lblDepartureTime)
+									.addGap(4)
+									.addComponent(departureTimeFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addComponent(lblArrivalTime)
+									.addGap(22)
+									.addComponent(arrivalTimeFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addGap(4)
+									.addComponent(lblPrice)
+									.addGap(49)
+									.addComponent(priceFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addGap(18)))
+					.addContainerGap())
+		);
+		gl_panel_1.setVerticalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGap(11)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addGap(3)
+									.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+										.addComponent(lblDepartureDate)
+										.addComponent(idFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(departureDateFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGap(18)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+								.addComponent(arrivalDateFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblArrivalDate))
+							.addGap(18)
+							.addComponent(airlineFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addGap(3)
+									.addComponent(lblId)
+									.addGap(21)
+									.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_panel_1.createSequentialGroup()
+											.addGap(3)
+											.addComponent(lblFlightNumber))
+										.addComponent(flightNumber, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+									.addGap(18)
+									.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_panel_1.createSequentialGroup()
+											.addGap(3)
+											.addComponent(lblDepartureLocation))
+										.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+											.addComponent(departureLocationFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.addComponent(lblAirline))))
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_panel_1.createSequentialGroup()
+											.addGap(3)
+											.addComponent(lblDepartureTime))
+										.addComponent(departureTimeFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+									.addGap(18)
+									.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_panel_1.createSequentialGroup()
+											.addGap(3)
+											.addComponent(lblArrivalTime))
+										.addComponent(arrivalTimeFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+									.addGap(18)
+									.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_panel_1.createSequentialGroup()
+											.addGap(3)
+											.addComponent(lblPrice))
+										.addComponent(priceFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+							.addGap(18)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addGap(4)
+									.addComponent(lblArrivalLocation))
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addGap(1)
+									.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+										.addComponent(arrivalLocationFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblNumberOfSits)
+										.addComponent(numberSitsFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(btnAddThisFlight, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE))))
+					.addContainerGap())
+		);
+		panel_1.setLayout(gl_panel_1);
 		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(
-				Alignment.LEADING).addGroup(
-				gl_panel.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE,
-								636, Short.MAX_VALUE).addContainerGap()));
-		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(
-				Alignment.LEADING).addGroup(
-				gl_panel.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE,
-								126, Short.MAX_VALUE).addContainerGap()));
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 701, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+					.addContainerGap())
+		);
 		panel.setLayout(gl_panel);
 		contentPane.setLayout(gl_contentPane);
 		initDataBindings();

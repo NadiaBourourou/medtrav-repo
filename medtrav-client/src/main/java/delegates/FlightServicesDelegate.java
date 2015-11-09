@@ -118,4 +118,27 @@ public class FlightServicesDelegate {
 	public static List<String> doFindAllDepaturesSansDoublons() {return getProxy().findAllDepaturesSansDoublons();}
 	public static List<String> doFindAllDepaturesOfOurPatients() {return getProxy().findAllDepaturesOfOurPatients();}
 	
+	
+	public static List<FlightMatching> doFindFlightByDepartureLocation(String searchDep)
+	{
+		return getProxy().findFlightByDepartureLocation(searchDep);
+	}
+	
+	public static List<FlightMatching> doFindFlightByArrivalLocation(String searchArr)
+	{
+		return getProxy().findFlightByArrivalLocation(searchArr);
+	}
+	
+	public static List<FlightMatching> doFindFlightByAirline(String searchAirline)
+	{
+		return getProxy().findFlightByAirline(searchAirline);
+	}
+	
+	public static long doMostWorkingAirlines(String airlineGiven){
+		return getProxy().mostWorkingAirlines(airlineGiven);
+	}
+	
+	public static List<String> doFindAllAirlines(){
+		return getProxy().findAllAirlines();
+	}
 }

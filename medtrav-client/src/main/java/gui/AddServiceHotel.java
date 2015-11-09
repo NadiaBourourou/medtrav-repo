@@ -15,8 +15,6 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-
-import delegates.ClinicBookingServicesDelegate;
 import delegates.HotelServicesDelegate;
 import delegates.ServiceHotelServicesDelegate;
 import entities.Hotel;

@@ -55,6 +55,14 @@ public interface FlightServicesRemote {
 	List<String> findAllDepaturesSansDoublons();
 	
 	List<String> findAllDepaturesOfOurPatients();
+	
+	List<FlightMatching> findFlightByDepartureLocation(String searchDep);
 
+	List<FlightMatching> findFlightByArrivalLocation(String searchArr);
 
+	List<FlightMatching> findFlightByAirline(String searchAirline);
+
+	long mostWorkingAirlines(String airlineGiven);
+	
+	List<String> findAllAirlines();
 }

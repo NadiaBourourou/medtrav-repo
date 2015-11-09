@@ -32,6 +32,10 @@ public class TestimonyServicesDelegate {
 	public static void doDeleteTestimony(Testimony testimony) {
 		getProxy().deleteTestimony(testimony);
 	}
+	
+	public static List<Testimony> doFindAllTestimoniesByTitle(String title) {
+		return getProxy().findAllTestimoniesByTitle(title);
+	}
 
 	public static List<Testimony> doFindAllTestimoniesByPatient(Integer patientId) {
 		return getProxy().findAllTestimoniesByPatientId(patientId);

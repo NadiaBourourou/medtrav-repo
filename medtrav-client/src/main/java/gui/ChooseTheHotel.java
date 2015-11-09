@@ -109,17 +109,17 @@ HotelBooking hb= new HotelBooking();
 			//	 if ( Singleroom.isSelected()){
 					 
 					Double pri= h.getPriceSingle();
-					double u=HotelBookingServicesDelegate.doCalculPrix(pri, numNights);
+					double u=HotelServicesDelegate.doCalculPrix(pri, numNights);
 					hb.setPrice(u);
 
-					HotelBookingServicesDelegate.doBookHotel(numNights, u, r, h, 1);
+					HotelServicesDelegate.doBookHotel(numNights, u, r, h, 1);
 					
 				 }
 				 else {Double pri= h.getPriceSuite();
-					double u=HotelBookingServicesDelegate.doCalculPrix(pri, numNights);
+					double u=HotelServicesDelegate.doCalculPrix(pri, numNights);
 					hb.setPrice(u); 
 
-					HotelBookingServicesDelegate.doBookHotel(numNights, u, r, h, 1);
+					HotelServicesDelegate.doBookHotel(numNights, u, r, h, 1);
 					}
 				 
 		

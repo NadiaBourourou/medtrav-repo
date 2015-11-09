@@ -43,6 +43,9 @@ public class ListClinics extends JFrame {
 	private JTextField professionalism;
 	private JTextField address;
 	private JTextField phoneNumber;
+	private JTextField email;
+	private JTextField pricesimple;
+	private JTextField pricesingle;
 
 	/**
 	 * Launch the application.
@@ -65,7 +68,7 @@ public class ListClinics extends JFrame {
 	 */
 	public ListClinics() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 529, 384);
+		setBounds(100, 100, 529, 488);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -136,6 +139,21 @@ public class ListClinics extends JFrame {
 				phoneNumber.setText("");
 			}
 		});
+		
+		JLabel lblEmail = new JLabel("Email");
+		
+		JLabel lblPriceSimple = new JLabel("Price Simple");
+		
+		JLabel lblPriceSingle = new JLabel("Price Single");
+		
+		email = new JTextField();
+		email.setColumns(10);
+		
+		pricesimple = new JTextField();
+		pricesimple.setColumns(10);
+		
+		pricesingle = new JTextField();
+		pricesingle.setColumns(10);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -145,9 +163,14 @@ public class ListClinics extends JFrame {
 						.addComponent(lblName)
 						.addComponent(lblProfessionalism)
 						.addComponent(lblAddress)
-						.addComponent(lblPhoneNumber))
+						.addComponent(lblPhoneNumber)
+						.addComponent(lblEmail)
+						.addComponent(lblPriceSimple)
+						.addComponent(lblPriceSingle))
 					.addGap(50)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addComponent(pricesingle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(pricesimple, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(phoneNumber, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(name, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_panel_1.createSequentialGroup()
@@ -157,8 +180,9 @@ public class ListClinics extends JFrame {
 							.addGap(60)
 							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(btnDelete, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(btnUpdate, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-					.addContainerGap(107, Short.MAX_VALUE))
+								.addComponent(btnUpdate, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+						.addComponent(email, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(129, Short.MAX_VALUE))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -181,7 +205,19 @@ public class ListClinics extends JFrame {
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblPhoneNumber)
 						.addComponent(phoneNumber, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(49, Short.MAX_VALUE))
+					.addGap(18)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblEmail)
+						.addComponent(email, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblPriceSimple)
+						.addComponent(pricesimple, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblPriceSingle)
+						.addComponent(pricesingle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(41, Short.MAX_VALUE))
 		);
 		panel_1.setLayout(gl_panel_1);
 		
@@ -225,6 +261,15 @@ public class ListClinics extends JFrame {
 		BeanProperty<Clinic, Integer> clinicBeanProperty_3 = BeanProperty.create("phoneNumber");
 		jTableBinding.addColumnBinding(clinicBeanProperty_3).setColumnName("Phone Number");
 		//
+		BeanProperty<Clinic, String> clinicBeanProperty_8 = BeanProperty.create("email");
+		jTableBinding.addColumnBinding(clinicBeanProperty_8).setColumnName("Email");
+		//
+		BeanProperty<Clinic, Double> clinicBeanProperty_9 = BeanProperty.create("priceSimple");
+		jTableBinding.addColumnBinding(clinicBeanProperty_9).setColumnName("Price Simple");
+		//
+		BeanProperty<Clinic, Double> clinicBeanProperty_10 = BeanProperty.create("priceSingle");
+		jTableBinding.addColumnBinding(clinicBeanProperty_10).setColumnName("Price Single");
+		//
 		jTableBinding.bind();
 		//
 		BeanProperty<JTable, String> jTableBeanProperty = BeanProperty.create("selectedElement.name");
@@ -262,5 +307,32 @@ public class ListClinics extends JFrame {
 		BeanProperty<JTextField, String> jTextFieldBeanProperty_3 = BeanProperty.create("text");
 		AutoBinding<Clinic, Integer, JTextField, String> autoBinding_7 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, clinic, clinicBeanProperty_7, phoneNumber, jTextFieldBeanProperty_3);
 		autoBinding_7.bind();
+		//
+		BeanProperty<JTable, String> jTableBeanProperty_4 = BeanProperty.create("selectedElement.email");
+		BeanProperty<Clinic, String> clinicBeanProperty_11 = BeanProperty.create("email");
+		AutoBinding<JTable, String, Clinic, String> autoBinding_8 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, table, jTableBeanProperty_4, clinic, clinicBeanProperty_11);
+		autoBinding_8.bind();
+		//
+		BeanProperty<JTable, Double> jTableBeanProperty_5 = BeanProperty.create("selectedElement.priceSimple");
+		BeanProperty<Clinic, Double> clinicBeanProperty_12 = BeanProperty.create("priceSimple");
+		AutoBinding<JTable, Double, Clinic, Double> autoBinding_9 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, table, jTableBeanProperty_5, clinic, clinicBeanProperty_12);
+		autoBinding_9.bind();
+		//
+		BeanProperty<JTable, Double> jTableBeanProperty_6 = BeanProperty.create("selectedElement.priceSingle");
+		BeanProperty<Clinic, Double> clinicBeanProperty_13 = BeanProperty.create("priceSingle");
+		AutoBinding<JTable, Double, Clinic, Double> autoBinding_10 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, table, jTableBeanProperty_6, clinic, clinicBeanProperty_13);
+		autoBinding_10.bind();
+		//
+		BeanProperty<JTextField, String> jTextFieldBeanProperty_4 = BeanProperty.create("text");
+		AutoBinding<Clinic, String, JTextField, String> autoBinding_11 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, clinic, clinicBeanProperty_11, email, jTextFieldBeanProperty_4);
+		autoBinding_11.bind();
+		//
+		BeanProperty<JTextField, String> jTextFieldBeanProperty_5 = BeanProperty.create("text");
+		AutoBinding<Clinic, Double, JTextField, String> autoBinding_12 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, clinic, clinicBeanProperty_12, pricesimple, jTextFieldBeanProperty_5);
+		autoBinding_12.bind();
+		//
+		BeanProperty<JTextField, String> jTextFieldBeanProperty_6 = BeanProperty.create("text");
+		AutoBinding<Clinic, Double, JTextField, String> autoBinding_13 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, clinic, clinicBeanProperty_13, pricesingle, jTextFieldBeanProperty_6);
+		autoBinding_13.bind();
 	}
 }

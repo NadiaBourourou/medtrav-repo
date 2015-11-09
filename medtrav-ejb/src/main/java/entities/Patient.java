@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -25,11 +24,11 @@ public class Patient extends User implements Serializable {
 	private List<Question> questions;
 	private MedicalRecords medicalRecords;
 
-	private List<Doctor> doctors;
 	private List<HotelBooking> hotelBookings;
 	private List<ClinicBooking> clinicBookings;
 	private List<Flight> flights;
 	private List<SurgeryPatient> surgeryPatients;
+	private List<DoctorPatient> doctorPatients;
 
 	private static final long serialVersionUID = 1L;
 
@@ -87,26 +86,16 @@ public class Patient extends User implements Serializable {
 		this.state = state;
 	}
 
-	@ManyToMany(mappedBy = "patients")
-	public List<Doctor> getDoctors() {
-		return doctors;
-	}
-
-	public void setDoctors(List<Doctor> doctors) {
-		this.doctors = doctors;
-	}
-
-
 	@OneToMany(mappedBy = "patient")
 	public List<Question> getQuestions() {
 		return questions;
 	}
+
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
 
 	@OneToMany(mappedBy = "patient")
-	
 	public List<HotelBooking> getHotelBookings() {
 		return hotelBookings;
 	}
@@ -114,8 +103,6 @@ public class Patient extends User implements Serializable {
 	public void setHotelBookings(List<HotelBooking> hotelBookings) {
 		this.hotelBookings = hotelBookings;
 	}
-
-
 
 	@OneToMany(mappedBy = "patient")
 	public List<ClinicBooking> getClinicBookings() {
@@ -125,8 +112,6 @@ public class Patient extends User implements Serializable {
 	public void setClinicBookings(List<ClinicBooking> clinicBookings) {
 		this.clinicBookings = clinicBookings;
 	}
-
-
 
 	@OneToMany(mappedBy = "patient")
 	public List<SurgeryPatient> getSurgeryPatients() {
@@ -144,6 +129,15 @@ public class Patient extends User implements Serializable {
 
 	public void setFlights(List<Flight> flights) {
 		this.flights = flights;
+	}
+
+	@OneToMany(mappedBy="patient")
+	public List<DoctorPatient> getDoctorPatients() {
+		return doctorPatients;
+	}
+
+	public void setDoctorPatients(List<DoctorPatient> doctorPatients) {
+		this.doctorPatients = doctorPatients;
 	}
 
 }

@@ -413,5 +413,47 @@ public class FlightServices implements FlightServicesRemote,
 		return query.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<FlightMatching> findFlightByDepartureLocation(String searchDep) {
+		String jpql = "select f from FlightMatching f where f.departure  LIKE :param";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", "%" + searchDep + "%");
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<FlightMatching> findFlightByArrivalLocation(String searchArr) {
+		String jpql = "select f from FlightMatching f where f.arrival  LIKE :param";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", "%" + searchArr + "%");
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<FlightMatching> findFlightByAirline(String searchAirline) {
+		String jpql = "select f from FlightMatching f where f.airline  LIKE :param";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", "%" + searchAirline + "%");
+		return query.getResultList();
+	}
+
+	@Override
+	public long mostWorkingAirlines(String airlineGiven) {
+	Query query=entityManager.createQuery("select count(f.idFlightMatching) from FlightMatching f where f.airline=:param ");
+	query.setParameter("param", airlineGiven);
+	return (long) query.getSingleResult();		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<String> findAllAirlines() {
+		String jpql = "select f.airline from FlightMatching f group by f.airline";
+		Query query = entityManager.createQuery(jpql);
+		return query.getResultList();
+	}
+
 	
 }

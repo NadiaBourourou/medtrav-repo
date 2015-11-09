@@ -1,5 +1,6 @@
 package services.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -8,7 +9,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import entities.Clinic;
+import entities.ClinicBooking;
+import entities.Hotel;
 import entities.Patient;
+import entities.RoomClinicType;
 import services.interfaces.ClinicServicesLocal;
 import services.interfaces.ClinicServicesRemote;
 
@@ -91,4 +95,50 @@ public class ClinicServices implements ClinicServicesRemote, ClinicServicesLocal
 		return query.getResultList();
 	}
 
-}
+	@Override
+	public List<Clinic> findClinicByName(String name) {
+		 String jpql = "select h from Clinic h where h.name=:param";
+		 Query query= entityManager.createQuery(jpql);
+		 query.setParameter("param", name);
+		 return query.getResultList();
+	}
+	
+
+	@Override
+	public Boolean addClinicBookingAndAffectClinic(ClinicBooking clinicBooking,
+			Integer id) {
+		Boolean b= false;
+	
+		try {
+	 Clinic clinic = entityManager.find(Clinic.class, id);
+
+	 clinicBooking.setClinic(clinic);
+	 entityManager.merge(clinicBooking);
+	 b= true;
+		}
+		catch (Exception e) {
+			System.err.println("error");
+		}
+		return b;
+	 
+	 
+	 
+	}
+
+	@Override
+	public Boolean bookClinic(RoomClinicType typeRoom, Date date,
+			String commentaire, Clinic clinic, Integer idPatient) {
+		Boolean b = false;
+		try {
+			Patient patient= entityManager.find(Patient.class,idPatient);
+			ClinicBooking clinicBooking = new ClinicBooking(typeRoom, date,
+				commentaire, clinic, patient);
+			entityManager.merge(clinicBooking);
+			b = true;
+		} catch (Exception e) {
+		}
+		return b;
+	}
+	}
+
+

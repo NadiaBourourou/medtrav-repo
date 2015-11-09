@@ -51,6 +51,8 @@ import org.jdesktop.beansbinding.ObjectProperty;
 import java.util.Date;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class ListTestimonies extends JFrame {
 
@@ -62,6 +64,7 @@ public class ListTestimonies extends JFrame {
 	private JTextField title;
 	private JTextPane description;
 	private Integer UserId=3;
+	private JTextField searchtf;
 	
 
 	
@@ -235,12 +238,29 @@ public class ListTestimonies extends JFrame {
 		contentPane.add(btnAddANew);
 		
 		JButton btnSearchTestimonies = new JButton("Search");
-		btnSearchTestimonies.setBounds(570, 135, 130, 23);
+		btnSearchTestimonies.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnSearchTestimonies.setBounds(443, 11, 130, 23);
 		contentPane.add(btnSearchTestimonies);
 		
 		JButton btnNewButton_1 = new JButton("Display");
 		btnNewButton_1.setBounds(560, 361, 130, 23);
 		contentPane.add(btnNewButton_1);
+		
+		searchtf = new JTextField();
+		searchtf.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				
+				testimonies=TestimonyServicesDelegate.doFindAllTestimoniesByTitle(searchtf.getText());
+			initDataBindings();
+			}
+		});
+		searchtf.setBounds(34, 11, 183, 23);
+		contentPane.add(searchtf);
+		searchtf.setColumns(10);
 		
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

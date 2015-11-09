@@ -1,5 +1,6 @@
 package gui.flights;
 
+import gui.AdminUI;
 import gui.testimonies.AddTestimony;
 import gui.testimonies.ListTestimonies;
 
@@ -16,6 +17,7 @@ import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.ImageIcon;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
@@ -51,9 +53,11 @@ public class ManageFlights extends JFrame {
 	 * Create the frame.
 	 */
 	public ManageFlights() {
+		setTitle("Manage flights");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 730, 447);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
@@ -66,16 +70,22 @@ public class ManageFlights extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				AddFlight2 addFlight= new AddFlight2();
 				addFlight.setVisible(true);
+				ManageFlights.this.setVisible(false);
 			}
 		});
+		btnAddAFlight.setIcon(new ImageIcon(ManageFlights.class.getResource("/images/addHome.png")));
+		btnAddAFlight.setBounds(10, 331, 160, 43);
 		
 		JButton btnSeeAllFlights = new JButton("See all flights");
 		btnSeeAllFlights.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			//	SeeAllFlights seeAllFlights = new SeeAllFlights();
-				//seeAllFlights.setVisible(true);
+			SeeAllFlights seeAllFlights = new SeeAllFlights();
+			seeAllFlights.setVisible(true);
+			ManageFlights.this.setVisible(false);
 			}
 		});
+		btnSeeAllFlights.setIcon(new ImageIcon(ManageFlights.class.getResource("/images/see.png")));
+		btnSeeAllFlights.setBounds(10, 331, 160, 43);
 		
 		JButton btnModifyMyFlights = new JButton("Modify/Cancel my flight");
 		btnModifyMyFlights.addActionListener(new ActionListener() {
@@ -83,47 +93,77 @@ public class ManageFlights extends JFrame {
 				
 				ModifyCancelFlight modifCancelFlight= new ModifyCancelFlight();
 				modifCancelFlight.setVisible(true);
+				ManageFlights.this.setVisible(false);
 			}
 		});
+		btnModifyMyFlights.setIcon(new ImageIcon(ManageFlights.class.getResource("/images/modifCancelHome.png")));
+	    btnModifyMyFlights.setBounds(10, 331, 160, 43);
 		
 		JButton btnNewButton = new JButton("See my flights");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SeeMyFlights seeMyFlights=new SeeMyFlights();
 				seeMyFlights.setVisible(true);
+				ManageFlights.this.setVisible(false);
 			}
 		});
+		btnNewButton.setIcon(new ImageIcon(ManageFlights.class.getResource("/images/see.png")));
+		btnNewButton.setBounds(10, 331, 160, 43);
+		
+		JLabel labelLogo = new JLabel("");
+		labelLogo.setIcon(new ImageIcon(AddFlight2.class.getResource("/images/smallLogo.png")));
+		labelLogo.setBounds(10, 0, 69, 73);
+		
+		JButton btnStatistics = new JButton("See statistics");
+		btnStatistics.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Statistiques stat = new Statistiques("Airline partners");
+				stat.setVisible(true);
+			}
+		});
+		btnStatistics.setIcon(new ImageIcon(ManageFlights.class.getResource("/images/stat.png")));
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(10)
-							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 307, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(36)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(btnModifyMyFlights, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(btnAddAFlight, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(btnNewButton, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
-							.addGap(37)
-							.addComponent(btnSeeAllFlights, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)))
-					.addGap(65))
+					.addComponent(labelLogo)
+					.addGap(183)
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(262, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(69)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(btnModifyMyFlights, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnAddAFlight, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE))
+					.addGap(82)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(btnStatistics, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnSeeAllFlights, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnNewButton, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))
+					.addContainerGap(101, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
-					.addGap(6)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnAddAFlight)
-						.addComponent(btnSeeAllFlights))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(labelLogo)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(35)
+							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)))
+					.addGap(61)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(btnAddAFlight, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(btnModifyMyFlights, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(btnSeeAllFlights, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)))
 					.addGap(18)
-					.addComponent(btnModifyMyFlights)
-					.addGap(18)
-					.addComponent(btnNewButton)
-					.addGap(45))
+					.addComponent(btnStatistics, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+					.addGap(29))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

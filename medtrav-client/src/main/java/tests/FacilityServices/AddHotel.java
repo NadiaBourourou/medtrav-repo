@@ -3,6 +3,7 @@ package tests.FacilityServices;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,6 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -104,8 +106,8 @@ public class AddHotel extends JFrame {
 						.toString()));
 				hotel.setState(StateType.valueOf(comboBox_1.getSelectedItem()
 						.toString()));
-			/*	File fichier = new File(textField.getText());
-				FileInputStream fis = null;
+				File fichier = new File(textField.getText());
+			/*	FileInputStream fis = null;
 				try {
 					fis = new FileInputStream(fichier);
 				} catch (FileNotFoundException e1) {
@@ -134,9 +136,9 @@ public class AddHotel extends JFrame {
 				for (int i = 0; i < b.length; i++) {
 					b[i] = list.get(i);
 				}
-
-				hotel.setPic(b);
 */
+			//s	hotel.setPic(img);
+
 				HotelServicesDelegate.doAddHotel(hotel);
 			}
 		});

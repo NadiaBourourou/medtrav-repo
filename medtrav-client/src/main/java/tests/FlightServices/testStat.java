@@ -1,5 +1,7 @@
 package tests.FlightServices;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,25 +17,16 @@ import entities.FlightMatching;
 public class testStat {
 	public static void main(String[] args) {
 
-		int count[] = { 0,0,0,0};
+		List<String> ourAirlines=FlightServicesDelegate.doFindAllAirlines();
 		
-		List<String> a = FlightServicesDelegate
-				.doFindAllDepaturesSansDoublons();
-		List<String> b = FlightServicesDelegate
-				.doFindAllDepaturesOfOurPatients();
-
-		for (int i = 0; i < a.size(); i++) {
-
-			for (int j = 0; j < b.size(); i++) {
-				if(a.get(i).equals(b.get(j))){
-					count[i]=0;
-					count[i]=count[i]+1;
-					System.out.println("Depature = "+a.get(i)+" "+"count = "+ count[i]);
-				}
-
-			}
+		for(int i=0;i<ourAirlines.size();i++)
+		{
+		
+		//System.out.println(ourAirlines.get(i));
+		long a= FlightServicesDelegate.doMostWorkingAirlines(ourAirlines.get(i));
+		System.out.println(ourAirlines.get(i)+" "+a);
 		}
-
 	}
-
 }
+
+
