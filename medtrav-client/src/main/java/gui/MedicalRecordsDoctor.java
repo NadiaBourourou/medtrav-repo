@@ -1,16 +1,14 @@
-package khadija.essai;
+package gui;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Blob;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,11 +18,11 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
 import org.jdesktop.beansbinding.AutoBinding;
@@ -35,19 +33,22 @@ import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 
 import delegates.MedicalRecordsDelegate;
-import delegates.UserServicesDelegate;
 import entities.Patient;
 import entities.User;
+
+import javax.swing.ImageIcon;
+
+import java.awt.Color;
+
 import javax.swing.JTextArea;
-import javax.swing.JTextPane;
 
 public class MedicalRecordsDoctor extends JFrame {
 
 	List<Patient> patients;
+	Patient patient = new Patient();
 	User patientSelected = new User();
 
 	private JPanel contentPane;
-	private JTextField id;
 	private JTextField prenom;
 	private JTextField nom;
 	private JTextField file;
@@ -62,6 +63,7 @@ public class MedicalRecordsDoctor extends JFrame {
 				try {
 					MedicalRecordsDoctor frame = new MedicalRecordsDoctor();
 					frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -73,38 +75,41 @@ public class MedicalRecordsDoctor extends JFrame {
 	 * Create the frame.
 	 */
 	public MedicalRecordsDoctor() {
+
 		setVisible(true);
-		patients = UserServicesDelegate.doListAllPatient();
+		patients = MedicalRecordsDelegate.doListAssignedPatientsToDoctor(3);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 304);
+		setBounds(100, 100, 527, 365);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
-		JLabel lblPatientId = new JLabel("Patient Id");
-
-		id = new JTextField();
-		id.setEnabled(false);
-		id.setColumns(10);
-
 		JLabel lblPatientsFirstName = new JLabel("Patient's First name");
+		lblPatientsFirstName.setBounds(15, 161, 124, 14);
 
 		prenom = new JTextField();
-		prenom.setEnabled(false);
+		prenom.setBounds(15, 186, 86, 20);
 		prenom.setColumns(10);
 
 		JLabel lblPatientsLastName = new JLabel("Patient's Last name");
+		lblPatientsLastName.setBounds(16, 217, 123, 14);
 
 		nom = new JTextField();
-		nom.setEnabled(false);
+		nom.setBounds(15, 242, 86, 20);
 		nom.setColumns(10);
 
 		JLabel lblPatientFile = new JLabel("Patient File");
+		lblPatientFile.setBounds(10, 287, 53, 14);
 
 		file = new JTextField();
+		file.setBounds(85, 284, 86, 20);
 		file.setColumns(10);
 
-		JButton btnUpload = new JButton("Upload");
+		JButton btnUpload = new JButton("");
+		btnUpload.setIcon(new ImageIcon(MedicalRecordsDoctor.class
+				.getResource("/images/uploadd.png")));
+		btnUpload.setBounds(181, 268, 45, 48);
 		btnUpload.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -117,60 +122,82 @@ public class MedicalRecordsDoctor extends JFrame {
 		});
 
 		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(210, 90, 301, 155);
 
 		JButton btnUpdate = new JButton("Update");
+		btnUpdate.setBounds(236, 283, 77, 23);
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				entities.MedicalRecords medicalRecords = new entities.MedicalRecords();
-				File fichier = new File(file.getText());
-				FileReader fr = null;
-				try {
-					fr = new FileReader(fichier);
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				ArrayList<Byte> list = new ArrayList<Byte>();
-				int s;
-				try {
-					while ((s = fr.read()) != -1) {
-						list.add((byte) s);
-					}
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				byte[] b = new byte[list.size()];
-				for (int i = 0; i < b.length; i++) {
-					b[i] = list.get(i);
-				}
-				medicalRecords = MedicalRecordsDelegate
-						.doFindMedicalRecordsByPatientId(Integer.parseInt(id
-								.getText()));
-				medicalRecords.setPatientFile(b);
-				MedicalRecordsDelegate.doUpdateMedicalRecords(medicalRecords);
+				if (!file.getText().isEmpty()) {
+					entities.MedicalRecords medicalRecords = new entities.MedicalRecords();
 
+					File fichier = new File(file.getText());
+					FileReader fr = null;
+					try {
+						fr = new FileReader(fichier);
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					ArrayList<Byte> list = new ArrayList<Byte>();
+					int s;
+					try {
+						while ((s = fr.read()) != -1) {
+							list.add((byte) s);
+						}
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					byte[] b = new byte[list.size()];
+					for (int i = 0; i < b.length; i++) {
+						b[i] = list.get(i);
+					}
+					medicalRecords = MedicalRecordsDelegate
+							.doFindMedicalRecordsByPatientId(patient
+									.getUserId());
+					medicalRecords.setPatientFile(b);
+					MedicalRecordsDelegate
+							.doUpdateMedicalRecords(medicalRecords);
+
+				} else {
+					JOptionPane.showMessageDialog(null,
+							"Please choose a patient file to upload");
+				}
 			}
 		});
 
-		JButton btnDownload = new JButton("Download");
+		JButton btnDownload = new JButton("");
+		btnDownload.setIcon(new ImageIcon(MedicalRecordsDoctor.class
+				.getResource("/images/arrow-download-icon.png")));
+		btnDownload.setBounds(413, 258, 53, 48);
 		btnDownload.addActionListener(new ActionListener() {
-			private Blob b;
+
 			private FileOutputStream output;
 
 			public void actionPerformed(ActionEvent e) {
-				byte[] analysis = MedicalRecordsDelegate
-						.doDownloadAnalysis(1);
-				b = null;
-				try {
 
-					File file = new File("KAD.docx");
-					output = new FileOutputStream(file);	
+				patient = patients.get(table.getSelectedRow());
+				byte[] analysis = MedicalRecordsDelegate
+						.doDownloadAnalysis(patient.getUserId());
+
+				try {
+					File file = new File(patient.getFirstName() + " "
+							+ patient.getLastName() + ".txt");
+
+					output = new FileOutputStream(file);
 					output.write(analysis);
+					FileReader fileReader = new FileReader(file);
+					BufferedReader br = new BufferedReader(fileReader);
+					LectureFichier lectureFichier = new LectureFichier();
+					lectureFichier.textArea.read(br, null);
+					br.close();		
+					lectureFichier.setVisible(true);
+				
 					
-					System.out.println(output.getFD()); 
-					
-					System.out.println(111);
+
+
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -181,70 +208,6 @@ public class MedicalRecordsDoctor extends JFrame {
 
 			}
 		});
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblPatientId)
-						.addComponent(id, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblPatientsFirstName)
-						.addComponent(prenom, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblPatientsLastName)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-							.addComponent(nom, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addComponent(lblPatientFile)
-								.addGap(41))))
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.UNRELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(panel, GroupLayout.PREFERRED_SIZE, 301, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-										.addComponent(btnUpdate)
-										.addComponent(btnDownload))
-									.addGap(22))))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(file, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnUpload)))
-					.addContainerGap())
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(26)
-							.addComponent(lblPatientId)
-							.addGap(11)
-							.addComponent(id, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(11)
-							.addComponent(lblPatientsFirstName)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(prenom, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(lblPatientsLastName)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(nom, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(27)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblPatientFile)
-								.addComponent(file, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnUpload)))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnDownload)
-							.addGap(18)
-							.addComponent(btnUpdate)))
-					.addContainerGap(123, Short.MAX_VALUE))
-		);
 
 		JScrollPane scrollPane = new JScrollPane();
 		GroupLayout gl_panel = new GroupLayout(panel);
@@ -258,16 +221,54 @@ public class MedicalRecordsDoctor extends JFrame {
 								Short.MAX_VALUE)));
 		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(
 				Alignment.LEADING).addGroup(
+				Alignment.TRAILING,
 				gl_panel.createSequentialGroup()
-						.addContainerGap()
+						.addContainerGap(12, Short.MAX_VALUE)
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE,
 								132, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(12, Short.MAX_VALUE)));
+						.addContainerGap()));
 
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		panel.setLayout(gl_panel);
-		contentPane.setLayout(gl_contentPane);
+		contentPane.setLayout(null);
+		contentPane.add(lblPatientsFirstName);
+		contentPane.add(prenom);
+		contentPane.add(lblPatientsLastName);
+		contentPane.add(nom);
+		contentPane.add(lblPatientFile);
+		contentPane.add(panel);
+		contentPane.add(btnUpdate);
+		contentPane.add(btnDownload);
+		contentPane.add(file);
+		contentPane.add(btnUpload);
+
+		JButton btnSearch = new JButton("");
+		btnSearch.setIcon(new ImageIcon(MedicalRecordsDoctor.class
+				.getResource("/images/rechercher.png")));
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (!(prenom.getText().isEmpty()) && !(nom.getText().isEmpty())) {
+					try {
+						patient = MedicalRecordsDelegate
+								.doFindPatientByFirstNameAndLastName(
+										prenom.getText(), nom.getText());
+						patients.clear();
+						patients.add(patient);
+						initDataBindings();
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null,
+								"The patient does not exist");
+					}
+				} else {
+					JOptionPane.showMessageDialog(null,
+							"Please fill out all required fields ");
+				}
+
+			}
+		});
+		btnSearch.setBounds(148, 172, 52, 48);
+		contentPane.add(btnSearch);
 		initDataBindings();
 	}
 
@@ -320,13 +321,6 @@ public class MedicalRecordsDoctor extends JFrame {
 						jTableBeanProperty_2, patientSelected,
 						userBeanProperty_5);
 		autoBinding_2.bind();
-		//
-		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty
-				.create("text");
-		AutoBinding<User, Integer, JTextField, String> autoBinding_3 = Bindings
-				.createAutoBinding(UpdateStrategy.READ_WRITE, patientSelected,
-						userBeanProperty_3, id, jTextFieldBeanProperty);
-		autoBinding_3.bind();
 		//
 		BeanProperty<JTextField, String> jTextFieldBeanProperty_1 = BeanProperty
 				.create("text");

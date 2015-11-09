@@ -1,0 +1,15 @@
+BCT_WIFI_RC : BCT+s01*
+BCT_wifi_PR: BCT=p02*
+proxy : 10.0.40.30 port : 8080
+nom d'utilisateur : local_ST002 mdp : 12345
+
+
+
+azizbouguerra00@gmail.com    mdp:foretdunord
+LeilaBouguerra00@gmail.com   mdp:anesthesiste
+
+
+mdp esprit: 123456
+
+root port3306 mdp123456
+
