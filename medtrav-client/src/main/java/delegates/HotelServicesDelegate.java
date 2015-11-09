@@ -43,14 +43,12 @@ public class HotelServicesDelegate {
 	public static List<Hotel> doFindAllHotels() {
 		return getProxy().findAllHotels();
 	}
-	public static Hotel doFindHotelByName(String name){
+	public static List<Hotel> doFindHotelByName(String name){
 		
 		return getProxy().findHotelByName(name);
 	}
 	
-	public static List<Hotel> doFindAllHotelsEnabled () {
-		return getProxy().findAllHotelsEnabled();
-	}
+	
 	public static Double doCalculPrix(Double prix, Integer numNights) {
 		return getProxy().calculPrix(prix, numNights);
 	}

@@ -74,7 +74,7 @@ public class ListHotelAndServicesPatient extends JFrame {
 	public ListHotelAndServicesPatient() {
 		setTitle("Hotels & Services");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 626, 446);
+		setBounds(100, 100, 641, 478);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -90,32 +90,47 @@ public class ListHotelAndServicesPatient extends JFrame {
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(ListHotelAndServicesPatient.class.getResource("/images/hotel services (2).jpg")));
+		
+		JLabel lblNewLabel = new JLabel("\r\n");
+		lblNewLabel.setIcon(new ImageIcon(ListHotelAndServicesPatient.class.getResource("/images/medtraaaaaav.jpg")));
+		
+		JButton btnNewButton = new JButton("");
+		btnNewButton.setIcon(new ImageIcon(ListHotelAndServicesPatient.class.getResource("/images/choose hotel.jpg")));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createSequentialGroup()
+						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+							.addComponent(lblNewLabel)
+							.addPreferredGap(ComponentPlacement.RELATED, 230, Short.MAX_VALUE)
 							.addComponent(label, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE)
-							.addGap(39))
+							.addGap(159))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(panel, GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
-							.addContainerGap())
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addContainerGap())))
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
+								.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addGap(176))))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(509)
+					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(221, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addComponent(label)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGap(21)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(lblNewLabel)
+						.addComponent(label))
+					.addGap(10)
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE)
-					.addGap(397))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+					.addGap(368))
 		);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -181,6 +196,18 @@ public class ListHotelAndServicesPatient extends JFrame {
 		initDataBindings();
 		initDataBindingss();
 	}
+	protected void initDataBindingss() {
+		//
+		JTableBinding<ServiceHotel, List<ServiceHotel>, JTable> jTableBinding_1 = SwingBindings.createJTableBinding(UpdateStrategy.READ, servicesHotels, tableServiceHotel);
+		//
+		BeanProperty<ServiceHotel, String> serviceHotelBeanProperty = BeanProperty.create("name");
+		jTableBinding_1.addColumnBinding(serviceHotelBeanProperty).setColumnName("Name Of Service");
+		//
+		BeanProperty<ServiceHotel, String> serviceHotelBeanProperty_1 = BeanProperty.create("description");
+		jTableBinding_1.addColumnBinding(serviceHotelBeanProperty_1).setColumnName("Details");
+		//
+		jTableBinding_1.bind();
+	}
 	protected void initDataBindings() {
 		JTableBinding<Hotel, List<Hotel>, JTable> jTableBinding = SwingBindings.createJTableBinding(UpdateStrategy.READ, hotels, tableHotel);
 		//
@@ -198,6 +225,12 @@ public class ListHotelAndServicesPatient extends JFrame {
 		//
 		BeanProperty<Hotel, String> hotelBeanProperty_4 = BeanProperty.create("address");
 		jTableBinding.addColumnBinding(hotelBeanProperty_4).setColumnName("Address");
+		//
+		BeanProperty<Hotel, Double> hotelBeanProperty_10 = BeanProperty.create("priceSingle");
+		jTableBinding.addColumnBinding(hotelBeanProperty_10).setColumnName("Price Single");
+		//
+		BeanProperty<Hotel, Double> hotelBeanProperty_11 = BeanProperty.create("priceSuite");
+		jTableBinding.addColumnBinding(hotelBeanProperty_11).setColumnName("Price Suite");
 		//
 		jTableBinding.bind();
 		//
@@ -225,17 +258,15 @@ public class ListHotelAndServicesPatient extends JFrame {
 		BeanProperty<Hotel, String> hotelBeanProperty_9 = BeanProperty.create("address");
 		AutoBinding<JTable, String, Hotel, String> autoBinding_4 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, tableHotel, jTableBeanProperty_4, hotel, hotelBeanProperty_9);
 		autoBinding_4.bind();
-	}
-	protected void initDataBindingss() {
 		//
-		JTableBinding<ServiceHotel, List<ServiceHotel>, JTable> jTableBinding_1 = SwingBindings.createJTableBinding(UpdateStrategy.READ, servicesHotels, tableServiceHotel);
+		BeanProperty<JTable, Double> jTableBeanProperty_5 = BeanProperty.create("selectedElement.priceSingle");
+		BeanProperty<Hotel, Double> hotelBeanProperty_12 = BeanProperty.create("priceSingle");
+		AutoBinding<JTable, Double, Hotel, Double> autoBinding_5 = Bindings.createAutoBinding(UpdateStrategy.READ, tableHotel, jTableBeanProperty_5, hotel, hotelBeanProperty_12);
+		autoBinding_5.bind();
 		//
-		BeanProperty<ServiceHotel, String> serviceHotelBeanProperty = BeanProperty.create("name");
-		jTableBinding_1.addColumnBinding(serviceHotelBeanProperty).setColumnName("Name Of Service");
-		//
-		BeanProperty<ServiceHotel, String> serviceHotelBeanProperty_1 = BeanProperty.create("description");
-		jTableBinding_1.addColumnBinding(serviceHotelBeanProperty_1).setColumnName("Details");
-		//
-		jTableBinding_1.bind();
+		BeanProperty<JTable, Double> jTableBeanProperty_6 = BeanProperty.create("selectedElement.priceSuite");
+		BeanProperty<Hotel, Double> hotelBeanProperty_13 = BeanProperty.create("priceSuite");
+		AutoBinding<JTable, Double, Hotel, Double> autoBinding_6 = Bindings.createAutoBinding(UpdateStrategy.READ, tableHotel, jTableBeanProperty_6, hotel, hotelBeanProperty_13);
+		autoBinding_6.bind();
 	}
 }

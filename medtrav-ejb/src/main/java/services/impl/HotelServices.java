@@ -97,11 +97,12 @@ public class HotelServices implements HotelServicesRemote, HotelServicesLocal {
 	}
 
 	@Override
-	public Hotel findHotelByName(String name) {
-		String jpql = "select h from Hotel h where h.name=:param";
+	public List<Hotel> findHotelByName(String name) {
+		String jpql = "select h from Hotel h where h.name LIKE :param";
 		Query query = entityManager.createQuery(jpql);
-		query.setParameter("param", name);
-		return (Hotel) query.getSingleResult();
+		query.setParameter("param","%" + name  + "%");
+		return query.getResultList();
+
 	}
 
 	@Override
