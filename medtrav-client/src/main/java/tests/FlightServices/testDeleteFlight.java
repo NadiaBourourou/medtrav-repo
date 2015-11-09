@@ -7,7 +7,7 @@ public class testDeleteFlight {
 	
 	public static void main(String[] args) {
 		
-		Flight flightFound=FlightServicesDelegate.doFindFlightById(1);
+		Flight flightFound=FlightServicesDelegate.doFindFlightById(4);
 		FlightServicesDelegate.doDeleteFlight(flightFound);
 	}
 

@@ -71,8 +71,10 @@ import javax.swing.JRadioButton;
 public class ListTestimonies extends JFrame {
 
 	private JPanel contentPane;
+	
 	List <Testimony> testimonies;
 	Testimony testimonySelected= new Testimony();
+	
 	private JTable table;
 	private JTextField testimonyId;
 	private JTextField title;

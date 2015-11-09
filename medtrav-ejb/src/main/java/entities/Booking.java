@@ -2,11 +2,11 @@ package entities;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -44,7 +44,7 @@ public class Booking implements Serializable {
 		this.bookingId = bookingId;
 	}
 
-	@ManyToOne
+	@OneToOne(cascade=CascadeType.REMOVE)
 	public Flight getFlight() {
 		return flight;
 	}
@@ -61,7 +61,7 @@ public class Booking implements Serializable {
 		this.state = state;
 	}
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.REMOVE)
 	public HotelBooking getHotelBooking() {
 		return hotelBooking;
 	}
@@ -70,7 +70,7 @@ public class Booking implements Serializable {
 		this.hotelBooking = hotelBooking;
 	}
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.REMOVE)
 	public ClinicBooking getClinicBooking() {
 		return clinicBooking;
 	}
@@ -79,7 +79,7 @@ public class Booking implements Serializable {
 		this.clinicBooking = clinicBooking;
 	}
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.REMOVE)
 	public SurgeryPatient getSurgeryPatient() {
 		return surgeryPatient;
 	}
@@ -88,7 +88,7 @@ public class Booking implements Serializable {
 		this.surgeryPatient = surgeryPatient;
 	}
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.REMOVE)
 	public DoctorPatient getDoctorPatient() {
 		return doctorPatient;
 	}

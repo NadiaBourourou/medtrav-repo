@@ -59,7 +59,9 @@ public class MedicalRecordsPatient extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
-		JButton btnAdd = new JButton("upload");
+		JButton btnAdd = new JButton("");
+		btnAdd.setBounds(192, 86, 75, 53);
+		btnAdd.setIcon(new ImageIcon(MedicalRecordsPatient.class.getResource("/images/upload.png")));
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JFileChooser chooser = new JFileChooser();
@@ -71,9 +73,11 @@ public class MedicalRecordsPatient extends JFrame {
 		});
 
 		textField = new JTextField();
+		textField.setBounds(96, 116, 86, 20);
 		textField.setColumns(10);
 
 		btnAdd_1 = new JButton("Add");
+		btnAdd_1.setBounds(92, 153, 51, 23);
 		btnAdd_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				entities.MedicalRecords medicalRecords = new entities.MedicalRecords();
@@ -110,35 +114,20 @@ public class MedicalRecordsPatient extends JFrame {
 		});
 
 		lblAnalysis = new JLabel("Analysis");
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(lblAnalysis)
-							.addGap(35)
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(10)
-							.addComponent(btnAdd))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(83)
-							.addComponent(btnAdd_1)))
-					.addContainerGap(179, Short.MAX_VALUE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(135, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblAnalysis)
-						.addComponent(btnAdd, GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
-					.addGap(46)
-					.addComponent(btnAdd_1)
-					.addGap(27))
-		);
-		contentPane.setLayout(gl_contentPane);
+		lblAnalysis.setBounds(31, 119, 39, 14);
+		contentPane.setLayout(null);
+		
+		JLabel label = new JLabel("");
+		label.setBounds(239, 132, 195, 130);
+		label.setIcon(new ImageIcon(MedicalRecordsPatient.class.getResource("/images/medicalrecord.jpg")));
+		contentPane.add(label);
+		contentPane.add(lblAnalysis);
+		contentPane.add(textField);
+		contentPane.add(btnAdd);
+		contentPane.add(btnAdd_1);
+		
+		JButton btnDownloadPatientfile = new JButton("Download PatientFile");
+		btnDownloadPatientfile.setBounds(26, 215, 156, 23);
+		contentPane.add(btnDownloadPatientfile);
 	}
 }

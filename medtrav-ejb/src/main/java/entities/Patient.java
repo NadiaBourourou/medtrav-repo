@@ -19,6 +19,7 @@ public class Patient extends User implements Serializable {
 	private String country;
 	private Integer numPassport;
 	private PatientState state;
+	private Boolean confirmed;
 
 	private List<Testimony> testimonies;
 	private List<Question> questions;
@@ -26,7 +27,7 @@ public class Patient extends User implements Serializable {
 
 	private List<HotelBooking> hotelBookings;
 	private List<ClinicBooking> clinicBookings;
-	private Flight flight;
+	private List<Flight> flights;
 	private List<SurgeryPatient> surgeryPatients;
 	private List<DoctorPatient> doctorPatients;
 
@@ -113,15 +114,6 @@ public class Patient extends User implements Serializable {
 		this.clinicBookings = clinicBookings;
 	}
 
-	@OneToOne(mappedBy = "patient")
-	public Flight getFlight() {
-		return flight;
-	}
-
-	public void setFlight(Flight flight) {
-		this.flight = flight;
-	}
-
 	@OneToMany(mappedBy = "patient")
 	public List<SurgeryPatient> getSurgeryPatients() {
 		return surgeryPatients;
@@ -129,6 +121,15 @@ public class Patient extends User implements Serializable {
 
 	public void setSurgeryPatients(List<SurgeryPatient> surgeryPatients) {
 		this.surgeryPatients = surgeryPatients;
+	}
+	
+	@OneToMany(mappedBy = "patient")
+	public List<Flight> getFlights() {
+		return flights;
+	}
+
+	public void setFlights(List<Flight> flights) {
+		this.flights = flights;
 	}
 
 	@OneToMany(mappedBy="patient")
@@ -138,6 +139,14 @@ public class Patient extends User implements Serializable {
 
 	public void setDoctorPatients(List<DoctorPatient> doctorPatients) {
 		this.doctorPatients = doctorPatients;
+	}
+
+	public Boolean getConfirmed() {
+		return confirmed;
+	}
+
+	public void setConfirmed(Boolean confirmed) {
+		this.confirmed = confirmed;
 	}
 
 }

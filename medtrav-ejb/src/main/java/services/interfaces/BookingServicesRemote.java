@@ -9,6 +9,7 @@ import entities.Clinic;
 import entities.ClinicBooking;
 import entities.Doctor;
 import entities.DoctorPatient;
+import entities.Flight;
 import entities.Hotel;
 import entities.HotelBooking;
 import entities.Surgery;
@@ -46,5 +47,7 @@ public interface BookingServicesRemote {
 	SurgeryPatient findSurgeryPatientByPatientId(Integer idPatient);
 
 	DoctorPatient findDoctorPatientByPatientId(Integer idPatient);
+
+	Flight findFlightByPatientId(Integer idPatient);
 
 }

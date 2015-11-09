@@ -1,84 +1,84 @@
 package entities;
 
 import java.io.Serializable;
+import java.lang.Double;
+import java.lang.Integer;
+import java.lang.String;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Entity implementation class for Entity: Flight
  *
  */
 @Entity
-@Table(name = "T_FLIGHT")
+@Table(name="T_FLIGHT")
 public class Flight implements Serializable {
 
+	
 	private Integer flightId;
-	private Date departureDate;
-	private Date arrivalDate;
+	private String numFlight;
+	private String departureDate;
+	private String arrivalDate;
 	private String departureLocation;
 	private String arrivalLocation;
+	private String timeFlightMatchingDep;
+	private String timeFlightMatchingArr;
 	private Double price;
 	private String airline;
+	private Integer nbSits;
+	
 
-	private List<Booking> bookings;
+
+	private Booking booking;
+
 	private Patient patient;
-
+	
 	private static final long serialVersionUID = 1L;
 
 	public Flight() {
 		super();
-	}
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	}   
+	
+	@Id    
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getFlightId() {
 		return this.flightId;
 	}
 
 	public void setFlightId(Integer flightId) {
 		this.flightId = flightId;
-	}
-
-	public Date getDepartureDate() {
+	}   
+	public String getDepartureDate() {
 		return this.departureDate;
 	}
 
-	public void setDepartureDate(Date departureDate) {
+	public void setDepartureDate(String departureDate) {
 		this.departureDate = departureDate;
-	}
-
-	public Date getArrivalDate() {
+	}   
+	public String getArrivalDate() {
 		return this.arrivalDate;
 	}
 
-	public void setArrivalDate(Date arrivalDate) {
+	public void setArrivalDate(String arrivalDate) {
 		this.arrivalDate = arrivalDate;
-	}
-
+	}   
 	public String getDepartureLocation() {
 		return this.departureLocation;
 	}
 
 	public void setDepartureLocation(String departureLocation) {
 		this.departureLocation = departureLocation;
-	}
-
+	}   
 	public String getArrivalLocation() {
 		return this.arrivalLocation;
 	}
 
 	public void setArrivalLocation(String arrivalLocation) {
 		this.arrivalLocation = arrivalLocation;
-	}
-
+	}   
 	public Double getPrice() {
 		return this.price;
 	}
@@ -86,32 +86,38 @@ public class Flight implements Serializable {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
+	
+	@OneToOne(mappedBy = "flight")
+	public Booking getBookings() {
+		return booking;
 
-	@OneToMany(mappedBy = "flight")
-	public List<Booking> getBookings() {
-		return bookings;
 	}
 
-	public void setBookings(List<Booking> bookings) {
-		this.bookings = bookings;
+
+	public void setBookings(Booking booking) {
+		this.booking = booking;
+
 	}
 
+	
 	public String getAirline() {
 		return airline;
 	}
-
+	
 	public void setAirline(String airline) {
 		this.airline = airline;
 	}
 
-	public void linkBookingsToThisFlight(List<Booking> bookings) {
+
+	/*public void linkBookingsToThisFlight(List<Booking bookings) {
+>>>>>>> branch 'master' of https://github.com/NadiaBourourou/medtrav-repo.git
 		this.bookings = bookings;
 		for (Booking b : bookings) {
 			b.setFlight(this);
 		}
-	}
+	}*/
 
-	@OneToOne
+	@ManyToOne
 	public Patient getPatient() {
 		return patient;
 	}
@@ -120,4 +126,40 @@ public class Flight implements Serializable {
 		this.patient = patient;
 	}
 
+
+
+	public Integer getNbSits() {
+		return nbSits;
+	}
+
+
+
+	public void setNbSits(Integer nbSits) {
+		this.nbSits = nbSits;
+	}
+
+	public String getTimeFlightMatchingDep() {
+		return timeFlightMatchingDep;
+	}
+
+	public void setTimeFlightMatchingDep(String timeFlightMatchingDep) {
+		this.timeFlightMatchingDep = timeFlightMatchingDep;
+	}
+
+	public String getTimeFlightMatchingArr() {
+		return timeFlightMatchingArr;
+	}
+
+	public void setTimeFlightMatchingArr(String timeFlightMatchingArr) {
+		this.timeFlightMatchingArr = timeFlightMatchingArr;
+	}
+
+	public String getNumFlight() {
+		return numFlight;
+	}
+
+	public void setNumFlight(String numFlight) {
+		this.numFlight = numFlight;
+	}
+   
 }

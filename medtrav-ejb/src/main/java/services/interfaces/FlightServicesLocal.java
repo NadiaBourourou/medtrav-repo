@@ -1,10 +1,12 @@
 package services.interfaces;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Local;
 
 import entities.Flight;
+import entities.FlightMatching;
 
 @Local
 public interface FlightServicesLocal {
@@ -19,20 +21,47 @@ public interface FlightServicesLocal {
 
 	Flight findFlightById(Integer idFlight);
 		
-	List<Flight> findFlightsByAirline(String airline);
+	List<FlightMatching> findFlightsByAirline(String airline);
 	
 	Boolean assignFlightToBooking(Integer idBooking,Integer idFlight);
-	Boolean assignFlightToBookingSlaveSide(Integer idBooking,Integer idFlight);
+	//Boolean assignFlightToBookingSlaveSide(Integer idBooking,Integer idFlight);
 	
 	Boolean assignDoctorToSurgery(Integer idSurgery,Integer idDoctor);
 	Boolean assignDoctorToSurgerySlaveSide(Integer idSurgery,Integer idDoctor);
-			
-	//Boolean assignMedicalRecordToSurgery(Integer idSurgery,Integer idMedicalRecord);
-	//Boolean assignMedicalRecordToSurgerySlaveSide(Integer idSurgery,Integer idMedicalRecord);
+/*			
+	Boolean assignMedicalRecordToSurgery(Integer idSurgery,Integer idMedicalRecord);
+	Boolean assignMedicalRecordToSurgerySlaveSide(Integer idSurgery,Integer idMedicalRecord);
+*/	
+	List<FlightMatching> findAllDepartures();
+	List <FlightMatching > findAllArrivals();
+
+	List <FlightMatching > findMatchingFlight(String departure,String arrival,String departureDate,String arrivalDate);
 	
-	List<String> findAllDepartures();
-	List <String > findAllArrivals();
+	List<Flight> findAllFlight();
 
+	FlightMatching findFlightMatchingByNumFlight(String numFlight);
+	
+	FlightMatching findFlightMatchingById(Integer idFmatching);
+	
+	Boolean updateNbSits(Integer nbSitsMaj,Integer idFlight);
 
+	List<FlightMatching> findMatchingFlightWithThatFromAndTo(String fromMatching, String toMatching);
+	
+	List<FlightMatching> findAllFlightMatching();
+	
+	List<String> findAllDepaturesSansDoublons();
+	
+	List<String> findAllDepaturesOfOurPatients();
+	
+	List<FlightMatching> findFlightByDepartureLocation(String searchDep);
+	
+	List<FlightMatching> findFlightByArrivalLocation(String searchArr);
 
+	List<FlightMatching> findFlightByAirline(String searchAirline);
+	
+	long mostWorkingAirlines(String airlineGiven);
+	
+	List<String> findAllAirlines();
+	
+	public void generateImageStat();
 }
