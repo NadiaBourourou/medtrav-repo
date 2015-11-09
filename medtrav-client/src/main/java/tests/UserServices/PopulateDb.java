@@ -50,7 +50,7 @@ public class PopulateDb {
 	Doctor doctor1 = new Doctor();
 		doctor1.setFirstName("Max");
 		doctor1.setLastName("Hunter");
-		doctor1.setCin("1940634");
+		//doctor1.setCin("1940634");
 		doctor1.setDescription("Specialiste des maladies cardio-vasculaires");
 		doctor1.setLogin("Max.Hunter");
 		doctor1.setPassword("pwdMax");

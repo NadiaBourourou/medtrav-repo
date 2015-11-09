@@ -10,6 +10,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -67,6 +68,7 @@ public class AddClinic extends JFrame {
 	 * Create the frame.
 	 */
 	public AddClinic() {
+		setTitle("Add Clinic");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 317);
 		contentPane = new JPanel();
@@ -104,7 +106,7 @@ public class AddClinic extends JFrame {
 		btnAddClinic.setIcon(new ImageIcon(AddClinic.class.getResource("/images/add clinic.png")));
 		btnAddClinic.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Clinic clinic= new Clinic ();
+			try {	Clinic clinic= new Clinic ();
 				clinic.setName(name.getText());
 				clinic.setAddress(address.getText());
 				clinic.setPhoneNumber(new Integer (phonenumber.getText()));
@@ -115,6 +117,13 @@ public class AddClinic extends JFrame {
 			
 			
 				ClinicServicesDelegate.doAddClinic(clinic);
+				JOptionPane.showMessageDialog(null,
+						"Clinic added successfully ");}
+			
+			catch (Exception ex) {
+				JOptionPane.showMessageDialog(null,
+						"Please check your information ");
+			}
 			}
 		});
 		

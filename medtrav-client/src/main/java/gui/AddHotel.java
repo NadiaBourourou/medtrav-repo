@@ -20,6 +20,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
@@ -29,7 +30,9 @@ import javax.swing.border.EmptyBorder;
 import delegates.HotelServicesDelegate;
 import entities.Hotel;
 import entities.StateType;
+
 import java.awt.Color;
+
 import javax.swing.ImageIcon;
 
 public class AddHotel extends JFrame {
@@ -61,6 +64,7 @@ public class AddHotel extends JFrame {
 	 * Create the frame.
 	 */
 	public AddHotel() {
+		setTitle("Add Hotel");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 487, 361);
 		contentPane = new JPanel();
@@ -96,7 +100,7 @@ public class AddHotel extends JFrame {
 		btnNewButton.setIcon(new ImageIcon(AddHotel.class.getResource("/images/pluuus.jpg")));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+try {
 				Hotel hotel = new Hotel();
 
 				hotel.setName(name.getText());
@@ -113,6 +117,14 @@ public class AddHotel extends JFrame {
 				
 
 				HotelServicesDelegate.doAddHotel(hotel);
+				JOptionPane.showMessageDialog(null,
+						"Hotel added successfully ");}
+
+catch (Exception ex) {
+JOptionPane.showMessageDialog(null,
+		"Please check your information ");
+}
+				
 			}
 		});
 

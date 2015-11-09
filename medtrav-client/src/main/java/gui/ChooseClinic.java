@@ -17,6 +17,7 @@ import datechooser.beans.DateChooserCombo;
 import delegates.ClinicServicesDelegate;
 import delegates.HotelServicesDelegate;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -70,6 +71,7 @@ public class ChooseClinic extends JFrame {
 	 * Create the frame.
 	 */
 	public ChooseClinic() {
+		setTitle("Choose The Clinic");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -107,7 +109,7 @@ public class ChooseClinic extends JFrame {
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Integer index = comboBoxClinic.getSelectedIndex() + 1;
+			try {	Integer index = comboBoxClinic.getSelectedIndex() + 1;
 				System.out.println(index);
 
 			Clinic	clinic= ClinicServicesDelegate.doFindClinicById(index);
@@ -129,6 +131,13 @@ public class ChooseClinic extends JFrame {
 				
 				ClinicServicesDelegate.doBookClinic(r, date, com, clinic, 1);
 				System.out.println("ok");
+				JOptionPane.showMessageDialog(null,
+						"Your choice has been saved ");}
+			
+			catch (Exception ex) {
+				JOptionPane.showMessageDialog(null,
+						"Please check your information ");
+			}
 			}
 		});
 		

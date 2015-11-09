@@ -8,12 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  * Entity implementation class for Entity: DoctorPatient
  *
  */
 @Entity
+@Table(name = "T_DOCTORPATIENT")
 public class DoctorPatient implements Serializable {
 
 	private DoctorPatientID id;
@@ -27,6 +29,27 @@ public class DoctorPatient implements Serializable {
 	public DoctorPatient() {
 		super();
 	}
+
+	
+	
+	
+	@Override
+	public String toString() {
+		return "DoctorPatient [id=" + id + "]";
+	}
+
+
+
+
+	public DoctorPatient(Doctor doctor, Patient patient) {
+		super();
+		this.id= new DoctorPatientID(patient.getUserId(), doctor.getUserId());
+		this.doctor = doctor;
+		this.patient = patient;
+	}
+
+
+
 
 	@EmbeddedId
 	public DoctorPatientID getId() {

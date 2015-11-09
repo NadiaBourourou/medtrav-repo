@@ -7,7 +7,7 @@ public class TestAssignFlightToBooking {
 
 	public static void main(String[] args) {
 		
-		FlightServicesDelegate.doAssignFlightToBooking(2, 2);
+		FlightServicesDelegate.doAssignFlightToBooking(1, 2);
 		
 	}
 
