@@ -2,6 +2,7 @@ package services.impl;
 
 import java.io.File;
 import java.sql.Blob;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -141,12 +142,12 @@ public class HotelServices implements HotelServicesRemote, HotelServicesLocal {
 
 	@Override
 	public Boolean bookHotel(Integer numNights, Double price,
-			RoomType roomType, Hotel hotel, Integer idPatient) {
+			RoomType roomType,Date date, Hotel hotel, Integer idPatient) {
 		Boolean b = false;
 		try {
 			Patient patient = entityManager.find(Patient.class, idPatient);
 			HotelBooking hotelBooking = new HotelBooking(numNights, price,
-					roomType, hotel, patient);
+					roomType, date, hotel, patient);
 			entityManager.merge(hotelBooking);
 			b = true;
 		} catch (Exception e) {

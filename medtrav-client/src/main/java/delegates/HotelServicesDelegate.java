@@ -2,6 +2,7 @@ package delegates;
 
 import java.io.File;
 import java.sql.Blob;
+import java.util.Date;
 import java.util.List;
 
 import locator.ServiceLocator;
@@ -63,8 +64,8 @@ public class HotelServicesDelegate {
 		return getProxy().findHotelByPatientId(idPatient);
 	}
 	
-	public static Boolean doBookHotel(Integer numNights, Double price, RoomType roomType, Hotel hotel, Integer idPatient){
-		return getProxy().bookHotel(numNights,price,roomType,hotel, idPatient);
+	public static Boolean doBookHotel(Integer numNights, Double price, RoomType roomType,Date date, Hotel hotel, Integer idPatient){
+		return getProxy().bookHotel(numNights,price,roomType, date,hotel, idPatient);
 	}
 	
 

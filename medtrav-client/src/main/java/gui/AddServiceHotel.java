@@ -13,8 +13,10 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
 import delegates.HotelServicesDelegate;
 import delegates.ServiceHotelServicesDelegate;
 import entities.Hotel;
@@ -24,6 +26,7 @@ import entities.ServiceHotel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+
 import javax.swing.ImageIcon;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
@@ -54,6 +57,7 @@ public class AddServiceHotel extends JFrame {
 	 * Create the frame.
 	 */
 	public AddServiceHotel() {
+		setTitle("Add Hotel Services");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 357);
 		contentPane = new JPanel();
@@ -89,7 +93,7 @@ public class AddServiceHotel extends JFrame {
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-
+try {
 				Integer index = comboBox.getSelectedIndex() +1;
 				System.out.println(index);
 				String name= txtname.getText();
@@ -98,6 +102,14 @@ public class AddServiceHotel extends JFrame {
 			hotelService.setName(name);
 			hotelService.setDescription(description);
 				ServiceHotelServicesDelegate.doAssignServiceHotelToHotel(hotelService, index);
+				
+				JOptionPane.showMessageDialog(null,
+						"Service added successfully ");}
+			
+			catch (Exception ex) {
+				JOptionPane.showMessageDialog(null,
+						"Please check your information ");
+			}
 			}
 		});
 		

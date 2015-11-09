@@ -63,6 +63,7 @@ public class ListClinicPatient extends JFrame {
 	 * Create the frame.
 	 */
 	public ListClinicPatient() {
+		setTitle("List Of Clinics");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 615, 377);
 		contentPane = new JPanel();

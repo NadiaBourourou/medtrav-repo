@@ -24,6 +24,7 @@ import org.jdesktop.beansbinding.BeanProperty;
 import javax.swing.border.TitledBorder;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -33,6 +34,7 @@ import org.jdesktop.beansbinding.Bindings;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+
 import javax.swing.ImageIcon;
 
 public class ListClinics extends JFrame {
@@ -69,6 +71,7 @@ public class ListClinics extends JFrame {
 	 * Create the frame.
 	 */
 	public ListClinics() {
+		setTitle("Manage Clinics");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 529, 488);
 		contentPane = new JPanel();
@@ -126,10 +129,18 @@ public class ListClinics extends JFrame {
 		btnUpdate.setIcon(new ImageIcon(ListClinics.class.getResource("/images/updateclinic.png")));
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
 				clinic = clinics.get(table.getSelectedRow());				
 				ClinicServicesDelegate.doUpdateClinic(clinic);
 				clinics = ClinicServicesDelegate.doFindAllClinics();
 				initDataBindings();
+				JOptionPane.showMessageDialog(null,
+						"Clinic updated successfully ");}
+			
+			catch (Exception ex) {
+				JOptionPane.showMessageDialog(null,
+						"Please check your information ");
+			}
 			}
 		});
 		
@@ -137,6 +148,7 @@ public class ListClinics extends JFrame {
 		btnDelete.setIcon(new ImageIcon(ListClinics.class.getResource("/images/remove clinic.png")));
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
 				clinic = clinics.get(table.getSelectedRow());				
 				ClinicServicesDelegate.doDeleteClinic(clinic);
 				clinics =ClinicServicesDelegate.doFindAllClinics();
@@ -145,6 +157,13 @@ public class ListClinics extends JFrame {
 				address.setText("");
 				professionalism.setText("");
 				phoneNumber.setText("");
+				JOptionPane.showMessageDialog(null,
+						"Clinic deleted");}
+			
+			catch (Exception ex) {
+				JOptionPane.showMessageDialog(null,
+						"Please check your information ");
+			}
 			}
 		});
 		

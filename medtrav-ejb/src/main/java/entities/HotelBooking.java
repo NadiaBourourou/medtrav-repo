@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -19,6 +20,7 @@ public class HotelBooking implements Serializable {
 	private Integer numNights;
 	private Double price;
 	private RoomType roomType;
+	private Date date;
 	private Hotel hotel;
 
 	private static final long serialVersionUID = 1L;
@@ -30,7 +32,7 @@ public class HotelBooking implements Serializable {
 		super();
 	}
 
-	public HotelBooking(Integer numNights, Double price, RoomType roomType,
+	public HotelBooking(Integer numNights, Double price, RoomType roomType,Date date,
 			Hotel hotel, Patient patient) {
 		super();
 		this.hotelBookingId = new HotelBookingID(hotel.getHotelId(),
@@ -38,6 +40,7 @@ public class HotelBooking implements Serializable {
 		this.numNights = numNights;
 		this.price = price;
 		this.roomType = roomType;
+		this.date = date;
 		this.hotel = hotel;
 		this.patient = patient;
 	}
@@ -73,6 +76,13 @@ public class HotelBooking implements Serializable {
 
 	public void setRoomType(RoomType roomType) {
 		this.roomType = roomType;
+	}
+	public Date getDate() {
+		return this.date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	@ManyToOne
