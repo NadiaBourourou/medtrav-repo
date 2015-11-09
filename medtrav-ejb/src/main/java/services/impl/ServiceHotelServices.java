@@ -96,10 +96,11 @@ EntityManager entityManager;
 
 	@Override
 	public List<ServiceHotel> findHotelServiceByHotelName(String name) {
-		String jpql = "select b from ServiceHotel b where b.hotel.name=:param";
+		String jpql = "select b from ServiceHotel b where b.hotel.name LIKE :param";
 		Query query = entityManager.createQuery(jpql);
-		query.setParameter("param", name);
+		query.setParameter(	"param","%" + name  + "%");
 		return query.getResultList();
+	
 	}
 
 }

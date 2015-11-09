@@ -83,7 +83,7 @@ public class ListServiceHotelAdmin extends JFrame {
 	public ListServiceHotelAdmin() {
 		setTitle("Manage Services");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 397);
+		setBounds(100, 100, 450, 427);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -99,6 +99,7 @@ public class ListServiceHotelAdmin extends JFrame {
 		
 	//	serviceHotels=
 		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
 		panel.setBorder(new TitledBorder(null, "List Of Services", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		
 		JPanel panel_1 = new JPanel();
@@ -119,44 +120,55 @@ public class ListServiceHotelAdmin extends JFrame {
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(ListServiceHotelAdmin.class.getResource("/images/hotel services (2).jpg")));
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setIcon(new ImageIcon(ListServiceHotelAdmin.class.getResource("/images/medtraaaaaav.jpg")));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblHotel)
-							.addGap(32)
-							.addComponent(txtnameHotel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(btSearch, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(lblHotel)
+									.addGap(32)
+									.addComponent(txtnameHotel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(btSearch, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(9)
+									.addComponent(lblNewLabel_2)))
+							.addPreferredGap(ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
 							.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
+						.addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 395, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(30)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-									.addComponent(lblHotel)
-									.addComponent(txtnameHotel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addComponent(btSearch, GroupLayout.PREFERRED_SIZE, 28, Short.MAX_VALUE))
-							.addGap(24))
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 82, Short.MAX_VALUE)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(11)
+									.addComponent(lblNewLabel_2)
+									.addPreferredGap(ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+										.addComponent(txtnameHotel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblHotel))))
+							.addGap(23))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 53, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)))
+							.addComponent(btSearch)
+							.addGap(18)))
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
+					.addGap(7)
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		
 		JLabel lblNewLabel = new JLabel("Name");

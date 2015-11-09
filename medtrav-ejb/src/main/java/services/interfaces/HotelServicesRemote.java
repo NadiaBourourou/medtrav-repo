@@ -19,7 +19,7 @@ public interface HotelServicesRemote {
 	Boolean deleteHotelById(Integer id);
 
 	Hotel findHotelById(Integer id);
-	Hotel findHotelByName(String name);
+	List<Hotel> findHotelByName(String name);
 
 	Boolean updateHotel(Hotel hotel);
 
