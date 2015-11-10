@@ -6,8 +6,12 @@ import java.util.List;
 import delegates.SurgeryServicesDelegate;
 import delegates.UserServicesDelegate;
 import entities.Administrator;
+import entities.Clinic;
 import entities.Doctor;
+import entities.Hotel;
 import entities.Patient;
+import entities.ServiceHotel;
+import entities.StateType;
 import entities.User;
 import entities.Procedure;
 import entities.RoleType;
@@ -36,7 +40,7 @@ public class PopulateDb {
 		Patient patient2 = new Patient();
 		patient2.setFirstName("Sam");
 		patient2.setLastName("Heinrich");
-	patient2.setCin("1000634");
+	    patient2.setCin("1000634");
 		patient2.setCountry("Germay");
 		patient2.setDateOfBirth(Date.valueOf("1984-6-12"));
 		patient2.setLogin("Sam.Heinrich");
@@ -47,10 +51,10 @@ public class PopulateDb {
 		patient2.setSexe(UserSexe.Male);
 		
 		
-	Doctor doctor1 = new Doctor();
+	    Doctor doctor1 = new Doctor();
 		doctor1.setFirstName("Max");
 		doctor1.setLastName("Hunter");
-		//doctor1.setCin("1940634");
+		doctor1.setCin("1940634");
 		doctor1.setDescription("Specialiste des maladies cardio-vasculaires");
 		doctor1.setLogin("Max.Hunter");
 		doctor1.setPassword("pwdMax");
@@ -105,22 +109,27 @@ public class PopulateDb {
 		Surgery1_2.setName("Laser Surgery of bladder cancer");
 		Surgery1_2
 				.setDescription("Get rid of your belly, time for effortless kickass abs");
+		Surgery1_2.setPrice((double) 2400);
 
 		Surgery Surgery2_2 = new Surgery();
 		Surgery2_2.setName("Venous stenting");
+		Surgery2_2.setPrice((double) 3200);
 
 		Surgery Surgery3_2 = new Surgery();
 		Surgery3_2.setName("VATS");
 		Surgery3_2.setDescription("Video assisted of thoracic surgery");
+		Surgery3_2.setPrice((double) 5000);
 
 		Procedure procedure3 = new Procedure();
 		procedure3.setName("Urology");
 
 		Surgery Surgery1_3 = new Surgery();
 		Surgery1_3.setName("Laser Surgery of bladder cancer");
+		Surgery1_3.setPrice((double) 7100);
 
 		Surgery Surgery2_3 = new Surgery();
 		Surgery2_3.setName("Vasectomy");
+		Surgery2_3.setPrice((double) 700);
 
 		UserServicesDelegate.doAddPatient(patient1);
 		UserServicesDelegate.doAddPatient(patient2);
@@ -150,7 +159,8 @@ public class PopulateDb {
 				Surgery1_3, 3);
 		SurgeryServicesDelegate.doAddTreatmentAndAssignItToProcedure(
 				Surgery2_3, 3);
-
+		
+		
 	}
 
 }

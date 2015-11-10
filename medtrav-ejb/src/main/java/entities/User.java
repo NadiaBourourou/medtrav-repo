@@ -33,6 +33,18 @@ public class User implements Serializable {
 	
 	
 	
+	
+	public User(String lastName, String firstName, String cin, String mail) {
+		super();
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.cin = cin;
+		this.mail = mail;
+	}
+
+
+
+
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", lastName=" + lastName

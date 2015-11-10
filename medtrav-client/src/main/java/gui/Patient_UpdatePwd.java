@@ -1,4 +1,4 @@
-package tests.SignUp;
+package gui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class TestSignUp extends JFrame {
+public class Patient_UpdatePwd extends JFrame {
 
 	private JPanel contentPane;
 
@@ -18,7 +18,7 @@ public class TestSignUp extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TestSignUp frame = new TestSignUp();
+					Patient_UpdatePwd frame = new Patient_UpdatePwd();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,9 +30,9 @@ public class TestSignUp extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TestSignUp() {
+	public Patient_UpdatePwd() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 730, 447);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));

@@ -20,6 +20,7 @@ public class SurgeryPatient implements Serializable {
 
 	private SurgeryPatientID surgeryPatientID;
 	private String commentaire;
+	private String price;
 	private static final long serialVersionUID = 1L;
 
 	private Patient patient;
@@ -80,6 +81,14 @@ public class SurgeryPatient implements Serializable {
 
 	public void setBookings(Booking booking) {
 		this.booking = booking;
+	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
 	}
 
 }
