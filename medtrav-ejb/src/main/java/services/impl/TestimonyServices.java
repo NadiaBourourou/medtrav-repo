@@ -9,6 +9,7 @@ import javax.persistence.Query;
 
 import entities.Doctor;
 import entities.Patient;
+import entities.Surgery;
 import entities.Testimony;
 import entities.User;
 import services.interfaces.TestimonyServicesLocal;
@@ -162,5 +163,17 @@ public class TestimonyServices implements TestimonyServicesRemote, TestimonyServ
 		return entitymanager.find(User.class, idUser);
 	}
 	
+	
+	@Override
+	public Doctor findDoctorById(Integer idUser) {
+		// TODO Auto-generated method stub
+		return entitymanager.find(Doctor.class, idUser);
+	}
+	
+	@Override
+	public Surgery findSurgeryById(Integer idUser) {
+		// TODO Auto-generated method stub
+		return entitymanager.find(Surgery.class, idUser);
+	}
 	
 }
