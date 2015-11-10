@@ -10,14 +10,14 @@ import javax.persistence.Query;
 import entities.Patient;
 import entities.Question;
 import entities.Testimony;
-
+import services.interfaces.QuestionServicesLocal;
 import services.interfaces.QuestionServicesRemote;
 
 /**
  * Session Bean implementation class QuestionServices
  */
 @Stateless
-public class QuestionServices implements QuestionServicesRemote {
+public class QuestionServices implements QuestionServicesRemote, QuestionServicesLocal {
 
 	@PersistenceContext
 	EntityManager entitymanager;

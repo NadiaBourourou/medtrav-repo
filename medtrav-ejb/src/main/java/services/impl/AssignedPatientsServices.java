@@ -13,13 +13,14 @@ import entities.Patient;
 import entities.Surgery;
 import entities.Testimony;
 import entities.User;
+import services.interfaces.AssignedPatientsServicesLocal;
 import services.interfaces.AssignedPatientsServicesRemote;
 
 /**
  * Session Bean implementation class AssignedPatientsServices
  */
 @Stateless
-public class AssignedPatientsServices implements AssignedPatientsServicesRemote{
+public class AssignedPatientsServices implements AssignedPatientsServicesRemote, AssignedPatientsServicesLocal{
 
 	@PersistenceContext
 	EntityManager entitymanager;

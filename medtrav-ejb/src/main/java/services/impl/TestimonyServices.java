@@ -11,13 +11,14 @@ import entities.Doctor;
 import entities.Patient;
 import entities.Testimony;
 import entities.User;
+import services.interfaces.TestimonyServicesLocal;
 import services.interfaces.TestimonyServicesRemote;
 
 /**
  * Session Bean implementation class TestimonyServices
  */
 @Stateless
-public class TestimonyServices implements TestimonyServicesRemote{
+public class TestimonyServices implements TestimonyServicesRemote, TestimonyServicesLocal{
 
 	@PersistenceContext
 	EntityManager entitymanager;
