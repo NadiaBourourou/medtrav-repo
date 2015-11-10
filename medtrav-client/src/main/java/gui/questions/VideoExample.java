@@ -15,8 +15,10 @@ import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
 
-    public class VideoExample {
+import entities.User;
 
+    public class VideoExample {
+private User userConnected;
         public  EmbeddedMediaPlayerComponent mediaPlayerComponent;
 
         public static void main(final String[] args) {
@@ -44,7 +46,7 @@ import com.sun.jna.NativeLibrary;
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(true);
             URL url = getClass().getResource("video.avi");
-            mediaPlayerComponent.getMediaPlayer().playMedia("\\target\\classes\\testVIdeo\\video.avi");
+            mediaPlayerComponent.getMediaPlayer().playMedia("\\target\\classes\\gui\\questions\\video.avi");
            
            Timer every50millis = new Timer(50, new ActionListener() {
                 private int count=0;
@@ -52,7 +54,7 @@ import com.sun.jna.NativeLibrary;
                 public void actionPerformed(ActionEvent e) {
                     count++;
                    
-                    if (count==500) {
+                    if (count==230) {
                        frame.dispose();
                        ListQuestions frame = new ListQuestions();
 						frame.setLocationRelativeTo(null);
@@ -68,4 +70,48 @@ import com.sun.jna.NativeLibrary;
            
            
         }
+        
+        
+        public VideoExample(User userConnected) {
+        	System.out.println("VIDEO EXEMPLE");
+    		System.out.println("user co id="+userConnected.getUserId());
+    		System.out.println("user co name="+userConnected.getFirstName()+userConnected.getLastName());		
+    		
+        	JFrame frame = new JFrame("Meaning of medical travel ");
+
+            mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
+
+            frame.setContentPane(mediaPlayerComponent);
+
+            frame.setLocation(100, 100);
+            frame.setSize(500, 500);
+            frame.setLocationRelativeTo(null);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setVisible(true);
+            URL url = getClass().getResource("video.avi");
+            mediaPlayerComponent.getMediaPlayer().playMedia("\\target\\classes\\gui\\questions\\video.avi");
+           
+           Timer every50millis = new Timer(50, new ActionListener() {
+                private int count=0;
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    count++;
+                   
+                    if (count==230) {
+                       frame.dispose();
+                       ListQuestions frame = new ListQuestions(userConnected);
+						frame.setLocationRelativeTo(null);
+						frame.setVisible(true);
+                    }
+                }
+            });
+            every50millis.start();
+            
+        
+        //   frame.dispose();
+            
+           
+           
+        }
+        
     }
