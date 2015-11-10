@@ -455,5 +455,11 @@ public class FlightServices implements FlightServicesRemote,
 		return query.getResultList();
 	}
 
+	@Override
+	public void generateImageStat() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }
