@@ -179,6 +179,7 @@ public class DisplayPatientAssigned extends JFrame {
 mail.setText(patientSelected.getMail());
 		try{Surgery surgery=AssigedPatientsServicesDelegate.doFindSurgeryByPatientId(patientSelected.getUserId());
 		System.out.println(surgery.getName());
+		
 		tfsurgery.setText(surgery.getName());}
 		catch(Exception n){lblSurgery.setVisible(false);}
 		gender.setText(patientSelected.getSexe().toString());
