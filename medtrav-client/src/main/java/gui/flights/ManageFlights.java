@@ -188,7 +188,7 @@ public class ManageFlights extends JFrame {
 		JButton btnAddAFlight = new JButton("Add a flight");
 		btnAddAFlight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddFlight2 addFlight= new AddFlight2();
+				AddFlight2 addFlight= new AddFlight2(user);
 				addFlight.setVisible(true);
 				ManageFlights.this.setVisible(false);
 			}
