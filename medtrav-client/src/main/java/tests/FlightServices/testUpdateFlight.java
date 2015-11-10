@@ -1,9 +1,7 @@
 package tests.FlightServices;
 
 import delegates.FlightServicesDelegate;
-import delegates.HotelServicesDelegate;
 import entities.Flight;
-import entities.Hotel;
 
 public class testUpdateFlight {
 	

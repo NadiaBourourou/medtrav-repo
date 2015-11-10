@@ -27,7 +27,7 @@ public class Patient extends User implements Serializable {
 
 	private List<HotelBooking> hotelBookings;
 	private List<ClinicBooking> clinicBookings;
-	private Flight flight;
+	private List<Flight> flights;
 	private List<SurgeryPatient> surgeryPatients;
 	private List<DoctorPatient> doctorPatients;
 
@@ -114,15 +114,6 @@ public class Patient extends User implements Serializable {
 		this.clinicBookings = clinicBookings;
 	}
 
-	@OneToOne(mappedBy = "patient")
-	public Flight getFlight() {
-		return flight;
-	}
-
-	public void setFlight(Flight flight) {
-		this.flight = flight;
-	}
-
 	@OneToMany(mappedBy = "patient")
 	public List<SurgeryPatient> getSurgeryPatients() {
 		return surgeryPatients;
@@ -130,6 +121,15 @@ public class Patient extends User implements Serializable {
 
 	public void setSurgeryPatients(List<SurgeryPatient> surgeryPatients) {
 		this.surgeryPatients = surgeryPatients;
+	}
+	
+	@OneToMany(mappedBy = "patient")
+	public List<Flight> getFlights() {
+		return flights;
+	}
+
+	public void setFlights(List<Flight> flights) {
+		this.flights = flights;
 	}
 
 	@OneToMany(mappedBy="patient")

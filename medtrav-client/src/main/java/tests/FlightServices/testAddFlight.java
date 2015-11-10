@@ -25,5 +25,13 @@ public class testAddFlight {
 		flight2.setPrice(900D);
 		FlightServicesDelegate.doAddFlight(flight2);
 
+		Flight flight3 = new Flight();
+		flight3.setArrivalDate(new Date());
+		flight3.setArrivalLocation("Tunis");
+		flight3.setDepartureDate(new Date());
+		flight3.setDepartureLocation("Abidjan");
+		flight3.setPrice(150D);
+		FlightServicesDelegate.doAddFlight(flight3);
+
 	}
 }

@@ -180,7 +180,7 @@ public class BookingServices implements BookingServicesRemote,
 
 	@Override
 	public Surgery findSurgeryByPatientId(Integer idPatient) {
-		String jpql = "select s from Surgery s join s.surgeryPatients sps where sps.patient.userId=:param";
+		String jpql = "select p from User p join p. sps where sps.patient.userId=:param";
 		Query query = entitymanager.createQuery(jpql);
 		query.setParameter("param", idPatient);
 		return (Surgery) query.getSingleResult();

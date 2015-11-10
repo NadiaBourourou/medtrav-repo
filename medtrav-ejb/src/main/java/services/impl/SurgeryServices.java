@@ -9,6 +9,9 @@ import javax.persistence.Query;
 
 import services.interfaces.SurgeryServicesLocal;
 import services.interfaces.SurgeryServicesRemote;
+import entities.Doctor;
+import entities.Flight;
+import entities.Patient;
 import entities.Procedure;
 import entities.Surgery;
 
@@ -69,7 +72,7 @@ public class SurgeryServices implements SurgeryServicesRemote,
 	}
 
 	@Override
-	public boolean addSurgery(Surgery treatment) {
+	public Boolean addSurgery(Surgery treatment) {
 		Boolean b = false;
 		try {
 			entityManager.persist(treatment);
@@ -120,6 +123,46 @@ public class SurgeryServices implements SurgeryServicesRemote,
 	public String getSurgeryDescription(Integer treatmentId) {
 		Surgery surgery = entityManager.find(Surgery.class, treatmentId);
 		return surgery.getDescription();
+	}
+
+	@Override
+	public Boolean updateSurgery(Surgery treatment) {
+		Boolean b = false;
+		try {
+			entityManager.merge(treatment);
+			b = true;
+
+		} catch (Exception e) {
+			System.err.println("Error updating flight");
+		}
+		return b;
+	}
+
+	@Override
+	public Boolean deleteSurgery(Surgery treatment) {
+		Boolean b = false;
+		try {
+			Surgery surgeryFound = entityManager.find(Surgery.class,treatment.getSurgeryId());
+			entityManager.remove(surgeryFound);
+			b = true;
+
+		} catch (Exception e) {
+			System.err.println("Error deleting treatment");
+		}
+		return b;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Surgery> findAllSurgeries() {
+		String jpql="select s from Surgery s";
+		Query query=entityManager.createQuery(jpql);
+		return query.getResultList();
+	}
+
+	@Override
+	public Doctor findDoctorById(Integer idDoctor) {
+		return entityManager.find(Doctor.class, idDoctor);
 	}
 
 }

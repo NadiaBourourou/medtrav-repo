@@ -1,16 +1,17 @@
-package khadija.essai;
+package gui;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -18,15 +19,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
 import delegates.MedicalRecordsDelegate;
+import delegates.UserServicesDelegate;
 import entities.Patient;
-import java.awt.Color;
 
 public class MedicalRecordsPatient extends JFrame {
 
+	Patient patient = new Patient();
 	private JPanel contentPane;
 	private JTextField textField;
 	private JButton btnAdd_1;
@@ -60,8 +61,9 @@ public class MedicalRecordsPatient extends JFrame {
 		setContentPane(contentPane);
 
 		JButton btnAdd = new JButton("");
-		btnAdd.setBounds(192, 86, 75, 53);
-		btnAdd.setIcon(new ImageIcon(MedicalRecordsPatient.class.getResource("/images/upload.png")));
+		btnAdd.setBounds(203, 72, 52, 51);
+		btnAdd.setIcon(new ImageIcon(MedicalRecordsPatient.class
+				.getResource("/images/uploadd.png")));
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JFileChooser chooser = new JFileChooser();
@@ -73,11 +75,11 @@ public class MedicalRecordsPatient extends JFrame {
 		});
 
 		textField = new JTextField();
-		textField.setBounds(96, 116, 86, 20);
+		textField.setBounds(85, 84, 86, 20);
 		textField.setColumns(10);
 
 		btnAdd_1 = new JButton("Add");
-		btnAdd_1.setBounds(92, 153, 51, 23);
+		btnAdd_1.setBounds(70, 163, 75, 23);
 		btnAdd_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				entities.MedicalRecords medicalRecords = new entities.MedicalRecords();
@@ -89,7 +91,7 @@ public class MedicalRecordsPatient extends JFrame {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
-	
+
 				ArrayList<Byte> list = new ArrayList<Byte>();
 				int s;
 				try {
@@ -104,7 +106,7 @@ public class MedicalRecordsPatient extends JFrame {
 				for (int i = 0; i < b.length; i++) {
 					b[i] = list.get(i);
 				}
-				Patient p = new Patient ();
+				Patient p = new Patient();
 				p.setUserId(1);
 				medicalRecords.setPatient(p);
 				medicalRecords.setAnalysis(b);
@@ -114,19 +116,49 @@ public class MedicalRecordsPatient extends JFrame {
 		});
 
 		lblAnalysis = new JLabel("Analysis");
-		lblAnalysis.setBounds(31, 119, 39, 14);
+		lblAnalysis.setBounds(36, 87, 39, 14);
 		contentPane.setLayout(null);
-		
+
 		JLabel label = new JLabel("");
-		label.setBounds(239, 132, 195, 130);
-		label.setIcon(new ImageIcon(MedicalRecordsPatient.class.getResource("/images/medicalrecord.jpg")));
+		label.setBounds(239, 143, 195, 130);
+		label.setIcon(new ImageIcon(MedicalRecordsPatient.class
+				.getResource("/images/medicalrecord.jpg")));
 		contentPane.add(label);
 		contentPane.add(lblAnalysis);
 		contentPane.add(textField);
 		contentPane.add(btnAdd);
 		contentPane.add(btnAdd_1);
-		
+
 		JButton btnDownloadPatientfile = new JButton("Download PatientFile");
+		btnDownloadPatientfile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				patient = UserServicesDelegate.doFindPatientById(1);
+				byte[] patientFile = MedicalRecordsDelegate
+						.doDownloadPatientFile(patient.getUserId());
+				try {
+					File file = new File(patient.getFirstName() + " "
+							+ patient.getLastName() + ".txt");
+					FileOutputStream output = new FileOutputStream(file);
+					output.write(patientFile);
+					FileReader fileReader = new FileReader(file);
+					BufferedReader br = new BufferedReader(fileReader);
+					LectureFichier lectureFichier = new LectureFichier();
+					lectureFichier.textArea.read(br, null);
+					br.close();
+					lectureFichier.setVisible(true);
+
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+			}
+
+		});
 		btnDownloadPatientfile.setBounds(26, 215, 156, 23);
 		contentPane.add(btnDownloadPatientfile);
 	}
