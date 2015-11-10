@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 import delegates.FlightServicesDelegate;
 import delegates.TestimonyServicesDelegate;
 import entities.Flight;
+import entities.FlightMatching;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -42,6 +43,8 @@ import org.jdesktop.beansbinding.Bindings;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+
+import javax.swing.border.LineBorder;
 
 public class ModifyCancelFlight extends JFrame {
 
@@ -104,6 +107,7 @@ public class ModifyCancelFlight extends JFrame {
 		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "My flights", TitledBorder.LEFT, TitledBorder.TOP, null, Color.GRAY));
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new LineBorder(Color.GRAY));
 		
 		JLabel labelLogo = new JLabel("");
 		labelLogo.setIcon(new ImageIcon(AddFlight2.class.getResource("/images/smallLogo.png")));
@@ -198,8 +202,14 @@ public class ModifyCancelFlight extends JFrame {
 				String to = (String) table.getValueAt(table.getSelectedRow(), 5);
 				System.out.println("to "+to);
 				
+				String numFlight=(String) table.getValueAt(table.getSelectedRow(), 1);
+				System.out.println("numFlight "+numFlight);
+				
+				Integer nbSitsArendre = (Integer) table.getValueAt(table.getSelectedRow(), 8);
+				System.out.println("nbSitsArendre "+nbSitsArendre);
+				
 				JOptionPane.showMessageDialog(null, "You are going to see all our available flights matching your depature and arrival locations");
-				ModifyFlight modifyFlight= new ModifyFlight(from,to,flightIdModif);
+				ModifyFlight modifyFlight= new ModifyFlight(from,to,flightIdModif,numFlight,nbSitsArendre);
 				modifyFlight.setVisible(true);
 				ModifyCancelFlight.this.setVisible(false);
 			}
@@ -225,6 +235,26 @@ public class ModifyCancelFlight extends JFrame {
 				price.setText("");
 				nbSits.setText("");
 				numberFlight.setText("");
+				
+
+				///////////////////Remise du nbSits à l'ancien vol///////////////
+
+				System.out.println("hello");
+				String numF=(String) table.getValueAt(table.getSelectedRow(), 1);
+				System.out.println("numF = "+numF);
+				FlightMatching flightMatch=FlightServicesDelegate.doFindFlightMatchingByNumFlight(numF);
+				System.out.println("comp aer = "+flightMatch.getAirline());
+				
+				Integer nbFlightArendre=(Integer) table.getValueAt(table.getSelectedRow(), 8);
+				System.out.println("nbFlightArendre = "+nbFlightArendre);
+				System.out.println("comp aer = "+flightMatch.getAirline());
+				
+
+				flightMatch.setNumberOfSits(flightMatch.getNumberOfSits()+nbFlightArendre);
+				FlightServicesDelegate.doUpdateNbSits(flightMatch);
+				System.out.println("Nv numF = "+flightMatch.getNumberOfSits());
+				
+				///////////////////Remise du nbSits à l'ancien vol///////////////
 				
 				SeeMyFlights seeMyFlights= new SeeMyFlights();
 				seeMyFlights.setVisible(true);
@@ -420,7 +450,7 @@ public class ModifyCancelFlight extends JFrame {
 		JTableBinding<Flight, List<Flight>, JTable> jTableBinding = SwingBindings.createJTableBinding(UpdateStrategy.READ_WRITE, flights, table);
 		//
 		BeanProperty<Flight, Integer> flightBeanProperty = BeanProperty.create("flightId");
-		jTableBinding.addColumnBinding(flightBeanProperty, "Id flight").setColumnName("New Column");
+		jTableBinding.addColumnBinding(flightBeanProperty, "Id flight").setColumnName("Flight Id");
 		//
 		BeanProperty<Flight, String> flightBeanProperty_1 = BeanProperty.create("numFlight");
 		jTableBinding.addColumnBinding(flightBeanProperty_1).setColumnName("Flight number");

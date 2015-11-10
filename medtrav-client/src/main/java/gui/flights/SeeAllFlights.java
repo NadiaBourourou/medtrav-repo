@@ -239,7 +239,7 @@ public class SeeAllFlights extends JFrame {
 		BeanProperty<FlightMatching, String> flightMatchingBeanProperty_2 = BeanProperty.create("departure");
 		jTableBinding.addColumnBinding(flightMatchingBeanProperty_2).setColumnName("Departure location");
 		//
-		BeanProperty<FlightMatching, String> flightMatchingBeanProperty_3 = BeanProperty.create("dateFlightMatchingArr");
+		BeanProperty<FlightMatching, String> flightMatchingBeanProperty_3 = BeanProperty.create("dateFlightMatchingDep");
 		jTableBinding.addColumnBinding(flightMatchingBeanProperty_3).setColumnName("Departure date");
 		//
 		BeanProperty<FlightMatching, String> flightMatchingBeanProperty_4 = BeanProperty.create("timeFlightMatchingDep");

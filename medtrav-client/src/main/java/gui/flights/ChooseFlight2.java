@@ -233,8 +233,6 @@ public class ChooseFlight2 extends JFrame {
 				
 				Integer numFlight=(Integer)table.getValueAt(table.getSelectedRow(), 0);
 			    System.out.println("Num vol = "+numFlight);
-
-			  //  FlightMatching fm1=FlightServicesDelegate.doFindFlightMatchingByNumFlight(numFlight);
 			    FlightMatching fm1=FlightServicesDelegate.doFindFlightMatchingById(numFlight);
 
 			    
@@ -244,10 +242,10 @@ public class ChooseFlight2 extends JFrame {
 			Integer nbSitsMaj=nbSitsInitial-nbSitsNeeded;
 			
 			fm1.setNumberOfSits(nbSitsMaj);
-			Boolean a = FlightServicesDelegate.doUpdateNbSits(nbSitsMaj,numFlight);
+
+			Boolean a = FlightServicesDelegate.doUpdateNbSits(fm1);
 			System.out.println("bool val = "+a);
-	
-			
+
 			System.out.println("NbSitsMaj = "+nbSitsMaj);
 				
 					JOptionPane.showMessageDialog(null, "Flight successfully added");

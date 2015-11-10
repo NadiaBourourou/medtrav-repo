@@ -50,6 +50,8 @@ public class ModifyFlight extends JFrame {
 	static String from;
 	static String to;
 	static Integer flightIdModif;
+	static String numFlightArendre;
+	static Integer nbSitsArendre;
 	List<FlightMatching> flightsMatching;
 	FlightMatching flightSelected = new FlightMatching();
 	private Integer userId = 1;
@@ -74,7 +76,7 @@ public class ModifyFlight extends JFrame {
 			public void run() {
 				try {
 					ModifyFlight frame = new ModifyFlight(from, to,
-							flightIdModif);
+							flightIdModif,numFlightArendre,nbSitsArendre);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -86,15 +88,19 @@ public class ModifyFlight extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ModifyFlight(String from, String to, Integer flightIdModif) {
+	public ModifyFlight(String from, String to, Integer flightIdModif,String numFlight,Integer nbSitsArendre) {
 		setTitle("Modify my flight");
 		this.from = from;
 		this.to = to;
 		this.flightIdModif = flightIdModif;
+		this.numFlightArendre=numFlightArendre;
+		this.nbSitsArendre=nbSitsArendre;
 
 		System.out.println("from de choose = " + from);
 		System.out.println("to de choose = " + to);
 		System.out.println("flightIdModif de choose = " + flightIdModif);
+		System.out.println("num Flight = " + numFlight);
+		System.out.println("nb Sits à rendre = " + nbSitsArendre);
 
 		flightsMatching = FlightServicesDelegate
 				.doFindMatchingFlightWithThatFromAndTo(this.from, this.to);
@@ -274,6 +280,27 @@ public class ModifyFlight extends JFrame {
 					flight1.setNumFlight(flightNumber.getText());
 			
 					FlightServicesDelegate.doUpdateFlight(flight1);
+					
+					Integer numFlight=(Integer)table.getValueAt(table.getSelectedRow(), 0);
+				    System.out.println("Num vol = "+numFlight);
+				    FlightMatching fm1=FlightServicesDelegate.doFindFlightMatchingById(numFlight);
+
+				Integer nbSitsInitial=fm1.getNumberOfSits();
+				Integer nbSitsMaj=nbSitsInitial-nbSitsNeeded;
+				
+				fm1.setNumberOfSits(nbSitsMaj);
+
+				FlightServicesDelegate.doUpdateNbSits(fm1);
+				
+				///////////////////Remise du nbSits à l'ancien vol///////////////
+			//	FlightMatching flightMatch=FlightServicesDelegate.doFindFlightMatchingByNumFlight(numFlightArendre);
+				FlightMatching flightMatch=FlightServicesDelegate.doFindFlightMatchingById(flightIdModif);
+				System.out.println("eh oh");
+				
+				flightMatch.setNumberOfSits(flightMatch.getNumberOfSits()+nbSitsArendre);
+				FlightServicesDelegate.doUpdateNbSits(flightMatch);
+				///////////////////Remise du nbSits à l'ancien vol///////////////
+				
 					initDataBindings();
 					
 					JOptionPane.showMessageDialog(null, "Flight successfully modified");
@@ -285,7 +312,7 @@ public class ModifyFlight extends JFrame {
 				} else {
 					Integer numFlight=(Integer)table.getValueAt(table.getSelectedRow(), 0);
 					FlightMatching fm1=FlightServicesDelegate.doFindFlightMatchingById(numFlight);
-					System.out.println("Failed to add a flight!");
+					System.out.println("Failed to modify a flight!");
 					JOptionPane.showMessageDialog(null, "Sorry, there is not enough sits. We only have "+fm1.getNumberOfSits()+" available sits");
 					ModifyFlight.this.setVisible(true);
 

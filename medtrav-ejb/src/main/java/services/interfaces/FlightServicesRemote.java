@@ -46,7 +46,9 @@ public interface FlightServicesRemote {
 	
 	FlightMatching findFlightMatchingById(Integer idFmatching);
 
-	Boolean updateNbSits(Integer nbSitsMaj,Integer idFlight);
+	//Boolean updateNbSits(Integer nbSitsMaj,Integer idFlight);
+
+	Boolean updateNbSits(FlightMatching flightMatch);
 
 	List<FlightMatching> findMatchingFlightWithThatFromAndTo(String fromMatching, String toMatching);
 	
@@ -65,6 +67,5 @@ public interface FlightServicesRemote {
 	long mostWorkingAirlines(String airlineGiven);
 	
 	List<String> findAllAirlines();
-	
-	public void generateImageStat();
+
 }

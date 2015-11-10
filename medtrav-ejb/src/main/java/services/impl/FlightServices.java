@@ -360,7 +360,7 @@ public class FlightServices implements FlightServicesRemote,
 		return entityManager.find(FlightMatching.class, idFmatching);
 	}
 
-	@Override
+/*	@Override
 	public Boolean updateNbSits(Integer nbSitsMaj, Integer idFlight) {
 		Boolean b = false;
 		try {
@@ -373,8 +373,22 @@ public class FlightServices implements FlightServicesRemote,
 			System.err.println("Error updating nbSits");
 		}
 		return b;
+		}
+*/
+		
+	@Override
+	public Boolean updateNbSits(FlightMatching flightMatch) {
+	Boolean b = false;
+		try {
+			entityManager.merge(flightMatch);
+			b = true;
 
+		} catch (Exception e) {
+			System.err.println("Error updating flight");
+		}
+		return b;
 	}
+
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -455,5 +469,4 @@ public class FlightServices implements FlightServicesRemote,
 		return query.getResultList();
 	}
 
-	
 }

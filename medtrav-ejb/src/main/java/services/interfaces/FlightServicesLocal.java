@@ -43,8 +43,10 @@ public interface FlightServicesLocal {
 	
 	FlightMatching findFlightMatchingById(Integer idFmatching);
 	
-	Boolean updateNbSits(Integer nbSitsMaj,Integer idFlight);
+	//Boolean updateNbSits(Integer nbSitsMaj,Integer idFlight);
 
+	Boolean updateNbSits(FlightMatching flightMatch);
+	
 	List<FlightMatching> findMatchingFlightWithThatFromAndTo(String fromMatching, String toMatching);
 	
 	List<FlightMatching> findAllFlightMatching();
@@ -63,5 +65,4 @@ public interface FlightServicesLocal {
 	
 	List<String> findAllAirlines();
 	
-	public void generateImageStat();
 }

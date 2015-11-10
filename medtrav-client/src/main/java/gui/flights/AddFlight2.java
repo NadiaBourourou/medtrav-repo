@@ -176,27 +176,9 @@ ChooseFlight2 chooseFlight= new ChooseFlight2(from,to,dateDepBDD,dateArrivalBDD)
 chooseFlight.setVisible(true);
 AddFlight2.this.setVisible(false);
 
-				/*Flight flight=new Flight();
-				flight.setAirline("easyJet");
-				flight.setArrivalDate(departureDate);
-				flight.setArrivalLocation(to);
-				flight.setDepartureDate(arrivalDate);
-				flight.setDepartureLocation(from);
-				flight.setPrice(280D);
-
-				if(FlightServicesDelegate.doAddFlight(flight))
-				{
-					JOptionPane.showMessageDialog(null, "Success adding a flight...");
-				}
-				else{
-					System.out.println("Failed to add a flight!");
-					JOptionPane.showMessageDialog(null,"Error adding flight");
-
-				}*/
 			}
 		});
 		btnAdd.setIcon(new ImageIcon(AddFlight2.class.getResource("/images/add.png")));
-	//	btnAdd.setBounds(10, 331, 160, 43);
 		
 		JLabel lblLogo = new JLabel("");
 		lblLogo.setIcon(new ImageIcon(AddFlight2.class.getResource("/images/smallLogo.png")));
@@ -215,18 +197,17 @@ AddFlight2.this.setVisible(false);
 		JLabel label = new JLabel("Add a flight");
 		label.setForeground(new Color(135, 206, 250));
 		label.setFont(new Font("Tahoma", Font.BOLD, 23));
-	//	buttonHome.setBounds(10, 331, 160, 43);
 		
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(lblLogo, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(173)
 							.addComponent(label, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(39)
@@ -236,21 +217,20 @@ AddFlight2.this.setVisible(false);
 								.addComponent(lblFrom, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE))
 							.addGap(29)
 							.addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)))
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(10)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(comboBoxTo, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
+									.addContainerGap(110, Short.MAX_VALUE))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(calendarTo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addGap(114))
+								.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
 									.addComponent(lblTo, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-									.addContainerGap())
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-									.addGroup(gl_contentPane.createSequentialGroup()
-										.addComponent(comboBoxTo, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
-										.addContainerGap(110, Short.MAX_VALUE))
-									.addGroup(gl_contentPane.createSequentialGroup()
-										.addComponent(calendarTo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addGap(114)))))
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+									.addContainerGap())))
+						.addGroup(gl_contentPane.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(buttonHome, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
 							.addGap(59))))
@@ -258,22 +238,23 @@ AddFlight2.this.setVisible(false);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(19)
+									.addComponent(lblLogo, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
+								.addComponent(buttonHome))
+							.addGap(14))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(label, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)))
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(19)
-							.addComponent(lblLogo, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(46)
-							.addComponent(label, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
-						.addComponent(buttonHome))
-					.addGap(14)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(44)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblFrom)
 								.addComponent(lblTo))
-							.addGap(18)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 								.addComponent(comboBoxTo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addComponent(comboBoxFrom, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
