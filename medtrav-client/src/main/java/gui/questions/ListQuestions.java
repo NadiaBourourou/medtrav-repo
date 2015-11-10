@@ -85,6 +85,7 @@ public class ListQuestions extends JFrame {
 	private JTextField questionId;
 	private JTextPane description;
 	private JTextField recherchetf;
+	private User userConnected;
 	
 	
 	/**
@@ -508,7 +509,439 @@ try{
 				        
 				         Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
 				       
-				         VideoExample vid= new VideoExample(null);
+				      //   VideoExample vid= new VideoExample(null);
+				       // ListQuestions.this.dispose();
+				
+				    
+					
+				}
+			});
+			button_2.setForeground(new Color(255, 255, 255));
+			button_2.setBackground(new Color(143, 188, 143));
+			button_2.setBounds(318, 299, 118, 22);
+			contentPane.add(button_2);
+			
+		}
+		catch(Exception a){
+			connectedtf.setForeground(new Color(220, 20, 60));
+			connectedtf.setText("You are not connected. ");
+			
+		} finally{
+			try{sock.close();}
+		catch(Exception h){}
+		}
+		
+		
+		
+		
+	}
+	
+	
+public ListQuestions(User userConnected) {
+		
+		questions=QuestionServicesDelegate.doFindAllQuestions();
+		System.out.println("LIST QUESTIONS ");
+		System.out.println("user co id="+userConnected.getUserId());
+		System.out.println("user co name="+userConnected.getFirstName()+userConnected.getLastName());		
+		
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 736, 694);
+		contentPane = new JPanel();
+		contentPane.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				
+			}
+		});
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(77, 141, 477, 152);
+		contentPane.add(panel);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(77, 335, 477, 206);
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
+		
+		
+		JScrollPane scrollPane = new JScrollPane();
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(13, Short.MAX_VALUE))
+		);
+		
+		table = new JTable();
+		table.setRowSelectionAllowed(false);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int idTableau=(int) table.getValueAt(table.getSelectedRow(), 4); 
+				System.out.println("id user selectionné = "+idTableau);
+				if(idTableau==userConnected.getUserId())
+				{panel_1.setVisible(true);}
+				else{panel_1.setVisible(false);}	
+				
+				
+			}
+		});
+		scrollPane.setViewportView(table);
+		panel.setLayout(gl_panel);
+		
+		
+		JLabel label = new JLabel("Modification");
+		label.setFont(new Font("Tahoma", Font.BOLD, 17));
+		label.setBounds(10, 11, 108, 23);
+		panel_1.add(label);
+		
+		title = new JTextField();
+		title.setBounds(97, 100, 121, 20);
+		panel_1.add(title);
+		title.setColumns(10);
+		
+		questionId = new JTextField();
+		questionId.setEnabled(false);
+		questionId.setBounds(97, 55, 121, 20);
+		panel_1.add(questionId);
+		questionId.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("Id question");
+		lblNewLabel.setBounds(20, 58, 93, 14);
+		panel_1.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Title");
+		lblNewLabel_1.setBounds(20, 103, 46, 14);
+		panel_1.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("Description");
+		lblNewLabel_2.setBounds(20, 134, 85, 14);
+		panel_1.add(lblNewLabel_2);
+		
+		description = new JTextPane();
+		description.setBounds(123, 134, 139, 56);
+		panel_1.add(description);
+		
+		JButton btnUpdate = new JButton("Update");
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			try{	questionSelected = questions.get(table.getSelectedRow());	
+				QuestionServicesDelegate.doUpdateQuestion(questionSelected);
+				questions=QuestionServicesDelegate.doFindAllQuestions();
+				initDataBindings();
+			} catch(Exception c){ JOptionPane.showMessageDialog(null, "Please click on the item."); }
+			}
+		});
+		btnUpdate.setBounds(303, 54, 89, 23);
+		panel_1.add(btnUpdate);
+		
+		JButton btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try{
+				QuestionServicesDelegate.doDeleteQuestion(questionSelected);
+				questions=QuestionServicesDelegate.doFindAllQuestions();
+				initDataBindings();
+				questionId.setText("");
+				description.setText("");
+				title.setText("");
+			} catch(Exception c){ JOptionPane.showMessageDialog(null, "Please click on the item."); }
+				
+			}
+		});
+		btnDelete.setBounds(303, 99, 89, 23);
+		panel_1.add(btnDelete);
+		
+		JButton btnBackToMenu = new JButton("Back to Menu");
+		btnBackToMenu.setBounds(723, 475, 117, 23);
+		contentPane.add(btnBackToMenu);
+		
+		JButton btnBackToMenu_1 = new JButton("Back to Menu");
+		btnBackToMenu_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			//	ListQuestions.this.setVisible(false);
+			}
+		});
+		btnBackToMenu_1.setBounds(573, 340, 130, 23);
+		contentPane.add(btnBackToMenu_1);
+		
+		JButton btnAdd = new JButton("Add");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				User user=TestimonyServicesDelegate.doFindUsertById(userConnected.getUserId());
+				if(user instanceof Patient) {System.out.println("user is PATIENT");
+				AddQuestion addQuestion= new AddQuestion(userConnected);
+				addQuestion.setLocationRelativeTo(null);
+				addQuestion.setVisible(true);
+				ListQuestions.this.setVisible(false);
+				}
+				else if (user instanceof Doctor){System.out.println("user is a doctor ");
+				JOptionPane.showMessageDialog(null, "Sorry, you are a doctor, you can't add a question.");}
+				else if (user instanceof Administrator){JOptionPane.showMessageDialog(null, "Sorry, you are an administrator, you can't add a question.");}
+				else {JOptionPane.showMessageDialog(null,"There's no users in the database");}
+				
+			
+			}
+		});
+		btnAdd.setBounds(573, 168, 130, 23);
+		contentPane.add(btnAdd);
+		
+		JRadioButton rbtitle = new JRadioButton("Title");
+		rbtitle.setSelected(true);
+		rbtitle.setBackground(Color.WHITE);
+		rbtitle.setBounds(353, 77, 58, 23);
+		contentPane.add(rbtitle);
+		
+		JRadioButton rbname = new JRadioButton("Patient's last name");
+		rbname.setBackground(Color.WHITE);
+		rbname.setBounds(427, 77, 140, 23);
+		contentPane.add(rbname);
+		
+		JCheckBox Answeredcb = new JCheckBox("Answered");
+		Answeredcb.setBackground(Color.WHITE);
+		Answeredcb.setBounds(77, 111, 97, 23);
+		contentPane.add(Answeredcb);
+		
+		recherchetf = new JTextField();
+		recherchetf.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(rbtitle.isSelected())
+				{	questions=QuestionServicesDelegate.doFindAllQuestionsByTitle(recherchetf.getText());
+				}
+				else if(rbname.isSelected()){ questions=QuestionServicesDelegate.doFindAllQuestionsByPatientName(recherchetf.getText());
+				}else{System.out.println("rien de selectionné");}
+				initDataBindings();
+			}
+		});
+		recherchetf.setColumns(10);
+		recherchetf.setBounds(77, 77, 183, 23);
+		contentPane.add(recherchetf);
+		
+		JLabel label_1 = new JLabel("Search by:");
+		label_1.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		label_1.setBounds(286, 81, 58, 14);
+		contentPane.add(label_1);
+		
+		
+		
+		JButton button = new JButton("Search");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(Answeredcb.isSelected())
+				{questions=QuestionServicesDelegate.doFindAllQuestionsWithResponse();
+				initDataBindings();
+				}
+				else{questions=QuestionServicesDelegate.doFindAllQuestions();
+				initDataBindings();
+				}
+			}
+		});
+		button.setBounds(573, 102, 130, 23);
+		contentPane.add(button);
+		
+		JButton btnDisplay = new JButton("Display");
+		btnDisplay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+try{
+	questionSelected = questions.get(table.getSelectedRow());
+				
+				DisplayQuestion dispTestimony= new DisplayQuestion(questionSelected,userConnected);
+				dispTestimony.setLocationRelativeTo(null);
+				
+				dispTestimony.setVisible(true);
+				dispTestimony.setLocationRelativeTo(null);
+				ListQuestions.this.setVisible(false);
+					
+				}
+				catch(Exception p){JOptionPane.showMessageDialog(null,"Please select a question.");}
+				
+				
+			}
+		});
+		btnDisplay.setBounds(573, 202, 127, 23);
+		contentPane.add(btnDisplay);
+		
+		JLabel lblListQuestions = new JLabel("Frequently asked questions");
+		lblListQuestions.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				
+
+				Voice voice;
+				VoiceManager vm = VoiceManager.getInstance();
+				voice = vm.getVoice("kevin16");
+				voice.allocate();
+				try {
+					voice.speak("frequently asked questions");
+					
+				}
+
+				catch (Exception en) {
+					System.out.println("error");
+				}
+			}
+		});
+		lblListQuestions.setForeground(SystemColor.desktop);
+		lblListQuestions.setFont(new Font("Tahoma", Font.BOLD, 24));
+		lblListQuestions.setBounds(190, 11, 348, 45);
+		contentPane.add(lblListQuestions);
+		
+	
+		panel_1.setVisible(false);
+		ButtonGroup group = new ButtonGroup();
+		group.add(rbtitle);
+		group.add(rbname);
+		
+		JButton btnNewButton = new JButton("Answer");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try{
+					questionSelected = questions.get(table.getSelectedRow());
+					
+					
+				User user=TestimonyServicesDelegate.doFindUsertById(userConnected.getUserId());
+				if(user instanceof Patient) {System.out.println("user is PATIENT");
+				
+				JOptionPane.showMessageDialog(null, "Sorry, as a patient, you can't add an answer.");
+				}
+				else if (user instanceof Doctor){System.out.println("user is a doctor ");
+				JOptionPane.showMessageDialog(null, "Sorry, as a doctor, you can't add an answer.");}
+				else if (user instanceof Administrator){
+					AnswerQuestion addTestimony= new AnswerQuestion(questionSelected,userConnected);
+					addTestimony.setLocationRelativeTo(null);
+					addTestimony.setVisible(true);
+					
+					ListQuestions.this.setVisible(false);
+				}
+				else {System.out.println("user normal");}
+				} catch(Exception p){JOptionPane.showMessageDialog(null, "Please select a question");}
+				
+			}
+		});
+		btnNewButton.setBounds(573, 236, 127, 23);
+		contentPane.add(btnNewButton);
+		
+		JLabel lblForMoreInformations = new JLabel("For more informations, please visit our web page.");
+		lblForMoreInformations.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblForMoreInformations.setBounds(77, 576, 243, 25);
+		contentPane.add(lblForMoreInformations);
+		
+		Button button_1 = new Button("facebook");
+		button_1.setFont(new Font("Dialog", Font.BOLD, 12));
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+			try{
+		//		https://twitter.com/MedicalTravelTn
+				String url="https://www.facebook.com/MedTrav/?fref=ts";
+				java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+				
+			}
+			catch(Exception es){JOptionPane.showMessageDialog(null, "Error");}
+			}
+		});
+		button_1.setBackground(SystemColor.activeCaption);
+		button_1.setForeground(Color.WHITE);
+		button_1.setBounds(339, 579, 97, 22);
+		contentPane.add(button_1);
+		
+		JLabel connectedtf = new JLabel("You are connected.");
+		//connectedtf.setForeground(new Color(199, 21, 133));
+		connectedtf.setBounds(296, 619, 146, 23);
+		contentPane.add(connectedtf);
+		
+		JButton btnVerifyConnection = new JButton("Verify connection");
+		btnVerifyConnection.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Socket sock= new Socket();
+				InetSocketAddress addr=new InetSocketAddress("www.google.com", 80);
+				try{
+					sock.connect(addr,3000);
+					connectedtf.setForeground(new Color(0, 128, 0));
+					connectedtf.setText("You are connected.");
+					
+				}
+				catch(Exception a){
+					connectedtf.setForeground(new Color(220, 20, 60));
+					connectedtf.setText("You are not connected. ");
+					
+				} finally{
+					try{sock.close();}
+				catch(Exception h){}
+				}
+				
+				
+			}
+		});
+		btnVerifyConnection.setBounds(120, 619, 140, 23);
+		contentPane.add(btnVerifyConnection);
+		
+		initDataBindings();
+		
+		Socket sock= new Socket();
+		InetSocketAddress addr=new InetSocketAddress("www.google.com", 80);
+		try{
+			sock.connect(addr,3000);
+			connectedtf.setForeground(new Color(0, 128, 0));
+			connectedtf.setText("You are connected.");
+			
+			Button twitterbtn = new Button("twitter");
+			twitterbtn.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+
+					try{
+						
+						String url="https://twitter.com/MedicalTravelTn";
+						java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+						
+					}
+					catch(Exception es){JOptionPane.showMessageDialog(null, "Error");}
+					}
+			});
+			twitterbtn.setForeground(new Color(255, 255, 255));
+			twitterbtn.setFont(new Font("Dialog", Font.BOLD, 12));
+			twitterbtn.setBackground(new Color(0, 191, 255));
+			twitterbtn.setBounds(463, 578, 97, 23);
+			contentPane.add(twitterbtn);
+			
+			JLabel lblWhat = new JLabel("What does medical travel mean?");
+			lblWhat.setFont(new Font("Tahoma", Font.BOLD, 11));
+			lblWhat.setForeground(new Color(255, 140, 0));
+			lblWhat.setBounds(104, 296, 191, 28);
+			contentPane.add(lblWhat);
+			
+			Button button_2 = new Button("Discover it in video!");
+			button_2.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+
+		
+
+				        final EmbeddedMediaPlayerComponent mediaPlayerComponent;
+
+				        
+				         NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "C:\\Program Files\\VideoLAN\\VLC");
+				        
+				         Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
+				       
+				         VideoExample vid= new VideoExample(userConnected);
 				        ListQuestions.this.dispose();
 				
 				    
@@ -534,6 +967,8 @@ try{
 		
 		
 	}
+	
+	
 	protected void initDataBindings() {
 		JTableBinding<Question, List<Question>, JTable> jTableBinding = SwingBindings.createJTableBinding(UpdateStrategy.READ_WRITE, questions, table);
 		//

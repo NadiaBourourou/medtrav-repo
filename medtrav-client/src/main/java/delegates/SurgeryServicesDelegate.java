@@ -4,6 +4,7 @@ import java.util.List;
 
 import locator.ServiceLocator;
 import services.interfaces.SurgeryServicesRemote;
+import entities.Doctor;
 import entities.Procedure;
 import entities.Surgery;
 
@@ -17,8 +18,20 @@ public class SurgeryServicesDelegate {
 				jndiName);
 	}
 
-	public static boolean doAddSurgery(Surgery treatment) {
+	public static Boolean doAddSurgery(Surgery treatment) {
 		return getProxy().addSurgery(treatment);
+	}
+	
+	public static Boolean doUpdateSurgery(Surgery treatment) {
+		return getProxy().updateSurgery(treatment);
+	}
+	
+	public static Boolean doDeleteSurgery(Surgery treatment) {
+		return getProxy().deleteSurgery(treatment);
+	}
+	
+	public static List<Surgery> doFindAllSurgeries(){
+		return getProxy().findAllSurgeries();
 	}
 
 	public static boolean doAddProcedure(Procedure procedure) {
@@ -59,6 +72,14 @@ public class SurgeryServicesDelegate {
 	public static List<Surgery> doFindAllSurgeriesByMedicalRecordsId(
 			Integer idMedicalRecord) {
 		return getProxy().findAllSurgeriesByMedicalRecordsId(idMedicalRecord);
+	}
+	
+	public static Doctor doFindDoctorById(Integer idDoctor){
+		return getProxy().findDoctorById(idDoctor);
+	}
+	
+	public static Boolean doAssignSurgeryToProcedureNv(Integer idSurgery,Integer idProcedure){
+		return getProxy().assignSurgeryToProcedureNv(idSurgery, idProcedure);
 	}
 
 }

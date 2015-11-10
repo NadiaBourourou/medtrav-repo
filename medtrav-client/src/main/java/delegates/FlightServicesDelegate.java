@@ -102,8 +102,12 @@ public class FlightServicesDelegate {
 		return getProxy().findFlightMatchingById(idFmatching);
 	}
 	
-	public static Boolean doUpdateNbSits(Integer nbSitsMaj,Integer idFlight){
+	/*public static Boolean doUpdateNbSits(Integer nbSitsMaj,Integer idFlight){
 		return getProxy().updateNbSits(nbSitsMaj,idFlight);
+	}*/
+	
+	public static Boolean doUpdateNbSits(FlightMatching flightMatch){
+		return getProxy().updateNbSits(flightMatch);
 	}
 	
 	public static List<FlightMatching> doFindMatchingFlightWithThatFromAndTo(String fromMatching, String toMatching){
@@ -141,4 +145,9 @@ public class FlightServicesDelegate {
 	public static List<String> doFindAllAirlines(){
 		return getProxy().findAllAirlines();
 	}
+	
+	public static FlightMatching doFindFlightMatchingByNumFlight(String numFlightArendre){
+		return getProxy().findFlightMatchingByNumFlight(numFlightArendre);
+	}
+	
 }

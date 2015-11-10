@@ -18,7 +18,7 @@ import services.interfaces.TestimonyServicesRemote;
  * Session Bean implementation class TestimonyServices
  */
 @Stateless
-public class TestimonyServices implements TestimonyServicesRemote, TestimonyServicesLocal {
+public class TestimonyServices implements TestimonyServicesRemote, TestimonyServicesLocal{
 
 	@PersistenceContext
 	EntityManager entitymanager;

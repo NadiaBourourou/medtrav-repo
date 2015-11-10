@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import entities.Doctor;
 import entities.DoctorPatient;
 import entities.Patient;
+import entities.Surgery;
 import entities.Testimony;
 import entities.User;
 import services.interfaces.AssignedPatientsServicesLocal;
@@ -19,7 +20,7 @@ import services.interfaces.AssignedPatientsServicesRemote;
  * Session Bean implementation class AssignedPatientsServices
  */
 @Stateless
-public class AssignedPatientsServices implements AssignedPatientsServicesRemote, AssignedPatientsServicesLocal {
+public class AssignedPatientsServices implements AssignedPatientsServicesRemote, AssignedPatientsServicesLocal{
 
 	@PersistenceContext
 	EntityManager entitymanager;
@@ -43,6 +44,17 @@ public class AssignedPatientsServices implements AssignedPatientsServicesRemote,
 	
 	}
     
+    @SuppressWarnings("unchecked")
+  	@Override
+  	public Surgery findSurgeryByPatientId(Integer patientId) {
+  		String jpql="select s from Surgery s join s.surgeryPatients dp where dp.patient.id =:param";
+  		Query query=entitymanager.createQuery(jpql);
+  		query.setFirstResult(0);
+		query.setMaxResults(1);
+  		query.setParameter("param",patientId);
+  		return  (Surgery)query.getSingleResult();
+  	
+  	}
 
 	@Override
 	public Boolean assignPatientToDoctorId(Integer idDoctor,

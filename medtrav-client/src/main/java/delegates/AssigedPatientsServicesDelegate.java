@@ -5,6 +5,7 @@ import java.util.List;
 import entities.Doctor;
 import entities.Patient;
 import entities.DoctorPatient;
+import entities.Surgery;
 import locator.ServiceLocator;
 import services.interfaces.AssignedPatientsServicesRemote;
 
@@ -49,6 +50,11 @@ public class AssigedPatientsServicesDelegate {
 	
 	public static DoctorPatient doFindAssignPatient(Integer patientId,Integer doctorId)  {
 		return getProxy().findAssignPatient(patientId, doctorId);
+	}
+	
+	
+	public static Surgery doFindSurgeryByPatientId(Integer patientId)  {
+		return getProxy().findSurgeryByPatientId(patientId);
 	}
 	
 	

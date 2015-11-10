@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -23,6 +24,7 @@ public class Surgery implements Serializable {
 	private Integer surgeryId;
 	private String name;
 	private String description;
+	private Date date;
 
 	private Doctor doctor;
 	private List<SurgeryPatient> surgeryPatients;
@@ -85,6 +87,14 @@ public class Surgery implements Serializable {
 
 	public void setProcedure(Procedure procedure) {
 		this.procedure = procedure;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 }

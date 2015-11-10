@@ -7,6 +7,7 @@ import javax.ejb.Remote;
 import entities.Doctor;
 import entities.DoctorPatient;
 import entities.Patient;
+import entities.Surgery;
 
 @Remote
 public interface AssignedPatientsServicesRemote {
@@ -31,6 +32,8 @@ public interface AssignedPatientsServicesRemote {
 	DoctorPatient findAssignPatient(Integer patientId, Integer doctorId);
 
 	Boolean deleteAssignPatient(Integer patientId, Integer doctorId);
+
+	Surgery findSurgeryByPatientId(Integer patientId);
 	
 	
 
