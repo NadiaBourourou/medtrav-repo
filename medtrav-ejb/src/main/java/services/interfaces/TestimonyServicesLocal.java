@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 import entities.Patient;
+import entities.Surgery;
 import entities.Testimony;
 import entities.User;
 
@@ -35,5 +36,7 @@ public interface TestimonyServicesLocal {
 	List<Testimony> findAllTestimoniesByTitle(String titleParam);
 
 	List<Testimony> findAllTestimoniesByPatientLastName(String s);
+	User findDoctorById(Integer idUser);
+	Surgery findSurgeryById(Integer idUser);
 	
 }

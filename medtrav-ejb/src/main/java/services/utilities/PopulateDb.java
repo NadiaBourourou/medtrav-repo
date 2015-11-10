@@ -11,8 +11,11 @@ import javax.ejb.Startup;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import services.interfaces.AssignedPatientsServicesLocal;
 import services.interfaces.ServiceHotelServicesLocal;
 import services.interfaces.SurgeryServicesLocal;
+import services.interfaces.TestimonyServicesLocal;
+import services.interfaces.UserServicesLocal;
 import entities.Administrator;
 import entities.Clinic;
 import entities.Doctor;
@@ -20,10 +23,12 @@ import entities.FlightMatching;
 import entities.Hotel;
 import entities.Patient;
 import entities.Procedure;
+import entities.Question;
 import entities.RoleType;
 import entities.ServiceHotel;
 import entities.StateType;
 import entities.Surgery;
+import entities.Testimony;
 import entities.UserSexe;
 
 /**
@@ -42,7 +47,12 @@ public class PopulateDb {
 	private SurgeryServicesLocal surgeryServicesLocal;
 	@EJB
 	private ServiceHotelServicesLocal serviceHotelServicesLocal;
-
+	@EJB
+	private AssignedPatientsServicesLocal assignedPatientsServicesLocal;
+	@EJB 
+	private UserServicesLocal userServicesLocal;
+	@EJB
+	private TestimonyServicesLocal testimonyServicesLocal;
 
 	public PopulateDb() {
 	}
@@ -301,16 +311,19 @@ public class PopulateDb {
 		procedure1.setName("Cosmetic and plastic surgery");
 
 		Surgery Surgery1_1 = new Surgery();
+		Surgery1_1.setDate(new java.util.Date());
 		Surgery1_1.setName("Abdominoplasty");
 		Surgery1_1
 				.setDescription("Get rid of your belly, time for effortless kickass abs");
 		Surgery1_1.setProcedure(procedure1);
 
 		Surgery Surgery2_1 = new Surgery();
+		Surgery2_1.setDate(new java.util.Date());
 		Surgery2_1.setName("Body lift");
 		Surgery2_1.setDescription("will see later on");
 
 		Surgery Surgery3_1 = new Surgery();
+		Surgery3_1.setDate(new java.util.Date());
 		Surgery3_1.setName("Botox");
 		Surgery3_1.setDescription("Say no to aging");
 
@@ -319,16 +332,19 @@ public class PopulateDb {
 		procedure2.setName("Cardiology and cardiovascular surgery");
 
 		Surgery Surgery1_2 = new Surgery();
+		Surgery1_2.setDate(new java.util.Date());
 		Surgery1_2.setName("Laser Surgery of bladder cancer");
 		Surgery1_2
 				.setDescription("Get rid of your belly, time for effortless kickass abs");
 		Surgery1_2.setPrice((double) 2400);
 
 		Surgery Surgery2_2 = new Surgery();
+		Surgery2_2.setDate(new java.util.Date());
 		Surgery2_2.setName("Venous stenting");
 		Surgery2_2.setPrice((double) 3200);
 
 		Surgery Surgery3_2 = new Surgery();
+		Surgery3_2.setDate(new java.util.Date());
 		Surgery3_2.setName("VATS");
 		Surgery3_2.setDescription("Video assisted of thoracic surgery");
 		Surgery3_2.setPrice((double) 5000);
@@ -337,10 +353,12 @@ public class PopulateDb {
 		procedure3.setName("Urology");
 
 		Surgery Surgery1_3 = new Surgery();
+		Surgery1_3.setDate(new java.util.Date());
 		Surgery1_3.setName("Laser Surgery of bladder cancer");
 		Surgery1_3.setPrice((double) 7100);
 
 		Surgery Surgery2_3 = new Surgery();
+		Surgery2_3.setDate(new java.util.Date());
 		Surgery2_3.setName("Vasectomy");
 		Surgery2_3.setPrice((double) 700);
 
@@ -450,7 +468,101 @@ public class PopulateDb {
 			serviceHotelServicesLocal.assignServiceHotelToHotel(serviceHotel5, 3);
 			
 			
-
+			/*Hajer*/
+		
+			
+		Patient monpatient1=testimonyServicesLocal.findPatientById(1);
+		Patient monpatient2=testimonyServicesLocal.findPatientById(2);
+		Doctor mondoctor1=userServicesLocal.findDoctorById(3);
+		Surgery monsurgery1=testimonyServicesLocal.findSurgeryById(1);
+		Surgery monsurgery2=testimonyServicesLocal.findSurgeryById(2);
+		
+			Testimony testimony1=new Testimony();
+			testimony1.setDate(new java.util.Date());
+			testimony1.setTitle("first medical travel");
+			testimony1.setDescription("I was admitted after having an accident at a waterfall. Thank you for the wonderful treatment ");
+			testimony1.setPatient(monpatient1);
+			
+			Testimony testimony2=new Testimony();
+			testimony2.setDate(new java.util.Date());
+			testimony2.setTitle("second medical travel");
+			testimony2.setDescription("I just want to thank you for the treatment. ");
+			testimony2.setPatient(monpatient1);
+			
+			
+			Testimony testimony3=new Testimony();
+			testimony3.setDate(new java.util.Date());
+			testimony3.setTitle("bonjour");
+			testimony3.setDescription("I am from France and I am really thankful for the treatment. ");
+			testimony3.setPatient(monpatient2);
+			
+			Testimony testimony4=new Testimony();
+			testimony4.setDate(new java.util.Date());
+			testimony4.setTitle("foreign travel");
+			testimony4.setDescription("Really it was good to see you and to have a treatment in tunisia. ");
+			testimony4.setPatient(monpatient2);
+			
+			
+			entityManager.merge(testimony1);
+			entityManager.merge(testimony2);
+			entityManager.merge(testimony3);
+			entityManager.merge(testimony4);
+	
+			
+			Question question1=new Question();
+			question1.setDate(new java.util.Date());
+			question1.setTitle("travel answered");
+			question1.setDescription("why does people travel abroad for treatment?");
+			question1.setResponse("To discover a new country and to save money.");
+			question1.setPatient(monpatient1);
+			
+			Question question2=new Question();
+			question2.setDate(new java.util.Date());
+			question2.setTitle("tourism answered");
+			question2.setDescription("can family members travel with me?");
+			question2.setResponse("you can choose to have any number of people travel with you");
+			question2.setPatient(monpatient1);
+			
+			Question question3=new Question();
+			question3.setDate(new java.util.Date());
+			question3.setTitle("tourism");
+			question3.setDescription("what is medical tourism?");
+			question3.setPatient(monpatient1);
+			
+			Question question4=new Question();
+			question4.setDate(new java.util.Date());
+			question4.setTitle("travel");
+			question4.setDescription("do I have to sacrifice quality of care for savings?");
+			question4.setPatient(monpatient2);
+			
+			
+			entityManager.merge(question1);
+			entityManager.merge(question2);
+			entityManager.merge(question3);
+			entityManager.merge(question4);
+			
+				
+			userServicesLocal.bookSurgery(monsurgery1, "comm ", 1);
+			userServicesLocal.bookSurgery(monsurgery2, "comm", 2);
+			
+			assignedPatientsServicesLocal.assignPatientToDoctor(mondoctor1, 1);
+			assignedPatientsServicesLocal.assignPatientToDoctor(mondoctor1, 2);
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			/*Hajer*/	
 			
 	}
 

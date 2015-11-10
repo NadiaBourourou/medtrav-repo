@@ -7,6 +7,7 @@ import javax.persistence.Query;
 
 import entities.Booking;
 import entities.Patient;
+import entities.Surgery;
 import entities.Testimony;
 import entities.User;
 
@@ -35,5 +36,9 @@ public interface TestimonyServicesRemote {
 	List<Testimony> findAllTestimoniesByTitle(String titleParam);
 
 	List<Testimony> findAllTestimoniesByPatientLastName(String s);
+
+	User findDoctorById(Integer idUser);
+
+	Surgery findSurgeryById(Integer idUser);
 	
 }
