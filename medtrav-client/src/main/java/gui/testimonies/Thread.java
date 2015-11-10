@@ -68,7 +68,7 @@ public class Thread extends JFrame {
 		btnQuestions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				User userConnected=TestimonyServicesDelegate.doFindUsertById(1);
+				User userConnected=TestimonyServicesDelegate.doFindUsertById(5);
 				System.out.println("THREAD QUESTION ");
 				System.out.println("user co id="+userConnected.getUserId());
 				System.out.println("user co name="+userConnected.getFirstName()+userConnected.getLastName());		
