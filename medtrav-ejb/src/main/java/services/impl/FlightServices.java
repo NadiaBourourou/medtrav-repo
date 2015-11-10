@@ -1,5 +1,7 @@
 package services.impl;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +10,12 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.swing.JOptionPane;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
 
 import entities.Booking;
 import entities.Doctor;
@@ -360,7 +368,7 @@ public class FlightServices implements FlightServicesRemote,
 		return entityManager.find(FlightMatching.class, idFmatching);
 	}
 
-	@Override
+/*	@Override
 	public Boolean updateNbSits(Integer nbSitsMaj, Integer idFlight) {
 		Boolean b = false;
 		try {
@@ -373,8 +381,22 @@ public class FlightServices implements FlightServicesRemote,
 			System.err.println("Error updating nbSits");
 		}
 		return b;
+		}
+*/
+		
+	@Override
+	public Boolean updateNbSits(FlightMatching flightMatch) {
+	Boolean b = false;
+		try {
+			entityManager.merge(flightMatch);
+			b = true;
 
+		} catch (Exception e) {
+			System.err.println("Error updating flight");
+		}
+		return b;
 	}
+
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -455,11 +477,5 @@ public class FlightServices implements FlightServicesRemote,
 		return query.getResultList();
 	}
 
-	@Override
-	public void generateImageStat() {
-		// TODO Auto-generated method stub
-		
-	}
 
-	
 }

@@ -1,8 +1,10 @@
 package services.interfaces;
 
+import java.util.List;
+
 import javax.ejb.Remote;
 
-import entities.MedicalRecords;
+import entities.*;
 
 @Remote
 public interface MedicalRecordsServicesRemote {
@@ -13,5 +15,11 @@ public interface MedicalRecordsServicesRemote {
 	MedicalRecords findMedicalRecordsByPatientId(Integer patientId);
 
 	byte[] downloadAnalysis(int id);
+
+	byte[] downloadPatientFile(int id);
+
+	List<Patient> listAssignedPatientsToDoctor(Integer idDoctor);
+
+	Patient findPatientByFirstNameAndLastName(String FirstName, String LastName);
 
 }

@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import entities.Doctor;
+import entities.Flight;
 import entities.Procedure;
 import entities.Surgery;
 
@@ -18,7 +20,13 @@ public interface SurgeryServicesRemote {
 	public Boolean assignProcedureToSurgery(Surgery newTreatment,
 			Integer procedureId);
 
-	boolean addSurgery(Surgery treatment);
+	Boolean addSurgery(Surgery treatment);
+	
+	Boolean updateSurgery(Surgery treatment);
+
+	Boolean deleteSurgery(Surgery treatment);
+	
+	List<Surgery> findAllSurgeries();
 
 	void addSurgeryAndAssignItToProcedure(Surgery treatment, Integer idProcedure);
 
@@ -29,5 +37,8 @@ public interface SurgeryServicesRemote {
 	public List<Surgery> findAllSurgeriesByProcedureId(Integer procedureId);
 
 	String getSurgeryDescription(Integer treatmentId);
+	
+	Doctor findDoctorById(Integer idDoctor);
 
+	Boolean assignSurgeryToProcedureNv(Integer idSurgery, Integer idProcedure);
 }

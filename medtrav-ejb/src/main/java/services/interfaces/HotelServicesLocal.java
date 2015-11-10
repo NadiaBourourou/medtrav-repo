@@ -1,5 +1,6 @@
 package services.interfaces;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -17,17 +18,24 @@ public interface HotelServicesLocal {
 
 	Hotel findHotelById(Integer id);
 
+	List<Hotel> findHotelByName(String name);
+
 	Boolean updateHotel(Hotel hotel);
 
 	Boolean deleteHotel(Hotel hotel);
 
 	List<Hotel> findAllHotels();
 
+	List<Hotel> findAllHotelsEnabled();
+
 	Double calculPrix(Double prix, Integer numNights);
 
-	Boolean addHotelBooking(HotelBooking hb);
+	Boolean addHotelBooking(HotelBooking hotelBooking);
 
 	Hotel findHotelByPatientId(Integer idPatient);
-	
-	Boolean bookHotel(Integer numNights, Double price, RoomType roomType, Hotel hotel, Integer idPatient);
+
+	Boolean bookHotel(Integer numNights, Double price, RoomType roomType,
+			Date date, Hotel hotel, Integer idPatient);
+
+	List<Hotel> findHotelsByStars(Integer stars);
 }
