@@ -449,8 +449,8 @@ public class ListTestimonies extends JFrame {
 		btnMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				PatientUi back = new PatientUi(userConnected);
-				setVisible(true);
+			PatientUi backo = new PatientUi(userConnected);
+				backo.setVisible(true);
 			}
 		});
 		btnMenu.setBounds(570, 335, 130, 23);
