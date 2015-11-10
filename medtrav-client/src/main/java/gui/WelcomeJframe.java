@@ -569,19 +569,29 @@ public class WelcomeJframe extends JFrame {
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				Surgery surgery = SurgeryServicesDelegate
-						.doFindSurgeryById(cbTreatment.getSelectedIndex());
-				UserServicesDelegate.doBookSurgery(surgery, "Test", 1);
+				if (table.getSelectedRowCount() == 0)
 
-				Doctor doctor = UserServicesDelegate.doFindDoctorById(3);
-				// UserServicesDelegate.doChooseDoctor(doctor,
-				// user.getUserId());
-				AssigedPatientsServicesDelegate.doAssignPatientToDoctor(doctor,
-						user.getUserId());
+				{
+					lblError.setText("Please select a surgery and a doctor before pursuing.");
+
+				}
+
+				else {
+
+					Surgery surgery = SurgeryServicesDelegate
+							.doFindSurgeryById(cbTreatment.getSelectedIndex());
+					UserServicesDelegate.doBookSurgery(surgery, "Test", user.getUserId());
+					System.out.println(surgery.getName());
+
+					selectedDoctor = doctors.get(table.getSelectedRow());
+				UserServicesDelegate.doChooseDoctor(selectedDoctor, user.getUserId());
 				
 				setVisible(false);
 				ListClinicPatient next=new ListClinicPatient(user);
 				next.setVisible(true);
+
+				}
+		
 			}
 		});
 

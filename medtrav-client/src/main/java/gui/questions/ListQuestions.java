@@ -32,6 +32,7 @@ import entities.Doctor;
 import entities.Patient;
 import entities.Question;
 import entities.User;
+import gui.PatientUi;
 import gui.testimonies.DisplayTestimony;
 import gui.testimonies.ListTestimonies;
 
@@ -691,6 +692,14 @@ public ListQuestions(User userConnected) {
 		panel_1.add(btnDelete);
 		
 		JButton btnBackToMenu = new JButton("Back to Menu");
+		btnBackToMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setVisible(false);
+				PatientUi back = new PatientUi(userConnected);
+				setVisible(true);
+			}
+		});
 		btnBackToMenu.setBounds(723, 475, 117, 23);
 		contentPane.add(btnBackToMenu);
 		
@@ -698,7 +707,9 @@ public ListQuestions(User userConnected) {
 		btnBackToMenu_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-			//	ListQuestions.this.setVisible(false);
+				setVisible(false);
+				PatientUi back = new PatientUi(userConnected);
+				setVisible(true);
 			}
 		});
 		btnBackToMenu_1.setBounds(573, 340, 130, 23);

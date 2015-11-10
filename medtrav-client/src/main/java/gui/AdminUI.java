@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import entities.User;
+import gui.questions.ListQuestions;
 
 public class AdminUI extends JFrame {
 	private User user;
@@ -93,6 +94,14 @@ public class AdminUI extends JFrame {
 		contentPane.add(btnClinics);
 
 		JButton btnForum = new JButton("Forum");
+		btnForum.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			setVisible(false);
+			ListQuestions quest = new ListQuestions(user);
+			quest.setVisible(true);
+				
+			}
+		});
 		btnForum.setBounds(387, 345, 135, 34);
 		contentPane.add(btnForum);
 
@@ -202,6 +211,10 @@ public class AdminUI extends JFrame {
 		JButton btnForum = new JButton("F.A.Q.");
 		btnForum.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			setVisible(false);
+			ListQuestions quest = new ListQuestions();
+			quest.setVisible(true);
+				
 			}
 		});
 		btnForum.setBounds(387, 345, 135, 34);

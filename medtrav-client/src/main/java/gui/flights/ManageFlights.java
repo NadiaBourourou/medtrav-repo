@@ -91,7 +91,7 @@ public class ManageFlights extends JFrame {
 		btnSeeAllFlights.setIcon(new ImageIcon(ManageFlights.class.getResource("/images/see.png")));
 		btnSeeAllFlights.setBounds(10, 331, 160, 43);
 		
-		JButton btnModifyMyFlights = new JButton("Modify/Cancel my flight");
+		JButton btnModifyMyFlights = new JButton("Modify/Cancel/Book");
 		btnModifyMyFlights.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -135,18 +135,17 @@ public class ManageFlights extends JFrame {
 					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(262, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(140, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+					.addGap(140)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnStatistics, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(btnModifyMyFlights, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE)
 								.addComponent(btnAddAFlight, GroupLayout.PREFERRED_SIZE, 214, GroupLayout.PREFERRED_SIZE))
 							.addGap(18)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(btnSeeAllFlights, GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-								.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE)))
-						.addComponent(btnStatistics))
+								.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE))))
 					.addGap(131))
 		);
 		gl_contentPane.setVerticalGroup(
@@ -207,7 +206,7 @@ public class ManageFlights extends JFrame {
 		btnSeeAllFlights.setIcon(new ImageIcon(ManageFlights.class.getResource("/images/see.png")));
 		btnSeeAllFlights.setBounds(10, 331, 160, 43);
 		
-		JButton btnModifyMyFlights = new JButton("Modify/Cancel my flight");
+		JButton btnModifyMyFlights = new JButton("Modify/Cancel/Book");
 		btnModifyMyFlights.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				

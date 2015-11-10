@@ -530,7 +530,7 @@ public class ChooseFlight2 extends JFrame {
 		buttonHome = new JButton("");
 		buttonHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ManageFlights home= new ManageFlights();
+				ManageFlights home= new ManageFlights(user);
 				home.setVisible(true);
 				ChooseFlight2.this.setVisible(false);
 

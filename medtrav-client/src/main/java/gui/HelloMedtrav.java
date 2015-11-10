@@ -112,7 +112,7 @@ public class HelloMedtrav extends JFrame {
 							EventQueue.invokeLater(new Runnable() {
 								public void run() {
 									try {
-										WelcomeJframe frame = new WelcomeJframe(
+										PatientUi frame = new PatientUi(
 												flen);
 										frame.setVisible(true);
 										setVisible(false);
