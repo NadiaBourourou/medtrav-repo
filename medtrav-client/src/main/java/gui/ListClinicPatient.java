@@ -101,6 +101,14 @@ public class ListClinicPatient extends JFrame {
 								.getResource("/images/healthcare-and-medical-care-symbol-heart-beat-rate-icon-design-template-vector-illustration_203517067.jpg")));
 
 		JButton btnNewButton = new JButton("");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setVisible(false);
+				ChooseClinic next = new ChooseClinic();
+				next.setVisible(true);
+			}
+		});
 		btnNewButton.setIcon(new ImageIcon(ListClinicPatient.class
 				.getResource("/images/imagechooseclinic.png")));
 
@@ -217,6 +225,14 @@ public class ListClinicPatient extends JFrame {
 								.getResource("/images/healthcare-and-medical-care-symbol-heart-beat-rate-icon-design-template-vector-illustration_203517067.jpg")));
 
 		JButton btnNewButton = new JButton("");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setVisible(false);
+				ChooseClinic next = new ChooseClinic(user);
+				next.setVisible(true);
+			}
+		});
 		btnNewButton.setIcon(new ImageIcon(ListClinicPatient.class
 				.getResource("/images/imagechooseclinic.png")));
 

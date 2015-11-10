@@ -59,7 +59,7 @@ import net.sf.dynamicreports.report.exception.DRException;
 			TextColumnBuilder<String> NameColumn = Columns.column("Hotel", "name", DynamicReports.type.stringType());
 			TextColumnBuilder<String> DescriptionColumn = Columns.column("Hotel description", "description", DynamicReports.type.stringType());
 			TextColumnBuilder<String> AddressColumn = Columns.column("Address", "address", DynamicReports.type.stringType());
-			TextColumnBuilder<Integer> starsColumn = Columns.column("* * * ", "starts", DynamicReports.type.integerType());
+			TextColumnBuilder<Integer> starsColumn = Columns.column("* * * ", "stars", DynamicReports.type.integerType());
 			TextColumnBuilder<Double> PriceSRColumn = Columns.column("Single Room $ ", "priceSingle", DynamicReports.type.doubleType());
 			TextColumnBuilder<Double> PriceSuiteColumn = Columns.column("Suite $ ", "priceSuite", DynamicReports.type.doubleType());
 

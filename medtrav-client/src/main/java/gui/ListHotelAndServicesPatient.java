@@ -31,11 +31,17 @@ import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 
+import delegates.AssigedPatientsServicesDelegate;
 import delegates.HotelServicesDelegate;
 import delegates.ServiceHotelServicesDelegate;
+import delegates.SurgeryServicesDelegate;
+import delegates.UserServicesDelegate;
+import entities.Doctor;
 import entities.Hotel;
 import entities.ServiceHotel;
 import entities.StateType;
+import entities.Surgery;
+import entities.User;
 
 public class ListHotelAndServicesPatient extends JFrame {
 
@@ -98,6 +104,186 @@ public class ListHotelAndServicesPatient extends JFrame {
 				.getResource("/images/medtraaaaaav.jpg")));
 
 		JButton btnNewButton = new JButton("");
+		btnNewButton.setIcon(new ImageIcon(ListHotelAndServicesPatient.class
+				.getResource("/images/choose hotel.jpg")));
+
+		JLabel lblNewLabel_1 = new JLabel("Stars");
+
+		stars = new JTextField();
+		stars.setColumns(10);
+
+		JButton btnSearchHotel = new JButton("");
+		btnSearchHotel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					hotels = HotelServicesDelegate.doFindHotelsByStars(Integer
+							.parseInt(stars.getText()));
+					initDataBindings();
+				} catch (Exception exc) {
+					JOptionPane.showMessageDialog(null,
+							"please choose a number ");
+
+				}
+			}
+		});
+		btnSearchHotel.setIcon(new ImageIcon(ListHotelAndServicesPatient.class
+				.getResource("/images/imagesearchclinic.png")));
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(509)
+					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(221, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblNewLabel)
+							.addGap(28)
+							.addComponent(lblNewLabel_1)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(stars, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnSearchHotel, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 252, Short.MAX_VALUE)
+							.addComponent(label, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE)
+							.addGap(114))
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
+								.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE))
+							.addContainerGap())))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(20)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblNewLabel)
+							.addGap(10))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnSearchHotel, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+									.addComponent(lblNewLabel_1)
+									.addComponent(stars, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addGap(18))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(label)
+							.addPreferredGap(ComponentPlacement.UNRELATED)))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+					.addGap(368))
+		);
+
+		JScrollPane scrollPane_1 = new JScrollPane();
+		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+		gl_panel_1.setHorizontalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_panel_1.setVerticalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+
+		tableServiceHotel = new JTable();
+		tableServiceHotel.setBackground(Color.WHITE);
+		scrollPane_1.setViewportView(tableServiceHotel);
+		panel_1.setLayout(gl_panel_1);
+
+		JScrollPane scrollPane = new JScrollPane();
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+
+		tableHotel = new JTable();
+		tableHotel.setBackground(Color.WHITE);
+		tableHotel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				// //////
+
+				hotel = hotels.get(tableHotel.getSelectedRow());
+				index = hotel.getHotelId();
+
+				servicesHotels = ServiceHotelServicesDelegate
+						.doFindAllServicesHotelByHotel(index);
+
+				initDataBindingss();
+			}
+		});
+
+		hotels = HotelServicesDelegate.doFindAllHotels();
+		scrollPane.setViewportView(tableHotel);
+		panel.setLayout(gl_panel);
+		contentPane.setLayout(gl_contentPane);
+		initDataBindings();
+		initDataBindingss();
+	}
+	
+	
+	public ListHotelAndServicesPatient(User user) {
+		setTitle("Hotels & Services");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 693, 478);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Hotels", TitledBorder.LEADING,
+				TitledBorder.TOP, null, null));
+		panel.setBackground(Color.WHITE);
+
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new TitledBorder(null, "Services",
+				TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setBackground(Color.WHITE);
+
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(ListHotelAndServicesPatient.class
+				.getResource("/images/hotel services (2).jpg")));
+
+		JLabel lblNewLabel = new JLabel("\r\n");
+		lblNewLabel.setIcon(new ImageIcon(ListHotelAndServicesPatient.class
+				.getResource("/images/medtraaaaaav.jpg")));
+
+		JButton btnNewButton = new JButton("");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				
+				setVisible(false);
+				ChooseTheHotel next=new ChooseTheHotel(user);
+				next.setVisible(true);
+			}
+		});
+		
 		btnNewButton.setIcon(new ImageIcon(ListHotelAndServicesPatient.class
 				.getResource("/images/choose hotel.jpg")));
 

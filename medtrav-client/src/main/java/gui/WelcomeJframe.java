@@ -580,7 +580,7 @@ public class WelcomeJframe extends JFrame {
 						user.getUserId());
 				
 				setVisible(false);
-				ListClinicPatient next=new ListClinicPatient();
+				ListClinicPatient next=new ListClinicPatient(user);
 				next.setVisible(true);
 			}
 		});
