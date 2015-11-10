@@ -32,6 +32,7 @@ import entities.Doctor;
 import entities.Patient;
 import entities.Question;
 import entities.User;
+import gui.AdminUI;
 import gui.PatientUi;
 import gui.testimonies.DisplayTestimony;
 import gui.testimonies.ListTestimonies;
@@ -236,9 +237,6 @@ public class ListQuestions extends JFrame {
 		btnDelete.setBounds(303, 99, 89, 23);
 		panel_1.add(btnDelete);
 		
-		JButton btnBackToMenu = new JButton("Back to Menu");
-		btnBackToMenu.setBounds(723, 475, 117, 23);
-		contentPane.add(btnBackToMenu);
 		
 		JButton btnBackToMenu_1 = new JButton("Back to Menu");
 		btnBackToMenu_1.addActionListener(new ActionListener() {
@@ -691,25 +689,25 @@ public ListQuestions(User userConnected) {
 		btnDelete.setBounds(303, 99, 89, 23);
 		panel_1.add(btnDelete);
 		
-		JButton btnBackToMenu = new JButton("Back to Menu");
-		btnBackToMenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				setVisible(false);
-				PatientUi back = new PatientUi(userConnected);
-				setVisible(true);
-			}
-		});
-		btnBackToMenu.setBounds(723, 475, 117, 23);
-		contentPane.add(btnBackToMenu);
+		
 		
 		JButton btnBackToMenu_1 = new JButton("Back to Menu");
 		btnBackToMenu_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				setVisible(false);
-				PatientUi back = new PatientUi(userConnected);
-				setVisible(true);
+				
+				if (userConnected instanceof Patient)
+				
+				{	setVisible(false);	
+					PatientUi back = new PatientUi(userConnected);
+				setVisible(true);}
+				else if(userConnected instanceof Administrator){
+					setVisible(false);
+					AdminUI back = new AdminUI(userConnected);
+					setVisible(true);
+					}
+				else{System.out.println("erreur ds btn Back to Menu");}
+				
 			}
 		});
 		btnBackToMenu_1.setBounds(573, 340, 130, 23);
