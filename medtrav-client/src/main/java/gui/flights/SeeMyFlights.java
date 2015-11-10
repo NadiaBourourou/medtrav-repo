@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import delegates.FlightServicesDelegate;
 import entities.Flight;
+import entities.User;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -37,6 +38,7 @@ import java.awt.Color;
 
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
@@ -46,7 +48,7 @@ public class SeeMyFlights extends JFrame {
 	private JPanel contentPane;
 	List<Flight> flights;
 	Flight flightSelected=new Flight();
-	private Integer userId=1;
+	//private Integer userId=1;
 	private JTable table;
 	private JTextField departureLocation;
 	private JTextField arrivalLocation;
@@ -59,6 +61,7 @@ public class SeeMyFlights extends JFrame {
 	private JTextField price;
 	private JTextField arrivalTime;
 	private JTextField departureTime;
+	private User user;
 
 	/**
 	 * Launch the application.
@@ -83,7 +86,7 @@ public class SeeMyFlights extends JFrame {
 		
 
 		flights = FlightServicesDelegate
-				.doFindAllFlighstByPatient(userId);
+				.doFindAllFlighstByPatient(user.getUserId());
 		
 		setTitle("See my flights");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -357,6 +360,287 @@ public class SeeMyFlights extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 		initDataBindings();
 	}
+	
+	
+	public SeeMyFlights(User user) {
+		
+
+		flights = FlightServicesDelegate
+				.doFindAllFlighstByPatient(user.getUserId());
+		
+		setTitle("See my flights");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 803, 507);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "My flights", TitledBorder.LEADING, TitledBorder.TOP, null, Color.GRAY));
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "My flight", TitledBorder.LEADING, TitledBorder.TOP, null, Color.GRAY));
+		
+		JLabel label = new JLabel("Id");
+		
+		JLabel label_1 = new JLabel("Flight number");
+		
+		JLabel label_2 = new JLabel("Arrival location");
+		
+		JLabel label_3 = new JLabel("Departure location");
+		
+		departureLocation = new JTextField();
+		departureLocation.setEnabled(false);
+		departureLocation.setColumns(10);
+		
+		arrivalLocation = new JTextField();
+		arrivalLocation.setEnabled(false);
+		arrivalLocation.setColumns(10);
+		
+		flightNumber = new JTextField();
+		flightNumber.setEnabled(false);
+		flightNumber.setColumns(10);
+		
+		idFlight = new JTextField();
+		idFlight.setEnabled(false);
+		idFlight.setColumns(10);
+		
+		JLabel label_4 = new JLabel("Departure date");
+		
+		departureDate = new JTextField();
+		departureDate.setEnabled(false);
+		departureDate.setColumns(10);
+		
+		arrivalDate = new JTextField();
+		arrivalDate.setEnabled(false);
+		arrivalDate.setColumns(10);
+		
+		JLabel label_5 = new JLabel("Arrival date");
+		
+		JLabel label_6 = new JLabel("Airline");
+		
+		airline = new JTextField();
+		airline.setEnabled(false);
+		airline.setColumns(10);
+		
+		JLabel label_7 = new JLabel("Number of sits");
+		
+		numberOfSits = new JTextField();
+		numberOfSits.setEnabled(false);
+		numberOfSits.setColumns(10);
+		
+		price = new JTextField();
+		price.setEnabled(false);
+		price.setColumns(10);
+		
+		JLabel label_8 = new JLabel("Price");
+		
+		JLabel label_9 = new JLabel("Arrival time");
+		
+		arrivalTime = new JTextField();
+		arrivalTime.setEnabled(false);
+		arrivalTime.setColumns(10);
+		
+		departureTime = new JTextField();
+		departureTime.setEnabled(false);
+		departureTime.setColumns(10);
+		
+		JLabel label_10 = new JLabel("Departure time");
+		
+		JScrollPane scrollPane = new JScrollPane();
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		panel.setLayout(gl_panel);
+		
+		JLabel lblLogo = new JLabel("");
+		lblLogo.setIcon(new ImageIcon(AddFlight2.class.getResource("/images/smallLogo.png")));
+		lblLogo.setBounds(10, 0, 69, 73);
+		
+		JButton buttonHome = new JButton("");
+		buttonHome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ManageFlights home= new ManageFlights();
+				home.setVisible(true);
+				SeeMyFlights.this.setVisible(false);
+			}
+		});
+		buttonHome.setIcon(new ImageIcon(SeeMyFlights.class.getResource("/images/blue-home-icon.png")));
+		buttonHome.setBounds(10, 331, 160, 43);
+		
+		JLabel lblSeeMyFlights = new JLabel("See my flights");
+		lblSeeMyFlights.setForeground(new Color(135, 206, 250));
+		lblSeeMyFlights.setFont(new Font("Tahoma", Font.BOLD, 23));
+
+		
+		
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(26)
+					.addComponent(lblLogo)
+					.addGap(136)
+					.addComponent(lblSeeMyFlights, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 247, Short.MAX_VALUE)
+					.addComponent(buttonHome, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+					.addGap(19))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(79, Short.MAX_VALUE))
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 716, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(51, Short.MAX_VALUE))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addGap(5)
+								.addComponent(lblLogo))
+							.addComponent(buttonHome))
+						.addComponent(lblSeeMyFlights, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(13, Short.MAX_VALUE))
+		);
+		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+		gl_panel_1.setHorizontalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGap(10)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addComponent(label_3)
+							.addGap(14)
+							.addComponent(departureLocation, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)
+							.addGap(41)
+							.addComponent(label_6)
+							.addGap(31)
+							.addComponent(airline, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
+							.addGap(26)
+							.addComponent(label_8)
+							.addGap(49)
+							.addComponent(price, 0, 0, Short.MAX_VALUE))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addComponent(label_2)
+							.addGap(32)
+							.addComponent(arrivalLocation, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)
+							.addGap(28)
+							.addComponent(label_7)
+							.addGap(4)
+							.addComponent(numberOfSits, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
+							.addComponent(label_1)
+							.addGap(38)
+							.addComponent(flightNumber, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)
+							.addGap(41)
+							.addComponent(label_5)
+							.addGap(4)
+							.addComponent(arrivalDate, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
+							.addGap(22)
+							.addComponent(label_9)
+							.addGap(22)
+							.addComponent(arrivalTime, 0, 0, Short.MAX_VALUE))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addComponent(label)
+							.addGap(93)
+							.addComponent(idFlight, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)
+							.addGap(23)
+							.addComponent(label_4)
+							.addGap(4)
+							.addComponent(departureDate, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
+							.addGap(22)
+							.addComponent(label_10)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(departureTime, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)))
+					.addGap(12))
+		);
+		gl_panel_1.setVerticalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGap(11)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(3)
+							.addComponent(label))
+						.addComponent(idFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(3)
+							.addComponent(label_4))
+						.addComponent(departureDate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(3)
+							.addComponent(label_10))
+						.addComponent(departureTime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(3)
+							.addComponent(label_1))
+						.addComponent(flightNumber, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(3)
+							.addComponent(label_5))
+						.addComponent(arrivalDate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(3)
+							.addComponent(label_9))
+						.addComponent(arrivalTime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addGap(3)
+									.addComponent(label_3))
+								.addComponent(departureLocation, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addGap(3)
+									.addComponent(label_6))
+								.addComponent(airline, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addGap(3)
+									.addComponent(label_8)))
+							.addGap(19)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addGap(3)
+									.addComponent(label_2))
+								.addComponent(arrivalLocation, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addGap(3)
+									.addComponent(label_7))
+								.addComponent(numberOfSits, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(price, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+		);
+		panel_1.setLayout(gl_panel_1);
+		contentPane.setLayout(gl_contentPane);
+		initDataBindings();
+	}
+	
 	protected void initDataBindings() {
 		JTableBinding<Flight, List<Flight>, JTable> jTableBinding = SwingBindings.createJTableBinding(UpdateStrategy.READ_WRITE, flights, table);
 		//

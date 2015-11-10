@@ -5,6 +5,7 @@ import delegates.SurgeryServicesDelegate;
 import entities.Doctor;
 import entities.Procedure;
 import entities.Surgery;
+import entities.User;
 import gui.flights.AddFlight2;
 import gui.surgeries.AddSurgery;
 
@@ -37,6 +38,7 @@ public class AddProcedure extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldName;
+	private User user;
 
 	/**
 	 * Launch the application.
@@ -116,15 +118,14 @@ public class AddProcedure extends JFrame {
 					.addComponent(lblAddAProcedure, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
 					.addGap(233))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(124)
-					.addComponent(lblName, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(textFieldName, GroupLayout.PREFERRED_SIZE, 214, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(308, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(377)
-					.addComponent(btnConfirm, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(196, Short.MAX_VALUE))
+					.addGap(81)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnConfirm)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblName, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(textFieldName, GroupLayout.PREFERRED_SIZE, 214, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(357, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -133,13 +134,99 @@ public class AddProcedure extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(labelLogo, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblAddAProcedure, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+					.addGap(25)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textFieldName, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblName))
-					.addGap(69)
-					.addComponent(btnConfirm, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-					.addGap(149))
+						.addComponent(lblName)
+						.addComponent(textFieldName, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addComponent(btnConfirm)
+					.addContainerGap(248, Short.MAX_VALUE))
+		);
+		contentPane.setLayout(gl_contentPane);
+	}
+	
+	public AddProcedure(User user) {
+		setTitle("Add a procedure");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 730, 447);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		
+		JLabel lblAddAProcedure = new JLabel("Add a procedure");
+		lblAddAProcedure.setForeground(new Color(135, 206, 250));
+		lblAddAProcedure.setFont(new Font("Tahoma", Font.BOLD, 23));
+		
+		JLabel labelLogo = new JLabel("");
+		labelLogo.setIcon(new ImageIcon(AddProcedure.class.getResource("/images/smallLogo.png")));
+		labelLogo.setBounds(10, 0, 69, 73);	
+		
+		JLabel lblName = new JLabel("Name");
+		
+		textFieldName = new JTextField();
+		textFieldName.setColumns(10);
+
+		
+		JButton btnConfirm = new JButton("Confirm");
+		btnConfirm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try{	
+					Procedure procedure= new Procedure();
+					
+					procedure.setName(textFieldName.getText());
+
+					
+					ProcedureServicesDelegate.doAddProcedure(procedure);
+					JOptionPane.showMessageDialog(null, "Procedure successfully added");
+					AddProcedure.this.setVisible(false);
+					
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null,"Error");
+				}
+					
+				SeeProcedures dispProc= new SeeProcedures();
+				dispProc.setVisible(true);
+
+				AddProcedure.this.setVisible(false);
+					
+			}
+		});
+		btnConfirm.setIcon(new ImageIcon(AddProcedure.class.getResource("/images/add.png")));
+
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(labelLogo, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
+					.addComponent(lblAddAProcedure, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
+					.addGap(233))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(81)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnConfirm)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblName, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(textFieldName, GroupLayout.PREFERRED_SIZE, 214, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(357, Short.MAX_VALUE))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(labelLogo, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblAddAProcedure, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+					.addGap(25)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblName)
+						.addComponent(textFieldName, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addComponent(btnConfirm)
+					.addContainerGap(248, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

@@ -17,6 +17,7 @@ import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 
 import delegates.FlightServicesDelegate;
+import entities.User;
 
 import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
@@ -38,6 +39,17 @@ public class Statistiques extends ApplicationFrame
 		setBounds(100, 100, 730, 447);
 	
    }
+   
+   
+   public Statistiques( String title, User user ) 
+   {
+      super( title ); 
+      setContentPane(createDemoPanel( ));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 730, 447);
+	
+   }
+   
    private static PieDataset createDataset( ) 
    {
 	      DefaultPieDataset dataset = new DefaultPieDataset( );
@@ -68,10 +80,10 @@ public class Statistiques extends ApplicationFrame
       
       int width = 640; /* Width of the image */
       int height = 480; /* Height of the image */ 
-      File pieChart = new File( "C:\\Users\\usus\\git\\medtrav-repo\\medtrav-client\\src\\main\\java\\myCharts\\PieChart.png" ); 
+      File pieChart = new File( "C:\\PieChart.png" ); 
 try {
 ChartUtilities.saveChartAsPNG(pieChart, chart, width, height);
-JOptionPane.showMessageDialog(null,"Image generated successfully!");
+JOptionPane.showMessageDialog(null,"Image generated successfully. You can find it under your C:  folder. ");
 } catch (IOException e) {
 // TODO Auto-generated catch block
 e.printStackTrace();
