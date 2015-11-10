@@ -29,7 +29,6 @@
 			<artifactId>javaee-api</artifactId>
 			<version>7.0</version>
 		</dependency>
-
 			<dependency>
 				<groupId>net.sourceforge.dynamicreports</groupId>
 				<artifactId>dynamicreports-core</artifactId>			
@@ -202,6 +201,7 @@
 				<groupId>org.wildfly.plugins</groupId>
 				<artifactId>wildfly-maven-plugin</artifactId>
 				<version>1.0.2.Final</version>
+				
 				<configuration>
 					<filename>${project.artifactId}.jar</filename>
 					<hostname>localhost</hostname>

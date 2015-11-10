@@ -37,6 +37,7 @@ import entities.StateBooking;
 import entities.Surgery;
 import entities.SurgeryPatient;
 import entities.User;
+import gui.flights.ManageFlights;
 
 public class Book extends JFrame {
 
@@ -474,6 +475,11 @@ public class Book extends JFrame {
 		JButton btnChangeFlight = new JButton("Change flight");
 		btnChangeFlight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				ManageFlights manageFlights = new ManageFlights();
+				manageFlights.setVisible(true);
+				
+				
 			}
 		});
 		btnChangeFlight.setBounds(293, 317, 124, 23);
