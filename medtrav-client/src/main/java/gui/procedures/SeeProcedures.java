@@ -200,7 +200,7 @@ public class SeeProcedures extends JFrame {
 				initDataBindings();
 				textFieldTitle.setText("");
 				textPaneDesc.setText("");
-			}
+			} 
 		});
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(
