@@ -3,7 +3,9 @@ package entities;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -46,7 +48,7 @@ public class Procedure implements Serializable {
 		this.name = name;
 	}
 
-	@OneToMany(mappedBy = "procedure")
+	@OneToMany(mappedBy = "procedure",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	public List<Surgery> getTreatments() {
 		return treatments;
 	}
@@ -54,5 +56,20 @@ public class Procedure implements Serializable {
 	public void setTreatments(List<Surgery> treatments) {
 		this.treatments = treatments;
 	}
+
+/*	public void addProcedureToSurgeries(List<Surgery> surgeries) {
+		for (Surgery e : surgeries) {
+			e.setProcedure(this);
+			this.getTreatments().add(e);
+		}
+	}
+*/
+	public Procedure(String name, List<Surgery> treatments) {
+		super();
+		this.name = name;
+		this.treatments = treatments;
+	}
+	
+	
 
 }

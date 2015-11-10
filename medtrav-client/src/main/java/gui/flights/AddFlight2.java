@@ -40,7 +40,7 @@ import javax.swing.ImageIcon;
 public class AddFlight2 extends JFrame {
 
 	private JPanel contentPane;
-	private Integer userId=1;
+	//private Integer userId=1;
 	User user;
 
 	/**
@@ -190,7 +190,7 @@ AddFlight2.this.setVisible(false);
 		JButton buttonHome = new JButton("");
 		buttonHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ManageFlights home= new ManageFlights();
+				ManageFlights home= new ManageFlights(user);
 				home.setVisible(true);
 				AddFlight2.this.setVisible(false);
 			}
@@ -402,7 +402,7 @@ AddFlight2.this.setVisible(false);
 		JButton buttonHome = new JButton("");
 		buttonHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ManageFlights home= new ManageFlights();
+				ManageFlights home= new ManageFlights(user);
 				home.setVisible(true);
 				AddFlight2.this.setVisible(false);
 			}

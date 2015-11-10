@@ -13,6 +13,7 @@ import delegates.TestimonyServicesDelegate;
 import entities.Flight;
 import entities.FlightMatching;
 import entities.Patient;
+import entities.User;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -54,7 +55,7 @@ public class ModifyFlight extends JFrame {
 	static Integer nbSitsArendre;
 	List<FlightMatching> flightsMatching;
 	FlightMatching flightSelected = new FlightMatching();
-	private Integer userId = 1;
+	//private Integer userId = 1;
 	private JTable table;
 	private JTextField idFlight;
 	private JTextField flightNumber;
@@ -67,6 +68,7 @@ public class ModifyFlight extends JFrame {
 	private JTextField departureTime;
 	private JTextField arrivalTime;
 	private JTextField Price;
+	private User user;
 
 	/**
 	 * Launch the application.
@@ -261,7 +263,7 @@ public class ModifyFlight extends JFrame {
 				//
 
 				Patient patient = FlightServicesDelegate
-						.doFindPatientById(userId);
+						.doFindPatientById(user.getUserId());
 				System.out.println("nomPatient= " + patient.getFirstName());
 				Integer nbSitsAvailable=(Integer)table.getValueAt(table.getSelectedRow(), 10);
 				Integer nbSitsNeeded = Integer.parseInt(numberOfSits.getText());
@@ -470,6 +472,391 @@ public class ModifyFlight extends JFrame {
 		initDataBindings();
 	}
 
+	
+	
+	public ModifyFlight(String from, String to, Integer flightIdModif,String numFlight,Integer nbSitsArendre,User user) {
+		setTitle("Modify my flight");
+		this.from = from;
+		this.to = to;
+		this.flightIdModif = flightIdModif;
+		this.numFlightArendre=numFlightArendre;
+		this.nbSitsArendre=nbSitsArendre;
+
+		System.out.println("from de choose = " + from);
+		System.out.println("to de choose = " + to);
+		System.out.println("flightIdModif de choose = " + flightIdModif);
+		System.out.println("num Flight = " + numFlight);
+		System.out.println("nb Sits à rendre = " + nbSitsArendre);
+
+		flightsMatching = FlightServicesDelegate
+				.doFindMatchingFlightWithThatFromAndTo(this.from, this.to);
+
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 885, 574);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Available matching flights", TitledBorder.LEADING, TitledBorder.TOP, null, Color.GRAY));
+
+		JPanel panel_1 = new JPanel();
+		panel_1.setForeground(Color.GRAY);
+		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Flight modifications", TitledBorder.LEADING, TitledBorder.TOP, null, Color.GRAY));
+		
+		JLabel labelLogo = new JLabel("");
+		labelLogo.setIcon(new ImageIcon(AddFlight2.class.getResource("/images/smallLogo.png")));
+		labelLogo.setBounds(10, 0, 69, 73);
+		
+		JButton buttonHome = new JButton("");
+		buttonHome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ManageFlights home= new ManageFlights();
+				home.setVisible(true);
+				ModifyFlight.this.setVisible(false);
+			}
+		});
+		buttonHome.setIcon(new ImageIcon(ModifyFlight.class.getResource("/images/blue-home-icon.png")));
+		buttonHome.setBounds(10, 331, 160, 43);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ModifyCancelFlight modifCancelF= new ModifyCancelFlight();
+				modifCancelF.setVisible(true);
+				ModifyFlight.this.setVisible(false);
+			}
+		});
+		btnBack.setIcon(new ImageIcon(ModifyFlight.class.getResource("/images/Arrow-back.png")));
+		btnBack.setBounds(10, 331, 160, 43);
+		
+		JLabel lblModifyFlight = new JLabel("Modify my flight");
+		lblModifyFlight.setForeground(new Color(135, 206, 250));
+		lblModifyFlight.setFont(new Font("Tahoma", Font.BOLD, 23));
+		
+		
+		
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnBack)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(labelLogo)
+							.addPreferredGap(ComponentPlacement.RELATED, 304, Short.MAX_VALUE)
+							.addComponent(lblModifyFlight, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE)
+							.addGap(202)
+							.addComponent(buttonHome, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+							.addComponent(panel_1, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+							.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 794, Short.MAX_VALUE)))
+					.addContainerGap())
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(labelLogo))
+						.addComponent(buttonHome)
+						.addComponent(lblModifyFlight, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+					.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
+
+		JLabel label = new JLabel("Id");
+
+		idFlight = new JTextField();
+		idFlight.setEnabled(false);
+		idFlight.setColumns(10);
+
+		JLabel label_1 = new JLabel("Flight number");
+
+		flightNumber = new JTextField();
+		flightNumber.setEnabled(false);
+		flightNumber.setColumns(10);
+
+		departureLocation = new JTextField();
+		departureLocation.setEnabled(false);
+		departureLocation.setColumns(10);
+
+		JLabel label_2 = new JLabel("Departure location");
+
+		JLabel label_3 = new JLabel("Arrival location");
+
+		arrivalLocation = new JTextField();
+		arrivalLocation.setEnabled(false);
+		arrivalLocation.setColumns(10);
+
+		JLabel label_4 = new JLabel("Departure date");
+
+		departureDate = new JTextField();
+		departureDate.setEnabled(false);
+		departureDate.setColumns(10);
+
+		JLabel label_5 = new JLabel("Arrival date");
+
+		arrivalDate = new JTextField();
+		arrivalDate.setEnabled(false);
+		arrivalDate.setColumns(10);
+
+		JLabel label_6 = new JLabel("Airline");
+
+		airline = new JTextField();
+		airline.setEnabled(false);
+		airline.setColumns(10);
+
+		JLabel label_7 = new JLabel("Number of sits");
+
+		numberOfSits = new JTextField();
+		numberOfSits.setColumns(10);
+
+		JLabel label_8 = new JLabel("Departure time");
+
+		departureTime = new JTextField();
+		departureTime.setEnabled(false);
+		departureTime.setColumns(10);
+
+		arrivalTime = new JTextField();
+		arrivalTime.setEnabled(false);
+		arrivalTime.setColumns(10);
+
+		JLabel label_9 = new JLabel("Arrival time");
+
+		Price = new JTextField();
+		Price.setEnabled(false);
+		Price.setColumns(10);
+
+		JLabel label_10 = new JLabel("Price");
+
+		JButton btnConfirmUpdate = new JButton("Confirm update");
+		btnConfirmUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Flight flight1 = FlightServicesDelegate
+						.doFindFlightById(flightIdModif);
+
+				//
+
+				Patient patient = FlightServicesDelegate
+						.doFindPatientById(user.getUserId());
+				System.out.println("nomPatient= " + patient.getFirstName());
+				Integer nbSitsAvailable=(Integer)table.getValueAt(table.getSelectedRow(), 10);
+				Integer nbSitsNeeded = Integer.parseInt(numberOfSits.getText());
+				
+				if (nbSitsAvailable-nbSitsNeeded>=0) {
+					flight1.setPatient(patient);
+					flight1.setAirline(airline.getText());
+					flight1.setArrivalDate(arrivalDate.getText());
+					flight1.setArrivalLocation(arrivalLocation.getText());
+					flight1.setTimeFlightMatchingArr(arrivalTime.getText());
+					flight1.setDepartureDate(departureDate.getText());
+					flight1.setDepartureLocation(departureLocation.getText());
+					flight1.setTimeFlightMatchingDep(departureTime.getText());
+					flight1.setPrice(Double.parseDouble(Price.getText()));
+					flight1.setNbSits(Integer.parseInt(numberOfSits.getText()));
+					flight1.setNumFlight(flightNumber.getText());
+			
+					FlightServicesDelegate.doUpdateFlight(flight1);
+					
+					Integer numFlight=(Integer)table.getValueAt(table.getSelectedRow(), 0);
+				    System.out.println("Num vol = "+numFlight);
+				    FlightMatching fm1=FlightServicesDelegate.doFindFlightMatchingById(numFlight);
+
+				Integer nbSitsInitial=fm1.getNumberOfSits();
+				Integer nbSitsMaj=nbSitsInitial-nbSitsNeeded;
+				
+				fm1.setNumberOfSits(nbSitsMaj);
+
+				FlightServicesDelegate.doUpdateNbSits(fm1);
+				JOptionPane.showMessageDialog(null, "Flight successfully modified");
+				
+				///////////////////Remise du nbSits à l'ancien vol///////////////
+				FlightMatching flightMatch=FlightServicesDelegate.doFindFlightMatchingByNumFlight(numFlightArendre);
+				//FlightMatching flightMatch=FlightServicesDelegate.doFindFlightMatchingById(flightIdModif);
+				System.out.println("eh oh");
+				
+				flightMatch.setNumberOfSits(flightMatch.getNumberOfSits()+nbSitsArendre);
+				FlightServicesDelegate.doUpdateNbSits(flightMatch);
+				///////////////////Remise du nbSits à l'ancien vol///////////////
+				
+					initDataBindings();
+
+					SeeMyFlights seeMyflights = new SeeMyFlights();
+					seeMyflights.setVisible(true);
+					ModifyFlight.this.setVisible(false);
+					
+					
+				} else {
+					Integer numFlight=(Integer)table.getValueAt(table.getSelectedRow(), 0);
+					FlightMatching fm1=FlightServicesDelegate.doFindFlightMatchingById(numFlight);
+					System.out.println("Failed to modify a flight!");
+					JOptionPane.showMessageDialog(null, "Sorry, there is not enough sits. We only have "+fm1.getNumberOfSits()+" available sits");
+					ModifyFlight.this.setVisible(true);
+
+		
+				}
+
+			//	ModifyCancelFlight interfaceOfAllMyFlights = new ModifyCancelFlight();
+				//interfaceOfAllMyFlights.setVisible(true);
+			}
+		});
+		btnConfirmUpdate.setIcon(new ImageIcon(ModifyFlight.class.getResource("/images/updateFlight.png")));
+		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+		gl_panel_1.setHorizontalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGap(10)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addComponent(label, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+							.addGap(80)
+							.addComponent(idFlight, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)
+							.addGap(10)
+							.addComponent(label_4, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
+							.addGap(4)
+							.addComponent(departureDate, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(label_8, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
+							.addGap(4)
+							.addComponent(departureTime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addComponent(label_1)
+							.addGap(38)
+							.addComponent(flightNumber, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(label_5)
+							.addGap(27)
+							.addComponent(arrivalDate, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
+							.addGap(22)
+							.addComponent(label_9, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
+							.addGap(4)
+							.addComponent(arrivalTime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
+							.addGap(4)
+							.addComponent(departureLocation, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(label_6)
+							.addGap(54)
+							.addComponent(airline, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
+							.addGap(26)
+							.addComponent(label_10, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+							.addGap(69)
+							.addComponent(Price, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addComponent(label_3)
+							.addGap(32)
+							.addComponent(arrivalLocation, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)
+							.addGap(14)
+							.addComponent(label_7, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+							.addGap(4)
+							.addComponent(numberOfSits, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
+							.addGap(86)
+							.addComponent(btnConfirmUpdate))))
+		);
+		gl_panel_1.setVerticalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGap(18)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(3)
+							.addComponent(label))
+						.addComponent(idFlight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(3)
+							.addComponent(label_4))
+						.addComponent(departureDate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(6)
+							.addComponent(label_8))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(3)
+							.addComponent(departureTime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addGap(18)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(3)
+							.addComponent(label_1))
+						.addComponent(flightNumber, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(3)
+							.addComponent(label_5))
+						.addComponent(arrivalDate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(9)
+							.addComponent(label_9))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(6)
+							.addComponent(arrivalTime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addGap(18)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(3)
+							.addComponent(label_2))
+						.addComponent(departureLocation, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(3)
+							.addComponent(label_6))
+						.addComponent(airline, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(6)
+							.addComponent(label_10))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(3)
+							.addComponent(Price, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addGap(18)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(4)
+							.addComponent(label_3))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(1)
+							.addComponent(arrivalLocation, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(4)
+							.addComponent(label_7))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(3)
+							.addComponent(numberOfSits, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnConfirmUpdate)))
+		);
+		panel_1.setLayout(gl_panel_1);
+
+		JScrollPane scrollPane = new JScrollPane();
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		panel.setLayout(gl_panel);
+		contentPane.setLayout(gl_contentPane);
+		initDataBindings();
+	}
+
+	
 	protected void initDataBindings() {
 		JTableBinding<FlightMatching, List<FlightMatching>, JTable> jTableBinding = SwingBindings
 				.createJTableBinding(UpdateStrategy.READ_WRITE,
