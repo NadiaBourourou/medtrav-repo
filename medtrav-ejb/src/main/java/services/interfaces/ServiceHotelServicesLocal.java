@@ -2,12 +2,12 @@ package services.interfaces;
 
 import java.util.List;
 
-import javax.ejb.Remote;
+import javax.ejb.Local;
 
 import entities.ServiceHotel;
 
-@Remote
-public interface ServiceHotelServicesRemote {
+@Local
+public interface ServiceHotelServicesLocal {
 
 	Boolean addServiceHotel(ServiceHotel serviceHotel);
 

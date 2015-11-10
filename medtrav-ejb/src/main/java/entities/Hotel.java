@@ -118,7 +118,7 @@ public class Hotel implements Serializable {
 		this.hotelBookings = hotelBookings;
 	}
 
-	@OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "hotel")
 	public List<ServiceHotel> getServicesHotel() {
 		return servicesHotel;
 	}

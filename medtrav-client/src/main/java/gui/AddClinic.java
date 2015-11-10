@@ -1,41 +1,24 @@
 package gui;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JFileChooser;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.border.EmptyBorder;
 
 import delegates.ClinicServicesDelegate;
-import delegates.HotelServicesDelegate;
 import entities.Clinic;
-import entities.Hotel;
-import entities.StateType;
-
-import javax.swing.JButton;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.awt.Color;
-
-import javax.swing.ImageIcon;
 
 public class AddClinic extends JFrame {
 
@@ -75,158 +58,319 @@ public class AddClinic extends JFrame {
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		
+
 		JLabel lblNewLabel = new JLabel("Name");
-		
+
 		name = new JTextField();
 		name.setColumns(10);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Address");
-		
+
 		address = new JTextField();
 		address.setColumns(10);
-		
+
 		JLabel lblNewLabel_3 = new JLabel("Phone Number");
-		
+
 		phonenumber = new JTextField();
 		phonenumber.setColumns(10);
 		professionalism = new JTextField();
 		professionalism.setColumns(10);
-		
+
 		Email = new JTextField();
 		Email.setColumns(10);
-		
+
 		priceSimple = new JTextField();
 		priceSimple.setColumns(10);
-		
+
 		priceSingle = new JTextField();
 		priceSingle.setColumns(10);
-		
+
 		JButton btnAddClinic = new JButton("");
-		btnAddClinic.setIcon(new ImageIcon(AddClinic.class.getResource("/images/add clinic.png")));
+		btnAddClinic.setIcon(new ImageIcon(AddClinic.class
+				.getResource("/images/add clinic.png")));
 		btnAddClinic.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			try {	Clinic clinic= new Clinic ();
-				clinic.setName(name.getText());
-				clinic.setAddress(address.getText());
-				clinic.setPhoneNumber(new Integer (phonenumber.getText()));
-				clinic.setProfessionalism(professionalism.getText());
-				clinic.setEmail(Email.getText());
-				clinic.setPriceSimple(Double.parseDouble(priceSimple.getText()));
-				clinic.setPriceSingle(Double.parseDouble(priceSingle.getText()));
-			
-			
-				ClinicServicesDelegate.doAddClinic(clinic);
-				JOptionPane.showMessageDialog(null,
-						"Clinic added successfully ");}
-			
-			catch (Exception ex) {
-				JOptionPane.showMessageDialog(null,
-						"Please check your information ");
-			}
+				try {
+					Clinic clinic = new Clinic();
+					clinic.setName(name.getText());
+					clinic.setAddress(address.getText());
+					clinic.setPhoneNumber(new Integer(phonenumber.getText()));
+					clinic.setProfessionalism(professionalism.getText());
+					clinic.setEmail(Email.getText());
+					clinic.setPriceSimple(Double.parseDouble(priceSimple
+							.getText()));
+					clinic.setPriceSingle(Double.parseDouble(priceSingle
+							.getText()));
+
+					ClinicServicesDelegate.doAddClinic(clinic);
+					JOptionPane.showMessageDialog(null,
+							"Clinic added successfully ");
+				}
+
+				catch (Exception ex) {
+					JOptionPane.showMessageDialog(null,
+							"Please check your information ");
+				}
 			}
 		});
-		
+
 		JLabel lblNewLabel_2 = new JLabel("Professionalism");
-		
-	
-		
+
 		JLabel lblEmail = new JLabel("Email");
-		
+
 		JLabel lblPriceSimple = new JLabel("Price Simple");
-		
+
 		JLabel lblPriceSingle = new JLabel("Price Single");
-		
+
 		JLabel lblNewLabel_4 = new JLabel("New label");
-		lblNewLabel_4.setIcon(new ImageIcon(AddClinic.class.getResource("/images/imageclinic ajout.png")));
+		lblNewLabel_4.setIcon(new ImageIcon(AddClinic.class
+				.getResource("/images/imageclinic ajout.png")));
 		lblNewLabel_4.setBounds(26, 70, 132, 14);
-		
+
 		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setIcon(new ImageIcon(AddClinic.class.getResource("/images/medtraaaaaav.jpg")));
+		lblNewLabel_5.setIcon(new ImageIcon(AddClinic.class
+				.getResource("/images/medtraaaaaav.jpg")));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(22)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblPriceSingle)
-						.addComponent(lblPriceSimple)
-						.addComponent(lblEmail)
-						.addComponent(lblNewLabel_2)
-						.addComponent(lblNewLabel_3)
-						.addComponent(lblNewLabel_1)
-						.addComponent(lblNewLabel))
-					.addGap(53)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(professionalism, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addComponent(Email, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addContainerGap())
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-									.addComponent(phonenumber, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addComponent(priceSingle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addComponent(priceSimple, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addComponent(address, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addComponent(name, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-									.addGroup(gl_contentPane.createSequentialGroup()
-										.addPreferredGap(ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-										.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
-										.addGap(28))
-									.addGroup(gl_contentPane.createSequentialGroup()
-										.addGap(36)
-										.addComponent(btnAddClinic, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-										.addContainerGap()))))))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblNewLabel_5, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(340, Short.MAX_VALUE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(25)
-					.addComponent(lblNewLabel_5, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
-					.addGap(19)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(name, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNewLabel))
-							.addGap(9)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(address, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNewLabel_1))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(phonenumber, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNewLabel_3)))
-						.addComponent(lblNewLabel_4))
-					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(professionalism, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_2))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(Email, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblEmail))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(priceSimple, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblPriceSimple))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(priceSingle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblPriceSingle)))
-						.addComponent(btnAddClinic, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE))
-					.addGap(15))
-		);
+		gl_contentPane
+				.setHorizontalGroup(gl_contentPane
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								gl_contentPane
+										.createSequentialGroup()
+										.addGap(22)
+										.addGroup(
+												gl_contentPane
+														.createParallelGroup(
+																Alignment.LEADING)
+														.addComponent(
+																lblPriceSingle)
+														.addComponent(
+																lblPriceSimple)
+														.addComponent(lblEmail)
+														.addComponent(
+																lblNewLabel_2)
+														.addComponent(
+																lblNewLabel_3)
+														.addComponent(
+																lblNewLabel_1)
+														.addComponent(
+																lblNewLabel))
+										.addGap(53)
+										.addGroup(
+												gl_contentPane
+														.createParallelGroup(
+																Alignment.LEADING)
+														.addGroup(
+																gl_contentPane
+																		.createSequentialGroup()
+																		.addComponent(
+																				professionalism,
+																				GroupLayout.PREFERRED_SIZE,
+																				GroupLayout.DEFAULT_SIZE,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addContainerGap())
+														.addGroup(
+																gl_contentPane
+																		.createParallelGroup(
+																				Alignment.LEADING)
+																		.addGroup(
+																				gl_contentPane
+																						.createSequentialGroup()
+																						.addComponent(
+																								Email,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE)
+																						.addContainerGap())
+																		.addGroup(
+																				gl_contentPane
+																						.createSequentialGroup()
+																						.addGroup(
+																								gl_contentPane
+																										.createParallelGroup(
+																												Alignment.LEADING)
+																										.addComponent(
+																												phonenumber,
+																												GroupLayout.PREFERRED_SIZE,
+																												GroupLayout.DEFAULT_SIZE,
+																												GroupLayout.PREFERRED_SIZE)
+																										.addComponent(
+																												priceSingle,
+																												GroupLayout.PREFERRED_SIZE,
+																												GroupLayout.DEFAULT_SIZE,
+																												GroupLayout.PREFERRED_SIZE)
+																										.addComponent(
+																												priceSimple,
+																												GroupLayout.PREFERRED_SIZE,
+																												GroupLayout.DEFAULT_SIZE,
+																												GroupLayout.PREFERRED_SIZE)
+																										.addComponent(
+																												address,
+																												GroupLayout.PREFERRED_SIZE,
+																												GroupLayout.DEFAULT_SIZE,
+																												GroupLayout.PREFERRED_SIZE)
+																										.addComponent(
+																												name,
+																												GroupLayout.PREFERRED_SIZE,
+																												GroupLayout.DEFAULT_SIZE,
+																												GroupLayout.PREFERRED_SIZE))
+																						.addGroup(
+																								gl_contentPane
+																										.createParallelGroup(
+																												Alignment.LEADING)
+																										.addGroup(
+																												gl_contentPane
+																														.createSequentialGroup()
+																														.addPreferredGap(
+																																ComponentPlacement.RELATED,
+																																63,
+																																Short.MAX_VALUE)
+																														.addComponent(
+																																lblNewLabel_4,
+																																GroupLayout.PREFERRED_SIZE,
+																																99,
+																																GroupLayout.PREFERRED_SIZE)
+																														.addGap(28))
+																										.addGroup(
+																												gl_contentPane
+																														.createSequentialGroup()
+																														.addGap(36)
+																														.addComponent(
+																																btnAddClinic,
+																																GroupLayout.PREFERRED_SIZE,
+																																68,
+																																GroupLayout.PREFERRED_SIZE)
+																														.addContainerGap()))))))
+						.addGroup(
+								gl_contentPane
+										.createSequentialGroup()
+										.addContainerGap()
+										.addComponent(lblNewLabel_5,
+												GroupLayout.PREFERRED_SIZE, 74,
+												GroupLayout.PREFERRED_SIZE)
+										.addContainerGap(340, Short.MAX_VALUE)));
+		gl_contentPane
+				.setVerticalGroup(gl_contentPane
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								gl_contentPane
+										.createSequentialGroup()
+										.addGap(25)
+										.addComponent(lblNewLabel_5,
+												GroupLayout.PREFERRED_SIZE, 51,
+												GroupLayout.PREFERRED_SIZE)
+										.addGap(19)
+										.addGroup(
+												gl_contentPane
+														.createParallelGroup(
+																Alignment.TRAILING)
+														.addGroup(
+																gl_contentPane
+																		.createSequentialGroup()
+																		.addGroup(
+																				gl_contentPane
+																						.createParallelGroup(
+																								Alignment.BASELINE)
+																						.addComponent(
+																								name,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE)
+																						.addComponent(
+																								lblNewLabel))
+																		.addGap(9)
+																		.addGroup(
+																				gl_contentPane
+																						.createParallelGroup(
+																								Alignment.BASELINE)
+																						.addComponent(
+																								address,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE)
+																						.addComponent(
+																								lblNewLabel_1))
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED)
+																		.addGroup(
+																				gl_contentPane
+																						.createParallelGroup(
+																								Alignment.TRAILING)
+																						.addComponent(
+																								phonenumber,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE)
+																						.addComponent(
+																								lblNewLabel_3)))
+														.addComponent(
+																lblNewLabel_4))
+										.addPreferredGap(
+												ComponentPlacement.RELATED,
+												GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)
+										.addGroup(
+												gl_contentPane
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																professionalism,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																lblNewLabel_2))
+										.addPreferredGap(
+												ComponentPlacement.UNRELATED)
+										.addGroup(
+												gl_contentPane
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																Email,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(lblEmail))
+										.addPreferredGap(
+												ComponentPlacement.UNRELATED)
+										.addGroup(
+												gl_contentPane
+														.createParallelGroup(
+																Alignment.LEADING)
+														.addGroup(
+																gl_contentPane
+																		.createSequentialGroup()
+																		.addGroup(
+																				gl_contentPane
+																						.createParallelGroup(
+																								Alignment.BASELINE)
+																						.addComponent(
+																								priceSimple,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE)
+																						.addComponent(
+																								lblPriceSimple))
+																		.addPreferredGap(
+																				ComponentPlacement.UNRELATED)
+																		.addGroup(
+																				gl_contentPane
+																						.createParallelGroup(
+																								Alignment.BASELINE)
+																						.addComponent(
+																								priceSingle,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE)
+																						.addComponent(
+																								lblPriceSingle)))
+														.addComponent(
+																btnAddClinic,
+																GroupLayout.PREFERRED_SIZE,
+																58,
+																GroupLayout.PREFERRED_SIZE))
+										.addGap(15)));
 		contentPane.setLayout(gl_contentPane);
 	}
 }

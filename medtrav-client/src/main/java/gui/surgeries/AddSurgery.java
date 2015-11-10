@@ -8,6 +8,7 @@ import entities.Surgery;
 import entities.Testimony;
 import gui.flights.AddFlight2;
 import gui.flights.ManageFlights;
+import gui.procedures.SeeProcedures;
 import gui.testimonies.AddTestimony;
 import gui.testimonies.ListTestimonies;
 
@@ -66,6 +67,7 @@ public class AddSurgery extends JFrame {
 	 * Create the frame.
 	 */
 	public AddSurgery() {
+		setTitle("Add a surgery");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 730, 447);
 		contentPane = new JPanel();
@@ -90,16 +92,6 @@ public class AddSurgery extends JFrame {
 		JTextPane textPaneDesc = new JTextPane();
 		textPaneDesc.setBackground(SystemColor.menu);
 		
-		JButton buttonHome = new JButton("Cancel");
-		buttonHome.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ManageFlights home= new ManageFlights();
-				home.setVisible(true);
-				AddSurgery.this.setVisible(false);
-			}
-		});
-		buttonHome.setIcon(new ImageIcon(AddFlight2.class.getResource("/images/blue-home-icon.png")));
-		
 		JButton buttonAdd = new JButton("Confirm");
 		buttonAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -110,6 +102,7 @@ public class AddSurgery extends JFrame {
 					surgery.setDoctor(doctor);	
 					surgery.setName(textFieldTitle.getText());
 					surgery.setDescription(textPaneDesc.getText().toString());
+					surgery.setDate(new Date());
 					
 					SurgeryServicesDelegate.doAddSurgery(surgery);
 					JOptionPane.showMessageDialog(null, "Surgery successfully added");
@@ -119,22 +112,22 @@ public class AddSurgery extends JFrame {
 					JOptionPane.showMessageDialog(null,"Error");
 				}
 					
-				//ListTestimonies dispTestimony= new ListTestimonies();
-				//dispTestimony.setLocationRelativeTo(null);
-				
-				//dispTestimony.setVisible(true);
+				SeeAllMySurgeries dispSur= new SeeAllMySurgeries();
+				dispSur.setVisible(true);
+
 				AddSurgery.this.setVisible(false);
+
+
 					
 			}
 		});
 		buttonAdd.setIcon(new ImageIcon(AddFlight2.class.getResource("/images/add.png")));
-		buttonHome.setIcon(new ImageIcon(AddFlight2.class.getResource("/images/deleteFlight.png")));
 
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 							.addGroup(gl_contentPane.createSequentialGroup()
@@ -150,10 +143,8 @@ public class AddSurgery extends JFrame {
 							.addGap(205)
 							.addComponent(lblAddASurgery, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(265, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(43)
-					.addComponent(buttonHome, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 331, Short.MAX_VALUE)
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addContainerGap(523, Short.MAX_VALUE)
 					.addComponent(buttonAdd, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
 					.addGap(50))
 		);
@@ -175,9 +166,7 @@ public class AddSurgery extends JFrame {
 						.addComponent(textPaneDesc, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblDescription, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-						.addComponent(buttonHome, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(buttonAdd, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
+					.addComponent(buttonAdd, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);

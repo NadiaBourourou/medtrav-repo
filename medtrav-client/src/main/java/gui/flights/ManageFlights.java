@@ -28,6 +28,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import delegates.FlightServicesDelegate;
+
 public class ManageFlights extends JFrame {
 
 	private JPanel contentPane;
@@ -114,7 +116,7 @@ public class ManageFlights extends JFrame {
 		labelLogo.setIcon(new ImageIcon(AddFlight2.class.getResource("/images/smallLogo.png")));
 		labelLogo.setBounds(10, 0, 69, 73);
 		
-		JButton btnStatistics = new JButton("See statistics & generate an image of those statistics");
+		JButton btnStatistics = new JButton("Generate flight statistics and the corrsponding image");
 		btnStatistics.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Statistiques stat = new Statistiques("Airline partners");
@@ -124,14 +126,14 @@ public class ManageFlights extends JFrame {
 		btnStatistics.setIcon(new ImageIcon(ManageFlights.class.getResource("/images/stat.png")));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addComponent(labelLogo)
 					.addGap(183)
 					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(262, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(143, Short.MAX_VALUE)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(140, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.RELATED)
@@ -140,10 +142,10 @@ public class ManageFlights extends JFrame {
 								.addComponent(btnAddAFlight, GroupLayout.PREFERRED_SIZE, 214, GroupLayout.PREFERRED_SIZE))
 							.addGap(18)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnSeeAllFlights, GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+								.addComponent(btnSeeAllFlights, GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
 								.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE)))
 						.addComponent(btnStatistics))
-					.addGap(140))
+					.addGap(131))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)

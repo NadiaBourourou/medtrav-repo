@@ -1,5 +1,7 @@
 package services.impl;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +10,12 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.swing.JOptionPane;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
 
 import entities.Booking;
 import entities.Doctor;
@@ -468,5 +476,6 @@ public class FlightServices implements FlightServicesRemote,
 		Query query = entityManager.createQuery(jpql);
 		return query.getResultList();
 	}
+	
 
 }

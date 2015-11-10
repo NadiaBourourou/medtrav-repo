@@ -291,10 +291,11 @@ public class ModifyFlight extends JFrame {
 				fm1.setNumberOfSits(nbSitsMaj);
 
 				FlightServicesDelegate.doUpdateNbSits(fm1);
+				JOptionPane.showMessageDialog(null, "Flight successfully modified");
 				
 				///////////////////Remise du nbSits à l'ancien vol///////////////
-			//	FlightMatching flightMatch=FlightServicesDelegate.doFindFlightMatchingByNumFlight(numFlightArendre);
-				FlightMatching flightMatch=FlightServicesDelegate.doFindFlightMatchingById(flightIdModif);
+				FlightMatching flightMatch=FlightServicesDelegate.doFindFlightMatchingByNumFlight(numFlightArendre);
+				//FlightMatching flightMatch=FlightServicesDelegate.doFindFlightMatchingById(flightIdModif);
 				System.out.println("eh oh");
 				
 				flightMatch.setNumberOfSits(flightMatch.getNumberOfSits()+nbSitsArendre);
@@ -302,8 +303,7 @@ public class ModifyFlight extends JFrame {
 				///////////////////Remise du nbSits à l'ancien vol///////////////
 				
 					initDataBindings();
-					
-					JOptionPane.showMessageDialog(null, "Flight successfully modified");
+
 					SeeMyFlights seeMyflights = new SeeMyFlights();
 					seeMyflights.setVisible(true);
 					ModifyFlight.this.setVisible(false);

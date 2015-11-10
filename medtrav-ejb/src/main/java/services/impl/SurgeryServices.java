@@ -14,6 +14,8 @@ import entities.Flight;
 import entities.Patient;
 import entities.Procedure;
 import entities.Surgery;
+import entities.Testimony;
+import entities.User;
 
 /**
  * Session Bean implementation class SurgeryServices
@@ -133,7 +135,7 @@ public class SurgeryServices implements SurgeryServicesRemote,
 			b = true;
 
 		} catch (Exception e) {
-			System.err.println("Error updating flight");
+			System.err.println("Error updating surgery");
 		}
 		return b;
 	}
@@ -163,6 +165,28 @@ public class SurgeryServices implements SurgeryServicesRemote,
 	@Override
 	public Doctor findDoctorById(Integer idDoctor) {
 		return entityManager.find(Doctor.class, idDoctor);
+	}
+
+	@Override
+	public Boolean assignSurgeryToProcedureNv(Integer idSurgery,
+			Integer idProcedure) {
+		Boolean b = false;
+		try {
+			Procedure procedureFound = (Procedure)entityManager.find(Procedure.class, idProcedure);
+			
+			Surgery surgeryFound = entityManager.find(Surgery.class,
+					idSurgery);
+
+			surgeryFound.setProcedure(procedureFound);
+
+			entityManager.merge(surgeryFound);
+			b = true;
+
+		} catch (Exception e) {
+			System.err.println("ouups ...");
+		}
+
+		return b;
 	}
 
 }
