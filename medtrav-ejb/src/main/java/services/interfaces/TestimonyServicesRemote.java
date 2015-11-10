@@ -22,7 +22,6 @@ public interface TestimonyServicesRemote {
 	
 	 List<Testimony> findAllTestimoniesByPatientId(Integer patientId);
 
-
 	 Testimony findTestimonyById(Integer idTestimony);
 
 	Boolean assignTestimonyToPatient(Integer idTestimony, Integer idPatient);

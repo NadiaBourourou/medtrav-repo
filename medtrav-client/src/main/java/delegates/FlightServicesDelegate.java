@@ -149,4 +149,5 @@ public class FlightServicesDelegate {
 	public static FlightMatching doFindFlightMatchingByNumFlight(String numFlightArendre){
 		return getProxy().findFlightMatchingByNumFlight(numFlightArendre);
 	}
+	
 }

@@ -40,4 +40,5 @@ public interface SurgeryServicesRemote {
 	
 	Doctor findDoctorById(Integer idDoctor);
 
+	Boolean assignSurgeryToProcedureNv(Integer idSurgery, Integer idProcedure);
 }

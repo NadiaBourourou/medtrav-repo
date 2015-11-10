@@ -77,5 +77,9 @@ public class SurgeryServicesDelegate {
 	public static Doctor doFindDoctorById(Integer idDoctor){
 		return getProxy().findDoctorById(idDoctor);
 	}
+	
+	public static Boolean doAssignSurgeryToProcedureNv(Integer idSurgery,Integer idProcedure){
+		return getProxy().assignSurgeryToProcedureNv(idSurgery, idProcedure);
+	}
 
 }
