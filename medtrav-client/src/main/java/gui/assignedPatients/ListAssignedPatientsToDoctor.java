@@ -17,6 +17,7 @@ import delegates.AssigedPatientsServicesDelegate;
 import delegates.TestimonyServicesDelegate;
 import entities.Patient;
 import entities.Testimony;
+import entities.User;
 import gui.testimonies.DisplayTestimony;
 import gui.testimonies.ListTestimonies;
 
@@ -30,7 +31,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+
 import javax.swing.JLabel;
+
 import java.awt.Font;
 import java.awt.SystemColor;
 
@@ -41,6 +44,7 @@ public class ListAssignedPatientsToDoctor extends JFrame {
 	private Integer doctorId=3;
 	List <Patient> patients;
 	Patient patientSelected= new Patient();
+	private User userConnected;
 
 	/**
 	 * Launch the application.
@@ -138,7 +142,7 @@ public class ListAssignedPatientsToDoctor extends JFrame {
 		btnDisplay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-try{patientSelected = patients.get(table.getSelectedRow());
+				try{patientSelected = patients.get(table.getSelectedRow());
 				
 				DisplayPatientAssigned dispPatient= new DisplayPatientAssigned(patientSelected);
 				dispPatient.setLocationRelativeTo(null);
@@ -165,6 +169,119 @@ try{patientSelected = patients.get(table.getSelectedRow());
 		contentPane.add(btnBackToMenu);
 		initDataBindings();
 	}
+	
+	//===
+	
+	public ListAssignedPatientsToDoctor(User userConnected) {
+		System.out.println("LIST ASSIGNED PATIENTS ");
+		System.out.println("user co id="+userConnected.getUserId());
+		System.out.println("user co name="+userConnected.getFirstName()+userConnected.getLastName());		
+		
+		patients=AssigedPatientsServicesDelegate.doFindAllPatientsByDoctorId(userConnected.getUserId());
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 716, 342);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(43, 99, 477, 140);
+		contentPane.add(panel);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		panel.setLayout(gl_panel);
+		
+		JButton btnAccept = new JButton("Accept");
+		btnAccept.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			try{	patientSelected = patients.get(table.getSelectedRow());	
+				AssigedPatientsServicesDelegate.doAcceptPatient(patientSelected);
+				patients=AssigedPatientsServicesDelegate.doFindAllPatientsByDoctorId(userConnected.getUserId());
+				initDataBindings();
+			}	
+			
+			catch(Exception p){JOptionPane.showMessageDialog(null,"Please select a patient.");}
+			
+				
+			}
+		});
+		btnAccept.setBounds(568, 113, 100, 23);
+		contentPane.add(btnAccept);
+		
+		JButton btnRefuse = new JButton("Refuse");
+		btnRefuse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			try{	patientSelected = patients.get(table.getSelectedRow());	
+		
+				AssigedPatientsServicesDelegate.doRefusePatient(patientSelected,userConnected.getUserId());
+				AssigedPatientsServicesDelegate.doDeleteAssignPatient(patientSelected.getUserId(), userConnected.getUserId());
+				patients=AssigedPatientsServicesDelegate.doFindAllPatientsByDoctorId(userConnected.getUserId());
+				initDataBindings();
+}	
+			
+			catch(Exception p){JOptionPane.showMessageDialog(null,"Please select a patient.");}
+			
+			}
+		});
+		btnRefuse.setBounds(568, 147, 100, 23);
+		contentPane.add(btnRefuse);
+		
+		JButton btnDisplay = new JButton("Display");
+		btnDisplay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try{patientSelected = patients.get(table.getSelectedRow());
+				
+				DisplayPatientAssigned dispPatient= new DisplayPatientAssigned(patientSelected);
+				dispPatient.setLocationRelativeTo(null);
+				
+				dispPatient.setVisible(true);
+				ListAssignedPatientsToDoctor.this.setVisible(false);
+					
+				}
+				catch(Exception p){JOptionPane.showMessageDialog(null,"Please select a patient.");}
+				
+			}
+		});
+		btnDisplay.setBounds(568, 181, 100, 23);
+		contentPane.add(btnDisplay);
+		
+		JLabel lblListAssignedPatients = new JLabel("List assigned patients");
+		lblListAssignedPatients.setForeground(SystemColor.desktop);
+		lblListAssignedPatients.setFont(new Font("Tahoma", Font.BOLD, 24));
+		lblListAssignedPatients.setBounds(172, 11, 326, 45);
+		contentPane.add(lblListAssignedPatients);
+		
+		JButton btnBackToMenu = new JButton("Back To Menu");
+		btnBackToMenu.setBounds(544, 256, 123, 23);
+		contentPane.add(btnBackToMenu);
+		initDataBindings();
+	}
+	
+	
+	
 	protected void initDataBindings() {
 		JTableBinding<Patient, List<Patient>, JTable> jTableBinding = SwingBindings.createJTableBinding(UpdateStrategy.READ_WRITE, patients, table);
 		//
