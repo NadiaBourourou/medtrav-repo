@@ -33,6 +33,7 @@ import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 
+import delegates.AssigedPatientsServicesDelegate;
 import delegates.SurgeryServicesDelegate;
 import delegates.UserServicesDelegate;
 import entities.Doctor;
@@ -572,14 +573,15 @@ public class WelcomeJframe extends JFrame {
 						.doFindSurgeryById(cbTreatment.getSelectedIndex());
 				UserServicesDelegate.doBookSurgery(surgery, "Test", 1);
 
-				System.out.println(surgery.getName());
-
-				// selectedBook =
-				// booksList.get(table.convertRowIndexToModel(selectedRow));
-
 				Doctor doctor = UserServicesDelegate.doFindDoctorById(3);
-				UserServicesDelegate.doChooseDoctor(doctor, user.getUserId());
-
+				// UserServicesDelegate.doChooseDoctor(doctor,
+				// user.getUserId());
+				AssigedPatientsServicesDelegate.doAssignPatientToDoctor(doctor,
+						user.getUserId());
+				
+				setVisible(false);
+				ListClinicPatient next=new ListClinicPatient(user);
+				next.setVisible(true);
 			}
 		});
 
@@ -696,43 +698,43 @@ public class WelcomeJframe extends JFrame {
 																				GroupLayout.PREFERRED_SIZE))
 														.addGroup(
 																gl_contentPane
-																		.createParallelGroup(
-																				Alignment.LEADING,
-																				false)
+																		.createSequentialGroup()
+																		.addContainerGap()
 																		.addGroup(
 																				gl_contentPane
-																						.createSequentialGroup()
-																						.addContainerGap()
-																						.addComponent(
-																								panel,
-																								GroupLayout.PREFERRED_SIZE,
-																								418,
-																								GroupLayout.PREFERRED_SIZE)
+																						.createParallelGroup(
+																								Alignment.LEADING,
+																								false)
 																						.addGroup(
 																								gl_contentPane
-																										.createParallelGroup(
-																												Alignment.LEADING)
-																										.addGroup(
-																												gl_contentPane
-																														.createSequentialGroup()
-																														.addPreferredGap(
-																																ComponentPlacement.UNRELATED)
-																														.addComponent(
-																																lblDoctorDescription,
-																																GroupLayout.DEFAULT_SIZE,
-																																GroupLayout.DEFAULT_SIZE,
-																																Short.MAX_VALUE))
-
-																										.addGroup(
-																												gl_contentPane
-																														.createSequentialGroup()
-																														.addGap(591)
-																														.addComponent(
-																																btnNext,
-																																GroupLayout.PREFERRED_SIZE,
-																																89,
-																																GroupLayout.PREFERRED_SIZE))))))));
-
+																										.createSequentialGroup()
+																										.addComponent(
+																												panel,
+																												GroupLayout.PREFERRED_SIZE,
+																												418,
+																												GroupLayout.PREFERRED_SIZE)
+																										.addPreferredGap(
+																												ComponentPlacement.UNRELATED)
+																										.addComponent(
+																												lblDoctorDescription,
+																												GroupLayout.DEFAULT_SIZE,
+																												GroupLayout.DEFAULT_SIZE,
+																												Short.MAX_VALUE))
+																						.addGroup(
+																								gl_contentPane
+																										.createSequentialGroup()
+																										.addComponent(
+																												lblError,
+																												GroupLayout.PREFERRED_SIZE,
+																												364,
+																												GroupLayout.PREFERRED_SIZE)
+																										.addGap(191)
+																										.addComponent(
+																												btnNext,
+																												GroupLayout.PREFERRED_SIZE,
+																												89,
+																												GroupLayout.PREFERRED_SIZE)))))
+										.addGap(5)));
 		gl_contentPane
 				.setVerticalGroup(gl_contentPane
 						.createParallelGroup(Alignment.LEADING)
@@ -834,16 +836,25 @@ public class WelcomeJframe extends JFrame {
 														.addGroup(
 																gl_contentPane
 																		.createSequentialGroup()
-																		.addGap(67)
-
+																		.addGap(116)
 																		.addComponent(
 																				lblDoctorDescription,
 																				GroupLayout.DEFAULT_SIZE,
 																				GroupLayout.DEFAULT_SIZE,
 																				Short.MAX_VALUE)))
 										.addPreferredGap(
-												ComponentPlacement.RELATED)
-										.addComponent(btnNext)));
+												ComponentPlacement.UNRELATED)
+										.addGroup(
+												gl_contentPane
+														.createParallelGroup(
+																Alignment.LEADING)
+														.addComponent(btnNext)
+														.addComponent(
+																lblError,
+																GroupLayout.PREFERRED_SIZE,
+																18,
+																GroupLayout.PREFERRED_SIZE))
+										.addContainerGap()));
 
 		JScrollPane scrollPane = new JScrollPane();
 		GroupLayout gl_panel = new GroupLayout(panel);

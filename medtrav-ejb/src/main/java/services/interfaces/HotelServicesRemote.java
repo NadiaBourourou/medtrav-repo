@@ -1,7 +1,5 @@
 package services.interfaces;
 
-import java.io.File;
-import java.sql.Blob;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +17,7 @@ public interface HotelServicesRemote {
 	Boolean deleteHotelById(Integer id);
 
 	Hotel findHotelById(Integer id);
+
 	List<Hotel> findHotelByName(String name);
 
 	Boolean updateHotel(Hotel hotel);
@@ -31,11 +30,13 @@ public interface HotelServicesRemote {
 
 	Double calculPrix(Double prix, Integer numNights);
 
-	Boolean addHotelBooking(HotelBooking hb);
+	Boolean addHotelBooking(HotelBooking hotelBooking);
 
 	Hotel findHotelByPatientId(Integer idPatient);
-	
-	Boolean bookHotel(Integer numNights, Double price, RoomType roomType,Date date, Hotel hotel, Integer idPatient);
 
-	
+	Boolean bookHotel(Integer numNights, Double price, RoomType roomType,
+			Date date, Hotel hotel, Integer idPatient);
+
+	List<Hotel> findHotelsByStars(Integer stars);
+
 }

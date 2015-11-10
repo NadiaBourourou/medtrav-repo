@@ -30,4 +30,14 @@ public interface QuestionServicesRemote {
 
 	List<Question> findAllQuestionsWithResponse();
 
+	List<Question> findAllQuestionsWithResponseAndPatient(String name);
+
+	List<Question> findAllQuestionsWithResponseAndTitle(String title);
+
+	List<Question> findAllQuestionsNoResponseAndTitle(String title);
+
+	List<Question> findAllQuestionsNoResponseAndPatient(String name);
+
+	List<Question> findAllQuestionsNoResponse();
+
 }

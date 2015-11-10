@@ -199,7 +199,11 @@ public class AdminUI extends JFrame {
 		btnClinics.setBounds(154, 152, 144, 34);
 		contentPane.add(btnClinics);
 
-		JButton btnForum = new JButton("Forum");
+		JButton btnForum = new JButton("F.A.Q.");
+		btnForum.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnForum.setBounds(387, 345, 135, 34);
 		contentPane.add(btnForum);
 

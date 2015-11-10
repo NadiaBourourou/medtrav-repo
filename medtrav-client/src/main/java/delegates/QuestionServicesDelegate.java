@@ -42,7 +42,25 @@ public class QuestionServicesDelegate {
 	public static List<Question> doFindAllQuestionsWithResponse() {
 		return getProxy().findAllQuestionsWithResponse();
 	}
+	
+	public static List<Question> doFindAllQuestionsNoResponse() {
+		return getProxy().findAllQuestionsNoResponse();
+	}
+	
+	public static List<Question> doFindAllQuestionsWithResponseAndTitle(String title) {
+		return getProxy().findAllQuestionsWithResponseAndTitle(title);
+	}
 
+	public static List<Question> doFindAllQuestionsWithResponseAndPatient(String name) {
+		return getProxy().findAllQuestionsWithResponseAndPatient(name);
+	}
+	public static List<Question> doFindAllQuestionsNoResponseAndTitle(String title) {
+		return getProxy().findAllQuestionsNoResponseAndTitle(title);
+	}
+	public static List<Question> doFindAllQuestionsNoResponseAndPatient(String name) {
+		return getProxy().findAllQuestionsNoResponseAndPatient(name);
+	}
+	
 	public static Patient doFindPatientById(Integer idQuestion) {
 		return getProxy().findPatientById(idQuestion);
 	}

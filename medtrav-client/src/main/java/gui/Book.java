@@ -279,6 +279,7 @@ public class Book extends JFrame {
 
 				// Flight
 				flight = BookingServicesDelegate.doFindFlightByPatientId(1);
+
 				String arrive =  flight.getArrivalDate();
 				String depart = flight.getDepartureDate();
 

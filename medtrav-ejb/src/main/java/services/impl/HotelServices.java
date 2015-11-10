@@ -1,7 +1,5 @@
 package services.impl;
 
-import java.io.File;
-import java.sql.Blob;
 import java.util.Date;
 import java.util.List;
 
@@ -100,7 +98,7 @@ public class HotelServices implements HotelServicesRemote, HotelServicesLocal {
 	public List<Hotel> findHotelByName(String name) {
 		String jpql = "select h from Hotel h where h.name LIKE :param";
 		Query query = entityManager.createQuery(jpql);
-		query.setParameter("param","%" + name  + "%");
+		query.setParameter("param", "%" + name + "%");
 		return query.getResultList();
 
 	}
@@ -120,10 +118,10 @@ public class HotelServices implements HotelServicesRemote, HotelServicesLocal {
 	}
 
 	@Override
-	public Boolean addHotelBooking(HotelBooking hb) {
+	public Boolean addHotelBooking(HotelBooking hotelBooking) {
 		Boolean b = false;
 		try {
-			entityManager.merge(hb);
+			entityManager.merge(hotelBooking);
 
 			b = true;
 		} catch (Exception e) {
@@ -143,7 +141,7 @@ public class HotelServices implements HotelServicesRemote, HotelServicesLocal {
 
 	@Override
 	public Boolean bookHotel(Integer numNights, Double price,
-			RoomType roomType,Date date, Hotel hotel, Integer idPatient) {
+			RoomType roomType, Date date, Hotel hotel, Integer idPatient) {
 		Boolean b = false;
 		try {
 			Patient patient = entityManager.find(Patient.class, idPatient);
@@ -154,6 +152,14 @@ public class HotelServices implements HotelServicesRemote, HotelServicesLocal {
 		} catch (Exception e) {
 		}
 		return b;
+	}
+
+	@Override
+	public List<Hotel> findHotelsByStars(Integer stars) {
+		String jpql = "select u from Hotel u where u.stars=:param";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", stars);
+		return query.getResultList();
 	}
 
 }

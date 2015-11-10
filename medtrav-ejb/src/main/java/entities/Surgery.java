@@ -24,6 +24,7 @@ public class Surgery implements Serializable {
 	private Integer surgeryId;
 	private String name;
 	private String description;
+	private Double price;
 	private Date date;
 
 	private Doctor doctor;
@@ -89,6 +90,14 @@ public class Surgery implements Serializable {
 		this.procedure = procedure;
 	}
 
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
 	public Date getDate() {
 		return date;
 	}

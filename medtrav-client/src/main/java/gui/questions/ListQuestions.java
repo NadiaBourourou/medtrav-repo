@@ -290,11 +290,21 @@ public class ListQuestions extends JFrame {
 		recherchetf.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if(rbtitle.isSelected())
-				{	questions=QuestionServicesDelegate.doFindAllQuestionsByTitle(recherchetf.getText());
+				if(rbtitle.isSelected() && Answeredcb.isSelected())
+				{	questions=QuestionServicesDelegate.doFindAllQuestionsWithResponseAndTitle(recherchetf.getText());
 				}
-				else if(rbname.isSelected()){ questions=QuestionServicesDelegate.doFindAllQuestionsByPatientName(recherchetf.getText());
-				}else{System.out.println("rien de selectionné");}
+				if(rbtitle.isSelected() && !Answeredcb.isSelected())
+				{	questions=QuestionServicesDelegate.doFindAllQuestionsNoResponseAndTitle(recherchetf.getText());
+				}
+				else if(rbname.isSelected() && Answeredcb.isSelected()){ 
+					questions=QuestionServicesDelegate.doFindAllQuestionsWithResponseAndPatient(recherchetf.getText());
+					
+				}
+				else if(rbname.isSelected() && !Answeredcb.isSelected()){ 
+					questions=QuestionServicesDelegate.doFindAllQuestionsNoResponseAndPatient(recherchetf.getText());
+					
+				}
+				else{System.out.println("rien de selectionné");}
 				initDataBindings();
 			}
 		});
@@ -316,7 +326,7 @@ public class ListQuestions extends JFrame {
 				{questions=QuestionServicesDelegate.doFindAllQuestionsWithResponse();
 				initDataBindings();
 				}
-				else{questions=QuestionServicesDelegate.doFindAllQuestions();
+				else{questions=QuestionServicesDelegate.doFindAllQuestionsNoResponse();
 				initDataBindings();
 				}
 			}
@@ -470,6 +480,16 @@ try{
 			connectedtf.setForeground(new Color(0, 128, 0));
 			connectedtf.setText("You are connected.");
 			
+		}
+		catch(Exception a){
+			connectedtf.setForeground(new Color(220, 20, 60));
+			connectedtf.setText("You are not connected. ");
+			
+		} finally{
+			try{sock.close();}
+		catch(Exception h){}
+		}
+			
 			Button twitterbtn = new Button("twitter");
 			twitterbtn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -521,15 +541,18 @@ try{
 			button_2.setBounds(318, 299, 118, 22);
 			contentPane.add(button_2);
 			
-		}
-		catch(Exception a){
-			connectedtf.setForeground(new Color(220, 20, 60));
-			connectedtf.setText("You are not connected. ");
+			JButton btnNewButton_1 = new JButton("List all questions");
+			btnNewButton_1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					questions=QuestionServicesDelegate.doFindAllQuestions();
+					initDataBindings();
+					
+				}
+			});
+			btnNewButton_1.setBounds(573, 134, 130, 23);
+			contentPane.add(btnNewButton_1);
 			
-		} finally{
-			try{sock.close();}
-		catch(Exception h){}
-		}
+		
 		
 		
 		
@@ -722,11 +745,21 @@ public ListQuestions(User userConnected) {
 		recherchetf.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if(rbtitle.isSelected())
-				{	questions=QuestionServicesDelegate.doFindAllQuestionsByTitle(recherchetf.getText());
+				if(rbtitle.isSelected()&& Answeredcb.isSelected())
+				{	questions=QuestionServicesDelegate.doFindAllQuestionsWithResponseAndTitle(recherchetf.getText());
 				}
-				else if(rbname.isSelected()){ questions=QuestionServicesDelegate.doFindAllQuestionsByPatientName(recherchetf.getText());
-				}else{System.out.println("rien de selectionné");}
+				if(rbtitle.isSelected()&& !Answeredcb.isSelected())
+				{	questions=QuestionServicesDelegate.doFindAllQuestionsNoResponseAndTitle(recherchetf.getText());
+				}
+				else if(rbname.isSelected()&& Answeredcb.isSelected()){ 
+					questions=QuestionServicesDelegate.doFindAllQuestionsWithResponseAndPatient(recherchetf.getText());
+					
+				}
+				else if(rbname.isSelected()&& !Answeredcb.isSelected()){ 
+					questions=QuestionServicesDelegate.doFindAllQuestionsNoResponseAndPatient(recherchetf.getText());
+					
+				}
+				else{System.out.println("rien de selectionné");}
 				initDataBindings();
 			}
 		});
@@ -748,7 +781,7 @@ public ListQuestions(User userConnected) {
 				{questions=QuestionServicesDelegate.doFindAllQuestionsWithResponse();
 				initDataBindings();
 				}
-				else{questions=QuestionServicesDelegate.doFindAllQuestions();
+				else{questions=QuestionServicesDelegate.doFindAllQuestionsNoResponse();
 				initDataBindings();
 				}
 			}
@@ -902,6 +935,17 @@ try{
 			connectedtf.setForeground(new Color(0, 128, 0));
 			connectedtf.setText("You are connected.");
 			
+		}
+		catch(Exception a){
+			connectedtf.setForeground(new Color(220, 20, 60));
+			connectedtf.setText("You are not connected. ");
+			
+		} finally{
+			try{sock.close();}
+		catch(Exception h){}
+		}
+			
+			
 			Button twitterbtn = new Button("twitter");
 			twitterbtn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -953,15 +997,19 @@ try{
 			button_2.setBounds(318, 299, 118, 22);
 			contentPane.add(button_2);
 			
-		}
-		catch(Exception a){
-			connectedtf.setForeground(new Color(220, 20, 60));
-			connectedtf.setText("You are not connected. ");
+			JButton btnNewButton_1 = new JButton("List all questions");
+			btnNewButton_1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					questions=QuestionServicesDelegate.doFindAllQuestions();
+					initDataBindings();
+					
+				}
+			});
+			btnNewButton_1.setBounds(573, 134, 130, 23);
+			contentPane.add(btnNewButton_1);
 			
-		} finally{
-			try{sock.close();}
-		catch(Exception h){}
-		}
+			
+	
 		
 		
 		

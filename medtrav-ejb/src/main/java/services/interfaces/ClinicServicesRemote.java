@@ -1,7 +1,7 @@
 package services.interfaces;
 
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 
 import javax.ejb.Remote;
 
@@ -26,8 +26,9 @@ public interface ClinicServicesRemote {
 
 	List<Clinic> findClinicByName(String name);
 
-	  Boolean addClinicBookingAndAffectClinic(ClinicBooking clinicBooking, Integer id);
+	Boolean addClinicBookingAndAffectClinic(ClinicBooking clinicBooking,
+			Integer id);
 
-	Boolean bookClinic(RoomClinicType typeRoom, Date date,
-			String commentaire,  Clinic clinic, Integer idPatient);
+	Boolean bookClinic(RoomClinicType typeRoom, Date date, String commentaire,
+			Clinic clinic, Integer idPatient);
 }

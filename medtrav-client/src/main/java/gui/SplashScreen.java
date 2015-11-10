@@ -21,5 +21,9 @@ public class SplashScreen {
 		Thread.sleep(1000);
 
 		splash.splashOff();
+		
+		
+		HelloMedtrav frame=new HelloMedtrav();
+		frame.setVisible(true);
 	}
 }
