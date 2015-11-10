@@ -280,8 +280,8 @@ public class Book extends JFrame {
 
 				// Flight
 				flight = BookingServicesDelegate.doFindFlightByPatientId(1);
-				Date arrive = (Date) flight.getArrivalDate();
-				Date depart = (Date) flight.getDepartureDate();
+				Date arrive =  flight.getArrivalDate();
+				Date depart = flight.getDepartureDate();
 
 				SimpleDateFormat sdfr = new SimpleDateFormat("dd/MMM/yyyy");
 
