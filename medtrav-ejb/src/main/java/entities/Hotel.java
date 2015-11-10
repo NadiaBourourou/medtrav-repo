@@ -41,6 +41,7 @@ public class Hotel implements Serializable {
 	public Hotel() {
 		super();
 	}
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
