@@ -170,10 +170,14 @@ public class ListAssignedPatientsToDoctor extends JFrame {
 		lblListAssignedPatients.setFont(new Font("Tahoma", Font.BOLD, 24));
 		lblListAssignedPatients.setBounds(172, 11, 326, 45);
 		contentPane.add(lblListAssignedPatients);
-
-		JButton btnBackToMenu = new JButton("Back To Menu");
-		btnBackToMenu.setBounds(544, 256, 123, 23);
-		contentPane.add(btnBackToMenu);
+		
+		JButton backTobtn = new JButton("Back to menu");
+		backTobtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		backTobtn.setBounds(541, 241, 127, 23);
+		contentPane.add(backTobtn);
 		initDataBindings();
 	}
 
@@ -300,23 +304,18 @@ public class ListAssignedPatientsToDoctor extends JFrame {
 		lblListAssignedPatients.setBounds(172, 11, 326, 45);
 		contentPane.add(lblListAssignedPatients);
 
-		JButton btnBackToMenu = new JButton("Back To Menu");
-		btnBackToMenu.addActionListener(new ActionListener() {
+		JButton backTobtn = new JButton("Back to menu");
+		backTobtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				try {
-					setVisible(false);
-					DoctorUI retour = new DoctorUI(userConnected);
-					retour.setVisible(true);
-				} catch (Exception p) {
-					JOptionPane.showMessageDialog(null,
-							"Can't go back right now. \nPlease retry later.");
-				}
-
+				setVisible(false);
+				DoctorUI choixMenu= new DoctorUI(userConnected);
+				choixMenu.setVisible(true);
+				
 			}
 		});
-		btnBackToMenu.setBounds(544, 256, 123, 23);
-		contentPane.add(btnBackToMenu);
+		backTobtn.setBounds(541, 241, 127, 23);
+		contentPane.add(backTobtn);
+		
 		initDataBindings();
 	}
 

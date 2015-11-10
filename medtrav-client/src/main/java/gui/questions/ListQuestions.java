@@ -698,13 +698,15 @@ public ListQuestions(User userConnected) {
 				
 				if (userConnected instanceof Patient)
 				
-				{	setVisible(false);	
-					PatientUi back = new PatientUi(userConnected);
-				setVisible(true);}
+				{	System.out.println("coucou patient");
+					setVisible(false);	
+					PatientUi backou = new PatientUi(userConnected);
+				backou.setVisible(true);}
 				else if(userConnected instanceof Administrator){
+					System.out.println("coucou admin");
 					setVisible(false);
-					AdminUI back = new AdminUI(userConnected);
-					setVisible(true);
+					AdminUI backo = new AdminUI(userConnected);
+					backo.setVisible(true);
 					}
 				else{System.out.println("erreur ds btn Back to Menu");}
 				

@@ -16,10 +16,16 @@ import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
 
 import javax.swing.JLabel;
 
 import entities.User;
+import googlemap.essai.JGoogleMapEditorPan;
 import gui.questions.ListQuestions;
 import gui.testimonies.ListTestimonies;
 
@@ -49,11 +55,11 @@ public class PatientUi extends JFrame {
 	public PatientUi() {
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
-		
+
 		JButton btnNewButton = new JButton("Begin my travel process");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				setVisible(false);
 				WelcomeJframe begin = new WelcomeJframe();
 				begin.setVisible(true);
@@ -61,7 +67,7 @@ public class PatientUi extends JFrame {
 		});
 		btnNewButton.setBounds(111, 110, 195, 86);
 		getContentPane().add(btnNewButton);
-		
+
 		JButton btnMyPersonalSpace = new JButton("My personal space");
 		btnMyPersonalSpace.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -72,33 +78,88 @@ public class PatientUi extends JFrame {
 		});
 		btnMyPersonalSpace.setBounds(111, 207, 195, 86);
 		getContentPane().add(btnMyPersonalSpace);
-		
+
 		JLabel label = new JLabel("");
 		label.setBounds(10, 28, 46, 14);
 		getContentPane().add(label);
-		
+
 		JButton btnTestimonies = new JButton("Testimonies");
 		btnTestimonies.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				ListTestimonies testimonies=new ListTestimonies();
+				ListTestimonies testimonies = new ListTestimonies();
 				testimonies.setVisible(true);
-				
+
 			}
 		});
 		btnTestimonies.setBounds(340, 110, 195, 86);
 		getContentPane().add(btnTestimonies);
-		
+
 		JButton btnFaq = new JButton("F.A.Q.");
 		btnFaq.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				ListQuestions questions=new ListQuestions();
+				ListQuestions questions = new ListQuestions();
 				questions.setVisible(true);
 			}
 		});
 		btnFaq.setBounds(340, 207, 195, 86);
 		getContentPane().add(btnFaq);
+
+		JButton btnContactUs = new JButton("Contact us");
+		btnContactUs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				JFrame test = new JFrame("Google Maps");
+
+				try {
+					String latitude = "36.8997598";
+					String longitude = "10.1878506";
+
+					String imageUrl = "https://maps.googleapis.com/maps/api/staticmap?center="
+							+ latitude
+							+ ","
+							+ longitude
+							+ "&zoom=16&size=612x612&scale=2&maptype=roadmap";
+					String destinationFile = "image.jpg";
+
+					// read the map image from Google
+					// then save it to a local file: image.jpg
+					//
+					URL url = new URL(imageUrl);
+					InputStream is = url.openStream();
+					OutputStream os = new FileOutputStream(destinationFile);
+
+					byte[] b = new byte[2048];
+					int length;
+
+					while ((length = is.read(b)) != -1) {
+						os.write(b, 0, length);
+					}
+
+					is.close();
+					os.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+					System.exit(1);
+				}
+
+				// create a GUI component that loads the image: image.jpg
+				//
+				ImageIcon imageIcon = new ImageIcon(
+						(new ImageIcon("image.jpg")).getImage()
+								.getScaledInstance(630, 600,
+										java.awt.Image.SCALE_SMOOTH));
+				test.add(new JLabel(imageIcon));
+
+				// show the GUI window
+				test.setVisible(true);
+				test.pack();
+			}
+
+		});
+		btnContactUs.setBounds(579, 336, 89, 23);
+		getContentPane().add(btnContactUs);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 730, 447);
 
@@ -108,20 +169,17 @@ public class PatientUi extends JFrame {
 		JMenuItem mntmLogOut = new JMenuItem("Log Out");
 		mntmLogOut.setIcon(new ImageIcon(WelcomeJframe.class
 				.getResource("/images/logout-icon.png")));
-		
-		
-		
-		
+
 	}
-	
+
 	public PatientUi(User user) {
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
-		
+
 		JButton btnNewButton = new JButton("Begin my travel process");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				setVisible(false);
 				WelcomeJframe begin = new WelcomeJframe(user);
 				begin.setVisible(true);
@@ -129,7 +187,7 @@ public class PatientUi extends JFrame {
 		});
 		btnNewButton.setBounds(111, 110, 195, 86);
 		getContentPane().add(btnNewButton);
-		
+
 		JButton btnMyPersonalSpace = new JButton("My personal space");
 		btnMyPersonalSpace.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -140,33 +198,88 @@ public class PatientUi extends JFrame {
 		});
 		btnMyPersonalSpace.setBounds(111, 207, 195, 86);
 		getContentPane().add(btnMyPersonalSpace);
-		
+
 		JLabel label = new JLabel("");
 		label.setBounds(10, 28, 46, 14);
 		getContentPane().add(label);
-		
+
 		JButton btnTestimonies = new JButton("Testimonies");
 		btnTestimonies.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				ListTestimonies testimonies=new ListTestimonies(user);
+				ListTestimonies testimonies = new ListTestimonies(user);
 				testimonies.setVisible(true);
-				
+
 			}
 		});
 		btnTestimonies.setBounds(340, 110, 195, 86);
 		getContentPane().add(btnTestimonies);
-		
+
 		JButton btnFaq = new JButton("F.A.Q.");
 		btnFaq.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				ListQuestions questions=new ListQuestions(user);
+				ListQuestions questions = new ListQuestions();
 				questions.setVisible(true);
 			}
 		});
 		btnFaq.setBounds(340, 207, 195, 86);
 		getContentPane().add(btnFaq);
+
+		JButton btnContactUs = new JButton("Contact us");
+		btnContactUs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				JFrame test = new JFrame("Google Maps");
+
+				try {
+					String latitude = "36.8511153";
+					String longitude = "10.2247553";
+
+					String imageUrl = "https://maps.googleapis.com/maps/api/staticmap?center="
+							+ latitude
+							+ ","
+							+ longitude
+							+ "&zoom=15&size=612x612&scale=2&maptype=roadmap";
+					String destinationFile = "image.jpg";
+
+					// read the map image from Google
+					// then save it to a local file: image.jpg
+					//
+					URL url = new URL(imageUrl);
+					InputStream is = url.openStream();
+					OutputStream os = new FileOutputStream(destinationFile);
+
+					byte[] b = new byte[2048];
+					int length;
+
+					while ((length = is.read(b)) != -1) {
+						os.write(b, 0, length);
+					}
+
+					is.close();
+					os.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+					System.exit(1);
+				}
+
+				// create a GUI component that loads the image: image.jpg
+				//
+				ImageIcon imageIcon = new ImageIcon(
+						(new ImageIcon("image.jpg")).getImage()
+								.getScaledInstance(630, 600,
+										java.awt.Image.SCALE_SMOOTH));
+				test.add(new JLabel(imageIcon));
+
+				// show the GUI window
+				test.setVisible(true);
+				test.pack();
+			}
+
+		});
+		btnContactUs.setBounds(579, 336, 89, 23);
+		getContentPane().add(btnContactUs);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 730, 447);
 
@@ -176,11 +289,6 @@ public class PatientUi extends JFrame {
 		JMenuItem mntmLogOut = new JMenuItem("Log Out");
 		mntmLogOut.setIcon(new ImageIcon(WelcomeJframe.class
 				.getResource("/images/logout-icon.png")));
-		
-		
-		
-		
+
 	}
-
-
 }
