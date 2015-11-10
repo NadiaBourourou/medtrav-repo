@@ -841,7 +841,7 @@ public class ModifyCancelFlight extends JFrame {
 								null,
 								"You are going to see all our available flights matching your depature and arrival locations");
 				ModifyFlight modifyFlight = new ModifyFlight(from, to,
-						flightIdModif, numFlight, nbSitsArendre);
+						flightIdModif, numFlight, nbSitsArendre,user);
 				modifyFlight.setVisible(true);
 				ModifyCancelFlight.this.setVisible(false);
 			}

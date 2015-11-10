@@ -384,10 +384,10 @@ AddFlight2.this.setVisible(false);
 	//String dateArrivalBDD = jourArr+"-"+moisArr+"-"+anneeArr+" "+00+":"+00+":"+00;
 			String dateArrivalBDD = jourArr+"-"+moisArr+"-"+anneeArr;
 
-	System.out.println("date arrivée en string : " + dateArrivalBDD); //date arrivée en string : 09-05-2017 0:0:0
+	//System.out.println("date arrivée en string : " + dateArrivalBDD); //date arrivée en string : 09-05-2017 0:0:0
 	
 	
-ChooseFlight2 chooseFlight= new ChooseFlight2(from,to,dateDepBDD,dateArrivalBDD);
+ChooseFlight2 chooseFlight= new ChooseFlight2(from,to,dateDepBDD,dateArrivalBDD,user);
 chooseFlight.setVisible(true);
 AddFlight2.this.setVisible(false);
 

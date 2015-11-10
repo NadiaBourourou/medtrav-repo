@@ -296,7 +296,7 @@ public class SeeAllFlights extends JFrame {
 		JButton buttonHome = new JButton("");
 		buttonHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ManageFlights home= new ManageFlights();
+				ManageFlights home= new ManageFlights(user);
 				home.setVisible(true);
 				SeeAllFlights.this.setVisible(false);
 			}

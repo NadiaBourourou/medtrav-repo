@@ -523,7 +523,7 @@ public class ModifyFlight extends JFrame {
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ModifyCancelFlight modifCancelF= new ModifyCancelFlight();
+				ModifyCancelFlight modifCancelF= new ModifyCancelFlight(user);
 				modifCancelF.setVisible(true);
 				ModifyFlight.this.setVisible(false);
 			}
@@ -690,7 +690,7 @@ public class ModifyFlight extends JFrame {
 				
 					initDataBindings();
 
-					SeeMyFlights seeMyflights = new SeeMyFlights();
+					SeeMyFlights seeMyflights = new SeeMyFlights(user);
 					seeMyflights.setVisible(true);
 					ModifyFlight.this.setVisible(false);
 					

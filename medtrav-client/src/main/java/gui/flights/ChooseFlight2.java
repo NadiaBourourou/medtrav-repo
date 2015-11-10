@@ -645,7 +645,7 @@ public class ChooseFlight2 extends JFrame {
 			System.out.println("NbSitsMaj = "+nbSitsMaj);
 				
 					JOptionPane.showMessageDialog(null, "Flight successfully added");
-					SeeMyFlights seeMyflights = new SeeMyFlights();
+					SeeMyFlights seeMyflights = new SeeMyFlights(user);
 					seeMyflights.setVisible(true);
 					ChooseFlight2.this.setVisible(false);
 				} else {
