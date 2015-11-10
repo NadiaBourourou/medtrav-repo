@@ -1,7 +1,5 @@
 package delegates;
 
-import java.io.File;
-import java.sql.Blob;
 import java.util.Date;
 import java.util.List;
 
@@ -43,28 +41,32 @@ public class HotelServicesDelegate {
 	public static List<Hotel> doFindAllHotels() {
 		return getProxy().findAllHotels();
 	}
-	public static List<Hotel> doFindHotelByName(String name){
-		
+
+	public static List<Hotel> doFindHotelByName(String name) {
+
 		return getProxy().findHotelByName(name);
 	}
-	
-	
+
 	public static Double doCalculPrix(Double prix, Integer numNights) {
 		return getProxy().calculPrix(prix, numNights);
 	}
 
-	public static boolean doAddHotelBooking (HotelBooking hb){
-		return getProxy().addHotelBooking(hb);
+	public static boolean doAddHotelBooking(HotelBooking hotelBooking) {
+		return getProxy().addHotelBooking(hotelBooking);
 	}
-	
 
-	public static Hotel doFindHotelByPatientId(Integer idPatient){
+	public static Hotel doFindHotelByPatientId(Integer idPatient) {
 		return getProxy().findHotelByPatientId(idPatient);
 	}
-	
-	public static Boolean doBookHotel(Integer numNights, Double price, RoomType roomType,Date date, Hotel hotel, Integer idPatient){
-		return getProxy().bookHotel(numNights,price,roomType, date,hotel, idPatient);
+
+	public static Boolean doBookHotel(Integer numNights, Double price,
+			RoomType roomType, Date date, Hotel hotel, Integer idPatient) {
+		return getProxy().bookHotel(numNights, price, roomType, date, hotel,
+				idPatient);
 	}
-	
+
+	public static List<Hotel> doFindHotelsByStars(Integer stars) {
+		return getProxy().findHotelsByStars(stars);
+	}
 
 }
