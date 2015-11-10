@@ -104,6 +104,10 @@ public class ListHotelAndServicesPatient extends JFrame {
 				.getResource("/images/medtraaaaaav.jpg")));
 
 		JButton btnNewButton = new JButton("");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton.setIcon(new ImageIcon(ListHotelAndServicesPatient.class
 				.getResource("/images/choose hotel.jpg")));
 
