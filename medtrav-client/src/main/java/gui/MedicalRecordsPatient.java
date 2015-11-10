@@ -188,7 +188,7 @@ public class MedicalRecordsPatient extends JFrame {
 
 			
 					try {
-						Skype.call(Constants.SKYPE_FRIEND_NICKNAME);
+						Skype.call(SKYPE_FRIEND_NICKNAME);
 					} catch (SkypeException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -330,7 +330,7 @@ public class MedicalRecordsPatient extends JFrame {
 
 			
 					try {
-						Skype.call(Constants.SKYPE_FRIEND_NICKNAME);
+						Skype.call(SKYPE_FRIEND_NICKNAME);
 					} catch (SkypeException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
