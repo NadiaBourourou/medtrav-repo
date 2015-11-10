@@ -109,6 +109,68 @@ public class QuestionServices implements QuestionServicesRemote, QuestionService
 	
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Question> findAllQuestionsNoResponse() {
+		//String chaine=null;
+		String jpql="select t from Question t where t.response IS NULL";
+		Query query=entitymanager.createQuery(jpql);
+		//query.setParameter("param",chaine);
+		return query.getResultList();
+	
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Question> findAllQuestionsWithResponseAndPatient(String name) {
+		//String chaine=null;
+		String jpql="select t from Question t where t.response IS NOT NULL AND t.patient.lastName LIKE :param";
+		Query query=entitymanager.createQuery(jpql);
+		query.setParameter("param",  "%" + name + "%");
+		//query.setParameter("param",chaine);
+		return query.getResultList();
+	
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Question> findAllQuestionsWithResponseAndTitle(String title) {
+		//String chaine=null;
+		String jpql="select t from Question t where t.response IS NOT NULL AND  t.title LIKE :param";
+		Query query=entitymanager.createQuery(jpql);
+		query.setParameter("param",  "%" + title + "%");
+		//query.setParameter("param",chaine);
+		return query.getResultList();
+	
+	}
+	
+	
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Question> findAllQuestionsNoResponseAndPatient(String name) {
+		//String chaine=null;
+		String jpql="select t from Question t where t.response IS NULL  AND t.patient.lastName LIKE :param";
+		Query query=entitymanager.createQuery(jpql);
+		query.setParameter("param",  "%" + name + "%");
+		//query.setParameter("param",chaine);
+		return query.getResultList();
+	
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Question> findAllQuestionsNoResponseAndTitle(String title) {
+		//String chaine=null;
+		String jpql="select t from Question t where t.response IS NULL AND  t.title LIKE :param";
+		Query query=entitymanager.createQuery(jpql);
+		query.setParameter("param",  "%" + title + "%");
+		//query.setParameter("param",chaine);
+		return query.getResultList();
+	
+	}
+	
 	
 	@SuppressWarnings("unchecked")
 	@Override
