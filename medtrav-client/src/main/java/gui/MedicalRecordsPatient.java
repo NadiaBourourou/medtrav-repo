@@ -124,6 +124,7 @@ public class MedicalRecordsPatient extends JFrame {
 				medicalRecords.setPatient(p);
 				medicalRecords.setAnalysis(b);
 				MedicalRecordsDelegate.doAddMedicalRecords(medicalRecords);
+				JOptionPane.showMessageDialog(null, "Analysis Uploaded successfully");
 
 			}
 		});

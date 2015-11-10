@@ -25,7 +25,6 @@ import java.net.URL;
 import javax.swing.JLabel;
 
 import entities.User;
-import googlemap.essai.JGoogleMapEditorPan;
 import gui.questions.ListQuestions;
 import gui.testimonies.ListTestimonies;
 

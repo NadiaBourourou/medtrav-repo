@@ -54,7 +54,7 @@ public class AddHotel extends JFrame {
 	public AddHotel() {
 		setTitle("Add Hotel");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 487, 379);
+		setBounds(100, 100, 597, 421);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -107,6 +107,10 @@ public class AddHotel extends JFrame {
 					HotelServicesDelegate.doAddHotel(hotel);
 					JOptionPane.showMessageDialog(null,
 							"Hotel added successfully ");
+					
+					setVisible(false);
+					ListHotelsAdmin listHotels = new ListHotelsAdmin();
+					listHotels.setVisible(true);
 				}
 
 				catch (Exception ex) {
