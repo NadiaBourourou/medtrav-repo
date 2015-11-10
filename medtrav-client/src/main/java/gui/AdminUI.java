@@ -38,8 +38,8 @@ public class AdminUI extends JFrame {
 		});
 	}
 
-	public AdminUI(User admin) {
-		lblLoggedAs.setText(admin.getLastName());
+	public AdminUI(User user) {
+		lblLoggedAs.setText(user.getLastName());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 730, 447);
 
@@ -83,17 +83,26 @@ public class AdminUI extends JFrame {
 		JButton btnHotels = new JButton("Hotels");
 		btnHotels.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+setVisible(false);
+ListHotelsAdmin hotels= new ListHotelsAdmin();
+hotels.setVisible(true);
 			}
 		});
 		btnHotels.setBounds(154, 345, 144, 34);
 		contentPane.add(btnHotels);
 
 		JButton btnClinics = new JButton("Hospitals & clinics");
+		btnClinics.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+setVisible(false);
+ListClinics clinics= new ListClinics();
+clinics.setVisible(true);
+			}
+		});
 		btnClinics.setBounds(154, 152, 144, 34);
 		contentPane.add(btnClinics);
 
-		JButton btnForum = new JButton("Forum");
+		JButton btnForum = new JButton("F.A.Q.");
 		btnForum.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			setVisible(false);
@@ -133,7 +142,7 @@ public class AdminUI extends JFrame {
 		btnDoctors.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				AdminUI_ListOfDoctors frame = new AdminUI_ListOfDoctors(admin);
+				AdminUI_ListOfDoctors frame = new AdminUI_ListOfDoctors(user);
 				frame.setVisible(true);
 				AdminUI.this.setVisible(false);
 
