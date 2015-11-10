@@ -18,7 +18,6 @@
 		<class>entities.Clinic</class>
 		<class>entities.Hotel</class>
 		<class>entities.ServiceHotel</class>
-		<class>entities.Treatment</class>
 		<class>entities.Procedure</class>
 		<class>entities.HotelBooking</class>
 		<class>entities.ClinicBooking</class>

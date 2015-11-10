@@ -578,6 +578,10 @@ public class WelcomeJframe extends JFrame {
 				// user.getUserId());
 				AssigedPatientsServicesDelegate.doAssignPatientToDoctor(doctor,
 						user.getUserId());
+				
+				setVisible(false);
+				ListClinicPatient next=new ListClinicPatient();
+				next.setVisible(true);
 			}
 		});
 

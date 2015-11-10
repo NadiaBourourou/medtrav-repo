@@ -31,6 +31,8 @@ public class PopulateDb {
 
 	@PersistenceContext
 	private EntityManager entityManager;
+	
+	
 	@EJB
 	private SurgeryServicesLocal surgeryServicesLocal;
 
