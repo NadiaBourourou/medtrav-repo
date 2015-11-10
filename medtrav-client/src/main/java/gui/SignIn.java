@@ -21,6 +21,7 @@ import delegates.FeaturesDomainDelegate;
 import delegates.UserServicesDelegate;
 import entities.Patient;
 import entities.UserSexe;
+import com.toedter.calendar.JDateChooser;
 
 public class SignIn extends JFrame {
 
@@ -34,6 +35,7 @@ public class SignIn extends JFrame {
 	Patient newPatient = new Patient();
 	Choice choice = new Choice();
 	private JTextField passport;
+	JDateChooser birthdate = new JDateChooser();
 
 	/**
 	 * Launch the application.
@@ -149,6 +151,7 @@ public class SignIn extends JFrame {
 					} else if (choice.getSelectedIndex() == 2) {
 						newPatient.setSexe(UserSexe.Other);
 					}
+					newPatient.setDateOfBirth(birthdate.getDate());
 					newPatient.setNumPassport(Integer.parseInt(passport.getText()));
 					newPatient.setCin(cin.getText());
 					newPatient.setMail(mail.getText());
@@ -170,8 +173,11 @@ public class SignIn extends JFrame {
 							to)) {
 						System.out.println("Email sent successfully");
 						JOptionPane
-								.showConfirmDialog(null,
-										"Please check your mail to get your credentials.");
+								.showMessageDialog(null,
+										"Welcome to MedTrav. \n Please check your mail to get your credentials.");
+						setVisible(false);
+						HelloMedtrav backframe= new HelloMedtrav();
+						backframe.setVisible(true);
 					} else
 						System.out.println("Some error occured");
 
@@ -184,11 +190,13 @@ public class SignIn extends JFrame {
 		JButton btnReset = new JButton("Reset");
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				firstName.setText("");
 				lastName.setText("");
 				cin.setText("");
 				country.setText("");
 				mail.setText("");
+				passport.setText("");
 				lblError.setText("");
 
 			}
@@ -197,6 +205,13 @@ public class SignIn extends JFrame {
 		contentPane.add(btnReset);
 
 		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			setVisible(false);
+			HelloMedtrav backframe= new HelloMedtrav();
+			backframe.setVisible(true);
+			}
+		});
 		btnBack.setBounds(9, 375, 89, 23);
 		contentPane.add(btnBack);
 		lblError.setForeground(Color.RED);
@@ -218,5 +233,9 @@ public class SignIn extends JFrame {
 		passport.setColumns(10);
 		passport.setBounds(195, 258, 213, 20);
 		contentPane.add(passport);
+		
+		
+		birthdate.setBounds(193, 149, 215, 20);
+		contentPane.add(birthdate);
 	}
 }

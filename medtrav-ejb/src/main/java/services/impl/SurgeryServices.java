@@ -2,6 +2,7 @@ package services.impl;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,9 +28,7 @@ public class SurgeryServices implements SurgeryServicesRemote,
 	@PersistenceContext
 	EntityManager entityManager;
 
-	/**
-	 * Default constructor.
-	 */
+
 	public SurgeryServices() {
 		// TODO Auto-generated constructor stub
 	}

@@ -109,22 +109,27 @@ public class PopulateDb {
 		Surgery1_2.setName("Laser Surgery of bladder cancer");
 		Surgery1_2
 				.setDescription("Get rid of your belly, time for effortless kickass abs");
+		Surgery1_2.setPrice((double) 2400);
 
 		Surgery Surgery2_2 = new Surgery();
 		Surgery2_2.setName("Venous stenting");
+		Surgery2_2.setPrice((double) 3200);
 
 		Surgery Surgery3_2 = new Surgery();
 		Surgery3_2.setName("VATS");
 		Surgery3_2.setDescription("Video assisted of thoracic surgery");
+		Surgery3_2.setPrice((double) 5000);
 
 		Procedure procedure3 = new Procedure();
 		procedure3.setName("Urology");
 
 		Surgery Surgery1_3 = new Surgery();
 		Surgery1_3.setName("Laser Surgery of bladder cancer");
+		Surgery1_3.setPrice((double) 7100);
 
 		Surgery Surgery2_3 = new Surgery();
 		Surgery2_3.setName("Vasectomy");
+		Surgery2_3.setPrice((double) 700);
 
 		UserServicesDelegate.doAddPatient(patient1);
 		UserServicesDelegate.doAddPatient(patient2);

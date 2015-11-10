@@ -476,6 +476,6 @@ public class FlightServices implements FlightServicesRemote,
 		Query query = entityManager.createQuery(jpql);
 		return query.getResultList();
 	}
-	
+
 
 }

@@ -159,5 +159,18 @@ public class HelloMedtrav extends JFrame {
 		Copyright.setForeground(Color.DARK_GRAY);
 		Copyright.setBounds(28, 384, 532, 14);
 		getContentPane().add(Copyright);
+		
+		JButton btnNewButton = new JButton("");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setVisible(false);
+				SignIn register = new SignIn();
+				register.setVisible(true);
+			}
+		});
+		btnNewButton.setIcon(new ImageIcon(HelloMedtrav.class.getResource("/images/signUpIcon.png")));
+		btnNewButton.setBounds(625, 361, 79, 37);
+		getContentPane().add(btnNewButton);
 	}
 }
