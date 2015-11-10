@@ -89,74 +89,74 @@ public class Book extends JFrame {
 		setContentPane(contentPane);
 
 		thotel = new JTextField();
-		thotel.setBounds(95, 49, 86, 20);
+		thotel.setBounds(95, 127, 86, 20);
 		thotel.setColumns(10);
 
 		JLabel label = new JLabel("");
-		label.setBounds(15, 17, 70, 70);
+		label.setBounds(15, 77, 70, 70);
 		label.setIcon(new ImageIcon(Book.class
 				.getResource("/images/hotel-service_318-29285.jpg")));
 
 		JLabel lblHotel = new JLabel("Hotel ");
-		lblHotel.setBounds(95, 17, 56, 14);
+		lblHotel.setBounds(95, 90, 56, 14);
 
 		JLabel label_1 = new JLabel("");
-		label_1.setBounds(15, 143, 70, 70);
+		label_1.setBounds(15, 243, 70, 70);
 		label_1.setIcon(new ImageIcon(
 				Book.class
 						.getResource("/images/hospital_medicine_health_healthcare_medical-512.png")));
 
 		JLabel lblClinic = new JLabel("Clinic");
-		lblClinic.setBounds(95, 143, 56, 14);
+		lblClinic.setBounds(95, 243, 56, 14);
 
 		tclinic = new JTextField();
-		tclinic.setBounds(95, 183, 86, 20);
+		tclinic.setBounds(95, 282, 86, 20);
 		tclinic.setColumns(10);
 
 		JLabel label_2 = new JLabel("");
-		label_2.setBounds(238, 17, 70, 70);
+		label_2.setBounds(248, 77, 70, 70);
 		label_2.setIcon(new ImageIcon(Book.class
 				.getResource("/images/operating-room-theatre-256.png")));
 
 		JLabel lblSurgery = new JLabel("Surgery");
-		lblSurgery.setBounds(331, 17, 56, 14);
+		lblSurgery.setBounds(328, 90, 56, 14);
 
 		tsurgery = new JTextField();
-		tsurgery.setBounds(331, 49, 86, 20);
+		tsurgery.setBounds(331, 127, 86, 20);
 		tsurgery.setColumns(10);
 
 		JLabel label_3 = new JLabel("");
-		label_3.setBounds(238, 127, 65, 76);
+		label_3.setBounds(238, 226, 65, 76);
 		label_3.setIcon(new ImageIcon(Book.class
 				.getResource("/images/Flight_icon.png")));
 
 		JLabel lblFlight = new JLabel("Flight");
-		lblFlight.setBounds(343, 102, 56, 14);
+		lblFlight.setBounds(331, 176, 56, 14);
 
 		arrival = new JTextField();
-		arrival.setBounds(313, 143, 86, 20);
+		arrival.setBounds(313, 226, 86, 20);
 		arrival.setColumns(10);
 
 		departure = new JTextField();
-		departure.setBounds(313, 193, 86, 20);
+		departure.setBounds(313, 282, 86, 20);
 		departure.setColumns(10);
 
 		JLabel lblArrival = new JLabel("Arrival");
-		lblArrival.setBounds(314, 127, 56, 14);
+		lblArrival.setBounds(316, 201, 56, 14);
 
 		JLabel lblDeparture = new JLabel("Departure");
-		lblDeparture.setBounds(313, 173, 81, 14);
+		lblDeparture.setBounds(313, 257, 81, 14);
 
 		JLabel label_4 = new JLabel("");
-		label_4.setBounds(507, 17, 70, 70);
+		label_4.setBounds(456, 90, 70, 70);
 		label_4.setIcon(new ImageIcon(Book.class
 				.getResource("/images/doctorb.png")));
 
 		JLabel lblDoctor = new JLabel("Doctor");
-		lblDoctor.setBounds(587, 17, 56, 14);
+		lblDoctor.setBounds(536, 90, 56, 14);
 
 		tdoctor = new JTextField();
-		tdoctor.setBounds(587, 49, 86, 20);
+		tdoctor.setBounds(536, 127, 86, 20);
 		tdoctor.setColumns(10);
 
 		JButton btnChangeHotel = new JButton("Change hotel");
@@ -168,7 +168,7 @@ public class Book extends JFrame {
 
 			}
 		});
-		btnChangeHotel.setBounds(95, 93, 124, 23);
+		btnChangeHotel.setBounds(57, 172, 124, 23);
 		contentPane.setLayout(null);
 		contentPane.add(label_4);
 		contentPane.add(lblDoctor);
@@ -198,7 +198,7 @@ public class Book extends JFrame {
 				chooseClinic.setVisible(true);
 			}
 		});
-		btnChangeClinic.setBounds(95, 224, 124, 23);
+		btnChangeClinic.setBounds(77, 317, 124, 23);
 		contentPane.add(btnChangeClinic);
 
 		JButton btnChangeFlight = new JButton("Change flight");
@@ -206,7 +206,7 @@ public class Book extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnChangeFlight.setBounds(293, 224, 124, 23);
+		btnChangeFlight.setBounds(293, 317, 124, 23);
 		contentPane.add(btnChangeFlight);
 
 		JButton btnBook = new JButton("");
@@ -248,9 +248,8 @@ public class Book extends JFrame {
 
 			}
 		});
-		btnBook.setIcon(new ImageIcon(Book.class
-				.getResource("/images/book-now-icon.png")));
-		btnBook.setBounds(121, 284, 86, 85);
+		btnBook.setIcon(new ImageIcon(Book.class.getResource("/images/reserver.png")));
+		btnBook.setBounds(456, 319, 56, 62);
 		contentPane.add(btnBook);
 
 		JButton button = new JButton("");
@@ -280,25 +279,25 @@ public class Book extends JFrame {
 
 				// Flight
 				flight = BookingServicesDelegate.doFindFlightByPatientId(1);
-				Date arrive = (Date) flight.getArrivalDate();
-				Date depart = (Date) flight.getDepartureDate();
+				String arrive =  flight.getArrivalDate();
+				String depart = flight.getDepartureDate();
 
-				SimpleDateFormat sdfr = new SimpleDateFormat("dd/MMM/yyyy");
+				/*SimpleDateFormat sdfr = new SimpleDateFormat("dd/MMM/yyyy");
 
 				String dateArriveString = null;
 				String dateDepartString = null;
 
 				dateArriveString = sdfr.format(arrive);
-				dateDepartString = sdfr.format(depart);
+				dateDepartString = sdfr.format(depart);*/
 
-				arrival.setText(dateArriveString);
-				departure.setText(dateDepartString);
+				arrival.setText(arrive);
+				departure.setText(depart);
 
 			}
 		});
 		button.setIcon(new ImageIcon(Book.class
 				.getResource("/images/d\u00E9tails.jpg")));
-		button.setBounds(491, 213, 124, 23);
+		button.setBounds(194, 351, 124, 23);
 		contentPane.add(button);
 
 		JButton button_1 = new JButton("");
@@ -320,9 +319,8 @@ public class Book extends JFrame {
 				}
 			}
 		});
-		button_1.setIcon(new ImageIcon(Book.class
-				.getResource("/images/updatebBoking.png")));
-		button_1.setBounds(298, 281, 89, 88);
+		button_1.setIcon(new ImageIcon(Book.class.getResource("/images/modifier.png")));
+		button_1.setBounds(531, 319, 56, 62);
 		contentPane.add(button_1);
 
 		JButton button_2 = new JButton("");
@@ -336,17 +334,16 @@ public class Book extends JFrame {
 
 			}
 		});
-		button_2.setIcon(new ImageIcon(Book.class
-				.getResource("/images/deleteRouge.png")));
-		button_2.setBounds(456, 284, 86, 85);
+		button_2.setIcon(new ImageIcon(Book.class.getResource("/images/supprimer.png")));
+		button_2.setBounds(609, 319, 56, 62);
 		contentPane.add(button_2);
 
 		JLabel lblState = new JLabel("State");
-		lblState.setBounds(456, 127, 56, 14);
+		lblState.setBounds(469, 214, 56, 14);
 		contentPane.add(lblState);
 
 		etatCombo.setModel(new DefaultComboBoxModel(StateBooking.values()));
-		etatCombo.setBounds(507, 124, 108, 20);
+		etatCombo.setBounds(535, 211, 108, 20);
 		contentPane.add(etatCombo);
 		initDataBindings();
 	}

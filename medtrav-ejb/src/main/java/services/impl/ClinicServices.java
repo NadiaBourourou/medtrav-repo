@@ -97,9 +97,9 @@ public class ClinicServices implements ClinicServicesRemote, ClinicServicesLocal
 
 	@Override
 	public List<Clinic> findClinicByName(String name) {
-		 String jpql = "select h from Clinic h where h.name=:param";
+		 String jpql = "select h from Clinic h where h.name  LIKE :param";
 		 Query query= entityManager.createQuery(jpql);
-		 query.setParameter("param", name);
+		 query.setParameter("param","%" + name  + "%");
 		 return query.getResultList();
 	}
 	

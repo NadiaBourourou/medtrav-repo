@@ -15,6 +15,19 @@
 		<class>entities.Surgery</class>
 		<class>entities.Administrator</class>
 		<class>entities.Question</class>
+		<class>entities.Clinic</class>
+		<class>entities.Hotel</class>
+		<class>entities.ServiceHotel</class>
+		<class>entities.Treatment</class>
+		<class>entities.Procedure</class>
+		<class>entities.HotelBooking</class>
+		<class>entities.ClinicBooking</class>
+		<class>entities.HotelBookingID</class>
+		<class>entities.ClinicBookingID</class>
+		<class>entities.DoctorPatient</class>
+		<class>entities.DoctorPatientID</class>
+		<class>entities.SurgeryPatient</class>
+		<class>entities.SurgeryPatientID</class>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
 			<property name="hibernate.show_sql" value="false" />
