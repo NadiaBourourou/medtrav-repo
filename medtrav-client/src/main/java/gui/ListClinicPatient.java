@@ -61,7 +61,7 @@ public class ListClinicPatient extends JFrame {
 	public ListClinicPatient() {
 		setTitle("List Of Clinics");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 615, 408);
+		setBounds(100, 100, 703, 408);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -108,122 +108,59 @@ public class ListClinicPatient extends JFrame {
 		lblNewLabel_1.setIcon(new ImageIcon(ListClinicPatient.class
 				.getResource("/images/medtraaaaaav.jpg")));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane
-				.setHorizontalGroup(gl_contentPane
-						.createParallelGroup(Alignment.LEADING)
-						.addGroup(
-								gl_contentPane
-										.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(
-												gl_contentPane
-														.createParallelGroup(
-																Alignment.LEADING)
-														.addGroup(
-																gl_contentPane
-																		.createSequentialGroup()
-																		.addComponent(
-																				lblName)
-																		.addGap(51)
-																		.addComponent(
-																				name,
-																				GroupLayout.PREFERRED_SIZE,
-																				GroupLayout.DEFAULT_SIZE,
-																				GroupLayout.PREFERRED_SIZE)
-																		.addGap(26)
-																		.addComponent(
-																				btnSearch,
-																				GroupLayout.PREFERRED_SIZE,
-																				32,
-																				GroupLayout.PREFERRED_SIZE))
-														.addComponent(
-																lblNewLabel_1))
-										.addGap(204)
-										.addComponent(lblNewLabel,
-												GroupLayout.PREFERRED_SIZE,
-												111, GroupLayout.PREFERRED_SIZE)
-										.addGap(49))
-						.addGroup(
-								gl_contentPane
-										.createSequentialGroup()
-										.addComponent(panel,
-												GroupLayout.DEFAULT_SIZE, 584,
-												Short.MAX_VALUE).addGap(9))
-						.addGroup(
-								Alignment.TRAILING,
-								gl_contentPane
-										.createSequentialGroup()
-										.addContainerGap(475, Short.MAX_VALUE)
-										.addComponent(btnNewButton,
-												GroupLayout.PREFERRED_SIZE, 75,
-												GroupLayout.PREFERRED_SIZE)
-										.addGap(39)));
-		gl_contentPane
-				.setVerticalGroup(gl_contentPane
-						.createParallelGroup(Alignment.LEADING)
-						.addGroup(
-								gl_contentPane
-										.createSequentialGroup()
-										.addGap(11)
-										.addGroup(
-												gl_contentPane
-														.createParallelGroup(
-																Alignment.TRAILING)
-														.addComponent(
-																lblNewLabel,
-																GroupLayout.PREFERRED_SIZE,
-																75,
-																GroupLayout.PREFERRED_SIZE)
-														.addGroup(
-																gl_contentPane
-																		.createSequentialGroup()
-																		.addComponent(
-																				lblNewLabel_1)
-																		.addGap(18)
-																		.addGroup(
-																				gl_contentPane
-																						.createParallelGroup(
-																								Alignment.BASELINE)
-																						.addComponent(
-																								name,
-																								GroupLayout.PREFERRED_SIZE,
-																								GroupLayout.DEFAULT_SIZE,
-																								GroupLayout.PREFERRED_SIZE)
-																						.addComponent(
-																								lblName)))
-														.addComponent(
-																btnSearch,
-																GroupLayout.PREFERRED_SIZE,
-																29,
-																GroupLayout.PREFERRED_SIZE))
-										.addGap(18)
-										.addComponent(panel,
-												GroupLayout.PREFERRED_SIZE,
-												GroupLayout.DEFAULT_SIZE,
-												GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(
-												ComponentPlacement.RELATED)
-										.addComponent(btnNewButton,
-												GroupLayout.PREFERRED_SIZE, 68,
-												GroupLayout.PREFERRED_SIZE)
-										.addContainerGap(12, Short.MAX_VALUE)));
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblName)
+							.addGap(51)
+							.addComponent(name, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(26)
+							.addComponent(btnSearch, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblNewLabel_1))
+					.addGap(204)
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
+					.addGap(49))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(482, Short.MAX_VALUE)
+					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
+					.addGap(39))
+				.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(11)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblNewLabel_1)
+							.addGap(18)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(name, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblName)))
+						.addComponent(btnSearch, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
 
 		JScrollPane scrollPane = new JScrollPane();
 		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(
-				Alignment.TRAILING).addGroup(
-				Alignment.LEADING,
-				gl_panel.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE,
-								553, Short.MAX_VALUE).addContainerGap()));
-		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(
-				Alignment.LEADING).addGroup(
-				gl_panel.createSequentialGroup()
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE,
-								131, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE,
-								Short.MAX_VALUE)));
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addComponent(scrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
 
 		table = new JTable();
 

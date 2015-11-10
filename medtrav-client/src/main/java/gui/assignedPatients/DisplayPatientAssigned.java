@@ -177,11 +177,12 @@ public class DisplayPatientAssigned extends JFrame {
 		cin.setText(patientSelected.getCin().toString());
 		name.setText(patientSelected.getFirstName()+" "+patientSelected.getLastName());
 mail.setText(patientSelected.getMail());
-		try{Surgery surgery=AssigedPatientsServicesDelegate.doFindSurgeryByPatientId(patientSelected.getUserId());
-		System.out.println(surgery.getName());
-		
-		tfsurgery.setText(surgery.getName());}
-		catch(Exception n){lblSurgery.setVisible(false);}
+try{Surgery surgery=AssigedPatientsServicesDelegate.doFindSurgeryByPatientId(patientSelected.getUserId());
+System.out.println(surgery.getName());
+
+tfsurgery.setText(surgery.getDate().toString());}
+
+catch(Exception n){lblSurgery.setVisible(false);}
 		gender.setText(patientSelected.getSexe().toString());
 		
 		
@@ -190,6 +191,9 @@ mail.setText(patientSelected.getMail());
 		
 	}
 	
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public DisplayPatientAssigned(Patient patientSelected, User userConnected) {
 		System.out.println("DISPLAY PATIENT ASSIGNED ");
 		System.out.println("user co id="+userConnected.getUserId());
@@ -303,22 +307,24 @@ mail.setText(patientSelected.getMail());
 			confirmed.setText("No");
 		}
 		JLabel tfsurgery = new JLabel("");
-		tfsurgery.setBounds(85, 159, 309, 25);
+		tfsurgery.setBounds(124, 168, 194, 25);
 		panel.add(tfsurgery);
 		
 
-		JLabel lblSurgery = new JLabel("Surgery :");
+		JLabel lblSurgery = new JLabel("Date surgery :");
 		lblSurgery.setForeground(new Color(0, 128, 128));
 		lblSurgery.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblSurgery.setBounds(10, 159, 74, 39);
+		lblSurgery.setBounds(10, 159, 106, 39);
 		panel.add(lblSurgery);
 		
 		cin.setText(patientSelected.getCin().toString());
 		name.setText(patientSelected.getFirstName()+" "+patientSelected.getLastName());
-mail.setText(patientSelected.getMail());
+		mail.setText(patientSelected.getMail());
 		try{Surgery surgery=AssigedPatientsServicesDelegate.doFindSurgeryByPatientId(patientSelected.getUserId());
 		System.out.println(surgery.getName());
-		tfsurgery.setText(surgery.getName());}
+		
+		tfsurgery.setText(surgery.getDate().toString());}
+		
 		catch(Exception n){lblSurgery.setVisible(false);}
 		gender.setText(patientSelected.getSexe().toString());
 		
@@ -327,5 +333,4 @@ mail.setText(patientSelected.getMail());
 		
 		
 	}
-	
 }
