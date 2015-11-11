@@ -7,8 +7,10 @@ import entities.Patient;
 import entities.Surgery;
 import entities.Testimony;
 import entities.User;
-import gui.flights.AddFlight2;
 import gui.flights.ManageFlights;
+import gui.flights.ModifyCancelFlight;
+import gui.procedures.AddProcedure;
+import gui.procedures.ManageProcedures;
 import gui.procedures.SeeProcedures;
 import gui.testimonies.AddTestimony;
 import gui.testimonies.ListTestimonies;
@@ -46,9 +48,10 @@ public class AddSurgery extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldTitle;
-	//private Integer userId=3;
-	private User user;
+	private Integer userId=3;
 
+	private User user;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -82,7 +85,7 @@ public class AddSurgery extends JFrame {
 		lblAddASurgery.setFont(new Font("Tahoma", Font.BOLD, 23));
 		
 		JLabel lblLogo = new JLabel("");
-		lblLogo.setIcon(new ImageIcon(AddFlight2.class.getResource("/images/smallLogo.png")));
+		lblLogo.setIcon(new ImageIcon(AddSurgery.class.getResource("/images/smallLogo.png")));
 		lblLogo.setBounds(10, 0, 69, 73);		
 		JLabel lblTitle = new JLabel("Title ");
 		
@@ -99,7 +102,7 @@ public class AddSurgery extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try{	
 					Surgery surgery= new Surgery();
-					Doctor doctor=SurgeryServicesDelegate.doFindDoctorById(user.getUserId());
+					Doctor doctor=SurgeryServicesDelegate.doFindDoctorById(userId);
 					System.out.println("nomPatient= "+doctor.getLastName());
 					surgery.setDoctor(doctor);	
 					surgery.setName(textFieldTitle.getText());
@@ -123,12 +126,24 @@ public class AddSurgery extends JFrame {
 					
 			}
 		});
-		buttonAdd.setIcon(new ImageIcon(AddFlight2.class.getResource("/images/add.png")));
+		buttonAdd.setIcon(new ImageIcon(AddSurgery.class.getResource("/images/add.png")));
+		
+		JButton button = new JButton("");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ManageSurgeries home = new ManageSurgeries();
+				home.setVisible(true);
+				AddSurgery.this.setVisible(false);
+			}
+		});
+		button.setIcon(new ImageIcon(AddSurgery.class
+				.getResource("/images/blue-home-icon.png")));
+		button.setBounds(10, 331, 160, 43);
 
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
@@ -144,8 +159,10 @@ public class AddSurgery extends JFrame {
 							.addComponent(lblLogo, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
 							.addGap(205)
 							.addComponent(lblAddASurgery, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(265, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addPreferredGap(ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
+					.addComponent(button, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap(523, Short.MAX_VALUE)
 					.addComponent(buttonAdd, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
 					.addGap(50))
@@ -153,26 +170,30 @@ public class AddSurgery extends JFrame {
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblLogo, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblAddASurgery, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-							.addGap(17)))
-					.addGap(62)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblTitle)
-						.addComponent(textFieldTitle, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-					.addGap(69)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(textPaneDesc, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblDescription, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblLogo, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(lblAddASurgery, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+									.addGap(17)))
+							.addGap(62)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblTitle)
+								.addComponent(textFieldTitle, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+							.addGap(69)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(textPaneDesc, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblDescription, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(button, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
 					.addComponent(buttonAdd, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
+	
 	
 	public AddSurgery(User user) {
 		setTitle("Add a surgery");
@@ -188,7 +209,7 @@ public class AddSurgery extends JFrame {
 		lblAddASurgery.setFont(new Font("Tahoma", Font.BOLD, 23));
 		
 		JLabel lblLogo = new JLabel("");
-		lblLogo.setIcon(new ImageIcon(AddFlight2.class.getResource("/images/smallLogo.png")));
+		lblLogo.setIcon(new ImageIcon(AddSurgery.class.getResource("/images/smallLogo.png")));
 		lblLogo.setBounds(10, 0, 69, 73);		
 		JLabel lblTitle = new JLabel("Title ");
 		
@@ -229,7 +250,7 @@ public class AddSurgery extends JFrame {
 					
 			}
 		});
-		buttonAdd.setIcon(new ImageIcon(AddFlight2.class.getResource("/images/add.png")));
+		buttonAdd.setIcon(new ImageIcon(AddSurgery.class.getResource("/images/add.png")));
 
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
