@@ -542,11 +542,11 @@ public class PopulateDb {
 			entityManager.merge(question4);
 			
 				
-			userServicesLocal.bookSurgery(monsurgery1, "comm ", 1);
-			userServicesLocal.bookSurgery(monsurgery2, "comm", 2);
+			//userServicesLocal.bookSurgery(monsurgery1, "comm ", 1);
+			//userServicesLocal.bookSurgery(monsurgery2, "comm", 2);
 			
-			assignedPatientsServicesLocal.assignPatientToDoctor(mondoctor1, 1);
-			assignedPatientsServicesLocal.assignPatientToDoctor(mondoctor1, 2);
+			//assignedPatientsServicesLocal.assignPatientToDoctor(mondoctor1, 1);
+			//assignedPatientsServicesLocal.assignPatientToDoctor(mondoctor1, 2);
 			
 			
 			
