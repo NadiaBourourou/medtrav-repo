@@ -207,13 +207,26 @@ clinics.setVisible(true);
 		JButton btnHotels = new JButton("Hotels");
 		btnHotels.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+setVisible(false);
+ListHotelsAdmin hotels= new ListHotelsAdmin();
+hotels.setVisible(true);
 			}
 		});
 		btnHotels.setBounds(154, 345, 144, 34);
 		contentPane.add(btnHotels);
 
 		JButton btnClinics = new JButton("Hospitals & clinics");
+		btnClinics.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+					setVisible(false);
+					ListClinics clinics= new ListClinics();
+					clinics.setVisible(true);
+								
+						
+			}
+		});
+		
 		btnClinics.setBounds(154, 152, 144, 34);
 		contentPane.add(btnClinics);
 

@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -12,7 +13,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import delegates.FlightServicesDelegate;
 import delegates.SurgeryServicesDelegate;
 import delegates.TestimonyServicesDelegate;
 import entities.Surgery;
@@ -58,6 +58,9 @@ public class SeeAllMySurgeries extends JFrame {
 	private JTextPane textPaneDescription;
 	private JButton btnModify;
 	private JButton btnDelete;
+	private JButton button;
+	private JLabel labelLogo;
+	
 	private User user;
 	
 
@@ -81,6 +84,7 @@ public class SeeAllMySurgeries extends JFrame {
 	 * Create the frame.
 	 */
 	public SeeAllMySurgeries() {
+		setTitle("See all the surgeries");
 		surgeries = SurgeryServicesDelegate.doFindAllSurgeries();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -98,27 +102,52 @@ public class SeeAllMySurgeries extends JFrame {
 		lblSeeAllMy.setFont(new Font("Tahoma", Font.BOLD, 23));
 		
 		panel_1 = new JPanel();
+		
+		button = new JButton("");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ManageSurgeries home = new ManageSurgeries();
+				home.setVisible(true);
+				SeeAllMySurgeries.this.setVisible(false);
+			}
+		});
+		button.setIcon(new ImageIcon(SeeAllMySurgeries.class
+				.getResource("/images/blue-home-icon.png")));
+		button.setBounds(10, 331, 160, 43);
+		
+		labelLogo = new JLabel("");
+		labelLogo.setIcon(new ImageIcon(SeeAllMySurgeries.class.getResource("/images/smallLogo.png")));
+		labelLogo.setBounds(10, 0, 69, 73);	
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE))
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+						.addGroup(gl_contentPane.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(panel, GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE))
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-							.addGap(253)
-							.addComponent(lblSeeAllMy, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(21)
+							.addComponent(labelLogo, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+							.addGap(176)
+							.addComponent(lblSeeAllMy, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+							.addComponent(button, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(23)
-					.addComponent(lblSeeAllMy, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(23)
+							.addComponent(lblSeeAllMy, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+						.addComponent(button, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+						.addComponent(labelLogo, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
@@ -244,8 +273,9 @@ public class SeeAllMySurgeries extends JFrame {
 		initDataBindings();
 	}
 	
-	
+
 	public SeeAllMySurgeries(User user) {
+		setTitle("See all the surgeries");
 		surgeries = SurgeryServicesDelegate.doFindAllSurgeries();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -263,27 +293,52 @@ public class SeeAllMySurgeries extends JFrame {
 		lblSeeAllMy.setFont(new Font("Tahoma", Font.BOLD, 23));
 		
 		panel_1 = new JPanel();
+		
+		button = new JButton("");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ManageSurgeries home = new ManageSurgeries(user);
+				home.setVisible(true);
+				SeeAllMySurgeries.this.setVisible(false);
+			}
+		});
+		button.setIcon(new ImageIcon(SeeAllMySurgeries.class
+				.getResource("/images/blue-home-icon.png")));
+		button.setBounds(10, 331, 160, 43);
+		
+		labelLogo = new JLabel("");
+		labelLogo.setIcon(new ImageIcon(SeeAllMySurgeries.class.getResource("/images/smallLogo.png")));
+		labelLogo.setBounds(10, 0, 69, 73);	
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE))
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+						.addGroup(gl_contentPane.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(panel, GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE))
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-							.addGap(253)
-							.addComponent(lblSeeAllMy, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(21)
+							.addComponent(labelLogo, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+							.addGap(176)
+							.addComponent(lblSeeAllMy, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+							.addComponent(button, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(23)
-					.addComponent(lblSeeAllMy, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(23)
+							.addComponent(lblSeeAllMy, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+						.addComponent(button, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+						.addComponent(labelLogo, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
@@ -408,6 +463,8 @@ public class SeeAllMySurgeries extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 		initDataBindings();
 	}
+	
+
 	
 	protected void initDataBindings() {
 		JTableBinding<Surgery, List<Surgery>, JTable> jTableBinding = SwingBindings.createJTableBinding(UpdateStrategy.READ_WRITE, surgeries, table);

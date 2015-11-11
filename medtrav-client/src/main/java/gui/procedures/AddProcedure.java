@@ -6,7 +6,7 @@ import entities.Doctor;
 import entities.Procedure;
 import entities.Surgery;
 import entities.User;
-import gui.flights.AddFlight2;
+
 import gui.surgeries.AddSurgery;
 
 import java.awt.BorderLayout;
@@ -38,7 +38,6 @@ public class AddProcedure extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldName;
-	private User user;
 
 	/**
 	 * Launch the application.
@@ -107,43 +106,64 @@ public class AddProcedure extends JFrame {
 			}
 		});
 		btnConfirm.setIcon(new ImageIcon(AddProcedure.class.getResource("/images/add.png")));
-
+		
+		JButton button = new JButton("");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ManageProcedures home = new ManageProcedures();
+				home.setVisible(true);
+				AddProcedure.this.setVisible(false);
+			}
+		});
+		button.setIcon(new ImageIcon(AddProcedure.class
+				.getResource("/images/blue-home-icon.png")));
+		button.setBounds(10, 331, 160, 43);
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(labelLogo, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
-					.addComponent(lblAddAProcedure, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
-					.addGap(233))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(81)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnConfirm)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(labelLogo, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
+							.addComponent(lblAddAProcedure, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
+							.addGap(160)
+							.addComponent(button, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(124)
 							.addComponent(lblName, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textFieldName, GroupLayout.PREFERRED_SIZE, 214, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(357, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(textFieldName, GroupLayout.PREFERRED_SIZE, 214, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(377)
+							.addComponent(btnConfirm, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(labelLogo, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblAddAProcedure, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
-					.addGap(25)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblName)
-						.addComponent(textFieldName, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addComponent(btnConfirm)
-					.addContainerGap(248, Short.MAX_VALUE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(button, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(labelLogo, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblAddAProcedure, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(textFieldName, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblName))
+							.addGap(69)
+							.addComponent(btnConfirm, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+							.addGap(149))))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
+	
 	
 	public AddProcedure(User user) {
 		setTitle("Add a procedure");
@@ -193,42 +213,63 @@ public class AddProcedure extends JFrame {
 			}
 		});
 		btnConfirm.setIcon(new ImageIcon(AddProcedure.class.getResource("/images/add.png")));
-
+		
+		JButton button = new JButton("");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ManageProcedures home = new ManageProcedures(user);
+				home.setVisible(true);
+				AddProcedure.this.setVisible(false);
+			}
+		});
+		button.setIcon(new ImageIcon(AddProcedure.class
+				.getResource("/images/blue-home-icon.png")));
+		button.setBounds(10, 331, 160, 43);
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(labelLogo, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
-					.addComponent(lblAddAProcedure, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
-					.addGap(233))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(81)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnConfirm)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(labelLogo, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
+							.addComponent(lblAddAProcedure, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
+							.addGap(160)
+							.addComponent(button, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(124)
 							.addComponent(lblName, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textFieldName, GroupLayout.PREFERRED_SIZE, 214, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(357, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(textFieldName, GroupLayout.PREFERRED_SIZE, 214, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(377)
+							.addComponent(btnConfirm, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(labelLogo, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblAddAProcedure, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
-					.addGap(25)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblName)
-						.addComponent(textFieldName, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addComponent(btnConfirm)
-					.addContainerGap(248, Short.MAX_VALUE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(button, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(labelLogo, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblAddAProcedure, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(textFieldName, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblName))
+							.addGap(69)
+							.addComponent(btnConfirm, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+							.addGap(149))))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
-
+	
+	
 }

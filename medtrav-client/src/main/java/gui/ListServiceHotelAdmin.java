@@ -110,6 +110,15 @@ public class ListServiceHotelAdmin extends JFrame {
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setIcon(new ImageIcon(ListServiceHotelAdmin.class
 				.getResource("/images/medtraaaaaav.jpg")));
+		
+		JButton button = new JButton("Back to menu");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				AdminUI retour = new AdminUI();
+				retour.setVisible(true);
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -126,11 +135,12 @@ public class ListServiceHotelAdmin extends JFrame {
 									.addComponent(btSearch, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addGap(9)
-									.addComponent(lblNewLabel_2)))
-							.addPreferredGap(ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+									.addComponent(lblNewLabel_2))
+								.addComponent(button, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
 							.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
-						.addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE))
+						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
+						.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
@@ -140,11 +150,13 @@ public class ListServiceHotelAdmin extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 97, Short.MAX_VALUE)
+								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 134, Short.MAX_VALUE)
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addGap(11)
 									.addComponent(lblNewLabel_2)
 									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(button)
+									.addGap(18)
 									.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 										.addComponent(txtnameHotel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 										.addComponent(lblHotel))))
