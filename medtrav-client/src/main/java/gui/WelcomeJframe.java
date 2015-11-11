@@ -580,18 +580,21 @@ public class WelcomeJframe extends JFrame {
 
 					Surgery surgery = SurgeryServicesDelegate
 							.doFindSurgeryById(cbTreatment.getSelectedIndex());
-					UserServicesDelegate.doBookSurgery(surgery, "Test", user.getUserId());
+					UserServicesDelegate.doBookSurgery(surgery, "Test",
+							user.getUserId());
+
 					System.out.println(surgery.getName());
 
 					selectedDoctor = doctors.get(table.getSelectedRow());
-				UserServicesDelegate.doChooseDoctor(selectedDoctor, user.getUserId());
-				
-				setVisible(false);
-				ListClinicPatient next=new ListClinicPatient(user);
-				next.setVisible(true);
+					UserServicesDelegate.doChooseDoctor(selectedDoctor,
+							user.getUserId());
+
+					setVisible(false);
+					ListClinicPatient next = new ListClinicPatient(user);
+					next.setVisible(true);
 
 				}
-		
+
 			}
 		});
 
