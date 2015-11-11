@@ -76,11 +76,11 @@ public class Statistiques extends ApplicationFrame
          dataset,        // data    
          true,           // include legend   
          true, 
-         false);
+         false); 
       
       int width = 640; /* Width of the image */
       int height = 480; /* Height of the image */ 
-      File pieChart = new File( "C:\\PieChart.png" ); 
+      File pieChart = new File( "C:\\medTrav\\PieChart.png" ); 
 try {
 ChartUtilities.saveChartAsPNG(pieChart, chart, width, height);
 JOptionPane.showMessageDialog(null,"Image generated successfully. You can find it under your C:  folder. ");
