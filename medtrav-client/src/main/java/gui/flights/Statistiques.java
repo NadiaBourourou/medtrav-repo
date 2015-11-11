@@ -76,7 +76,7 @@ public class Statistiques extends ApplicationFrame
          dataset,        // data    
          true,           // include legend   
          true, 
-         false);
+         false); 
       
       int width = 640; /* Width of the image */
       int height = 480; /* Height of the image */ 
