@@ -53,9 +53,9 @@ public class PatientUi extends JFrame {
 	 */
 	public PatientUi() {
 		getContentPane().setBackground(Color.WHITE);
-		getContentPane().setLayout(null);
 
 		JButton btnNewButton = new JButton("Begin my travel process");
+		btnNewButton.setBounds(111, 110, 195, 86);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -64,10 +64,11 @@ public class PatientUi extends JFrame {
 				begin.setVisible(true);
 			}
 		});
-		btnNewButton.setBounds(111, 110, 195, 86);
+		getContentPane().setLayout(null);
 		getContentPane().add(btnNewButton);
 
 		JButton btnMyPersonalSpace = new JButton("My personal space");
+		btnMyPersonalSpace.setBounds(111, 207, 195, 86);
 		btnMyPersonalSpace.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -75,7 +76,6 @@ public class PatientUi extends JFrame {
 				myspace.setVisible(true);
 			}
 		});
-		btnMyPersonalSpace.setBounds(111, 207, 195, 86);
 		getContentPane().add(btnMyPersonalSpace);
 
 		JLabel label = new JLabel("");
@@ -83,6 +83,7 @@ public class PatientUi extends JFrame {
 		getContentPane().add(label);
 
 		JButton btnTestimonies = new JButton("Testimonies");
+		btnTestimonies.setBounds(340, 110, 195, 86);
 		btnTestimonies.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -91,10 +92,10 @@ public class PatientUi extends JFrame {
 
 			}
 		});
-		btnTestimonies.setBounds(340, 110, 195, 86);
 		getContentPane().add(btnTestimonies);
 
 		JButton btnFaq = new JButton("F.A.Q.");
+		btnFaq.setBounds(340, 207, 195, 86);
 		btnFaq.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -102,10 +103,10 @@ public class PatientUi extends JFrame {
 				questions.setVisible(true);
 			}
 		});
-		btnFaq.setBounds(340, 207, 195, 86);
 		getContentPane().add(btnFaq);
 
 		JButton btnContactUs = new JButton("Contact us");
+		btnContactUs.setBounds(546, 336, 122, 23);
 		btnContactUs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -149,7 +150,7 @@ public class PatientUi extends JFrame {
 						(new ImageIcon("image.jpg")).getImage()
 								.getScaledInstance(630, 600,
 										java.awt.Image.SCALE_SMOOTH));
-				test.add(new JLabel(imageIcon));
+				test.getContentPane().add(new JLabel(imageIcon));
 
 				// show the GUI window
 				test.setVisible(true);
@@ -157,13 +158,33 @@ public class PatientUi extends JFrame {
 			}
 
 		});
-		btnContactUs.setBounds(579, 336, 89, 23);
 		getContentPane().add(btnContactUs);
+		
+		JLabel label_1 = new JLabel("");
+		label_1.setIcon(new ImageIcon(PatientUi.class.getResource("/images/smallLogo.png")));
+		label_1.setBounds(10, 11, 65, 60);
+		getContentPane().add(label_1);
+		
+		JLabel label_2 = new JLabel("");
+		label_2.setIcon(new ImageIcon(PatientUi.class.getResource("/images/user_patient_icon.png")));
+		label_2.setBounds(639, 11, 65, 60);
+		getContentPane().add(label_2);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 730, 447);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
+		
+		JMenuItem mntmLogOut_1 = new JMenuItem("Log Out");
+		mntmLogOut_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			setVisible(false);
+			HelloMedtrav quit = new HelloMedtrav();
+			quit.setVisible(true);
+			
+			}
+		});
+		menuBar.add(mntmLogOut_1);
 
 		JMenuItem mntmLogOut = new JMenuItem("Log Out");
 		mntmLogOut.setIcon(new ImageIcon(WelcomeJframe.class
@@ -269,7 +290,7 @@ public class PatientUi extends JFrame {
 						(new ImageIcon("image.jpg")).getImage()
 								.getScaledInstance(630, 600,
 										java.awt.Image.SCALE_SMOOTH));
-				test.add(new JLabel(imageIcon));
+				test.getContentPane().add(new JLabel(imageIcon));
 
 				// show the GUI window
 				test.setVisible(true);
@@ -281,9 +302,32 @@ public class PatientUi extends JFrame {
 		getContentPane().add(btnContactUs);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 730, 447);
+		
+		JLabel label_1 = new JLabel("");
+		label_1.setIcon(new ImageIcon(PatientUi.class.getResource("/images/smallLogo.png")));
+		label_1.setBounds(10, 11, 65, 60);
+		getContentPane().add(label_1);
+		
+		JLabel label_2 = new JLabel("");
+		label_2.setIcon(new ImageIcon(PatientUi.class.getResource("/images/user_patient_icon.png")));
+		label_2.setBounds(639, 11, 65, 60);
+		getContentPane().add(label_2);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 730, 447);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
+		
+		JMenuItem mntmLogOut_1 = new JMenuItem("Log Out");
+		mntmLogOut_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			setVisible(false);
+			HelloMedtrav quit = new HelloMedtrav();
+			quit.setVisible(true);
+			
+			}
+		});
+		menuBar.add(mntmLogOut_1);
 
 		JMenuItem mntmLogOut = new JMenuItem("Log Out");
 		mntmLogOut.setIcon(new ImageIcon(WelcomeJframe.class

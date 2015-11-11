@@ -30,6 +30,9 @@ import delegates.UserServicesDelegate;
 import entities.Patient;
 import entities.User;
 import featuresDomain.chat.Constants;
+import java.awt.Component;
+import javax.swing.Box;
+import java.awt.Dimension;
 
 public class MedicalRecordsPatient extends JFrame {
 
@@ -43,6 +46,7 @@ public class MedicalRecordsPatient extends JFrame {
 	private JButton btnCallMyDoctor;
 	private JLabel skypelogo;
 	public  String SKYPE_FRIEND_NICKNAME = "naddoouu011108";
+	private JLabel label;
 
 	/**
 	 * Launch the application.
@@ -207,6 +211,28 @@ public class MedicalRecordsPatient extends JFrame {
 				.getResource("/images/skype.png")));
 		skypelogo.setBounds(495, 92, 187, 159);
 		contentPane.add(skypelogo);
+		
+		
+		label = new JLabel("");
+		label.setIcon(new ImageIcon(MedicalRecordsPatient.class.getResource("/images/medicalrecord.jpg")));
+		label.setBounds(155, 63, 196, 145);
+		contentPane.add(label);
+		
+		Component verticalStrut = Box.createVerticalStrut(20);
+		verticalStrut.setBounds(404, 11, 68, 398);
+		contentPane.add(verticalStrut);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				PatientUi back = new PatientUi();
+				back.setVisible(true);
+				
+			}
+		});
+		btnBack.setBounds(10, 362, 89, 23);
+		contentPane.add(btnBack);
 	}
 
 	public MedicalRecordsPatient() {
@@ -218,7 +244,7 @@ public class MedicalRecordsPatient extends JFrame {
 		setContentPane(contentPane);
 
 		JButton btnAdd = new JButton("");
-		btnAdd.setBounds(367, 273, 52, 51);
+		btnAdd.setBounds(360, 206, 52, 51);
 		btnAdd.setIcon(new ImageIcon(MedicalRecordsPatient.class
 				.getResource("/images/uploadd.png")));
 		btnAdd.addActionListener(new ActionListener() {
@@ -232,11 +258,11 @@ public class MedicalRecordsPatient extends JFrame {
 		});
 
 		textField = new JTextField();
-		textField.setBounds(191, 271, 156, 20);
+		textField.setBounds(184, 204, 156, 20);
 		textField.setColumns(10);
 
 		btnAdd_1 = new JButton("Add");
-		btnAdd_1.setBounds(186, 302, 161, 23);
+		btnAdd_1.setBounds(179, 235, 161, 23);
 		btnAdd_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				entities.MedicalRecords medicalRecords = new entities.MedicalRecords();
@@ -273,7 +299,7 @@ public class MedicalRecordsPatient extends JFrame {
 		});
 
 		lblAnalysis = new JLabel("Analysis");
-		lblAnalysis.setBounds(46, 273, 105, 17);
+		lblAnalysis.setBounds(39, 206, 105, 17);
 		contentPane.setLayout(null);
 		contentPane.add(lblAnalysis);
 		contentPane.add(textField);
@@ -310,7 +336,7 @@ public class MedicalRecordsPatient extends JFrame {
 			}
 
 		});
-		btnDownloadPatientfile.setBounds(191, 334, 156, 23);
+		btnDownloadPatientfile.setBounds(179, 267, 161, 23);
 		contentPane.add(btnDownloadPatientfile);
 
 		logo = new JLabel("");
@@ -350,5 +376,26 @@ public class MedicalRecordsPatient extends JFrame {
 				.getResource("/images/skype.png")));
 		skypelogo.setBounds(495, 92, 187, 159);
 		contentPane.add(skypelogo);
+		
+		label = new JLabel("");
+		label.setIcon(new ImageIcon(MedicalRecordsPatient.class.getResource("/images/medicalrecord.jpg")));
+		label.setBounds(155, 63, 196, 145);
+		contentPane.add(label);
+		
+		Component verticalStrut = Box.createVerticalStrut(20);
+		verticalStrut.setBounds(404, 11, 68, 398);
+		contentPane.add(verticalStrut);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				PatientUi back = new PatientUi();
+				back.setVisible(true);
+				
+			}
+		});
+		btnBack.setBounds(10, 362, 89, 23);
+		contentPane.add(btnBack);
 	}
 }
