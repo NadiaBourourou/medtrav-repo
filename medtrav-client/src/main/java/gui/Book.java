@@ -38,6 +38,10 @@ import entities.Surgery;
 import entities.SurgeryPatient;
 import entities.User;
 import gui.flights.ManageFlights;
+import gui.surgeries.ManageSurgeries;
+
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 public class Book extends JFrame {
 
@@ -346,6 +350,30 @@ public class Book extends JFrame {
 		etatCombo.setModel(new DefaultComboBoxModel(StateBooking.values()));
 		etatCombo.setBounds(535, 211, 108, 20);
 		contentPane.add(etatCombo);
+		
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBounds(0, 0, 688, 21);
+		contentPane.add(menuBar);
+		
+		JMenuItem mntmLogout = new JMenuItem("LogOut");
+		mntmLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				HelloMedtrav go = new HelloMedtrav();
+				go.setVisible(true);
+			}
+		});
+		menuBar.add(mntmLogout);
+		
+		JMenuItem mntmMainMenu = new JMenuItem("Main menu");
+		mntmMainMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				PatientUi go = new PatientUi();
+				go.setVisible(true);
+			}
+		});
+		menuBar.add(mntmMainMenu);
 		initDataBindings();
 	}
 	
@@ -622,6 +650,29 @@ public class Book extends JFrame {
 		etatCombo.setModel(new DefaultComboBoxModel(StateBooking.values()));
 		etatCombo.setBounds(535, 211, 108, 20);
 		contentPane.add(etatCombo);
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBounds(0, 0, 688, 21);
+		contentPane.add(menuBar);
+		
+		JMenuItem mntmLogout = new JMenuItem("LogOut");
+		mntmLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				HelloMedtrav go = new HelloMedtrav();
+				go.setVisible(true);
+			}
+		});
+		menuBar.add(mntmLogout);
+		
+		JMenuItem mntmMainMenu = new JMenuItem("Main menu");
+		mntmMainMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				PatientUi go = new PatientUi(user);
+				go.setVisible(true);
+			}
+		});
+		menuBar.add(mntmMainMenu);
 		initDataBindings();
 	}
 
