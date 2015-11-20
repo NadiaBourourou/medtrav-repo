@@ -239,7 +239,7 @@ public class PatientUi extends JFrame {
 		btnFaq.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				ListQuestions questions = new ListQuestions();
+				ListQuestions questions = new ListQuestions(user);
 				questions.setVisible(true);
 			}
 		});

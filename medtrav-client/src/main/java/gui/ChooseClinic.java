@@ -87,7 +87,7 @@ public class ChooseClinic extends JFrame {
 
 		JLabel lblDate = new JLabel("Date");
 
-		JLabel lblCommentaire = new JLabel("Commentaire");
+		JLabel lblCommentaire = new JLabel("Comment");
 
 		JButton btnSubmit = new JButton("");
 		btnSubmit.setIcon(new ImageIcon(ChooseClinic.class

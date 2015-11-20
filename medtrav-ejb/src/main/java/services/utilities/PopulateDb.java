@@ -473,7 +473,7 @@ public class PopulateDb {
 			
 		Patient monpatient1=testimonyServicesLocal.findPatientById(1);
 		Patient monpatient2=testimonyServicesLocal.findPatientById(2);
-		Doctor mondoctor1=userServicesLocal.findDoctorById(3);
+		Doctor mondoctor1=userServicesLocal.findDoctorById(4);
 		Surgery monsurgery1=testimonyServicesLocal.findSurgeryById(1);
 		Surgery monsurgery2=testimonyServicesLocal.findSurgeryById(2);
 		
