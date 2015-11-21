@@ -31,6 +31,7 @@ public class Patient extends User implements Serializable {
 	private List<Flight> flights;
 	private List<SurgeryPatient> surgeryPatients;
 	private List<DoctorPatient> doctorPatients;
+	private List<Favorite> favorites;
 
 	private static final long serialVersionUID = 1L;
 
@@ -148,6 +149,15 @@ public class Patient extends User implements Serializable {
 
 	public void setConfirmed(Boolean confirmed) {
 		this.confirmed = confirmed;
+	}
+	
+	@OneToMany(mappedBy="patient")
+	public List<Favorite> getFavorites() {
+		return favorites;
+	}
+
+	public void setFavorites(List<Favorite> favorites) {
+		this.favorites = favorites;
 	}
 
 }

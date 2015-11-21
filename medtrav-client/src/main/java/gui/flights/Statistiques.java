@@ -83,7 +83,7 @@ public class Statistiques extends ApplicationFrame
       File pieChart = new File( "C:\\medTrav\\PieChart.png" ); 
 try {
 ChartUtilities.saveChartAsPNG(pieChart, chart, width, height);
-JOptionPane.showMessageDialog(null,"Image generated successfully. You can find it under your C:  folder. ");
+JOptionPane.showMessageDialog(null,"Image generated successfully. You can find it under your C: folder. ");
 } catch (IOException e) {
 // TODO Auto-generated catch block
 e.printStackTrace();
