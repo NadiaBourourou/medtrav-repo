@@ -16,7 +16,6 @@ import javax.persistence.*;
 public class Favorite implements Serializable {
 
 	private Integer idFavorite;
-	private Integer idTip;
 	private String nameFavorite;
 
 	private List<Tip> tips;
@@ -36,14 +35,6 @@ public class Favorite implements Serializable {
 
 	public void setIdFavorite(Integer idFavorite) {
 		this.idFavorite = idFavorite;
-	}
-
-	public Integer getIdTip() {
-		return this.idTip;
-	}
-
-	public void setIdTip(Integer idTip) {
-		this.idTip = idTip;
 	}
 
 	public String getNameFavorite() {
